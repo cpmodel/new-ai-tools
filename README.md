@@ -3,12 +3,18 @@
 A collection of working papers, data workbooks, and process files for fiscal and
 climate-policy analysis, organized by project.
 
+See **[SETUP.md](SETUP.md)** for environment requirements, build instructions, and
+run-process specifications consolidated from the subfolder documentation.
+
 ## Repository structure
 
 ```
 fiscal-climate-ai-tools/
+├── SETUP.md                     Consolidated requirements, build steps, run process
 ├── ExciseDiagnostic/            Excise tax diagnostic working paper and data
 └── TaxMacroFiscalDashboard/     Tax, macro-fiscal, and climate policy dashboards
+    └── build/                   Raw data, config, and scripts for the Global Fiscal
+                                  Indicators dashboard (Python + R build pipeline)
 ```
 
 ## ExciseDiagnostic
@@ -52,6 +58,10 @@ Dashboards and data on tax, macro-fiscal, and carbon/climate policy indicators.
 - **`Political Economy/`** — Political economy metric documentation
 - **`TECP + Validation/`** — Total Effective Carbon Price data, elasticities, and
   validation materials (`Total_Effective_Carbon_Price.pdf`, `CPATPriceElasticities.xlsx`)
+- **`build/`** — Self-contained Python/R pipeline that builds the Global Fiscal
+  Indicators workbook (53 indicators, 9 blocks) from raw source files; see
+  [SETUP.md](SETUP.md) for requirements and build steps
 - **`Tax+Macro-Fiscal-Energy_indicators.xlsx`** — Combined tax, macro-fiscal, and
   energy indicators workbook
 - **`TaxMacroFiscalDashboard_v1.0.pptx`** — Dashboard overview deck
+

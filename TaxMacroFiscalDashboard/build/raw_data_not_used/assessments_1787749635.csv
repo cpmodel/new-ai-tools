@@ -1,0 +1,21 @@
+Framework,Country,Year,CRPFM-1,CRPFM-1.1,CRPFM-2,CRPFM-2.1,CRPFM-3,CRPFM-3.1,CRPFM-4,CRPFM-4.1,CRPFM-4.2,CRPFM-5,CRPFM-5.1,CRPFM-5.2,CRPFM-5.3,CRPFM-5.4,CRPFM-6,CRPFM-6.1,CRPFM-7,CRPFM-7.1,CRPFM-7.2,CRPFM-8,CRPFM-8.1,CRPFM-8.2,CRPFM-8.3,CRPFM-8.4,CRPFM-9,CRPFM-9.1,CRPFM-9.2,CRPFM-10,CRPFM-10.1,CRPFM-10.2,CRPFM-11,CRPFM-11.1,CRPFM-11.2,CRPFM-11.3,CRPFM-12,CRPFM-12.1,CRPFM-12.2,CRPFM-13,CRPFM-13.1,CRPFM-13.2,CRPFM-14,CRPFM-14.1,CRPFM-14.2
+Climate,Ethiopia,2022,B,B,D,D,C,C,D+,D,C,D+,C,C,C,D,D,D,D+,D,C,D,D,C,D,D,NA,NA,NA,D+,C,D,D+,D,C,D,C+,B,C,B,B,NA,NA,NA,NA
+Climate,Bhutan,2023,C,C,D,D,C,C,D,D,NA,D+,C,B,D,D,D,D,C+,C,B,D+,C,C,D,D,B,C,A,B,A,C,C+,C,C,B,D,D,D,C,B,D,NA,NA,NA
+Climate,Niger,2023,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D+,D,C,D,D,D,D,D,NA,NA,NA,D+,D,C,C,B,D,C,C,C,C,C,B,D,NA,NA,NA
+Climate,Colombia,2024,A,A,C,C,C,C,D,D,D,D+,B,C,C,D,D,D,A,A,A,D,D,C,D,D,C+,D,A,C+,A,D,D+,D,C,C,D,D,D,B,A,C,D,D,D
+Climate,Kenya,2023,D,D,C,C,C,C,C,C,C,C+,B,B,B,D,D,D,D,D,NA,D,D,D,D,D,D,D,D,D+,D,C,B+,B,A,B,C,C,C,C,B,D,D,D,D
+Climate,Paraguay,2023,D,D,D,D,D,D,D+,C,D,D,D,D,D,D,D,D,D,D,D,D,C,D,D,D,NA,NA,NA,D,D,D,D,D,D,D,D,D,D,D,D,D,NA,NA,NA
+Climate,Rwanda,2022,B,B,C,C,C,C,D,D,D,D+,D,C,C,D,C,C,D,D,D,D,D,D,D,D,NA,NA,NA,D,D,D,B,C,C,A,D+,C,D,D+,C,D,NA,NA,NA
+Climate,Samoa,2021,B,B,D,D,D,D,D+,D,C,D,D,D,D,D,D,D,D+,D,C,D+,C,C,C,D*,NA,NA,NA,C,C,C,NA,NA,NA,NA,C+,B,C,D,D,D,NA,NA,NA
+Climate,Burundi,2023,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,NA,NA,NA,D,D,D,D,D,NA,D,D,D,D,C,B,D,NA,NA,NA
+Climate,Cameroon,2023,B,B,D,D,D,D,D,D,D,D,D,C,D,D,D,D,C+,B,C,D,D,C,D,D,NA,NA,NA,D,D,D,D,D,D,D,B,B,B,C,B,D,NA,NA,NA
+Climate,"Costa Rica",2022,D,D,D,D,C,C,D,D,D,D+,C,D,C,D,C,C,C+,A,D,D,D,D,D,D,NA,NA,NA,D+,D,C,D,D,D,D,D,D,D,C,B,D,NA,NA,NA
+Climate,Indonesia,2022,D,D,C,C,D,D,D,D,D,D+,C,C,D,D,C,C,C+,C,B,D+,C,C,D,D,B,C,A,B,A,C,C+,D,B,B,B,B,B,C,B,D,C+,C,B
+Climate,Nepal,2024,B,B,C,C,B,B,D,D,D,D,D,D,C,D,D,D,D,D,D,D,D,C,D,D,NA,NA,NA,D,D,D,C,C,C,C,C+,B,C,C,B,D,C,C,C
+Climate,Philippines,2025,D,D,B,B,B,B,C,B,D,D,D,D,D,D,D,D,B,C,A,C,A,C,D,D,NA,NA,NA,C+,C,B,C+,B,D,B,B,B,B,D,D,D,D,D,D
+Climate,Kazakhstan,2025,D,D,D,D,D,D,C,C,C,C,C,D,D,A,D,D,B,A,C,D,D,C,D,D,A,A,A,NA,NA,NA,D+,C,D,D,C,C,C,D,D,D,NA,NA,NA
+Climate,Togo,2023,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,C,C,C,D,D,D,D,D,NA,NA,NA,D,D,D,D,D,D,D,C,C,NA,D,D,NA,NA,NA,NA
+Climate,Uganda,2024,D,D,D,D,D,D,C,C,C,D+,C,D,D,D,C,C,D+,C,D,D,D,D,D,D,NA,NA,NA,D,D,D,D+,C,C,D,B,B,B,C,B,D,D,D,D
+Climate,"Cote d'Ivoire",2026,B,B,D,D,D,D,C,C,C,D,D,C,D,D,D,D,C,C,C,D,D,C,D,D,NA,NA,NA,C,C,C,D+,D,D,C,C,C,C,D+,C,D,NA,NA,NA
+Climate,Zambia,2025,D,D,D,D,D,D,D+,C,D,D,D,D,D,D,D,D,D+,D,C,D,D,C,D,D,C+,D,A,D+,C,D,C,C,D,B,C,C,C,C+,B,C,D,D*,D*
+Climate,Bolivia,2025,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,D,NA,NA,NA,D+,D,C,D,D,D,D,D,D,D,D,D,NA,NA,NA,NA
