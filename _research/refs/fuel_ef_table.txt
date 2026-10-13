@@ -1,0 +1,136 @@
+=== PAGE 3 ===
+Volume 2: Energy
+Equations
+Equation 2.1 Greenhouse gas emissions from stationary combustion......................................................2.11
+Equation 2.2 Total emissions by greenhouse gas......................................................................................2.12
+Equation 2.3 Greenhouse gas emissions by technology...........................................................................2.12
+Equation 2.4 Fuel consumption estimates based on technology penetration............................................2.13
+Equation 2.5 Technology-based emission estimation...............................................................................2.13
+Equation 2.6 CO capture efficiency.........................................................................................................2.35
+2
+Equation 2.7 Treatment of CO capture....................................................................................................2.36
+2
+Figures
+Figure 2.1 Generalised decision tree for estimating emissions from stationary combustion................2.15
+Figure 2.2 Power and heat plants use fuels to produce electric power and/or useful heat....................2.30
+Figure 2.3 A refinery uses energy to transform crude oil into petroleum products..............................2.31
+Figure 2.4 Fuels are used as an energy source in manufacturing industries to convert raw
+materials into products.........................................................................................................2.31
+Figure 2.5 CO capture systems from stationary combustion sources..................................................2.34
+2
+Figure 2.6 Carbon flows in and out of the system boundary for a CO capture system
+2
+associated with stationary combustion processes................................................................2.35
+Tables
+Table 2.1 Detailed sector split for stationary combustion.....................................................................2.7
+Table 2.2 Default emission factors for stationary combustion in the energy industries
+(kg of greenhouse gas per TJ on a net calorific basis).........................................................2.16
+Table 2.3 Default emission factors for stationary combustion in manufacturing industries and
+construction (kg of greenhouse gas per TJ on a net calorific basis)...................................2.18
+Table 2.4 Default emission factors for stationary combustion in the commercial/institutional category
+(kg of greenhouse gas per TJ on a net calorific basis)........................................................2.20
+Table 2.5 Default emission factors for stationary combustion in the
+residential and agriculture/forestry/fishing/fishing farms categories
+(kg of greenhouse gas per TJ on a net calorific basis)........................................................2.22
+Table 2.6 Utility source emission factors............................................................................................2.25
+Table 2.7 Industrial source emission factors.......................................................................................2.26
+2.4 2006 IPCC Guidelines for National Greenhouse Gas Inventories
+=== PAGE 15 ===
+Volume 2: Energy
+TABLE 2.2
+DEFAULT EMISSION FACTORS FOR STATIONARY COMBUSTION IN THE ENERGY INDUSTRIES
+(kg of greenhouse gas per TJ on a Net Calorific Basis)
+CO CH NO
+2 4 2
+Fuel Default Lower Upper Default Lower Upper Default Lower Upper
+Emission Emission Emission
+Factor Factor Factor
+Crude Oil 73 300 71 100 75 500 r 3 1 10 0.6 0.2 2
+Orimulsion r 77 000 69 300 85 400 r 3 1 10 0.6 0.2 2
+Natural Gas Liquids r 64 200 58 300 70 400 r 3 1 10 0.6 0.2 2
+Motor Gasoline r 69 300 67 500 73 000 r 3 1 10 0.6 0.2 2
+Aviation Gasoline r 70 000 67 500 73 000 r 3 1 10 0.6 0.2 2
+2.16 2006 IPCC Guidelines for National Greenhouse Gas Inventories
+enilosaG
+Jet Gasoline r 70 000 67 500 73 000 r 3 1 10 0.6 0.2 2
+Jet Kerosene r 71 500 69 700 74 400 r 3 1 10 0.6 0.2 2
+Other Kerosene 71 900 70 800 73 700 r 3 1 10 0.6 0.2 2
+Shale Oil 73 300 67 800 79 200 r 3 1 10 0.6 0.2 2
+Gas/Diesel Oil 74 100 72 600 74 800 r 3 1 10 0.6 0.2 2
+Residual Fuel Oil 77 400 75 500 78 800 r 3 1 10 0.6 0.2 2
+Liquefied Petroleum Gases 63 100 61 600 65 600 r 1 0.3 3 0.1 0.03 0.3
+Ethane 61 600 56 500 68 600 r 1 0.3 3 0.1 0.03 0.3
+Naphtha 73 300 69 300 76 300 r 3 1 10 0.6 0.2 2
+Bitumen 80 700 73 000 89 900 r 3 1 10 0.6 0.2 2
+Lubricants 73 300 71 900 75 200 r 3 1 10 0.6 0.2 2
+Petroleum Coke r 97 500 82 900 115 000 r 3 1 10 0.6 0.2 2
+Refinery Feedstocks 73 300 68 900 76 600 r 3 1 10 0.6 0.2 2
+Refinery Gas n 57 600 48 200 69 000 r 1 0.3 3 0.1 0.03 0.3
+Paraffin Waxes 73 300 72 200 74 400 r 3 1 10 0.6 0.2 2
+White Spirit and SBP 73 300 72 200 74 400 r 3 1 10 0.6 0.2 2
+liO
+rehtO
+Other Petroleum Products 73 300 72 200 74 400 r 3 1 10 0.6 0.2 2
+Anthracite 98 300 94 600 101 000 1 0.3 3 r 1.5 0.5 5
+Coking Coal 94 600 87 300 101 000 1 0.3 3 r 1. 5 0.5 5
+Other Bituminous Coal 94 600 89 500 99 700 1 0.3 3 r 1. 5 0.5 5
+Sub-Bituminous Coal 96 100 92 800 100 000 1 0.3 3 r 1.5 0.5 5
+Lignite 101 000 90 900 115 000 1 0.3 3 r 1. 5 0.5 5
+Oil Shale and Tar Sands 107 000 90 200 125 000 1 0.3 3 r 1. 5 0.5 5
+Brown Coal Briquettes 97 500 87 300 109 000 n 1 0.3 3 r 1. 5 0.5 5
+Patent Fuel 97 500 87 300 109 000 1 0.3 3 n 1. 5 0.5 5
+Coke Oven Coke and r 107 000 95 700 119 000 1 0.3 3 r 1. 5 0.5 5
+Lignite Coke
+ekoC
+Gas Coke r 107 000 95 700 119 000 r 1 0.3 3 0.1 0.03 0.3
+Coal Tar n 80 700 68 200 95 300 n 1 0.3 3 r 1. 5 0.5 5
+Gas Works Gas n 44 400 37 300 54 100 n 1 0.3 3 0.1 0.03 0.3
+Coke Oven Gas n 44 400 37 300 54 100 r 1 0.3 3 0.1 0.03 0.3
+Blast Furnace Gas n 260 000 219 000 308 000 r 1 0.3 3 0.1 0.03 0.3
+sesaG
+devireD
+Oxygen Steel Furnace Gas n 182 000 145 000 202 000 r 1 0.3 3 0.1 0.03 0.3
+Natural Gas 56 100 54 300 58 300 1 0.3 3 0.1 0.03 0.3
+=== PAGE 16 ===
+Chapter 2: Stationary Combustion
+TABLE 2.2 (CONTINUED)
+DEFAULT EMISSION FACTORS FOR STATIONARY COMBUSTION IN THE ENERGY INDUSTRIES
+(kg of greenhouse gas per TJ on a Net Calorific Basis)
+CO CH NO
+2 4 2
+Fuel Default Lower Upper Default Lower Upper Default Lower Upper
+Emission Emission Emission
+Factor Factor Factor
+Municipal Wastes (non-biomass
+fraction) n 91 700 73 300 121 000 30 10 100 4 1.5 15
+Industrial Wastes n 143 000 110 000 183 000 30 10 100 4 1.5 15
+Waste Oils n 73 300 72 200 74 400 30 10 100 4 1.5 15
+Peat 106 000 100 000 108 000 n 1 0.3 3 n 1.5 0.5 5
+Wood / Wood Waste n 112 000 95 000 132 000 30 10 100 4 1.5 15
+Sulphite lyes (Black
+Liquor)a n 95 300 80 700 110 000 n 3 1 18 n 2 1 21
+Other Primary Solid
+Biomass n 100 000 84 700 117 000 30 10 100 4 1.5 15
+2006 IPCC Guidelines for National Greenhouse Gas Inventories 2.17
+sleufoiB
+diloS
+Charcoal n 112 000 95 000 132 000 200 70 600 4 1.5 15
+Biogasoline n 70 800 59 800 84 300 r 3 1 10 0.6 0.2 2
+Biodiesels n 70 800 59 800 84 300 r 3 1 10 0.6 0.2 2 diuqiL
+sleufoiB
+Other Liquid Biofuels n 79 600 67 100 95 300 r 3 1 10 0.6 0.2 2
+Landfill Gas n 54 600 46 200 66 000 r 1 0.3 3 0.1 0.03 0.3
+Sludge Gas n 54 600 46 200 66 000 r 1 0.3 3 0.1 0.03 0.3
+saG
+ssamoiB
+Other Biogas n 54 600 46 200 66 000 r 1 0.3 3 0.1 0.03 0.3
+-non
+rehtO
+sleuf
+lissof
+Municipal Wastes
+(biomass fraction) n 100 000 84 700 117 000 30 10 100 4 1.5 15
+(a) Includes the biomass-derived CO emitted from the black liquor combustion unit and the biomass-derived CO emitted from the kraft mill lime kiln.
+2 2
+n indicates a new emission factor which was not present in the 1996 Guidelines
+r indicates an emission factor that has been revised since the 1996 Guidelines

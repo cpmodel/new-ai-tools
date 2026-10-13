@@ -1,0 +1,8 @@
+# Ignore all CSV and pkl files in cpat_data
+cpat_data/new_data/*.csv
+cpat_data/new_data_pkl/*.pkl.bz2
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+*$py.class

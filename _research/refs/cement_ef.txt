@@ -1,0 +1,199 @@
+=== PAGE 6 ===
+Chapter 2: Mineral Industry Emissions
+specific chemistry of raw materials. If site-specific raw materials data are used, it is vital that all sources of
+carbonate in the raw materials and fuels are accounted for (not just the limestone). The basic emissions
+calculations for all carbonate-burning industries are similar. They are based on common formula weights and
+CO ratios, which are presented in Table 2.1 below for convenience.
+2
+TABLE 2.1
+FORMULAE, FORMULA WEIGHTS, AND CARBON DIOXIDE CONTENTS OF COMMON CARBONATE SPECIES*
+Carbonate Mineral Name(s) Formula Weight Emission Factor
+(tonnes CO /tonne carbonate)**
+2
+CaCO Calcite*** or aragonite 100.0869 0.43971
+3
+MgCO Magnesite 84.3139 0.52197
+3
+CaMg(CO) Dolomite*** 184.4008 0.47732
+32
+FeCO Siderite 115.8539 0.37987
+3
+Ca(Fe,Mg,Mn)(CO) Ankerite**** 185.0225−215.6160 0.40822−0.47572
+32
+MnCO Rhodochrosite 114.9470 0.38286
+3
+Na CO Sodium carbonate or soda ash 106.0685 0.41492
+2 3
+Source: CRC Handbook of Chemistry and Physics (2004)
+* Final results (i.e., emission estimates) using these data should be rounded to no more than two significant figures.
+** The fraction of emitted CO assuming 100 percent calcination; e.g., 1 tonne calcite, if fully calcined, would yield 0.43971 tonnes of
+2
+CO.
+2
+*** Calcite is the principal mineral in limestone. Terms like high-magnesium or dolomitic limestones refer to a relatively small
+substitution of Mg for Ca in the general CaCO formula commonly shown for limestone.
+3
+**** Formulae weight range shown for ankerite assumes that Fe, Mg, and Mn are present in amounts of at least 1.0 percent.
+2.2 CEMENT PRODUCTION
+2.2.1 Methodological issues
+In cement manufacture, CO is produced during the production of clinker, a nodular intermediate product that is
+2
+then finely ground, along with a small proportion of calcium sulfate [gypsum (CaSO ·2H O) or anhydrite
+4 2
+(CaSO )], into hydraulic (typically portland) cement. During the production of clinker, limestone, which is
+4
+mainly calcium carbonate (CaCO ), is heated, or calcined, to produce lime (CaO) and CO as a by-product. The
+3 2
+CaO then reacts with silica (SiO ), alumina (Al O ), and iron oxide (Fe O ) in the raw materials to make the
+2 2 3 2 3
+clinker minerals (chiefly calcium silicates). The proportion in the raw materials of carbonates other than CaCO
+3
+is generally very small. The other carbonates, if present, exist mainly as impurities in the primary limestone raw
+material. A small amount of MgO (typically 1-2 percent) in the clinker-making process is desirable as it acts as a
+flux, but much more than this amount can lead to problems with the cement (van Oss and Padovani, 2002).
+Cement may be made (ground) entirely from imported clinker, in which case the cement production facility may
+be considered to have zero process-related CO emissions. As discussed in Section 2.2.1.2, cement kiln dust
+2
+(CKD) may be generated during the manufacture of clinker. Emission estimates should account for emissions
+associated with the CKD.
+There are no additional emissions associated with the production of masonry cement. Where masonry cement is
+produced by adding lime to portland cement (or its clinker), the emissions associated with the lime should
+already be accounted for under lime production. The addition of ground limestone to portland cement or its
+clinker to produce masonry cement does not lead to additional emissions.
+2.2.1.1 CHOICE OF METHOD
+The decision tree in Figure 2.1 describes good practice in choosing the most appropriate method based on
+national circumstances. In the Tier 1 method, emissions are based on clinker production estimates inferred from
+cement production data, correcting for imports and exports of clinker. The estimation of emissions directly from
+cement production (i.e., applying an emission factor directly to cement production without first estimating
+clinker production) is not considered to be a good practice method because it does not account for clinker
+imports and exports.
+In Tier 2, emissions are estimated directly from clinker production data (rather than clinker production inferred
+from cement production) and a national or default emission factor. The Tier 3 approach is a calculation based on
+2006 IPCC Guidelines for National Greenhouse Gas Inventories 2.7
+=== PAGE 11 ===
+Volume 3: Industrial Processes and Product Use
+EQUATION 2.4
+EMISSION FACTOR FOR CLINKER
+EF =0.51•1.02(CKDcorrection)=0.52tonnesCO /tonneclinker
+clc 2
+Under Tier 1, the default EF incorporates the correction for CKD. This should not be confused with EF under
+clc cl
+Tier 2, which does not account for the CKD. EF should be multiplied by a correction factor, CF (see
+cl ckd
+Equation 2.5) to generate the combined EF for clinker and CKD.
+TIER 2 METHOD
+Emission factor for clinker (EF )
+cl
+In the Tier 2 method, if sufficient country-specific data on CaO content of clinker and inputs of non-carbonate
+CaO sources are available, it is good practice to estimate a country-specific CO emission factor for clinker. As
+2
+noted above, the derivation of an emission factor for clinker requires that the CaO content of the clinker be
+known, as well as the fraction of CaO that was derived from a carbonate source (generally CaCO ). The CaO
+3
+content of clinker is generally within the range of 60 to 67 percent. At a given plant the CaO content will remain
+stable to within 1 to 2 percent. The basic default emission factor, as recommended under Tier 1, assumes that the
+clinker is 65 percent CaO and that this is 100 percent derived from CaCO and that 100 percent calcination is
+3
+achieved in the kiln.
+The base (i.e., uncorrected for CKD) 0.51 emission factor in Equation 2.4 assumes a 65 percent CaO content in
+clinker. A similar calculation would yield emission factors for different CaO contents, if these contents are
+known. For example, for a clinker with 60 percent CaO all derived from CaCO the EF (not including a
+3 cl
+correction for CKD) is 0.47, and for 67 percent CaO the EF is 0.53.
+cl
+If it is known that a plant is deriving a significant fraction of CaO from a non-carbonate source (such as steel
+slag or fly ash), then this component of CaO should first be subtracted. For example, if 4 percent of the CaO in a
+65 percent CaO clinker is from slag, then the CaO from carbonate is 61 percent and the calculation for this yields
+an EF of 0.48.
+cl
+The default emission factor does not include a correction for MgO. For every 1 percent of MgO derived from
+carbonate the emission factor is an additional 0.011 tonne CO /tonne clinker (i.e., EF = 0.510 + 0.011 = 0.52
+2 cl
+tonne CO /tonne clinker). Because MgO also may come from a non-carbonate source and because the MgO is
+2
+deliberately kept low in portland cement, the true MgO from carbonate is likely to be very small. Given the fact
+that the assumption of a 100 percent carbonate source for the CaO already yields an overestimation of emissions
+(there is likely to be at least some contribution of CaO from non-carbonate sources) and the fact that some of the
+MgO is also likely to be from a non-carbonate source, a correction for MgO is not required for a Tier 2
+calculation. For uncertainties associated with these assumptions please refer to Table 2.3.
+Emissions correction factor for cement kiln dust (CF )
+ckd
+Dust may be generated at various points in the kiln line apparatus used to make clinker. The composition of this
+dust can vary depending on where it is generated but all may be included under the term ‘cement kiln dust’
+(CKD). CKD includes particulates derived from the raw materials, and the original carbonate component of the
+dust may be incompletely calcined. CKD can be efficiently captured by dust control technology and then
+recycled to the kiln (the preferred practice), or it may be directly returned to the kiln in the combustion air, or
+(after capture) it may be disposed of. The degree to which CKD can be recycled to the kiln depends on whether
+or not this causes a quality problem (e.g., excessive alkali content) with the clinker or subsequent finished
+cement. Any CKD not recycled to the kiln is considered to be ‘lost’ to the process and emissions associated with
+it will not be accounted for by the clinker. To the degree that the lost CKD represents calcined carbonate raw
+materials, the emissions from these calcined raw materials represent an addition to the clinker emissions in the
+Tier 1 and 2 calculations, and a subtraction in the Tier 3 calculation.
+As data on the amount of CKD produced may be scarce (except possibly for plant-level reporting), estimating
+emissions from lost CKD based on a default value can be considered good practice. The amount of CO from
+2
+lost CKD can vary, but ranges typically from about 1.5 percent (additional CO relative to that calculated for
+2
+clinker) for a modern plant to about 20 percent for a plant losing a lot of highly calcinated CKD (van Oss, 2005).
+In the absence of data, the default CKD correction factor (CF ) is 1.02 (i.e., add 2 percent to the CO calculated
+ckd 2
+for clinker). If no calcined CKD is believed to be lost to the system, the CKD correction factor will be 1.00 (van
+Oss, 2005). In addition to CKD, the World Business Council for Sustainable Development (WBCSD) separately
+addresses emissions from bypass dust (which is fully calcined). If the data are available, countries may refer to
+the WBCSD Protocol to estimate these emissions (WBCSD, 2005).
+Where data are available, a correction factor (CF in Equation 2.2) for the ‘lost’ CO emissions can be
+ckd 2
+calculated using Equation 2.5.
+2.12 2006 IPCC Guidelines for National Greenhouse Gas Inventories
+=== PAGE 21 ===
+Volume 3: Industrial Processes and Product Use
+2.3.1.2 CHOICE OF EMISSION FACTORS
+TIER 1 METHOD
+Tier 1 is an output-based method and applies an emission factor to the total quantity of lime produced. The
+emission factor is based on the stoichiometric ratios illustrated in Table 2.4, which vary depending on the type of
+lime produced. The stoichiometric ratio is the amount of CO released by the carbonate precursor to the lime,
+2
+assuming that the degree of calcination was 100 percent and assuming no LKD. For example, 1 tonne of CaO
+requires the calcination of 1.785 tonnes of CaCO and this releases 0.785 tonne CO if fully calcined.
+3 2
+In the absence of country specific data, it is good practice to assume 85 percent production of high calcium lime
+and 15 percent production of dolomitic lime (Miller, 1999). Based on this, Equation 2.8 illustrates how to
+calculate the Tier 1 emission factor for lime production.
+EQUATION 2.8
+TIER 1 DEFAULT EMISSION FACTOR FOR LIME PRODUCTION
+EF =0.85•EF +0.15•EF
+Lime highcalciumlime dolomiticlime
+=0.85•0.75+0.15•0.77a
+=0.6375+0.1155
+=0.75tonnesCO /tonnelimeproduced
+2
+Notes on defaults in Equation 2.8
+a: The default EF for dolomitic lime may be 0.86 or 0.77 depending on the technology used for lime
+production. See Table 2.4.
+TABLE 2.4
+BASIC PARAMETERS FOR THE CALCULATION OF EMISSION FACTORS FOR LIME PRODUCTION
+Lime Type Stoichiometric Range of Range of Default Value Default
+Ratio CaO MgO for CaO or Emission Factor
+[tonnes CO 2 per Content [%] Contentd CaO·MgO [tonnes CO 2 per
+tonne CaO or [%] Content tonne lime]
+CaO·MgO] [fraction]
+(1) (2) (1) • (2)
+High-calcium limea 0.785 93-98 0.3-2.5 0.95 0.75
+Dolomitic lime b 0.913 55-57 38-41 0.95 or 0.85c 0.86 or 0.77c
+Hydraulic lime b 0.785 65-92e NA 0.75e 0.59
+Source:
+a Miller (1999b) based on ASTM (1996) and Schwarzkopf (1995).
+b Miller (1999a) based on Boynton (1980).
+c This value depends on technology used for lime production. The higher value is suggested for developed countries, the lower for
+developing ones.
+d There is no exact chemical formula for each type of lime because the chemistry of the lime product is determined by the chemistry of
+the limestone or dolomite used to manufacture the lime.
+e Total CaO content (including that in silicate phases).
+TIER 2 METHOD
+Similar to Tier 1, the emission factor for lime production in Tier 2 reflects the stoichiometric ratios between CO
+2
+and CaO and/or CaO·MgO, and an adjustment to account for the CaO or the CaO·MgO content of the lime.
+However, unlike Tier 1, Tier 2 requires the use of national level data on lime production by type. It is good
+practice to apply Equation 2.9 to develop the emission factors and to account for the CaO or the CaO·MgO
+content.
+2.22 2006 IPCC Guidelines for National Greenhouse Gas Inventories

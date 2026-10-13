@@ -1,0 +1,16 @@
+Main Technoeconomic Characteristics (mtc = main power parameters),,,,,,,,,,,
+Global level,,,,,,,,,,,
+Updated Jun-27-2025!,,,,,,,,,,,
+Code,ItemCode,CoutryCode,Technology,CapacityFactor, CapEx.USD_kW ,Efficiency.NCV,OpexFixed.USD_kW_y,OpexVariable.USD_kWh,WACC,TotalLifetime,Construction
+wld.mtc.coa,mtc,wld,coa,0.54,2000,0.34,60,0,0.08,30,5.25
+wld.mtc.nga,mtc,wld,nga,0.57,900,0.52,30,0,0.08,30,
+wld.mtc.oil,mtc,wld,oil,0.13,1345,0.38,23.5,0.01,0.08,35,
+wld.mtc.nuc,mtc,wld,nuc,0.93,4000,0.38,150,0,0.07,50,7.4
+wld.mtc.hyd,mtc,wld,hyd,0.43,3300,,50,0,0.08,50,4
+wld.mtc.wnd,mtc,wld,wnd,0.3,1300,,40,0,0.07,30,2
+wld.mtc.sol,mtc,wld,sol,0.18,800,,15,0,0.07,25,1.5
+wld.mtc.ore,mtc,wld,ore,0.75,3500,0.38,100,0,0.1,30,4.5
+wld.mtc.bio,mtc,wld,bio,0.69,2000,0.25,100,0,0.07,30,4
+wld.mtc.eys,mtc,wld,eys,,794,,31.4,0,,30,
+wld.mtc.bat,mtc,wld,bat,,300,0.85,40,0,,20,1
+wld.mtc.bat-int,mtc,wld,bat-int,,166,,0,0,,20,

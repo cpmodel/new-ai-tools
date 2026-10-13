@@ -1,0 +1,221 @@
+country_name,baseline_taxes,gas_market,source
+Angola,Fixed,Global,Prices_int row 62
+Afghanistan,Fixed,Global,Prices_int row 63
+American Samoa,Fixed,LNG,Prices_int row 64
+Andorra,Fixed,Europe,Prices_int row 65
+Antigua and Barbuda,Fixed,North Am,Prices_int row 66
+Aruba,Fixed,North Am,Prices_int row 67
+"Bahamas, The",Fixed,North Am,Prices_int row 68
+Barbados,Fixed,North Am,Prices_int row 69
+Benin,Fixed,Global,Prices_int row 70
+Belize,Fixed,North Am,Prices_int row 71
+Bermuda,Fixed,North Am,Prices_int row 72
+Bhutan,Fixed,LNG,Prices_int row 73
+British Virgin Islands,Fixed,North Am,Prices_int row 74
+Botswana,Fixed,Global,Prices_int row 75
+Cameroon,Fixed,Global,Prices_int row 76
+Cayman Islands,Fixed,North Am,Prices_int row 77
+Central African Republic,Fixed,Global,Prices_int row 78
+Chad,Fixed,Global,Prices_int row 79
+Channel Islands,Fixed,Global,Prices_int row 80
+Burkina Faso,Fixed,Global,Prices_int row 81
+Burundi,Fixed,Global,Prices_int row 82
+Cabo Verde,Fixed,Global,Prices_int row 83
+"Congo, Democratic Republic of the",Fixed,Global,Prices_int row 84
+"Congo, Republic of",Fixed,Global,Prices_int row 85
+Comoros,Fixed,Global,Prices_int row 86
+Côte d'Ivoire,Fixed,Global,Prices_int row 87
+Cuba,Fixed,North Am,Prices_int row 88
+Curaçao,Fixed,North Am,Prices_int row 89
+Djibouti,Fixed,Global,Prices_int row 90
+Dominica,Fixed,North Am,Prices_int row 91
+Eritrea,Fixed,Global,Prices_int row 92
+Ethiopia,Fixed,Global,Prices_int row 93
+Gabon,Fixed,Global,Prices_int row 94
+Ghana,Fixed,Global,Prices_int row 95
+Kenya,Fixed,Global,Prices_int row 96
+Mauritius,Fixed,Global,Prices_int row 97
+Mozambique,Fixed,Global,Prices_int row 98
+Namibia,Fixed,Global,Prices_int row 99
+Niger,Fixed,Global,Prices_int row 100
+Nigeria,Fixed,Global,Prices_int row 101
+Rwanda,Fixed,Global,Prices_int row 102
+Senegal,Fixed,Global,Prices_int row 103
+South Africa,Fixed,Global,Prices_int row 104
+South Sudan,Fixed,Global,Prices_int row 105
+Tanzania,Fixed,Global,Prices_int row 106
+Togo,Fixed,Global,Prices_int row 107
+Zambia,Fixed,Global,Prices_int row 108
+Zimbabwe,Fixed,Global,Prices_int row 109
+Australia,Fixed,LNG,Prices_int row 110
+Bangladesh,Fixed,LNG,Prices_int row 111
+Brunei Darussalam,Fixed,LNG,Prices_int row 112
+Cambodia,Fixed,LNG,Prices_int row 113
+China,Fixed,LNG,Prices_int row 114
+Hong Kong SAR,Fixed,LNG,Prices_int row 115
+India,Fixed,LNG,Prices_int row 116
+Indonesia,Fixed,LNG,Prices_int row 117
+Japan,Fixed,LNG,Prices_int row 118
+Korea,Fixed,LNG,Prices_int row 119
+Malaysia,Fixed,LNG,Prices_int row 120
+Mongolia,Fixed,LNG,Prices_int row 121
+Myanmar,Fixed,LNG,Prices_int row 122
+Nepal,Fixed,LNG,Prices_int row 123
+New Zealand,Fixed,LNG,Prices_int row 124
+Philippines,Fixed,LNG,Prices_int row 125
+Singapore,Fixed,LNG,Prices_int row 126
+Sri Lanka,Fixed,LNG,Prices_int row 127
+Thailand,Fixed,LNG,Prices_int row 128
+Vietnam,Fixed,LNG,Prices_int row 129
+Albania,Fixed,Europe,Prices_int row 130
+Austria,Fixed,Europe,Prices_int row 131
+Belarus,Fixed,Europe,Prices_int row 132
+Belgium,Fixed,Europe,Prices_int row 133
+Bosnia and Herzegovina,Fixed,Europe,Prices_int row 134
+Bulgaria,Fixed,Europe,Prices_int row 135
+Croatia,Fixed,Europe,Prices_int row 136
+Cyprus,Fixed,Europe,Prices_int row 137
+Czechia,Fixed,Europe,Prices_int row 138
+Denmark,Fixed,Europe,Prices_int row 139
+Estonia,Fixed,Europe,Prices_int row 140
+Equatorial Guinea,Fixed,Global,Prices_int row 141
+Faroe Islands,Fixed,Europe,Prices_int row 142
+Fiji,Fixed,Global,Prices_int row 143
+Finland,Fixed,Europe,Prices_int row 144
+France,Fixed,Europe,Prices_int row 145
+Germany,Fixed,Europe,Prices_int row 146
+Greece,Fixed,Europe,Prices_int row 147
+Hungary,Fixed,Europe,Prices_int row 148
+Iceland,Fixed,Europe,Prices_int row 149
+Ireland,Fixed,Europe,Prices_int row 150
+Israel,Fixed,Global,Prices_int row 151
+Italy,Fixed,Europe,Prices_int row 152
+Kosovo,Fixed,Europe,Prices_int row 153
+Latvia,Fixed,Europe,Prices_int row 154
+Lithuania,Fixed,Europe,Prices_int row 155
+Luxembourg,Fixed,Europe,Prices_int row 156
+North Macedonia,Fixed,Europe,Prices_int row 157
+Malta,Fixed,Europe,Prices_int row 158
+Moldova,Fixed,Europe,Prices_int row 159
+"Montenegro, Rep. of",Fixed,Europe,Prices_int row 160
+Netherlands,Fixed,Europe,Prices_int row 161
+Norway,Fixed,Europe,Prices_int row 162
+Poland,Fixed,Europe,Prices_int row 163
+French Polynesia,Fixed,LNG,Prices_int row 164
+"Gambia, The",Fixed,Global,Prices_int row 165
+Gibraltar,Fixed,Europe,Prices_int row 166
+Greenland,Fixed,Europe,Prices_int row 167
+Grenada,Fixed,North Am,Prices_int row 168
+Guam,Fixed,LNG,Prices_int row 169
+Guinea,Fixed,Global,Prices_int row 170
+Guinea-Bissau,Fixed,Global,Prices_int row 171
+Guyana,Fixed,North Am,Prices_int row 172
+Isle of Man,Fixed,Europe,Prices_int row 173
+Kiribati,Fixed,LNG,Prices_int row 174
+"Korea, Dem. People's Rep.",Fixed,LNG,Prices_int row 175
+Lao P.D.R.,Fixed,LNG,Prices_int row 176
+Lesotho,Fixed,Global,Prices_int row 177
+Liberia,Fixed,Global,Prices_int row 178
+Liechtenstein,Fixed,Europe,Prices_int row 179
+Macao SAR,Fixed,LNG,Prices_int row 180
+Madagascar,Fixed,Global,Prices_int row 181
+Malawi,Fixed,Global,Prices_int row 182
+Maldives,Fixed,LNG,Prices_int row 183
+Mali,Fixed,Global,Prices_int row 184
+Marshall Islands,Fixed,LNG,Prices_int row 185
+Mauritania,Fixed,Global,Prices_int row 186
+Micronesia,Fixed,LNG,Prices_int row 187
+Monaco,Fixed,Europe,Prices_int row 188
+Nauru,Fixed,LNG,Prices_int row 189
+New Caledonia,Fixed,LNG,Prices_int row 190
+Northern Mariana Islands,Fixed,LNG,Prices_int row 191
+Palau,Fixed,LNG,Prices_int row 192
+Papua New Guinea,Fixed,LNG,Prices_int row 193
+Puerto Rico,Fixed,North Am,Prices_int row 194
+Samoa,Fixed,LNG,Prices_int row 195
+San Marino,Fixed,Europe,Prices_int row 196
+São Tomé and Príncipe,Fixed,Global,Prices_int row 197
+Seychelles,Fixed,Global,Prices_int row 198
+Sierra Leone,Fixed,Global,Prices_int row 199
+Sint Maarten (Dutch part),Fixed,North Am,Prices_int row 200
+Solomon Islands,Fixed,LNG,Prices_int row 201
+Somalia,Fixed,Global,Prices_int row 202
+St. Kitts and Nevis,Fixed,North Am,Prices_int row 203
+St. Lucia,Fixed,North Am,Prices_int row 204
+St. Martin (French part),Fixed,North Am,Prices_int row 205
+St. Vincent and the Grenadines,Fixed,North Am,Prices_int row 206
+Eswatini,Fixed,Global,Prices_int row 207
+Syria,Fixed,Global,Prices_int row 208
+Taiwan Province of China,Fixed,LNG,Prices_int row 209
+Timor-Leste,Fixed,LNG,Prices_int row 210
+Tonga,Fixed,LNG,Prices_int row 211
+Turks and Caicos Islands,Fixed,North Am,Prices_int row 212
+Tuvalu,Fixed,LNG,Prices_int row 213
+Uganda,Fixed,Global,Prices_int row 214
+Vanuatu,Fixed,LNG,Prices_int row 215
+Virgin Islands (U.S.),Fixed,North Am,Prices_int row 216
+West Bank and Gaza,Fixed,Global,Prices_int row 217
+Portugal,Fixed,Europe,Prices_int row 218
+Romania,Fixed,Europe,Prices_int row 219
+Russia,Fixed,Europe,Prices_int row 220
+Serbia,Fixed,Europe,Prices_int row 221
+Slovak Republic,Fixed,Europe,Prices_int row 222
+Slovenia,Fixed,Europe,Prices_int row 223
+Spain,Fixed,Europe,Prices_int row 224
+Sweden,Fixed,Europe,Prices_int row 225
+Switzerland,Fixed,Europe,Prices_int row 226
+Turkiye,Fixed,Global,Prices_int row 227
+Ukraine,Fixed,Europe,Prices_int row 228
+United Kingdom,Fixed,Europe,Prices_int row 229
+Algeria,Fixed,Global,Prices_int row 230
+Armenia,Fixed,Global,Prices_int row 231
+Azerbaijan,Fixed,Global,Prices_int row 232
+Bahrain,Fixed,Global,Prices_int row 233
+Egypt,Fixed,Global,Prices_int row 234
+Georgia,Fixed,Global,Prices_int row 235
+Iran,Fixed,Global,Prices_int row 236
+Iraq,Fixed,Global,Prices_int row 237
+Jordan,Fixed,Global,Prices_int row 238
+Kazakhstan,Fixed,Global,Prices_int row 239
+Kuwait,Fixed,Global,Prices_int row 240
+Kyrgyz Republic,Fixed,Global,Prices_int row 241
+Lebanon,Fixed,Global,Prices_int row 242
+Libya,Fixed,Global,Prices_int row 243
+Morocco,Fixed,Global,Prices_int row 244
+Oman,Fixed,Global,Prices_int row 245
+Pakistan,Fixed,Global,Prices_int row 246
+Qatar,Fixed,Global,Prices_int row 247
+Saudi Arabia,Fixed,Global,Prices_int row 248
+Sudan,Fixed,Global,Prices_int row 249
+Tajikistan,Fixed,Global,Prices_int row 250
+Tunisia,Fixed,Global,Prices_int row 251
+Turkmenistan,Fixed,Global,Prices_int row 252
+United Arab Emirates,Fixed,Global,Prices_int row 253
+Uzbekistan,Fixed,Global,Prices_int row 254
+Yemen,Fixed,Global,Prices_int row 255
+Argentina,Ad-Valorem,North Am,Prices_int row 256
+Bolivia,Fixed,North Am,Prices_int row 257
+Brazil,Fixed,North Am,Prices_int row 258
+Canada,Fixed,North Am,Prices_int row 259
+Chile,Fixed,North Am,Prices_int row 260
+Colombia,Fixed,North Am,Prices_int row 261
+Costa Rica,Fixed,North Am,Prices_int row 262
+Dominican Republic,Fixed,North Am,Prices_int row 263
+Ecuador,Fixed,North Am,Prices_int row 264
+El Salvador,Fixed,North Am,Prices_int row 265
+Guatemala,Fixed,North Am,Prices_int row 266
+Haiti,Fixed,North Am,Prices_int row 267
+Honduras,Fixed,North Am,Prices_int row 268
+Jamaica,Fixed,North Am,Prices_int row 269
+Mexico,Fixed,North Am,Prices_int row 270
+Nicaragua,Fixed,North Am,Prices_int row 271
+Panama,Fixed,North Am,Prices_int row 272
+Paraguay,Fixed,North Am,Prices_int row 273
+Peru,Fixed,North Am,Prices_int row 274
+Suriname,Fixed,North Am,Prices_int row 275
+Trinidad and Tobago,Fixed,North Am,Prices_int row 276
+United States,Fixed,North Am,Prices_int row 277
+World aviation,Fixed,LNG,Prices_int row 278
+World marine,Fixed,LNG,Prices_int row 279
+Venezuela,Fixed,North Am,Prices_int row 280
+Uruguay,Fixed,North Am,Prices_int row 281

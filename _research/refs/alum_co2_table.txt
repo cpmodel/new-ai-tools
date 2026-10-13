@@ -1,0 +1,483 @@
+=== PAGE 5 ===
+Volume 3: Industrial Processes and Product Use
+Equation 4.29 CO emissions from primary magnesium production (Tier 2)............................................4.61
+2
+Equation 4.30 SF emissions from magnesium casting (Tier 1).................................................................4.62
+6
+Equation 4.31 SF emissions from magnesium casting (Tier 2).................................................................4.62
+6
+Equation 4.32 CO emissions from lead production...................................................................................4.72
+2
+Equation 4.33 CO emissions from zinc production (Tier 1)......................................................................4.79
+2
+Equation 4.34 CO emissions from zinc production (Tier 1)......................................................................4.79
+2
+Figures
+Figure 4.1 Illustration of main processes for integrated iron and steel production...............................4.10
+Figure 4.2 Illustration of coke production process (emissions reported in Category 1A of the Energy
+Sector).................................................................................................................................4.13
+Figure 4.3 Illustration of sinter production process..............................................................................4.14
+Figure 4.4 Illustration of pig iron production processes.......................................................................4.15
+Figure 4.5 Illustration of steel production processes.............................................................................4.16
+Figure 4.6 Estimation of CO emissions from metallurgical coke production......................................4.19
+2
+Figure 4.7 Decision tree for estimation of CO emissions from iron and steel production...................4.20
+2
+Figure 4.8 Decision tree for estimation of CH emissions from iron and steel production...................4.20
+4
+Figure 4.9 Decision tree for estimation of CO emissions from ferroalloy production........................4.35
+2
+Figure 4.10 Decision tree for estimation of CH emissions from FeSi and Si alloy production.............4.36
+4
+Figure 4.11 Decision tree for calculation of CO emissions from primary aluminium production........4.44
+2
+Figure 4.12 Decision tree for calculation of PFC emissions from primary aluminium production........4.53
+Figure 4.13 Decision tree for estimation of CO emissions from raw materials calcination in the primary
+2
+magnesium production process...........................................................................................4.63
+Figure 4.14 Decision tree for estimation of SF emissions from magnesium processing.......................4.64
+6
+Figure 4.15 Decision tree for estimation of CO emissions from lead production.................................4.72
+2
+Figure 4.16 Decision tree for estimation of CO emissions from zinc production.................................4.81
+2
+Tables
+Table 4.1 Tier 1 default CO emission factors for coke production and iron & steel production........4.25
+2
+Table 4.2 Tier 1 default CH emission factors for coke production and iron & steel production........4.26
+4
+Table 4.3 Tier 2 material-specific carbon contents for iron & steel and coke production...................4.27
+Table 4.4 Uncertainty ranges...............................................................................................................4.30
+Table 4.5 Generic CO emission factors for ferroalloy production (tonnes CO /tonne product)........4.37
+2 2
+Table 4.6 CO emission factors for ferroalloy production (tonnes CO /tonne reducing agent)...........4.38
+2 2
+Table 4.7 Default emission factors for CH (kg CH /tonne product)..................................................4.39
+4 4
+Table 4.8 Emission factors for CH (kg CH /tonne product)..............................................................4.39
+4 4
+Table 4.9 Uncertainty ranges...............................................................................................................4.40
+4.6 2006 IPCC Guidelines for National Greenhouse Gas Inventories
+=== PAGE 6 ===
+Chapter 4: Metal Industry Emissions
+Table 4.10 Tier 1 technology specific emission factors for calculating carbon dioxide emissions from
+anode or paste consumption................................................................................................4.47
+Table 4.11 Data sources and uncertainties for parameters used in Tier 2 or 3 method for CO emissions
+2
+from prebake cells (CWPB and SWPB)..............................................................................4.48
+Table 4.12 Data sources and uncertainties for parameters used in Tier 2 or 3 method for CO emissions
+2
+from pitch volatiles combustion (CWPB and SWPB)........................................................4.48
+Table 4.13 Data sources and uncertainties for parameters used in Tier 2 or 3 method for CO emissions
+2
+from bake furnace packing material (CWPB and SWPB)..................................................4.48
+Table 4.14 Data sources and uncertainties for parameters used in Tier 2 or 3 method for CO emissions
+2
+from Søderberg cells (VSS and HSS)..................................................................................4.49
+Table 4.15 Default emission factors and uncertainty ranges for the calculation of PFC emissions from
+aluminium production by cell technology type (Tier 1 method).........................................4.54
+Table 4.16 Technology specific slope and overvoltage coefficients for the calculation of PFC emissions
+from aluminium production (Tier 2 method).......................................................................4.54
+Table 4.17 Good practice reporting information for calculating CO and PFC emissions from aluminium
+2
+production by tier................................................................................................................4.58
+Table 4. 18 Possible GHG emissions related to production and processing of magnesium...................4.59
+Table 4.19 Emission factors for ore-specific primary Mg metal production.........................................4.65
+Table 4.20 SF emission factors for magnesium casting processes (Tier 1).........................................4.66
+6
+Table 4.21 Generic CO emission factors for lead production by source and furnace type..................4.73
+2
+Table 4.22 Material-specific carbon content for lead production..........................................................4.74
+Table 4.23 Uncertainty ranges...............................................................................................................4.76
+Table 4.24 Tier 1 CO emission factors for zinc production.................................................................4.80
+2
+Table 4.25 Uncertainty Ranges.............................................................................................................4.82
+Boxes
+Box 4.1 Definitions for words/symbols used in equations in this section.........................................4.33
+Box 4.2 Anode effect description......................................................................................................4.50
+2006 IPCC Guidelines for National Greenhouse Gas Inventories 4.7
+=== PAGE 46 ===
+Chapter 4: Metal Industry Emissions
+Ash = ash content in pitch, wt %
+p
+H = hydrogen content in pitch, wt %
+p
+S = sulphur content in calcined coke, wt %
+c
+Ash = ash content in calcined coke, wt %
+c
+CD = carbon in skimmed dust from Søderberg cells, tonnes C/tonne Al
+44/12 = CO molecular mass : carbon atomic mass ratio, dimensionless
+2
+Equation 4.24 should be applied to each smelter in the country using the Søderberg process and the results
+summed to arrive at total national emissions. It is possible to use a hybrid Tier 2/3 approach if data on ash or
+sulphur content are not available for each smelter.
+4.4.2.2 CHOICE OF EMISSION FACTORS FOR CO EMISSIONS FROM
+2
+PRIMARY ALUMINIUM PRODUCTION
+Tier 1 method for CO emissions
+2
+Table 4.10 lists the default emission factors for CO per tonne of aluminium. The emission factors of 1.6 and 1.7
+2
+for Prebake and Søderberg technologies are based on International Aluminium Institute (IAI) global survey data
+(International Aluminium Institute, Life Cycle Assessment of Aluminium , 2000).
+TABLE 4.10
+TIER 1 TECHNOLOGY SPECIFIC EMISSION FACTORS FOR CALCULATING CARBON DIOXIDE EMISSIONS FROM ANODE OR
+PASTE CONSUMPTION
+Technology Emission Factor (tonnes Uncertainty
+CO /tonne Al)
+2 (+/-%)
+Prebake7 1.6 10
+Søderberg 1.7 10
+Source: International Aluminium Institute, Life Cycle Assessment of Aluminium (IAI, 2000).
+Tier 2 and Tier 3 emission factors for CO emissions
+2
+CO emissions for Prebake cells (CWPB and SWPB):
+2
+The most significant factors in Equation 4.21 are metal production and net anode consumption for Prebake
+technology. Both these parameters should be collected from individual operating facilities for use with the Tier
+2 or the Tier 3. Other terms in the equation make minor adjustments for non-carbon components of the anodes
+(for example, sulphur and ash) and thus are not as critical. Tier 3 is based on the use of specific operating
+facility data for these minor components, whereas Tier 2 is based on default values listed in Tables 4.11 to 4.13.
+Tier 3 improves the accuracy of the results, but the improvement in accuracy is not expected to exceed 5 percent.
+Carbon consumed per tonne of aluminium produced is typically recorded by primary aluminium production
+facilities given its economic significance. Facilities using prebake cells refer to this consumption as ‘net anode or
+net carbon consumption,’ and those using Søderberg cells refer to it as ‘anode paste consumption.’
+7 The emission factor for Prebake cells includes CO emissions from the combustion of pitch volatiles and packing coke
+2
+from baking anodes.
+2006 IPCC Guidelines for National Greenhouse Gas Inventories 4.47
+=== PAGE 47 ===
+Volume 3: Industrial Processes and Product Use
+TABLE 4.11
+DATA SOURCES AND UNCERTAINTIES FOR PARAMETERS USED IN TIER 2 OR 3 METHOD FOR CO 2 EMISSIONS FROM
+PREBAKE CELLS (CWPB AND SWPB) , SEE EQUATION 4.21
+Parameter Tier 2 Method Tier 3 Method
+Data Source Uncertainty Data Source Uncertainty
+(+/-%) (+/-%)
+MP: total metal production Individual facility Individual facility
+2 2
+(tonnes aluminium per year) records records
+NAC: net anode consumption per tonne Individual facility Individual facility
+5 5
+of aluminium (tonnes per tonne Al) records records
+S: sulphur content in baked anodes Use industry Individual facility
+a 50 10
+(wt %) typical value, 2 records
+Ash: ash content in baked anodes Use industry Individual facility
+a 85 10
+(wt %) typical value, 0.4 records
+Source: IAI (2005b).
+TABLE 4.12
+DATA SOURCES AND UNCERTAINTIES FOR PARAMETERS USED IN TIER 2 OR 3 METHOD FOR CO 2 EMISSIONS FROM PITCH
+VOLATILES COMBUSTION (CWPB AND SWPB) , SEE EQUATION 4.22
+Parameter Tier 2 Method Tier 3 Method
+Data Source Uncertainty Data Source Uncertainty
+(+/-%) (+/-%)
+GA: initial weight of green anodes Individual facility Individual facility
+2 2
+processed (tonnes green anode per year) records records
+H w : Hydrogen content in green anodes Use industry Individual facility
+(tonnes) typical value, 50 records 10
+0.005 • GA
+BA: Baked anode production Individual facility Individual facility
+2 2
+(tonnes per year) records records
+WT: Waste tar collected (tonnes) Use industry
+typical value, Individual facility
+a) Riedhammer furnaces 50 20
+a) 0.005 • GA records
+b) All other furnaces b) insignificant
+Source: IAI (2005b).
+TABLE 4.13
+DATA SOURCES AND UNCERTAINTIES FOR PARAMETERS USED IN TIER 2 OR 3 METHOD FOR CO 2 EMISSIONS FROM
+BAKE FURNACE PACKING MATERIAL (CWPB AND SWPB) , SEE EQUATION 4.23
+Parameter Tier 2 Method Tier 3 Method
+Data Source Uncertainty Data Source Uncertainty
+(+/-%) (+/-%)
+PCC: Packing coke consumption Use industry Individual facility
+(tonnes per tonne BA) typical value, 25 records 2
+0.015
+BA: Baked anode production (tonnes Individual facility Individual facility
+2 2
+per year) records records
+S : Sulphur content in packing coke Use industry Individual facility
+pc 50 10
+(wt %) typical value, 2 records
+Ash : Ash content in packing coke (wt Use industry Individual facility
+pc 95 10
+%) typical value, 2.5 records
+Source: IAI (2005b).
+4.48 2006 IPCC Guidelines for National Greenhouse Gas Inventories
+=== PAGE 48 ===
+Chapter 4: Metal Industry Emissions
+CO emissions for Søderberg cells (VSS and HSS):
+2
+The binder content in paste, BC, typically varies by less than 1 percent and is part of operation practice by
+facility. It is an important term in Equation 4.24 because the carbon content of the pitch, which acts as a binder,
+is lower than that of the coke, which makes up the remainder of the paste. As was noted previously for Prebake
+anode consumption, the most important components of Equation 4.24 are the metal production and paste
+consumption. The other terms in Equation 4.24 make small corrections based on impurities and minor
+differences in carbon content of paste materials. Tier 3 is based on the use of specific operating facility data for
+these minor components, whereas Tier 2 is based on default values listed in Table 4.14. Tier 3 improves the
+accuracy of the results; however, the impact can be expected to be less than 5 percent on the result.
+TABLE 4.14
+DATA SOURCES AND UNCERTAINTIES FOR PARAMETERS USED IN TIER 2 OR 3 METHOD FOR CO 2 EMISSIONS FROM
+SØDERBERG CELLS (VSS AND HSS)
+Parameter Tier 2 Method Tier 3 Method
+Data Source Data Data Source Data
+Uncertainty Uncertainty
+(+/-%) (+/-%)
+MP: total metal production (tonnes Individual facility Individual facility
+2 2
+Al/year) records records
+PC : paste consumption Individual facility Individual facility
+2-5 2-5
+(tonnes per tonne Al) records records
+Use industry
+CSM: emissions of cyclohexane typical value, Individual facility
+30 15
+soluble matter (kg per tonne Al) HSS – 4.0 records
+VSS – 0.5
+Use industry
+BC: binder content in paste typical value, Individual facility
+25 5
+(wt %) Dry Paste – 24 records
+Wet Paste – 27
+Use industry
+S: sulphur content in pitch Individual facility
+p typical value, 20 10
+(wt %) records
+0.6
+Use industry
+Individual facility
+Ash : ash content in pitch (wt %) typical value, 20 10
+p records
+0.2
+Use industry
+H: hydrogen content in pitch Individual facility
+p typical value, 50 10
+(wt %) records
+3.3
+Use industry
+S: sulphur content in calcined Individual facility
+c typical value, 20 10
+coke (wt %) records
+1.9
+Use industry
+Ash: ash content in calcined coke Individual facility
+c typical value, 50 10
+(wt %) records
+0.2
+CD: carbon in dust from anode Use industry
+Individual facility
+(tonnes of carbon in skim per typical value, 99 30
+records
+tonne Al) 0.01
+4.4.2.3 CHOICE OF METHOD FOR PFCS
+During electrolysis, alumina (Al O ) is dissolved in a fluoride melt comprising about 80 weight percent cryolite
+2 3
+(Na AlF ). Perfluorocarbons (CF and C F collectively referred to as PFCs) are formed from the reaction of the
+3 6 4 2 6
+carbon anode with the cryolite melt during a process upset condition known as an ‘anode effect’. An anode effect
+occurs when the concentration of alumina in the electrolyte is too low to support the standard anode reaction.
+2006 IPCC Guidelines for National Greenhouse Gas Inventories 4.49
+=== PAGE 52 ===
+Chapter 4: Metal Industry Emissions
+Figure 4.12 Decision tree for calculation of PFC emissions from primary aluminium
+production
+Start
+Are
+Do
+process data Calculate PFC emissions
+process data
+(AE minutes per cell for high performing
+Yes indicate a high performing Yes
+day or AE overvoltage) facilities using either
+facility?1
+available? Tier 2 or Tier 3.
+Box 4: Tier 3 or Tier 2
+Collect
+process
+No
+data5.
+No
+Yes Are facility
+Is this a key specific PFC coefficients Calculate PFC emissions
+Yes
+category4? available per good using Tier 3 method.
+practice2?
+Box 3: Tier 3
+Calculate PFC emissions
+No
+No using Tier 2 method3.
+Box 2: Tier 2
+Are production
+data available by Yes
+technology?
+Estimate annual Calculate PFC emissions
+No
+production by technology. using Tier 1 method6.
+Box 1: Tier 1
+Note:
+1. High performing facilities emit so little PFCs that no significant improvement can be expected in the overall facility GHG inventory by
+using the Tier 3 method rather than the Tier 2 method. High performing facilities are defined, based on what process data are collected, as
+those that operate with less than 0.2 anode effect minutes per cell day, or, less than 1.4 mV overvoltage. In such facilities the improvement
+in accuracy in facility GHG inventory is less than 5% when moving from Tier 2 to Tier 3 methods for PFCs.
+2. Good practices for obtaining facility specific PFC equation coefficients are detailed in the IAI GHG Protocol (IAI, 2005).
+3. In this case, Tier 2 method should be used until site-specific Tier 3 coefficients become available and the Tier 3 method employed unless
+PFC emissions become immaterial, in which case facilities can choose to use either the Tier 2 or Tier 3 method.
+4. See Volume 1 Chapter 4, Methodological Choice and Identification of Key Categories (noting Section 4.1.2 on limited resources), for
+discussion of key categories and use of decision trees.
+5. For key categories, it is good practice to collect anode effect process data and production activity data at the individual production
+facility level.
+6. Primary aluminium facilities regularly record activity data including metal production and anode effect process data facilitating, at a
+minimum, Tier 2 calculation method. Errors of magnitude of x10 can result from use of Tier 1 methods for PFCs.
+4.4.2.4 CHOICE OF EMISSION FACTORS FOR PFCS
+Tier 1: Technology based default emission factors
+Default emission factors for Tier 1 method are provided in Table 4.15.
+2006 IPCC Guidelines for National Greenhouse Gas Inventories 4.53
+=== PAGE 53 ===
+Volume 3: Industrial Processes and Product Use
+TABLE 4.15
+DEFAULT EMISSION FACTORS AND UNCERTAINTY RANGES FOR THE CALCULATION OF PFC EMISSIONS FROM
+ALUMINIUM PRODUCTION BY CELL TECHNOLOGY TYPE (TIER 1 METHOD)
+Technology CF CF
+4 2 6
+EF (kg/tonne Al)a Uncertainty Range (%)b EF (kg/tonne Al)c Uncertainty Range (%)d
+CF4 C2F6
+CWPB 0.4 -99/+380 0.04 -99/+380
+SWPB 1.6 -40/+150 0.4 -40/+150
+VSS 0.8 -70/+260 0.04 -70/+260
+HSS 0.4 -80/+180 0.03 -80/+180
+a Default CF values calculated from median anode effect performance from 1990 IAI survey data (IAI, 2001).
+4
+b Uncertainty based on the range of calculated CF specific emissions by technology from 1990 IAI anode effect survey data (IAI,
+4
+2001).
+c Default CF values calculated from global average CF:CF ratios by technology, multiplied by the default CF emission factor.
+2 6 2 6 4 4
+d Uncertainty range based on global average CF:CF ratios by technology, multiplied by calculated minimum and maximum specific
+2 6 4
+CF emissions from 1990 IAI survey data (IAI, 2001).
+4
+Note: These default emission factors should only be used in the absence of Tier 2 or Tier 3 data.
+Tier 2: PFC emission factor based on a technology specific relationship between
+anode effect performance and PFC emissions.
+The Tier 2 method is based on using either technology specific slope or overvoltage coefficients for the
+applicable reduction cell and process control technology as listed in Table 4.16.11
+TABLE 4.16
+TECHNOLOGY SPECIFIC SLOPE AND OVERVOLTAGE COEFFICIENTS FOR THE CALCULATION OF PFC EMISSIONS FROM
+ALUMINIUM PRODUCTION (TIER 2 METHOD)
+Slope Coefficient b, c
+Overvoltage Coefficientb, c, d
+[(kg PFC /t Al ) / (AE-Mins/cell- [(kg /t ) / (mV)] Weight Fraction C 2 F 6 / CF 4
+Technologya day)] CF4 Al
+Uncertainty Uncertainty Uncertainty
+CF CF CF /CF
+4 (+/-%) 4 (+/-%) 2 6 4 (+/-%)
+CWPB 0.143 6 1.16 24 0.121 11
+SWPB 0.272 15 3.65 43 0.252 23
+VSS 0.092 17 NR NR 0.053 15
+HSS 0.099 44 NR NR 0.085 48
+a Centre Worked Prebake (CWPB), Side Worked Prebake (SWPB), Vertical Stud Søderberg (VSS), Horizontal Stud Søderberg (HSS).
+b Source: Measurements reported to IAI, US EPA sponsored measurements and multiple site measurements (U.S. EPA and IAI, 2003).
+c Embedded in each Slope and Overvoltage coefficient is an assumed emissions collection efficiency as follows: CWPB 98%, SWPB
+90%, VSS 85%, HSS 90%. These collection efficiencies have been assumed based on measured PFC collection fractions, measured
+fluoride gas collection efficiencies and expert opinion.
+d The noted coefficients reflect measurements made at some facilities recording positive overvoltage and others recording algebraic
+overvoltage. No robust relationship has yet been established between positive and algebraic overvoltage. Positive overvoltage should
+provide a better correlation with PFC emissions than algebraic overvoltage. Overvoltage coefficients are not relevant (NR) to VSS and
+HSS technologies.
+11 These slope coefficients were derived from measurement of PFCs and correlating the measured PFC emissions to anode
+effect minutes per cell day at over one-hundred aluminium smelters. The values in Table 4.16 are the technology specific
+factors from measurement data available as of March 2005 when this document was developed. It is important to note Tier
+2 slope coefficients are based on the anode-effect minutes per cell-day statistic as defined in the IAI GHG Protocol (IAI,
+2005a). It is good practice to refer to the most current data for calculation of PFC emissions as noted in the IAI GHG
+Protocol and to the IPCC Emission Factor Database.
+4.54 2006 IPCC Guidelines for National Greenhouse Gas Inventories
+=== PAGE 56 ===
+Chapter 4: Metal Industry Emissions
+4.4.3.2 ACTIVITY DATA UNCERTAINTIES
+There is very little uncertainty in the data for the annual production of aluminium, less than 1 percent. The
+uncertainty in recording carbon consumption as baked anode consumption or coke and paste consumption is
+estimated to be only slightly higher than for aluminium production, less than 2 percent. The other component of
+calculated facility specific emissions using Tier 2 or Tier 3 methods is the anode effect activity data, i.e., either
+anode effect minutes per cell day or anode effect overvoltage. These parameters are typically logged by the
+process control system as part of the operations of nearly all aluminium production facilities and the
+uncertainties in these data are low.
+4.4.4 Quality Assurance/Quality Control (QA/QC),
+Reporting and Documentation
+4.4.4.1 QUALITY ASSURANCE/QUALITY CONTROL (QA/QC)
+It is good practice at all primary aluminium production facilities to maintain records of all of the necessary
+activity data to support calculations of emissions factors as suggested in these guidelines. These records will
+include production of aluminium, anode effect performance and consumption of carbon materials used in either
+Prebake or Søderberg cells. In addition, the International Aluminium Institute maintains global summaries of
+aggregated activity data for these same parameters and regional data are available from regional aluminium
+associations. It is good practice to aggregate emissions estimates from each smelter to estimate total national
+emissions. However, if smelter-level production data are unavailable, smelter capacity data may be used along
+with aggregate national production to estimate smelter production.
+It is good practice to verify facility CO emission factors per tonne aluminium by comparison with the expected
+2
+range of variation that would be predicted from the variation noted in Tables 4.10 and 4.11 for carbon dioxide
+specific emissions. Also, the underlying equation coefficients used for calculating PFC emission factors per
+tonne aluminium should be compared with those noted in Table 4.15. It is suggested that any inventory value
+outside the 95 percent confidence range of the data population variance be confirmed with the data source.
+Use of standard measurement methods improves the consistency of the resulting data and knowledge of the
+statistical properties of the data. For primary aluminium, the EPA/IAI Protocol for Measurement of
+Tetrafluoromethane (CF ) and Hexafluoroethane (C F ) Emissions from Primary Aluminum Production is the
+4 2 6
+internationally recognized standard (U.S. EPA and IAI, 2003). Inventory compilers should encourage plants to
+use this method for developing Tier 3 PFC equation coefficients. Significant differences between calculated
+coefficients based on PFC measurements and the industry average Tier 2 coefficients for similar reduction
+technology should elicit further review and checks on calculations. Large differences should be explained and
+documented. An international data set of anode effect performance, which can be used to identify outlier data, is
+available from the International Aluminium Institute. In addition, an up-to-date database of PFC measurements
+is also maintained by IAI and should be consulted when assessing the appropriateness of reported data.
+Inter-annual changes in emissions of carbon dioxide per tonne aluminium should not exceed +/-10 percent based
+on the consistency of the underlying processes that produce carbon dioxide. In contrast, inter-annual changes in
+emissions of PFCs per tonne of aluminium may change by values of up to +/- 100 percent. Increases in PFC
+specific emissions can result from process instability. Increases in anode effect frequency and duration can be the
+result of factors such as unanticipated power interruptions, changes in sources of alumina feed materials, cell
+operational problems, and increases in potline amperage to increase aluminium production. Decreases in PFC
+specific emissions can result from decreases in anode effect frequency and duration due to changes in the
+computer algorithms used in cell process control, upgrades in cell technology such as the installation of point
+feeders, improved work practices and better control of raw materials.
+4.4.4.2 REPORTING AND DOCUMENTATION
+It is good practice to document and archive all information required to produce the national emissions inventory
+estimates as outlined in Volume 1, Chapter 6, Quality Assurance and Quality Control, Internal Documentation
+and Archiving. Some examples of specific documentation and reporting relevant to this source category are
+provided below.
+It is not practical to include all documentation in the national inventory report. However, the inventory should
+include summaries of methods used and references to source data such that the reported emissions estimates are
+2006 IPCC Guidelines for National Greenhouse Gas Inventories 4.57
+=== PAGE 57 ===
+Volume 3: Industrial Processes and Product Use
+transparent and steps in their calculation may be retraced. To improve transparency, it is good practice to report
+emissions for PFCs from aluminium production separately from other source categories. Additionally, it is good
+practice that CF and C F emissions are reported separately on a mass basis.
+4 2 6
+The supporting information necessary to ensure transparency in reported emissions estimates is shown in Table
+4.17, Good practice Reporting Information for PFC Emissions from Aluminium Production by Tier, below.
+Much of the production and process data are considered proprietary by operators, especially where there is only
+one smelter in a country. It is good practice to exercise appropriate techniques, including aggregation of data, to
+ensure protection of confidential data.
+TABLE 4.17
+GOOD PRACTICE REPORTING INFORMATION FOR CALCULATING CO 2 AND PFC EMISSIONS FROM ALUMINIUM
+PRODUCTION BY TIER
+Data Tier 3 Tier 2 Tier 1
+PFCs
+Annual national production (by CWPB, SWPB, HSS, or VSS technology) X
+Annual production by smelter (by CWPB, SWPB, HSS, or VSS technology) X X
+Anode Effect minutes per cell-day or Anode Effect Overvoltage (mV) X X
+Facility specific emission coefficients linked to anode effect performance X
+Technology specific emission coefficients linked to anode effect performance X
+Default technology emission coefficients X
+Supporting documentation X X X
+CO
+2
+Annual national production (by Prebake or Søderberg technology) X
+Annual production by smelter (by Prebake or Søderberg technology) X X
+Net anode consumption for Prebake cells or paste consumption for Søderberg cells X X
+Carbon material impurity levels and carbon dust for Søderberg cells X
+4.58 2006 IPCC Guidelines for National Greenhouse Gas Inventories

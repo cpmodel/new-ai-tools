@@ -1,0 +1,16 @@
+subsector,name,ktoe_2022,legacy_row
+rod,Road,0.0,3725
+ral,Rail,47.63186961943863,3726
+avi,Domestic aviation,0.0,3727
+nav,Domestic navigation,0.0,3728
+res,Residential,6382.142461687616,3729
+foo,Food & forestry,1257.2944901716642,3730
+srv,Services (public & private),4021.5308672193655,3731
+mch,Mining & Chemicals,411.49545779030245,3732
+irn,Iron and steel,751.8531098444473,3733
+nfm,Other metals,6.1925552619658095,3734
+mac,Machinery,573.0841184780776,3735
+cem,Cement,1270.6460918469224,3736
+omn,Other manufacturing,773.8487885070347,3737
+cst,Construction,0.0,3738
+oen,Other - energy use,0.0,3739

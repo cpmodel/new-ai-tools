@@ -1,0 +1,9 @@
+fuel,gj_per_price_unit,ef_unit_in_legacy
+coa,1.0,tCO2/GJ
+nga,1.0,tCO2/GJ
+gso,0.034969740000000006,tCO2/liter
+die,0.037295190000000006,tCO2/liter
+lpg,0.02577968854495125,tCO2/liter
+ker,0.037748829655107154,tCO2/liter
+oop,6.12,tCO2/bbl
+bio,1.0,tCO2/GJ

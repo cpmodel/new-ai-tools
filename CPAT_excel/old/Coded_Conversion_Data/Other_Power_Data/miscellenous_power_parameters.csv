@@ -1,0 +1,22 @@
+Power data,,,,,
+This tab gathers raw and refined data used in the power sector,,,,,
+Miscellaneous Power Parameters,,,,,
+Global level,,,,,
+Quantity,,Sector,Source, Unit ,Value
+Transmission & Distribution Cost,,Residential,IEA, $/kwhe ,0.04
+Transmission & Distribution Cost,,Industrial,IEA, $/kwhe ,0.02
+Nuclear Fuel cost per kwhe final electricity,,Nuclear,NEA, $/kwhe ,0
+Average WACC,,All,CPAT (from BNEF),,
+,,,,,
+Assumptions for max RE Scaleup Rates,,,,,
+Low,0.01,,,,
+Medium*,0.02,,,,
+High,0.03,,,,
+Vhigh,0.04,,,,
+,,,,,
+WACC Assumptions (user set),,,,,
+Income Level,WACC Assumed,,,,
+HIC,0.08,,,,
+UMIC,0.1,,,,
+LMIC,0.13,,,,
+LIC,0.15,,,,

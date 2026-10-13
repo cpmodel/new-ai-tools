@@ -1,0 +1,255 @@
+=== PAGE 23 ===
+Volume 3: Industrial Processes and Product Use
+This section describes a Tier 1 default method and a more advanced Tier 3 facility-level method for CH from
+4
+sinter production or iron production, both of which are similar to the approaches described for estimating CO
+2
+emissions. There is no Tier 2 method. CH may be emitted from steel–making processes as well, however those
+4
+emissions are assumed to be negligible. Therefore CH emissions from steel-making processes are not discussed
+4
+here.
+The Tier 1 methodology for CH is based on emission factors and national production statistics.
+4
+EQUATION 4.12
+CH 4 EMISSIONS FROM SINTER PRODUCTION (TIER 1)
+Sinter Production: E =SI•EF
+CH4,non−energy SI
+EQUATION 4.13
+CH 4 EMISSIONS FROM BLAST FURNACE PRODUCTION OF PIG IRON (TIER 1)
+Pig Iron Production: E =PI•EF
+CH4,non−energy PI
+EQUATION 4.14
+CH 4 EMISSIONS FROM DIRECT REDUCED IRON PRODUCTION (TIER 1)
+Direct Reduced Iron Production: E =DRI•EF
+CH4,non−energy DRI
+Where:
+E = emissions of CH to be reported in IPPU Sector, kg
+CH4, non-energy 4
+SI = quantity of sinter produced nationally, tonnes
+PI = quantity of iron produced nationally including iron converted to steel and not converted to steel,
+tonnes
+DRI = quantity of direct reduced iron produced nationally, tonnes
+EF = emission factor, kg CH /tonne x produced
+x 4
+The Tier 3 method uses plant specific emissions data. If actual measured CH emissions data are available for
+4
+coke production, these data can be aggregated to account for national CH emissions. Total national emissions
+4
+will equal the sum of emissions reported from each facility.
+4.2.2.3 CHOICE OF EMISSION FACTORS
+TIER 1 METHOD
+Carbon dioxide emission factors
+Table 4.1 provides default emission factors for coke, sinter, pellet, iron, and steel production. The emission
+factors for the three steelmaking methods are based on expert judgment using typical practice for the different
+steel production scenarios listed. The default emission factors account for all carbon input into the blast furnace.
+It is assumed based on the Integrated Pollution Prevention and Control (IPPC) Reference Document on
+Production of Iron and Steel (European IPPC Bureau, 2001) (referred to in this section as ‘IPPC I&S BAT
+Document’) that most of the carbon input to the blast furnace is from coke (60 -90 percent).
+The default CO emission factor for coke production is derived by averaging plant-specific CO emissions data
+2 2
+for 11 European coke plants reported in the IPPC I&S BAT Document. Emissions of CO are reported in Table
+2
+6.2 of the IPPC I&S BAT Document in units of kilograms of CO per tonne of liquid steel produced. The CO
+2 2
+emissions range from 175 to 200 kg CO per tonne liquid steel. The conversion factors provided in Table 6.2 of
+2
+the IPPC Document are 940 kg pig iron per tonne liquid steel and 358 kg coke per tonne pig iron. Based on these
+conversion factors the average CO emissions from the 11 European coke plants is 0.56 tonne CO per tonne
+2 2
+coke produced.
+The CO emission factor for sinter plants is derived by averaging plant-specific CO emissions data for four
+2 2
+European sinter plants reported in the IPPC I&S BAT Document. Emissions of CO are reported in Table 4.1 of
+2
+4.24 2006 IPCC Guidelines for National Greenhouse Gas Inventories
+=== PAGE 24 ===
+Chapter 4: Metal Industry Emissions
+the IPPC I&S BAT Document in units of kilograms of CO per tonne of liquid steel produced. The CO
+2 2
+emissions range from 205 to 240 kg CO per tonne liquid steel. The conversion factors provided in Table 4.1 of
+2
+the IPPC I&S BAT Document are 940 kg pig iron per tonne liquid steel and 1160 kg sinter per tonne pig iron.
+Based on these conversion factors the average CO emissions from the four European sinter plants is 0.2 kg CO
+2 2
+per kg sinter produced.
+The CO emission factor for blast furnace iron making is derived by averaging plant-specific CO emissions data
+2 2
+for European sinter plants reported in the IPPC I&S BAT Document. The CO and CO content of blast furnace
+2
+gas produced by the iron making process is reported in Tables 7.2 and 7.3 of the IPPC I&S BAT Document in
+units of kilograms of CO per tonne of pig iron produced and kilograms of CO per tonne of pig iron produced.
+2
+The CO content ranges from 400 to 900 kg CO per tonne pig iron produced and the CO content ranges from
+2 2
+300 to 700 kg CO per tonne of pig iron produced. Based on the assumption that all of the blast furnace gas
+burned for energy recovery (and combusted to CO ) within the integrated iron and steel mill and that no blast
+2
+furnace gas is transferred off site, this corresponds to an emission factor of 1.35 kg CO per kg pig iron produced.
+2
+TABLE 4.1
+TIER 1 DEFAULT CO 2 EMISSION FACTORS FOR COKE PRODUCTION AND IRON & STEEL PRODUCTION
+Process Emission Factor Source
+Sinter Production (tonne CO per Sinter Production: European IPPC Bureau (2001), Integrated Pollution
+2
+tonne sinter produced) 0.20 Prevention and Control (IPPC) Best Available Techniques Reference
+Document on the Production of Iron and Steel, December 2001, Table
+4.1, Page 29. http://eippcb.jrc.es/pages/FActivities.htm
+Coke Oven (tonne CO per tonne Coke Production: European IPPC Bureau (2001), Integrated Pollution
+2
+coke produced) 0.56 Prevention and Control (IPPC) Best Available Techniques Reference
+Document on the Production of Iron and Steel, December 2001, Table
+6.2, Page 122. http://eippcb.jrc.es/pages/FActivities.htm
+Iron Production (tonne CO per Iron Production: European IPPC Bureau (2001), Integrated Pollution
+2
+tonne pig iron produced) 1.35 Prevention and Control (IPPC) Best Available Techniques Reference
+Document on the Production of Iron and Steel, December 2001, Tables
+7.2 and 7.3. http://eippcb.jrc.es/pages/FActivities.htm
+Direct Reduced Iron production Direct Reduced Iron Production: European IPPC Bureau (2001),
+(tonne CO per tonne DRI Integrated Pollution Prevention and Control (IPPC) Best Available
+2
+produced) 0.70 Techniques Reference Document on the Production of Iron and Steel,
+December 2001, Table 10.1 Page 322 and Table 10.4 Page 331.
+http://eippcb.jrc.es/pages/FActivities.htm
+Pellet production (tonne CO per Pellet Production: European IPPC Bureau (2001), Integrated Pollution
+2
+tonne pellet produced) 0.03 Prevention and Control (IPPC) Best Available Techniques Reference
+Document on the Production of Iron and Steel, December 2001, Table
+5.1 Page 95. http://eippcb.jrc.es/pages/FActivities.htm
+Steelmaking Method
+Basic Oxygen Furnace (BOF) Steel Production: Consensus of experts and IISI Environmental
+(tonne CO per tonne of steel 1.46 Performance Indicators 2003 STEEL
+2
+produced) (International Iron and Steel Institute, 2004)
+Electric Arc Furnace (EAF) Steel Production: Consensus of experts and IISI Environmental
+(tonne CO per tonne of steel 0.08 Performance Indicators 2003 STEEL
+2
+produced) ** (International Iron and Steel Institute, 2004)
+Open Hearth Furnace (OHF) Steel Production: Consensus of experts and IISI Environmental
+(tonne CO per tonne of steel 1.72 Performance Indicators 2003 STEEL
+2
+produced) (International Iron and Steel Institute, 2004)
+Global Average Factor (65% Steel Production: Consensus of experts and IISI Environmental
+BOF, 30% EAF, 5% OHF)* Performance Indicators 2003 STEEL
+1.06
+(tonne CO per tonne of steel (International Iron and Steel Institute, 2004)
+2
+produced)
+* Factor based on 2003 international data where BOFs accounted for approximately 63 percent of world steel production and EAFs
+approximately 33 percent; OHF production accounted for the remaining 4 percent but is declining.
+** The emission factor for EAF steelmaking does not include emissions from iron production. The emission factors for BOF and OHF
+steelmaking do include emissions from blast furnace iron production.
+Note that the CO emission factor for EAF steelmaking in this table is based on production of steel from scrap metal, and therefore the
+2
+EAF emission factor does not account for any CO emissions from blast furnace iron making. The Tier 1 CO emission factor for EAFs in
+2 2
+this table is therefore not applicable to EAFs that use pig iron as a raw material.
+2006 IPCC Guidelines for National Greenhouse Gas Inventories 4.25
+=== PAGE 58 ===
+Chapter 4: Metal Industry Emissions
+4.5 MAGNESIUM PRODUCTION
+4.5.1 Introduction
+In the magnesium industry, there are a number of potential emission sources and gases. The amount and type of
+emission from the magnesium industry will reflect the raw material used for primary magnesium metal
+production and/or the type of cover gas mixture used in the casting and recycling foundries to prevent oxidation
+of molten magnesium. It is good practice to consider, in a disaggregated way if possible, all segments of the
+magnesium industry and their related emissions. A list of possible greenhouse gas emissions, which may be
+associated with primary, and secondary magnesium metal production and casting operations, is provided in
+Table 4.18.
+Primary magnesium refers to metallic magnesium derived from mineral sources. Primary magnesium can be
+produced either by electrolysis or a thermal reduction process. The raw materials used for primary magnesium
+production are dolomite, magnesite, carnalite, serpentine, brines or seawater. Processing of carbonate raw
+materials (magnesite and dolomite) will release CO during manufacturing. The CO is released during
+2 2
+calcination of carbonate-based ores (dolomite/magnesite) - a ‘pre-treatment’ step to the main electrolytic/thermal
+reduction processes. This process is similar to the generation of CO in the mineral industry (see Chapter 2).
+2
+Secondary magnesium production includes the recovery and recycling of metallic magnesium from a variety of
+magnesium containing scrap materials e.g., post consumer parts, machine cuttings, casting scraps, furnace
+residues, etc. Magnesium casting processes may involve metal from both primary production and secondary
+magnesium production. Magnesium casting processes involve handling of molten pure magnesium and/or
+molten high magnesium content alloys. Molten magnesium (also understood to mean high magnesium content
+alloys) maybe cast by a variety of methods including gravity casting, sand casting, die casting and others.
+All molten magnesium spontaneously burns in the presence of atmospheric oxygen. Production and casting of all
+magnesium metal requires a protection system to prevent burning. Among the various protection systems
+commonly used are those that use gaseous components with high GWP values, such as SF , which typically
+6
+escape to the atmosphere. Metallic magnesium cast from the various processes and sources all require protection
+methods and will therefore have similar potentials for GHG emissions.
+TABLE 4. 18
+POSSIBLE GHG EMISSIONS RELATED TO PRODUCTION AND PROCESSING OF MAGNESIUM
+PROCESS POTENTIAL ASSOCIATED PROCESS GHG EMISSION
+SF HFC’s CO Others*
+6 2
+Raw Materials Preparation for Primary Production
+Dolomite/Magnesite Based - - X -
+Other Raw Materials - - - -
+Casting (primary & secondary)
+Primary ingot casting X X X X
+Die casting X X X X
+Gravity casting X X X X
+Other casting methods X X X X
+Secondary Mg Production** X X X X
+*Others include fluorinated ketone and various fluorinated decomposition products e.g., PFCs
+** Includes processes involving the recycle/recovery of metallic magnesium
+Secondary magnesium production (recycling), handling, melting, and casting, molten metal is protected against
+oxidation throughout the process by using protection systems such as SF or SO containing cover gases (a
+6 2
+2006 IPCC Guidelines for National Greenhouse Gas Inventories 4.59
+=== PAGE 64 ===
+Chapter 4: Metal Industry Emissions
+HFC-134a, FK 5-1-12 and decomposition products (e.g., PFCs)
+As described in Section 4.5.1, the industrial use of fluorinated compounds other than SF for magnesium
+6
+oxidation protection commenced in 2003-2004. As such, the industrial experience in using these compounds for
+magnesium protection purposes is yet very limited. Even individual plants will have little historic data, if any, on
+actual emissions of these other fluorinated compounds from their operations. While there is a general sense in
+industry that the volume use of these alternate gases will be less than SF , there are no data available at this time
+6
+on which to base emission factors. Hence, it is not possible at this time to develop an emission factor-based
+approach (Tier 1 or 2) for reporting emissions.
+However, if the GHG emission from the use of magnesium cover gases is a national key category, it is good
+practice to collect direct measurements or meaningful indirect measurements of GHG emissions (fugitive
+emissions of HFC134-a and FK 5-1-12 as well as emissions of PFCs as decomposition products) from
+magnesium foundries using HFC-134a or FK 5-1-12 as cover gases. This is consistent with the Tier 3 approach.
+Carrier gases
+The contribution of carbon dioxide carrier gas used in protective cover gas systems is normally a small fraction
+of the global warming potential. In general, these emissions may be disregarded.
+4.5.2.2 CHOICE OF EMISSION FACTORS
+CO EMISSIONS FROM PRIMARY PRODUCTION
+2
+Tier 1 – default emission factors
+As previously mentioned, the Tier 1 method calculates emissions from default emission factors applied to a
+country’s total primary magnesium production. The default emission factors (Table 4.19) take into account the
+type of material used and basic stoichiometric ratios which have been adjusted by empirical data for generic
+manufacturing process losses. The resulting emission of CO per tonne magnesium produced is considerably
+2
+higher than the theoretical volume described in the Section 4.5.1.
+TABLE 4.19
+EMISSION FACTORS FOR ORE-SPECIFIC PRIMARY Mg METAL PRODUCTION
+Raw Material tonnes CO emission/tonne primary Mg produced
+2
+Dolomite 5.13
+Magnesite 2.83
+Tier 2 – country/company-specific emission factors
+The Tier 2 method for estimating CO emissions from primary magnesium involves collecting company/plant-
+2
+specific empirical emission factors. The company specific emission factors may differ substantially from the
+default emission factors depending on process materials handling. This collection should take place if the
+emissions are a key category.
+Tier 3 – direct measurement approach
+If actual measured CO emissions data are available from individual primary magnesium facilities, these data
+2
+can be aggregated and used directly to account for national emissions.
+MAGNESIUM CASTING PROCESSES (PRIMARY & SECONDARY)
+SF
+6
+Tier 1 – default emission factors
+The underlying assumption for the Tier 1 approach is that all SF consumption in this industry segment is
+6
+emitted, though. as described in Section 4.5.1, this assumption will potentially overestimate the GHG emissions.
+The Tier 1 method also assumes no knowledge of type of magnesium handling- or casting operation (recycling,
+billet casting or die-casting, etc.) Under recommended conditions for die-casting, the consumption rates are
+about 1 kg SF per tonne magnesium produced or smelted (Gjestland and Magers, 1996). Although the SF
+6 6
+2006 IPCC Guidelines for National Greenhouse Gas Inventories 4.65

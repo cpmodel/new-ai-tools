@@ -1,0 +1,329 @@
+=== PAGE 7 ===
+Volume 3: Industrial Processes and Product Use
+Tables
+Table 3.1 Default total fuel requirements (fuel plus feedstock) and emission factors for ammonia
+production (per tonne NH ) ................................................................................................. 3.15
+3
+Table 3.2 N O abatement approaches and abatement measures .......................................................... 3.20
+2
+Table 3.3 Default factors for nitric acid production ............................................................................ 3.23
+Table 3.4 Default factors for adipic acid production ........................................................................... 3.30
+Table 3.5 Default factor for caprolactam production ........................................................................... 3.36
+Table 3.6 Default factors for glyoxal and glyoxylic acid production .................................................. 3.39
+Table 3.7 Default factors for CO and CH emissions from silicon carbide production ..................... 3.44
+2 4
+Table 3.8 Emission factors for CO emission from calcium carbide production and use .................... 3.44
+2
+Table 3.9 Default factors for titanium dioxide production (tonnes CO per tonne product) ................ 3.49
+2
+Table 3.10 Specific carbon content of petrochemical feedstocks and products..................................... 3.69
+Table 3.11 Petrochemical production Tier 1 default feedstocks and processes ..................................... 3.72
+Table 3.12 Methanol production CO emission factors ......................................................................... 3.73
+2
+Table 3.13 Methanol production feedstock consumption factors .......................................................... 3.74
+Table 3.14 Steam cracking ethylene production Tier 1 CO emission factors ....................................... 3.75
+2
+Table 3.15 Default Geographic Adjustment Factors for Tier 1 CO emission factors
+2
+for steam cracking ethylene production ............................................................................... 3.75
+Table 3.16 Default methane emission factors for ethylene production ................................................. 3.76
+Table 3.17 Ethylene dichloride/vinyl chloride production process Tier 1 CO emission factors .......... 3.77
+2
+Table 3.18 Ethylene dichloride/vinyl chloride monomer process Tier 1 feedstock
+consumption factors ............................................................................................................. 3.77
+Table 3.19 Ethylene dichloride/vinyl chloride process Tier 1 default CH emission factor .................. 3.78
+4
+Table 3.20 Ethylene oxide production feedstock consumption and CO emission factors .................... 3.78
+2
+Table 3.21 Ethylene oxide production Tier 1 CH emission factors ..................................................... 3.79
+4
+Table 3.22 Acrylonitrile production CO emission factors ................................................................... 3.79
+2
+Table 3.23 Carbon black production Tier 1 CO emission factors ........................................................ 3.80
+2
+Table 3.24 Carbon black production Tier 1 CH emission factors ........................................................ 3.80
+4
+Table 3.25 Ethylene steam cracking feedstock-product matrix ............................................................. 3.82
+Table 3.26 Secondary product production factors for acrylonitrile production process ........................ 3.82
+Table 3.27 Uncertainty ranges for emission factors and activity data ................................................... 3.86
+Table 3.28 HFC-23 default emission factors ......................................................................................... 3.99
+3.8 2006 IPCC Guidelines for National Greenhouse Gas Inventories
+=== PAGE 20 ===
+Chapter 3: Chemical Industry Emissions
+• periodic emissions monitoring that is undertaken over a period(s) that is reflective of the usual pattern of
+operation of the plant to derive an emission factor that is multiplied by output (100 percent HNO ) to derive
+3
+emissions;
+• irregular sampling to derive an emission factor that is multiplied by output (100 percent HNO ) to derive
+3
+emissions;
+• by multiplying a default emission factor by output (100 percent HNO ).
+3
+Methods are classified according to the extent of plant-level data that are available. Both Tier 2 and Tier 3 are
+based on plant-level activity data.
+TIER 1 METHOD
+Emissions are estimated as follows:
+EQUATION 3.5
+N2O EMISSIONS FROM NITRIC ACID PRODUCTION – TIER 1
+E = EF•NAP
+N2O
+Where:
+E = N O emissions, kg
+N2O 2
+EF = N O emission factor (default), kg N O/tonne nitric acid produced
+2 2
+NAP = nitric acid production, tonnes
+When applying the Tier 1 method it is good practice to assume that there is no abatement of N O emissions and
+2
+to use the highest default emission factor based on technology type shown in Table 3.3.
+TIER 2 METHOD
+There are a large number of nitric acid plants (estimates range from 255 to 600 plants according to Choe et al.,
+1993; Bockman and Granli, 1994) with substantial variations in the N O generation factors among plant types.
+2
+Consequently, default factors may be needed more often for nitric acid N O emissions estimates. Where default
+2
+values are used to estimate emissions from nitric acid production, it is good practice to categorise plants
+according to type and to use an appropriate N O generation factor.
+2
+The Tier 2 method uses plant-level production data disaggregated by technology type and default emission
+factors classified by technology type. Emissions are calculated as follows:
+EQUATION 3.6
+N2O EMISSIONS FROM NITRIC ACID PRODUCTION – TIER 2
+[ ( )]
+E =∑ EF •NAP • 1−DF •ASUF
+N2O i i j j
+i,j
+Where:
+E = emissions of N O, kg
+N2O 2
+EF = N O emission factor for technology type i, kg N O/tonne nitric acid produced
+i 2 2
+NAP = nitric acid production from technology type i, tonnes
+i
+DF = destruction factor for abatement technology type j, fraction
+j
+ASUF = abatement system utilisation factor for abatement technology type j, fraction
+j
+Note that the default emission factors shown in Table 3.3 include the impact on emissions of abatement
+technology where relevant. To use these factors, inventory compilers should verify that the abatement
+technology is installed at individual plants and operated throughout the year.
+The basic equation for estimating N O emissions includes additional terms that recognise the potential future use
+2
+of N O abatement technologies. The N O destruction factor has to be multiplied by an abatement system
+2 2
+utilisation factor in order to account for any down-time of the emission abatement equipment (i.e., time the
+equipment is not operating).
+2006 IPCC Guidelines for National Greenhouse Gas Inventories 3.21
+=== PAGE 21 ===
+Volume 3: Industrial Processes and Product Use
+TIER 3 METHOD – DIRECT MEASUREMENT
+While the tier 2 approach applies technology specific emission factors reflecting the national technology mix.
+Tier 3 is based on real measurement data (e.g., CEMS). Plant-level production data disaggregated by technology
+type and plant level emission factors obtained from direct measurement of emissions. These may be derived
+from irregular sampling of emissions of N O or periodic emissions monitoring of N O undertaken over a
+2 2
+period(s) that reflects the usual pattern of operation of the plant. Emissions can be derived using Equation 3.6.
+Alternatively, the Tier 3 method uses the results of continuous emissions monitoring (CEM), although it is noted
+that most plants are unlikely to employ CEM due to the resource costs. Where CEM is employed, emissions can
+be estimated based on the sum of measured N O emissions derived from the concentration of N O in monitored
+2 2
+emissions for each recorded monitoring interval.
+Figure 3.2 Decision tree for estimation of N2O emissions from nitric acid production
+Start
+Use plant specific-emissions data
+Are direct and activity data (irregular sampling
+measurement data Yes data, periodic monitoring data or
+available? continuous emissions monitoring) as
+basis for Tier 3 method.
+Box 3: Tier 3
+No
+Are
+plant-specific Use plant-specific data on quantity
+activity data on nitric acid Yes of nitric acid by technology type
+production produced as basis for Tier 2 method.
+available?
+Box 2: Tier 2
+No
+Use national data on nitric acid
+Is this a key
+No production or national data on
+category1?
+capacity, and default emission factors.
+Box 1: Tier 1
+Yes
+Collect data for the Tier 3
+or Tier 2 method.
+Note:
+1. See Volume 1 Chapter 4, Methodological Choice and Identification of Key Categories (noting Section 4.1.2 on limited resources), for
+discussion of key categories and use of decision trees.
+3.3.2.2 CHOICE OF EMISSION FACTORS
+TIER 1 METHOD
+It is good practice to use the highest emission factor based on the technology type shown in Table 3.3 and to
+assume that there is no abatement of N O emissions.
+2
+TIER 2 METHOD
+If plant-level factors are not available, it is good practice to use default factors. These default values often
+represent midpoint or mean values of data sets (as determined by expert analysis). The extent to which they
+3.22 2006 IPCC Guidelines for National Greenhouse Gas Inventories
+=== PAGE 22 ===
+Chapter 3: Chemical Industry Emissions
+represent a specific plant’s emission rate is unknown. Default factors in Table 3.3 should be used only in cases
+where plant-specific measurements are not available.
+Table 3.3 includes emission factors for N O, and associated uncertainties. The factors listed in Table 3.3 for
+2
+plants using non-selective catalytic reduction (NSCR), (a NO abatement technology that can also be managed to
+x
+abate N O), already incorporate the effect of N O abatement measures. To use these factors, inventory compilers
+2 2
+should verify that the abatement technology is installed at individual plants and operated throughout the year.
+TIER 3 METHOD
+Plant measurements provide the most rigorous data for calculating net emissions (i.e., N O generation and
+2
+destruction factors). Monitoring N O emissions from nitric acid production is practical because these are point
+2
+sources and there are a finite number of production plants. Given currently available technology, instrumentation
+for sampling and monitoring emission rates do not limit precision or accuracy of the overall measurement.
+Usually sampling frequency and timing is sufficient to avoid systematic errors and to achieve the desired level of
+accuracy.
+As a general rule, it is good practice to conduct sampling and analysis whenever a plant makes any significant
+process changes that would affect the generation rate of N O, and sufficiently often otherwise to ensure that
+2
+operating conditions are constant. In addition, plant operators should be consulted annually to determine the
+specific destruction technologies employed and confirm their use, since technologies may change over time.
+Precise measurement of the emissions rate and abatement efficiencies requires measurement of both the exit
+stream and the uncontrolled stream. Where measurement data are available only on the exit stream, good
+practice is to base emissions on these data. In this case, any available estimates of abatement efficiency should
+be provided only for information purposes and are not used to calculate emissions.
+TABLE 3.3
+DEFAULT FACTORS FOR NITRIC ACID PRODUCTION
+Production Process N2O Emission Factor
+(relating to 100 percent pure acid)
+Plants with NSCRa (all processes) 2 kg N2O/tonne nitric acid ±10%
+Plants with process-integrated or tailgas N2O destruction 2.5 kg N2O/tonne nitric acid ±10%
+Atmospheric pressure plants (low pressure) 5 kg N2O/tonne nitric acid ±10%
+Medium pressure combustion plants 7 kg N2O/tonne nitric acid ±20%
+High pressure plants 9 kg N2O/tonne nitric acid ±40%
+a Non-Selective Catalytic Reduction (NSCR).
+Source: van Balken (2005).
+3.3.2.3 CHOICE OF ACTIVITY DATA
+It is good practice to compile production data at a level of detail that allows the use of a Tier 2 or Tier 3 method,
+where possible. Activity data should be based on 100 percent HNO , - it is good practice to ensure that all
+3
+production data reported are for 100 percent HNO .
+3
+TIER 1 METHOD
+The Tier 1 method requires data on national production of nitric acid. National nitric acid statistics may omit a
+substantial proportion of the national total (see details in Section 3.3.2.4 Completeness). If national-level activity
+data are not available, information on production capacity can be used. It is good practice to multiply the total
+national production capacity by a capacity utilisation factor of 80 percent ± 10 percent (i.e., a range of 70-90
+percent).
+TIER 2 METHOD
+The Tier 2 method requires plant-level production data disaggregated by technology type and abatement system
+type. It is good practice to gather activity (production) data at a level of detail consistent with that of any
+generation and destruction data. Typical plant-level production data is assumed to have an uncertainty of ±2
+percent due to the economic value of having accurate information.
+2006 IPCC Guidelines for National Greenhouse Gas Inventories 3.23
+=== PAGE 23 ===
+Volume 3: Industrial Processes and Product Use
+TIER 3 METHOD
+As with the Tier 2 method, plant-level production data disaggregated by technology and abatement system type
+are required. It is good practice to gather activity (production) data at a level of detail consistent with that of any
+generation and destruction data. Although production data are not used in the estimation of emissions where the
+estimate is based on CEM, these data should be collected and reported to ensure that changes in variables that
+influence emissions can be monitored over time. Typical plant-level production data is assumed to have an
+uncertainty of ±2 percent due to the economic value of having accurate information.
+3.3.2.4 COMPLETENESS
+Nationally compiled nitric acid production statistics could underestimate production. Studies that compare global
+statistics compiled from national data on nitric acid production with industry estimates of global production
+suggest that the national statistics account for only 50 to 70 percent of the total (Bouwman et al., 1995; Olivier,
+1999). This is probably due to nitric acid production that is integrated as part of larger production processes,
+where the nitric acid never enters into commerce and is not counted in the national statistics. It is good practice
+to account for these sources by methods such as identifying them through national registries of NO emissions,
+x
+another unintended by-product of nitric acid production.
+NSCR and SCR systems designed to abate N O can give rise to additional emissions of CO, CO and
+2 2
+hydrocarbons (CH and NMVOCs). These emissions will depend on the hydrocarbon reducing agent that is used
+4
+(methane (CH ), propane (C H ), propene (C H ), LPG). Emissions can be estimated based on the quantity of
+4 3 8 3 6
+reducing agent used and the completeness of combustion. Plant-level information will be required to enable
+emissions estimation. Over time default values could be developed as more information becomes available,
+however, at present there are no default values. Methods for estimating these emissions are not included in these
+Guidelines, however, inventory compilers are encouraged to investigate these emission sources and to develop
+appropriate methodologies.
+There will usually be few nitric acid plants in a country, and it is suggested that emissions are calculated from
+plant specific data. In countries where only a subset of plants report data for the Tier 3 method or where there is
+a transition from Tier 2 to Tier 3, it may not be possible to report emissions using Tier 3 for all facilities during
+the transition. Where data for the Tier 3 method are not available for all plants, Tier 2 could be used for the
+remaining plants. Also, where data for the Tier 2 method are reported by only a subset of plants or where there is
+a transition from Tier 1 to Tier 2, it may be possible to determine the share of production represented by non-
+reporting plants and use this information to estimate the remaining emissions using Tier 1 in order to ensure
+completeness during the transition period.
+3.3.2.5 DEVELOPING A CONSISTENT TIME SERIES
+N O emissions should be recalculated for all years whenever emission calculation methods are changed (e.g., if
+2
+the inventory compiler changes from the use of default values to actual values determined at the plant level). If
+plant-specific data are not available for all years in the time series, it will be necessary to consider how current
+plant measurements can be used to recalculate emissions for previous years. It may be possible to apply current
+plant-specific emission factors to production data from previous years, provided that plant operations have not
+changed substantially. Such a recalculation is required to ensure that any changes in emissions trends are real
+and not an artefact of changes in procedure. It is good practice to recalculate the time series according to the
+guidance provided in Volume 1, Chapter 5.
+3.3.3 Uncertainty assessment
+3.3.3.1 EMISSION FACTOR UNCERTAINTIES
+Uncertainties for the default values shown in Table 3.3 are estimates based on expert judgment. In general,
+default emission factors for gaseous substances have higher uncertainties because mass values for gaseous
+substances are influenced by temperature and pressure variations and gases are more easily lost through process
+leaks. The default values for nitric acid production have a relatively high level of uncertainty for two reasons.
+First, N O may be generated in the gauze reactor section of nitric acid production as an unintended reaction by-
+2
+product (Cook, 1999). Second, the exhaust gas may or may not be treated for NO control, and the NO
+x x
+3.24 2006 IPCC Guidelines for National Greenhouse Gas Inventories
+=== PAGE 35 ===
+Volume 3: Industrial Processes and Product Use
+stream and the uncontrolled stream. Where measurement data are available only on the exit stream, good
+practice is to base emissions on these data. In this case, any available estimates of abatement efficiency should
+be provided only for information purposes and not used to calculate emissions.
+TABLE 3.5
+DEFAULT FACTOR FOR CAPROLACTAM PRODUCTION
+Production Process N2O Emission Factor Uncertainty
+(kg N2O/tonne caprolactam)
+Raschig 9.0a ± 40%
+a Based on high pressure plants for nitric acid production.
+Source: Default Factors for Nitric Acid Production. (See Table 3.3 in this chapter.)
+Figure 3.4 Decision tree for estimation of N2O emissions from caprolactam, glyoxal or
+glyoxylic acid production
+Start
+Use plant specific-emissions data
+Are direct and activity data (irregular sampling
+measurement data Yes data, periodic monitoring data or
+available? continuous emissions monitoring) as
+basis for Tier 3 method.
+Box 3: Tier 3
+No
+Are
+plant-specific activity Use plant-specific data on quantity of
+data available on caprolactam, Yes caprolactam, glyoxal or glyoxylic acid
+glyoxal or glyoxylic acid produced as basis for Tier 2 method.
+production?
+Box 2: Tier 2
+No
+Is Caprolactam,
+Use national data on caprolactam,
+Glyoxal and Glyoxylic
+glyoxal or glyoxylic acid production
+Acid Production a key category1, No
+or national data on capacity, and
+and is this a significant
+default emission factors.
+subcategory?
+Box 1: Tier 1
+Yes
+Collect data for the Tier 3
+or Tier 2 method.
+Note:
+1. See Volume 1 Chapter 4, Methodological Choice and Identification of Key Categories (noting Section 4.1.2 on limited resources), for
+discussion of key categories and use of decision trees.
+3.36 2006 IPCC Guidelines for National Greenhouse Gas Inventories

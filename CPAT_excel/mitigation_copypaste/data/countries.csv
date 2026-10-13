@@ -1,0 +1,223 @@
+code,name,region,income_group,source
+ABW,Aruba,LCN,HIC,Elasticities!13:138-141
+AFG,Afghanistan,SAS,LIC,Elasticities!14:138-141
+AGO,Angola,SSF,LMIC,Elasticities!15:138-141
+ALB,Albania,ECS,UMIC,Elasticities!16:138-141
+AND,Andorra,ECS,HIC,Elasticities!17:138-141
+ARE,United Arab Emirates,MEA,HIC,Elasticities!18:138-141
+ARG,Argentina,LCN,HIC,Elasticities!19:138-141
+ARM,Armenia,ECS,UMIC,Elasticities!20:138-141
+ASM,American Samoa,EAS,UMIC,Elasticities!21:138-141
+ATG,Antigua and Barbuda,LCN,HIC,Elasticities!22:138-141
+AUS,Australia,EAS,HIC,Elasticities!23:138-141
+AUT,Austria,ECS,HIC,Elasticities!24:138-141
+AZE,Azerbaijan,ECS,UMIC,Elasticities!25:138-141
+BDI,Burundi,SSF,LIC,Elasticities!26:138-141
+BEL,Belgium,ECS,HIC,Elasticities!27:138-141
+BEN,Benin,SSF,LIC,Elasticities!28:138-141
+BFA,Burkina Faso,SSF,LIC,Elasticities!29:138-141
+BGD,Bangladesh,SAS,LMIC,Elasticities!30:138-141
+BGR,Bulgaria,ECS,UMIC,Elasticities!31:138-141
+BHR,Bahrain,MEA,HIC,Elasticities!32:138-141
+BHS,"Bahamas, The",LCN,HIC,Elasticities!33:138-141
+BIH,Bosnia and Herzegovina,ECS,UMIC,Elasticities!34:138-141
+BLR,Belarus,ECS,UMIC,Elasticities!35:138-141
+BLZ,Belize,LCN,UMIC,Elasticities!36:138-141
+BMU,Bermuda,NAC,HIC,Elasticities!37:138-141
+BOL,Bolivia,LCN,LMIC,Elasticities!38:138-141
+BRA,Brazil,LCN,UMIC,Elasticities!39:138-141
+BRB,Barbados,LCN,HIC,Elasticities!40:138-141
+BRN,Brunei Darussalam,EAS,HIC,Elasticities!41:138-141
+BTN,Bhutan,SAS,LMIC,Elasticities!42:138-141
+BWA,Botswana,SSF,UMIC,Elasticities!43:138-141
+CAF,Central African Republic,SSF,LIC,Elasticities!44:138-141
+CAN,Canada,NAC,HIC,Elasticities!45:138-141
+CHE,Switzerland,ECS,HIC,Elasticities!46:138-141
+CHI,Channel Islands,ECS,HIC,Elasticities!47:138-141
+CHL,Chile,LCN,HIC,Elasticities!48:138-141
+CHN,China,EAS,UMIC,Elasticities!49:138-141
+CIV,Côte d'Ivoire,SSF,LMIC,Elasticities!50:138-141
+CMR,Cameroon,SSF,LMIC,Elasticities!51:138-141
+COD,"Congo, Democratic Republic of the",SSF,LIC,Elasticities!52:138-141
+COG,"Congo, Republic of",SSF,LMIC,Elasticities!53:138-141
+COL,Colombia,LCN,UMIC,Elasticities!54:138-141
+COM,Comoros,SSF,LIC,Elasticities!55:138-141
+CPV,Cabo Verde,SSF,LMIC,Elasticities!56:138-141
+CRI,Costa Rica,LCN,UMIC,Elasticities!57:138-141
+CUB,Cuba,LCN,UMIC,Elasticities!58:138-141
+CUW,Curaçao,LCN,HIC,Elasticities!59:138-141
+CYM,Cayman Islands,LCN,HIC,Elasticities!60:138-141
+CYP,Cyprus,ECS,HIC,Elasticities!61:138-141
+CZE,Czechia,ECS,HIC,Elasticities!62:138-141
+DEU,Germany,ECS,HIC,Elasticities!63:138-141
+DJI,Djibouti,MEA,LMIC,Elasticities!64:138-141
+DMA,Dominica,LCN,UMIC,Elasticities!65:138-141
+DNK,Denmark,ECS,HIC,Elasticities!66:138-141
+DOM,Dominican Republic,LCN,UMIC,Elasticities!67:138-141
+DZA,Algeria,MEA,UMIC,Elasticities!68:138-141
+ECU,Ecuador,LCN,UMIC,Elasticities!69:138-141
+EGY,Egypt,MEA,LMIC,Elasticities!70:138-141
+ERI,Eritrea,SSF,LIC,Elasticities!71:138-141
+ESP,Spain,ECS,HIC,Elasticities!72:138-141
+EST,Estonia,ECS,HIC,Elasticities!73:138-141
+ETH,Ethiopia,SSF,LIC,Elasticities!74:138-141
+FIN,Finland,ECS,HIC,Elasticities!75:138-141
+FJI,Fiji,EAS,UMIC,Elasticities!76:138-141
+FRA,France,ECS,HIC,Elasticities!77:138-141
+FRO,Faroe Islands,ECS,HIC,Elasticities!78:138-141
+FSM,Micronesia,EAS,LMIC,Elasticities!79:138-141
+GAB,Gabon,SSF,UMIC,Elasticities!80:138-141
+GBR,United Kingdom,ECS,HIC,Elasticities!81:138-141
+GEO,Georgia,ECS,LMIC,Elasticities!82:138-141
+GHA,Ghana,SSF,LMIC,Elasticities!83:138-141
+GIB,Gibraltar,ECS,HIC,Elasticities!84:138-141
+GIN,Guinea,SSF,LIC,Elasticities!85:138-141
+GMB,"Gambia, The",SSF,LIC,Elasticities!86:138-141
+GNB,Guinea-Bissau,SSF,LIC,Elasticities!87:138-141
+GNQ,Equatorial Guinea,SSF,UMIC,Elasticities!88:138-141
+GRC,Greece,ECS,HIC,Elasticities!89:138-141
+GRD,Grenada,LCN,UMIC,Elasticities!90:138-141
+GRL,Greenland,ECS,HIC,Elasticities!91:138-141
+GTM,Guatemala,LCN,UMIC,Elasticities!92:138-141
+GUM,Guam,EAS,HIC,Elasticities!93:138-141
+GUY,Guyana,LCN,UMIC,Elasticities!94:138-141
+HIC,HIC,N/A,HIC,Elasticities!95:138-141
+HKG,Hong Kong SAR,EAS,HIC,Elasticities!96:138-141
+HND,Honduras,LCN,LMIC,Elasticities!97:138-141
+HRV,Croatia,ECS,HIC,Elasticities!98:138-141
+HTI,Haiti,LCN,LIC,Elasticities!99:138-141
+HUN,Hungary,ECS,HIC,Elasticities!100:138-141
+IDN,Indonesia,EAS,LMIC,Elasticities!101:138-141
+IMN,Isle of Man,ECS,HIC,Elasticities!102:138-141
+IND,India,SAS,LMIC,Elasticities!103:138-141
+IRL,Ireland,ECS,HIC,Elasticities!104:138-141
+IRN,Iran,MEA,UMIC,Elasticities!105:138-141
+IRQ,Iraq,MEA,UMIC,Elasticities!106:138-141
+ISL,Iceland,ECS,HIC,Elasticities!107:138-141
+ISR,Israel,MEA,HIC,Elasticities!108:138-141
+ITA,Italy,ECS,HIC,Elasticities!109:138-141
+JAM,Jamaica,LCN,UMIC,Elasticities!110:138-141
+JOR,Jordan,MEA,UMIC,Elasticities!111:138-141
+JPN,Japan,EAS,HIC,Elasticities!112:138-141
+KAZ,Kazakhstan,ECS,UMIC,Elasticities!113:138-141
+KEN,Kenya,SSF,LMIC,Elasticities!114:138-141
+KGZ,Kyrgyz Republic,ECS,LMIC,Elasticities!115:138-141
+KHM,Cambodia,EAS,LMIC,Elasticities!116:138-141
+KIR,Kiribati,EAS,LMIC,Elasticities!117:138-141
+KNA,St. Kitts and Nevis,LCN,HIC,Elasticities!118:138-141
+KOR,Korea,EAS,HIC,Elasticities!119:138-141
+KWT,Kuwait,MEA,HIC,Elasticities!120:138-141
+LAO,Lao P.D.R.,EAS,LMIC,Elasticities!121:138-141
+LBN,Lebanon,MEA,UMIC,Elasticities!122:138-141
+LBR,Liberia,SSF,LIC,Elasticities!123:138-141
+LBY,Libya,MEA,UMIC,Elasticities!124:138-141
+LCA,St. Lucia,LCN,UMIC,Elasticities!125:138-141
+LIE,Liechtenstein,ECS,HIC,Elasticities!126:138-141
+LKA,Sri Lanka,SAS,LMIC,Elasticities!127:138-141
+LSO,Lesotho,SSF,LMIC,Elasticities!128:138-141
+LTU,Lithuania,ECS,HIC,Elasticities!129:138-141
+LUX,Luxembourg,ECS,HIC,Elasticities!130:138-141
+LVA,Latvia,ECS,HIC,Elasticities!131:138-141
+MAC,Macao SAR,EAS,HIC,Elasticities!132:138-141
+MAF,St. Martin (French part),LCN,HIC,Elasticities!133:138-141
+MAR,Morocco,MEA,LMIC,Elasticities!134:138-141
+MCO,Monaco,ECS,HIC,Elasticities!135:138-141
+MDA,Moldova,ECS,LMIC,Elasticities!136:138-141
+MDG,Madagascar,SSF,LIC,Elasticities!137:138-141
+MDV,Maldives,SAS,UMIC,Elasticities!138:138-141
+MEX,Mexico,LCN,UMIC,Elasticities!139:138-141
+MHL,Marshall Islands,EAS,UMIC,Elasticities!140:138-141
+MKD,North Macedonia,ECS,UMIC,Elasticities!141:138-141
+MLI,Mali,SSF,LIC,Elasticities!142:138-141
+MLT,Malta,MEA,HIC,Elasticities!143:138-141
+MMR,Myanmar,EAS,LMIC,Elasticities!144:138-141
+MNE,"Montenegro, Rep. of",ECS,UMIC,Elasticities!145:138-141
+MNG,Mongolia,EAS,LMIC,Elasticities!146:138-141
+MNP,Northern Mariana Islands,EAS,HIC,Elasticities!147:138-141
+MOZ,Mozambique,SSF,LIC,Elasticities!148:138-141
+MRT,Mauritania,SSF,LMIC,Elasticities!149:138-141
+MUS,Mauritius,SSF,UMIC,Elasticities!150:138-141
+MWI,Malawi,SSF,LIC,Elasticities!151:138-141
+MYS,Malaysia,EAS,UMIC,Elasticities!152:138-141
+NAM,Namibia,SSF,UMIC,Elasticities!153:138-141
+NCL,New Caledonia,EAS,HIC,Elasticities!154:138-141
+NER,Niger,SSF,LIC,Elasticities!155:138-141
+NGA,Nigeria,SSF,LMIC,Elasticities!156:138-141
+NIC,Nicaragua,LCN,LMIC,Elasticities!157:138-141
+NLD,Netherlands,ECS,HIC,Elasticities!158:138-141
+NOR,Norway,ECS,HIC,Elasticities!159:138-141
+NPL,Nepal,SAS,LIC,Elasticities!160:138-141
+NRU,Nauru,EAS,UMIC,Elasticities!161:138-141
+NZL,New Zealand,EAS,HIC,Elasticities!162:138-141
+OMN,Oman,MEA,HIC,Elasticities!163:138-141
+PAK,Pakistan,SAS,LMIC,Elasticities!164:138-141
+PAN,Panama,LCN,HIC,Elasticities!165:138-141
+PER,Peru,LCN,UMIC,Elasticities!166:138-141
+PHL,Philippines,EAS,LMIC,Elasticities!167:138-141
+PLW,Palau,EAS,HIC,Elasticities!168:138-141
+PNG,Papua New Guinea,EAS,LMIC,Elasticities!169:138-141
+POL,Poland,ECS,HIC,Elasticities!170:138-141
+PRI,Puerto Rico,LCN,HIC,Elasticities!171:138-141
+PRK,"Korea, Dem. People's Rep.",EAS,LIC,Elasticities!172:138-141
+PRT,Portugal,ECS,HIC,Elasticities!173:138-141
+PRY,Paraguay,LCN,UMIC,Elasticities!174:138-141
+PSE,West Bank and Gaza,MEA,LMIC,Elasticities!175:138-141
+PYF,French Polynesia,EAS,HIC,Elasticities!176:138-141
+QAT,Qatar,MEA,HIC,Elasticities!177:138-141
+ROU,Romania,ECS,UMIC,Elasticities!178:138-141
+RUS,Russia,ECS,UMIC,Elasticities!179:138-141
+RWA,Rwanda,SSF,LIC,Elasticities!180:138-141
+SAU,Saudi Arabia,MEA,HIC,Elasticities!181:138-141
+SDN,Sudan,SSF,LMIC,Elasticities!182:138-141
+SEN,Senegal,SSF,LIC,Elasticities!183:138-141
+SGP,Singapore,EAS,HIC,Elasticities!184:138-141
+SLB,Solomon Islands,EAS,LMIC,Elasticities!185:138-141
+SLE,Sierra Leone,SSF,LIC,Elasticities!186:138-141
+SLV,El Salvador,LCN,LMIC,Elasticities!187:138-141
+SMR,San Marino,ECS,HIC,Elasticities!188:138-141
+SOM,Somalia,SSF,LIC,Elasticities!189:138-141
+SRB,Serbia,ECS,UMIC,Elasticities!190:138-141
+SSD,South Sudan,SSF,LIC,Elasticities!191:138-141
+SSF,Sub-Saharan Africa,SSF,N/A,Elasticities!192:138-141
+STP,São Tomé and Príncipe,SSF,LMIC,Elasticities!193:138-141
+SUR,Suriname,LCN,UMIC,Elasticities!194:138-141
+SVK,Slovak Republic,ECS,HIC,Elasticities!195:138-141
+SVN,Slovenia,ECS,HIC,Elasticities!196:138-141
+SWE,Sweden,ECS,HIC,Elasticities!197:138-141
+SWZ,Eswatini,SSF,LMIC,Elasticities!198:138-141
+SXM,Sint Maarten (Dutch part),LCN,HIC,Elasticities!199:138-141
+SYC,Seychelles,SSF,HIC,Elasticities!200:138-141
+SYR,Syria,MEA,LIC,Elasticities!201:138-141
+TCA,Turks and Caicos Islands,LCN,HIC,Elasticities!202:138-141
+TCD,Chad,SSF,LIC,Elasticities!203:138-141
+TGO,Togo,SSF,LIC,Elasticities!204:138-141
+THA,Thailand,EAS,UMIC,Elasticities!205:138-141
+TJK,Tajikistan,ECS,LIC,Elasticities!206:138-141
+TKM,Turkmenistan,ECS,UMIC,Elasticities!207:138-141
+TLS,Timor-Leste,EAS,LMIC,Elasticities!208:138-141
+TON,Tonga,EAS,UMIC,Elasticities!209:138-141
+TTO,Trinidad and Tobago,LCN,HIC,Elasticities!210:138-141
+TUN,Tunisia,MEA,LMIC,Elasticities!211:138-141
+TUR,Turkiye,ECS,UMIC,Elasticities!212:138-141
+TUV,Tuvalu,EAS,UMIC,Elasticities!213:138-141
+TWN,Taiwan Province of China,EAS,HIC,Elasticities!214:138-141
+TZA,Tanzania,SSF,LIC,Elasticities!215:138-141
+UGA,Uganda,SSF,LIC,Elasticities!216:138-141
+UKR,Ukraine,ECS,LMIC,Elasticities!217:138-141
+URY,Uruguay,LCN,HIC,Elasticities!218:138-141
+USA,United States,NAC,HIC,Elasticities!219:138-141
+UZB,Uzbekistan,ECS,LMIC,Elasticities!220:138-141
+VCT,St. Vincent and the Grenadines,LCN,UMIC,Elasticities!221:138-141
+VEN,Venezuela,LCN,UMIC,Elasticities!222:138-141
+VGB,British Virgin Islands,LCN,HIC,Elasticities!223:138-141
+VIR,Virgin Islands (U.S.),LCN,HIC,Elasticities!224:138-141
+VNM,Vietnam,EAS,LMIC,Elasticities!225:138-141
+VUT,Vanuatu,EAS,LMIC,Elasticities!226:138-141
+WAV,World aviation bunkers,NA,NA,Elasticities!227:138-141
+WMR,World marine bunkers,NA,NA,Elasticities!228:138-141
+WSM,Samoa,EAS,UMIC,Elasticities!229:138-141
+XKX,Kosovo,ECS,LMIC,Elasticities!230:138-141
+YEM,Yemen,MEA,LIC,Elasticities!231:138-141
+ZAF,South Africa,SSF,UMIC,Elasticities!232:138-141
+ZMB,Zambia,SSF,LMIC,Elasticities!233:138-141
+ZWE,Zimbabwe,SSF,LIC,Elasticities!234:138-141

@@ -1,0 +1,127 @@
+=== PAGE 14 ===
+Chapter 3: Chemical Industry Emissions
+For the Tier 1 method it is good practice to use the highest total fuel requirement per tonne of ammonia. If no
+information on fuel type is available, it is good practice to use the average value shown in Table 3.1 for partial
+oxidation.
+TABLE 3.1
+DEFAULT TOTAL FUEL REQUIREMENTS (FUEL PLUS FEEDSTOCK) AND EMISSION FACTORS FOR AMMONIA PRODUCTION
+(PER TONNE NH3)
+Production Process Total fuel requirement Carbon content Carbon oxidation CO2 emission
+(GJ(NCV)/tonne NH3) factor [CCF]1 factor [COF]1 factor
+± Uncertainty (%) (kg/GJ) (fraction) (tonnes CO2
+/tonne NH3)
+Modern plants – Europe
+30.2 (± 6%) 15.3 1 1.694
+Conventional reforming –
+natural gas
+Excess air reforming –
+natural gas 29.7 (± 6%) 15.3 1 1.666
+Autothermal reforming –
+natural gas 30.2 (± 6%) 15.3 1 1.694
+Partial oxidation
+36.0 (± 6%) 21.0 1 2.772
+Derived from European
+average values for specific
+energy consumption (Mix of 37.5 (± 7%) 15.3 1 2.104
+modern and older plants)
+Average value – natural gas
+Average value –
+partial oxidation 42.5 (± 7%) 21.0 1 3.273
+NCV – Net Calorific Value.
+1. Values from Energy, Vol. 2, Chapter.1, Tables 1.3 and 1.4..
+Source: Adapted from EFMA (2000b; p.21); de Beer, Phylipsen and Bates (2001; p.21); for modern plants default factors can be derived
+using C content based on natural gas (dry basis) and partial oxidation default factors can be derived using C content based on residual
+fuel oil.
+TIER 2 METHOD
+The total fuel requirement values per unit of output in Table 3.1 can be used in conjunction with data on NH
+3
+production by fuel type and process type, along with either default or country specific data on the C content
+factor and carbon oxidation factor of the fuels.
+TIER 3 METHOD
+Plant-level data on total fuel requirement provide the most rigorous data for calculating CO emissions from
+2
+ammonia production. It is good practice to obtain information on the CCF and COF from producers or use
+country-specific Energy Sector data. The CCF is the key emission factor variable for deriving the quantity of
+CO emissions. Derivation of emissions using plant-level ammonia production depends on an accurate estimate
+2
+of the fuel requirement per unit of output, along with information on the other variables.
+3.2.2.3 CHOICE OF ACTIVITY DATA
+TIER 1 METHOD
+The Tier 1 method requires data on national production of NH . If national-level activity data are not available,
+3
+information on production capacity can be used. It is good practice to multiply the total national production
+capacity by a capacity utilisation factor of 80 percent ± 10 percent (i.e., a range of 70-90 percent) if the inventory
+compiler can document that utilisation for a year was below capacity. The same capacity utilisation factor should
+be applied to each year of the time-series.
+TIER 2 METHOD
+The Tier 2 method requires plant level data on ammonia production classified by fuel type and production
+process. In addition, plant level data on CO recovered for downstream use or other application are required.
+2
+2006 IPCC Guidelines for National Greenhouse Gas Inventories 3.15
+=== PAGE 72 ===
+Chapter 3: Chemical Industry Emissions
+the event that no activity data are available concerning the specific processes and feedstocks used within a
+country to produce the petrochemical, the default process and default feedstock identified in Table 3.11 and the
+associated Tier 1 emission factors identified in the subsequent tables in this section are used to estimate the CO
+2
+emissions from the petrochemical production process. Country-specific emission factors may be used instead of
+the default emission factors if country-specific factors are available.
+Methanol
+Carbon dioxide emissions
+Emissions of CO from methanol production from the steam reforming and partial oxidation processes may be
+2
+estimated by applying the default process feedstock emission factors, or the feedstock-specific and process-
+specific emission factors in Table 3.12, to activity data for methanol production, process configuration and
+process feedstock. The default emission factors are based on the average of plant-specific CO emissions data
+2
+reported for four methanol plants using the conventional steam reforming process without primary reformer and
+using natural gas feedstock. Emissions data used in developing the default CO emission factor were reported
+2
+for conventional process methanol plants in New Zealand, Chile, and Canada and in the Netherlands. Emission
+factors in the table include both the CO emissions arising from the process feedstock and the CO emissions
+2 2
+arising from feedstock combusted within the steam reforming process. Table 3.13 summarises the total feedstock
+consumption, in units of GJ/tonne methanol produced, for the various methanol production process
+configurations and feedstocks shown in Table 3.12.
+The conventional reforming process can include a single reformer unit or both a primary reformer unit and a
+secondary reformer. The emission factors differ depending upon the number of reformer units. Lurgi is a
+provider of methanol process technology and has published emission factors for several conventional reforming
+process technologies, see Table 3.12. The production capacity of Mega Methanol plants is generally greater than
+5 000 tonnes per day of methanol. The emission factors for the Lurgi Conventional process technologies should
+be applied only if the specific process technology is known. Otherwise the emission factor for conventional
+steam reforming without primary reformer, or the emission factor for conventional steam reforming with primary
+reformer, should be applied.
+The conventional steam reforming process for methanol production can be integrated with an ammonia
+production process. The emission factor for integrated methanol and ammonia production should be used only if
+the specific process technology is known.
+TABLE 3.12
+METHANOL PRODUCTION CO2 EMISSION FACTORS
+tonne CO2/tonne methanol produced
+Process Configuration Feedstock Nat. gas Nat. gas + Oil Coal Lignite
+CO2
+Conventional Steam Reforming, without primary reformer (a)
+0.67
+(Default Process and Natural Gas Default Feedstock)
+Conventional Steam Reforming, with primary reformer (b) 0.497
+Conventional Steam Reforming, Lurgi Conventional process (c1) 0.385 0.267
+Conventional Steam Reforming, Lurgi Low Pressure Process (c2) 0.267
+Combined Steam Reforming, Lurgi Combined Process (c3) 0.396
+Conventional Steam Reforming, Lurgi Mega Methanol Process (c4) 0.310
+Partial oxidation process (d) 1.376 5.285 5.020
+Conventional Steam Reforming with integrated ammonia production 1.02
+Nat. gas + CO feedstock process based on 0.2-0.3 tonne CO feedstock per tonne methanol
+2 2
+Emission factors in this table are calculated from the feedstock consumption values in Table 3.13 based on the following feedstock
+carbon contents and heating values:
+Natural Gas: 56 kg CO/GJ 48.0 GJ/tonne
+2
+Oil: 74 kg CO/GJ 42.7 GJ/tonne
+2
+Coal: 93 kg CO/GJ 27.3 GJ/tonne
+2
+Lignite: 111 kg CO/GJ
+2
+Uncertainty values for this table are included in Table 3.27
+Sources: (a) Struker, A, and Blok, K, 1995; Methanex, 2003: (b) Hinderink, 1996: (c1 – c4) Lurgi, 2004a; Lurgi, 2004b; Lurgi, 2004c:
+(d) FgH-ISI, 1999
+2006 IPCC Guidelines for National Greenhouse Gas Inventories 3.73

@@ -1,0 +1,59 @@
+=== PAGE 53 ===
+Volume 3: Industrial Processes and Product Use
+TABLE 4.15
+DEFAULT EMISSION FACTORS AND UNCERTAINTY RANGES FOR THE CALCULATION OF PFC EMISSIONS FROM
+ALUMINIUM PRODUCTION BY CELL TECHNOLOGY TYPE (TIER 1 METHOD)
+Technology CF CF
+4 2 6
+EF (kg/tonne Al)a Uncertainty Range (%)b EF (kg/tonne Al)c Uncertainty Range (%)d
+CF4 C2F6
+CWPB 0.4 -99/+380 0.04 -99/+380
+SWPB 1.6 -40/+150 0.4 -40/+150
+VSS 0.8 -70/+260 0.04 -70/+260
+HSS 0.4 -80/+180 0.03 -80/+180
+a Default CF values calculated from median anode effect performance from 1990 IAI survey data (IAI, 2001).
+4
+b Uncertainty based on the range of calculated CF specific emissions by technology from 1990 IAI anode effect survey data (IAI,
+4
+2001).
+c Default CF values calculated from global average CF:CF ratios by technology, multiplied by the default CF emission factor.
+2 6 2 6 4 4
+d Uncertainty range based on global average CF:CF ratios by technology, multiplied by calculated minimum and maximum specific
+2 6 4
+CF emissions from 1990 IAI survey data (IAI, 2001).
+4
+Note: These default emission factors should only be used in the absence of Tier 2 or Tier 3 data.
+Tier 2: PFC emission factor based on a technology specific relationship between
+anode effect performance and PFC emissions.
+The Tier 2 method is based on using either technology specific slope or overvoltage coefficients for the
+applicable reduction cell and process control technology as listed in Table 4.16.11
+TABLE 4.16
+TECHNOLOGY SPECIFIC SLOPE AND OVERVOLTAGE COEFFICIENTS FOR THE CALCULATION OF PFC EMISSIONS FROM
+ALUMINIUM PRODUCTION (TIER 2 METHOD)
+Slope Coefficient b, c
+Overvoltage Coefficientb, c, d
+[(kg PFC /t Al ) / (AE-Mins/cell- [(kg /t ) / (mV)] Weight Fraction C 2 F 6 / CF 4
+Technologya day)] CF4 Al
+Uncertainty Uncertainty Uncertainty
+CF CF CF /CF
+4 (+/-%) 4 (+/-%) 2 6 4 (+/-%)
+CWPB 0.143 6 1.16 24 0.121 11
+SWPB 0.272 15 3.65 43 0.252 23
+VSS 0.092 17 NR NR 0.053 15
+HSS 0.099 44 NR NR 0.085 48
+a Centre Worked Prebake (CWPB), Side Worked Prebake (SWPB), Vertical Stud Søderberg (VSS), Horizontal Stud Søderberg (HSS).
+b Source: Measurements reported to IAI, US EPA sponsored measurements and multiple site measurements (U.S. EPA and IAI, 2003).
+c Embedded in each Slope and Overvoltage coefficient is an assumed emissions collection efficiency as follows: CWPB 98%, SWPB
+90%, VSS 85%, HSS 90%. These collection efficiencies have been assumed based on measured PFC collection fractions, measured
+fluoride gas collection efficiencies and expert opinion.
+d The noted coefficients reflect measurements made at some facilities recording positive overvoltage and others recording algebraic
+overvoltage. No robust relationship has yet been established between positive and algebraic overvoltage. Positive overvoltage should
+provide a better correlation with PFC emissions than algebraic overvoltage. Overvoltage coefficients are not relevant (NR) to VSS and
+HSS technologies.
+11 These slope coefficients were derived from measurement of PFCs and correlating the measured PFC emissions to anode
+effect minutes per cell day at over one-hundred aluminium smelters. The values in Table 4.16 are the technology specific
+factors from measurement data available as of March 2005 when this document was developed. It is important to note Tier
+2 slope coefficients are based on the anode-effect minutes per cell-day statistic as defined in the IAI GHG Protocol (IAI,
+2005a). It is good practice to refer to the most current data for calculation of PFC emissions as noted in the IAI GHG
+Protocol and to the IPCC Emission Factor Database.
+4.54 2006 IPCC Guidelines for National Greenhouse Gas Inventories
