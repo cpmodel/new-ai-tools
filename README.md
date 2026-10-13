@@ -11,11 +11,32 @@ run-process specifications consolidated from the subfolder documentation.
 ```
 fiscal-climate-ai-tools/
 ├── SETUP.md                     Consolidated requirements, build steps, run process
+├── CPAT_excel/                  CPAT Excel workspace (legacy model + Excel-AI prototypes);
+│                                 has its own README/AGENTS/NORMS/CAVEATS/TODO
+├── CPAT_coded/                  CPAT Python reimplementation
+├── CBAMPolicyTool/              CBAM Policy Tool (global workbook, guide, Egypt case)
 ├── ExciseDiagnostic/            Excise tax diagnostic working paper and data
-└── TaxMacroFiscalDashboard/     Tax, macro-fiscal, and climate policy dashboards
-    └── build/                   Raw data, config, and scripts for the Global Fiscal
-                                  Indicators dashboard (Python + R build pipeline)
+├── TaxMacroFiscalDashboard/     Tax, macro-fiscal, and climate policy dashboards
+│   └── build/                   Raw data, config, and scripts for the Global Fiscal
+│                                 Indicators dashboard (Python + R build pipeline)
+├── templates/                   Master templates
+└── _research/                   Source literature (IPCC, CBAM regulation, roadmaps)
 ```
+
+## CPAT (Excel)
+
+CPAT-Excel work is documented separately inside [`CPAT_excel/`](CPAT_excel/). For
+any CPAT-Excel task, start there rather than here:
+
+- [`CPAT_excel/README.md`](CPAT_excel/README.md) — CPAT workspace map, workflow,
+  key documents
+- [`CPAT_excel/AGENTS.md`](CPAT_excel/AGENTS.md) — instructions for AI agents on
+  CPAT tasks
+- [`CPAT_excel/NORMS.md`](CPAT_excel/NORMS.md) — Excel column, colour, input and
+  versioning norms; task-completion process
+- [`CPAT_excel/CAVEATS.md`](CPAT_excel/CAVEATS.md) — append-only log of completed
+  tasks and their caveats
+- [`CPAT_excel/TODO.md`](CPAT_excel/TODO.md) — open CPAT work
 
 ## ExciseDiagnostic
 
