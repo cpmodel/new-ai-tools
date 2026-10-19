@@ -16,6 +16,8 @@ fiscal-climate-ai-tools/
 ├── CPAT_coded/                  CPAT Python reimplementation
 ├── CBAMPolicyTool/              CBAM Policy Tool (global workbook, guide, Egypt case)
 ├── ExciseDiagnostic/            Excise tax diagnostic working paper and data
+├── InvestmentNeeds/             Mitigation (net zero) investment needs model, by country,
+│                                 sector and cost-of-capital lens
 ├── TaxMacroFiscalDashboard/     Tax, macro-fiscal, and climate policy dashboards
 │   └── build/                   Raw data, config, and scripts for the Global Fiscal
 │                                 Indicators dashboard (Python + R build pipeline)
@@ -66,6 +68,19 @@ Run modes:
 - **Whole run**: master process file only (stages A1–A6).
 - **Sectoral run**: master file plus one part file per run; Parts 1–4 in any
   order, Part 5 last.
+
+## InvestmentNeeds
+
+Mitigation (net zero) investment needs model, built on the SISEPUEDE-based global
+method (October 2026). See [`InvestmentNeeds/README.md`](InvestmentNeeds/README.md).
+
+- **`Mitigation_Investment_Needs_v1.0.xlsx`** — 2030 total and incremental investment
+  needs, and incremental cost, for 195 economies × 7 sectors, under three lenses: market
+  cost of capital, World Bank rate (6%), and World Bank rate with local co-benefits.
+  Uses the dashboard's cost-of-capital and PIMA indicators. Has a Damodaran input sheet
+  for wider WACC coverage.
+- **`build/build_investment_model.py`** — builds the workbook from repository data
+- **`raw_data/`** — optional inputs (Damodaran `ctryprem.xlsx`)
 
 ## TaxMacroFiscalDashboard
 

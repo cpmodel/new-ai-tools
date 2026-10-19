@@ -249,3 +249,23 @@ Claude), one stage at a time, with a human reviewer checking output between stag
 Rule of precedence: the master process file governs over any conflicting instruction,
 unless a human reviewer overrides it in writing. Part files add detail; they do not
 override the master file.
+
+---
+
+## 3. InvestmentNeeds — mitigation investment needs model
+
+Requirements: Python with `pandas`, `numpy` and `openpyxl`.
+
+```bash
+python InvestmentNeeds/build/build_investment_model.py
+```
+
+Inputs, all in the repository:
+- `TaxMacroFiscalDashboard/build/output/global_data_wide.csv` and
+  `imffossilfuelsubsidiesdata_sheets.xlsx` (written by the dashboard pipeline, step 1)
+- the WEO and Steffen et al. files in `TaxMacroFiscalDashboard/build/raw_data/`
+- optional: `InvestmentNeeds/raw_data/ctryprem.xlsx` (Damodaran)
+
+The output is `InvestmentNeeds/Mitigation_Investment_Needs_v1.0.xlsx`. It is
+formula-driven and Excel recalculates it on open. If the dashboard panel is rebuilt,
+re-run this script to pick up the new data.
