@@ -16,6 +16,8 @@ fiscal-climate-ai-tools/
 ├── CPAT_coded/                  CPAT Python reimplementation
 ├── CBAMPolicyTool/              CBAM Policy Tool (global workbook, guide, Egypt case)
 ├── ExciseDiagnostic/            Excise tax diagnostic working paper and data
+├── IntegratedMFC/               Integrated MF-C (macro-fiscal climate) tool: the dashboard plus
+│                                 investment needs on one country page; built in modules
 ├── InvestmentNeeds/             Mitigation (net zero) investment needs model, by country,
 │                                 sector and cost-of-capital lens
 ├── MacroFiscalModels/           GIMF-lite, DIGNAD/DIGNAR-lite, LIC-DSF-lite and the
@@ -81,6 +83,15 @@ losses to coal and oil generators, with per-country calibration from the dashboa
 panel and Ember. See [`PriceFeasibility/README.md`](PriceFeasibility/README.md).
 Also as a light three-tab Excel screening workbook,
 `PriceFeasibility/PriceFeasibility_Screen.xlsx`, which reads the dashboard's long data format.
+
+## IntegratedMFC
+
+The Integrated MF-C (macro-fiscal climate) tool, `IntegratedMFC/Integrated_MFC_Tool_v0.1.xlsx`:
+the Global Fiscal Indicators dashboard with the mitigation investment needs spliced in as two
+blocks (Investment 1: v1.1 2030 need by sector and cost-of-capital lens; Investment 2: NMIM v0.2,
+who pays and the path to 2050). Built in modules by `IntegratedMFC/build/build_mfc_tool.py` with
+the dashboard's own builder; more modules to follow. See
+[`IntegratedMFC/README.md`](IntegratedMFC/README.md).
 
 ## InvestmentNeeds
 

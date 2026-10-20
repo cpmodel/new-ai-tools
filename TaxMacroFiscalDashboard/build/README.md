@@ -85,6 +85,11 @@ panel and the workbook.
 emits, the run stops with a `PIPELINE/CONFIG MISMATCH` error naming it. It does not
 warn and continue — that failure mode previously let indicators go missing silently.
 
+**Other tools reuse the builder.** `build_dashboard.py` also reads an optional
+`tool.json` in the config folder (version, file name, title, README text) and an optional
+`block_kind` column in `indicators.csv` (`assessment` / `context` / `appendix`; by default it
+follows the block name). This dashboard uses neither; `IntegratedMFC/` builds its tool this way.
+
 **Source coverage is derived**, counted from the panel at build time rather than typed
 into the Sources sheet, so it cannot drift.
 

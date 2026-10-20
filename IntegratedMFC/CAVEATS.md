@@ -1,0 +1,10 @@
+# CAVEATS: Integrated MF-C tool
+
+Task log, newest at the bottom. Earlier entries may be corrected but not deleted.
+
+## 2026-10-20 - Integrated MF-C tool v0.1: investment needs in the macro-fiscal dashboard
+- **Task:** New tool, the Integrated MF-C (macro-fiscal climate) tool, in its own folder; first module integrates the mitigation investment needs with the macro-fiscal dashboard.
+- **Inputs:** `TaxMacroFiscalDashboard/build/output/global_data_long.csv` and `config/` (v1.2 panel); `InvestmentNeeds/Mitigation_Investment_Needs_v1.1.xlsx` (cached values of Results_Country and Calc); `InvestmentNeeds/national_model/results/nmim_summary_v0_2.csv`.
+- **Outputs:** `Integrated_MFC_Tool_v0.1.xlsx`; `build/build_mfc_tool.py`; `build/config/{tool.json, investment_needs_indicators.csv, investment_needs_sources.csv}`; `build/output/investment_needs_long.csv`; README, VersionNotes. `TaxMacroFiscalDashboard/build/scripts/build_dashboard.py` gains optional `tool.json` overrides and an optional `block_kind` config column, so one builder makes both workbooks; the dashboard's own output is unchanged (rebuilt and compared cell by cell: values, fonts, fills, number formats).
+- **Checks:** Recalculated in LibreOffice: Kenya shows 91 of 91 indicators; v1.1 sector rows sum to incremental investment (1.11 vs 1.12% GDP, rounding); P1-P5 sum to net zero investment (2.30 vs 2.31); budget need = P1 + 0.3 x P4; private share = (P3 + P5 + 0.7 x P4) / total.
+- **Caveats:** (1) Investment blocks are model output with their models' caveats (Tier 3 allocation in v1.1; judgement-based typology shares in NMIM). (2) v1.1 and NMIM disagree on the 2030 need (different methods and price bases); both shown, labelled. (3) The v1.1 extractor reads cached values, so the workbook must be recalculated after a rebuild. (4) TWN dropped (not in the dashboard country list). (5) Investment scores are percentile ranks of magnitudes, not verdicts; block averages for Investment 1-2 are as fragile as those of the Context blocks.

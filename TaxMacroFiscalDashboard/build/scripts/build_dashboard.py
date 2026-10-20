@@ -14,7 +14,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.datavalidation import DataValidation
 warnings.filterwarnings("ignore")
 
-import os, argparse
+import os, argparse, json
 _here = os.path.dirname(os.path.abspath(__file__))
 _ap = argparse.ArgumentParser()
 _ap.add_argument("--out", default=os.environ.get("OUT_DIR", os.path.join(_here, "..", "output")))
@@ -25,6 +25,11 @@ _args, _ = _ap.parse_known_args()
 SHIP = os.path.join(os.path.abspath(_args.ship), "")
 OUT = os.path.join(os.path.abspath(_args.out), "")
 CONFIG = os.path.join(os.path.abspath(_args.config), "")
+# Optional per-tool overrides in <config>/tool.json: version, file_stem, title, subtitle,
+# readme_replace {heading: text} and readme_add [[heading, text], ...]. This dashboard has
+# none and keeps the defaults; IntegratedMFC/ uses it to build its own tool from this script.
+TOOL = json.load(open(CONFIG + "tool.json")) if os.path.exists(CONFIG + "tool.json") else {}
+VERSION = TOOL.get("version", VERSION)
 F = "Arial"; INK = "0E1B2A"; ACC = "C05621"; MUT = "5A6B7B"
 HDR = PatternFill("solid", fgColor=INK); TINT = PatternFill("solid", fgColor="F0F3F5")
 thin = Side(style="thin", color="C8D0D6"); BOX = Border(left=thin, right=thin, top=thin, bottom=thin)
@@ -35,8 +40,14 @@ thin = Side(style="thin", color="C8D0D6"); BOX = Border(left=thin, right=thin, t
 _cfg = pd.read_csv(CONFIG + "indicators.csv").sort_values("order")
 QUESTIONS = [tuple(r) for r in _cfg.drop_duplicates("block")[
     ["block","block_theme","block_question","block_subtitle","block_fill","block_font"]].values]
-MAGNITUDE = set(_cfg.loc[_cfg.block.str.startswith(("Context","Appendix")), "block"])
-APPENDIX  = set(_cfg.loc[_cfg.block.str.startswith("Appendix"), "block"])
+# Block kind follows the name (Context = magnitude, Appendix = reference, else assessment)
+# unless an optional block_kind column (assessment / context / appendix) says otherwise.
+_kind = _cfg.block.map(lambda b: "appendix" if b.startswith("Appendix")
+                       else "context" if b.startswith("Context") else "assessment")
+if "block_kind" in _cfg:
+    _kind = _cfg.block_kind.fillna("").where(_cfg.block_kind.fillna("") != "", _kind)
+MAGNITUDE = set(_cfg.loc[_kind.isin(["context","appendix"]), "block"])
+APPENDIX  = set(_cfg.loc[_kind == "appendix", "block"])
 spec = _cfg.rename(columns={"block":"Q","label":"Indicator","area":"Area",
         "direction":"Direction","source_label":"Source","headline":"Headline",
         "eval_scale":"Eval","score_flag":"Flag","indent":"Indent"})[
@@ -72,12 +83,12 @@ def head(ws, labels, widths, row=1, h=28):
 # ---- README
 ws = wb.active; ws.title = "README"
 for col, w_ in [("A",3),("B",30),("C",104)]: ws.column_dimensions[col].width = w_
-ws["B2"] = "Global Fiscal Indicators — climate and mitigation finance"
+ws["B2"] = TOOL.get("title", "Global Fiscal Indicators — climate and mitigation finance")
 ws["B2"].font = Font(name=F, size=16, bold=True, color=INK)
-ws["B3"] = f"Version {VERSION}. {W.shape[0]} countries, {len(spec)} indicators, 16 public datasets. Compiled 26 August 2026."
+ws["B3"] = f"Version {VERSION}. {W.shape[0]} countries, {len(spec)} indicators, " + TOOL.get(
+    "subtitle", "16 public datasets. Compiled 26 August 2026.")
 ws["B3"].font = Font(name=F, size=10, italic=True, color=MUT)
-r = 5
-for k, v in [
+README_ROWS = [
 ("What this is", f"A comparable fiscal and energy layer for all {W.shape[0]} countries in the World Bank country list. The is_ccdr column flags the 98 economies with a published Country Climate and Development Report, so the original CCDR view is one filter away."),
 ("How it is organised", "Eleven blocks, in reading order. Four ASSESSMENT blocks come first and carry the diagnosis: fiscal space, delivery, cost of capital, and financing. Three CONTEXT blocks follow and explain it: how much fossil revenue runs through the budget, whether the country sells or buys fossil fuels, and how it generates power. Four are APPENDIX - fuel pricing, power market regulation, macro-model inputs and the integrated scenario - shown in grey as reference detail rather than part of the diagnosis; they carry no block verdict."),
 ("How to use it", "Dashboard: pick a country in the yellow cell. Everything resolves - evaluation, score, value, observation year, coverage - grouped and coloured by block. Data_wide is the cross-section, Data_long names the source file for every value, Scores holds the 1-10 rescaling, Spec is the indicator list, Sources lists the datasets."),
@@ -90,7 +101,11 @@ for k, v in [
 ("Appendix C and D", "Appendix C holds the WEO ratios the macro-fiscal models start from (revenue, primary balance, investment, current account, average growth). Appendix D is MODEL OUTPUT, not data: the integrated scenario from MacroFiscalModels (investment needs from NMIM, feasible power-sector carbon pricing from PriceFeasibility, a macro model, LIC-DSF-lite), with illustrative calibrations. Read it as a scenario, never as an observation; its year is the scenario year."),
 ("A caveat on electricity prices", "The two electricity price rows come from the same CPAT series behind the cost-recovery indicators that were dropped from this tool on data-quality grounds. Retail prices are closer to observed than the modelled supply costs were, and they are the input CPAT uses to compute subsidies - but treat them as reference values rather than evidence."),
 ("Not included", "IMF PIMA and C-PIMA scores. Publication is consent-based and the published subsample self-selects toward better performers, so a scored column would understate weakness. PEFA PI-11 is the substitute. Electricity cost recovery was also dropped: the CPAT retail-price basis is not reliable enough to carry a scored column."),
-]:
+]
+_rr = TOOL.get("readme_replace", {})
+README_ROWS = [(k, _rr.get(k, v)) for k, v in README_ROWS] + [tuple(x) for x in TOOL.get("readme_add", [])]
+r = 5
+for k, v in README_ROWS:
     a = ws.cell(r, 2, k); a.font = Font(name=F, size=10, bold=True, color=INK)
     a.alignment = Alignment(vertical="top")
     b = ws.cell(r, 3, v); b.font = Font(name=F, size=10)
@@ -298,7 +313,7 @@ for i, row in enumerate(L.itertuples(index=False), 2):
         c.font = Font(name=F, size=9); c.border = BOX
     dl.row_dimensions[i].height = 13
 
-_name = f"Global_fiscal_indicators_v{VERSION}.xlsx"
+_name = f"{TOOL.get('file_stem', 'Global_fiscal_indicators')}_v{VERSION}.xlsx"
 wb.save(SHIP + _name)
 print(f"wrote {SHIP + _name}")
 print(f"saved | {W.shape[0]} countries | {len(spec)} indicators | {len(QUESTIONS)} blocks | {len(L)} long rows")
