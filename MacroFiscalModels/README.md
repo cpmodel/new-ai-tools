@@ -1,6 +1,6 @@
 # MacroFiscalModels: GIMF-lite, DIGNAD-lite, DIGNAR-lite and LIC-DSF-lite
 
-**The tool:** `MacroFiscal_CountryTool_v0.2.xlsx` — open it, pick a country, see the whole chain. No Python needed.
+**The tool:** `MacroFiscal_CountryTool_v0.3.xlsx` — open it, pick a country, see the whole chain. No Python needed.
 
 Simplified Python versions of three IMF / World Bank tools, linked to the National Mitigation
 Investment Model (`../InvestmentNeeds/national_model/`, NMIM v0.2), so a country's net zero investment
@@ -36,8 +36,8 @@ python3 dignad_lite.py           # disaster test
 python3 lic_dsf.py               # DSF on placeholder data
 python3 calibration.py KEN SLE   # dashboard calibration, model choice, cross-check
 python3 integrated.py KEN SLE    # the whole chain for some countries
-python3 integrated.py --all      # all NMIM countries -> results/integrated_{results,paths,settings}.csv (~10 min)
-python3 build_country_tool.py    # the standalone country tool -> MacroFiscal_CountryTool_v0.2.xlsx
+python3 integrated.py --all      # all NMIM countries -> results/integrated_{results,paths,settings}.csv (about 3 minutes)
+python3 build_country_tool.py    # the standalone country tool -> MacroFiscal_CountryTool_v0.3.xlsx
 ```
 
 Outputs go to `results/`: `gimf_<ISO>.png`, `dsf_<ISO>.png`, `dignad_disaster.png`, `paths_<ISO>.csv`.

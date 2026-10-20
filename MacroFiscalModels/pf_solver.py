@@ -5,15 +5,15 @@ lead at T + 1. The Jacobian is sparse (block tridiagonal in time) and is built b
 differences with a 3-colouring of the time index, so it costs 3n residual evaluations.
 """
 import numpy as np
-from scipy.sparse import lil_matrix, csc_matrix
+from scipy.sparse import csc_matrix
 from scipy.sparse.linalg import spsolve
 
 
 def jacobian(F, X, h=1e-7):
     T, n = X.shape
     F0 = F(X)
-    J = lil_matrix((T * n, T * n))
-    for j in range(n):
+    rows, cols_, vals = [], [], []                 # assembled once: element-wise insertion into a
+    for j in range(n):                             # lil_matrix took nearly all the run time
         for c in range(3):
             P = X.copy()
             cols = np.arange(c, T, 3)
@@ -23,8 +23,11 @@ def jacobian(F, X, h=1e-7):
                 for s in (tt - 1, tt, tt + 1):
                     if 0 <= s < T:
                         nz = np.nonzero(D[s])[0]
-                        J[s * n + nz, tt * n + j] = D[s][nz]
-    return csc_matrix(J), F0
+                        rows.append(s * n + nz)
+                        cols_.append(np.full(len(nz), tt * n + j))
+                        vals.append(D[s][nz])
+    J = csc_matrix((np.concatenate(vals), (np.concatenate(rows), np.concatenate(cols_))), shape=(T * n, T * n))
+    return J, F0
 
 
 def solve_path(F, X0, tol=1e-10, maxit=40, verbose=False):

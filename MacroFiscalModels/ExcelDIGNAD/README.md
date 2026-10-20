@@ -1,6 +1,6 @@
-# DIGNAD-R Excel (proof of concept, v0.2)
+# DIGNAD-R Excel (proof of concept, v0.3)
 
-`DIGNAD_R_Excel_v0.2.xlsx` is DIGNAD-lite with the DIGNAR resource block written entirely in Excel
+`DIGNAD_R_Excel_v0.3.xlsx` is DIGNAD-lite with the DIGNAR resource block written entirely in Excel
 formulas, for 12 countries (Kenya, Sierra Leone, Uganda, Liberia, Ethiopia, Rwanda, Mozambique,
 Ghana, Senegal, Angola, Congo Rep., Chad), 2024-2050. No macros, no Python to use it.
 
@@ -75,7 +75,8 @@ python3 build_dignad_excel.py --check     # needs results/integrated_{results,pa
 
 ## Caveats
 
-Illustrative calibration; four augmented inputs are income-group defaults (candidates for the
-dashboard's Appendix C: public investment, return on public capital, hand-to-mouth share, grants);
+Illustrative calibration. Public investment now comes from the dashboard's Appendix C (IMF ICSD,
+to 2019) where it has a value, else the income-group default; three augmented inputs are still
+income-group defaults (return on public capital, hand-to-mouth share, grants: no data source yet);
 `fiscal_rule_speed` is passed in from the integrated run. No energy savings, no private investment
 push, no exchange rate; one fiscal instrument. Checked in LibreOffice, not in Excel itself.

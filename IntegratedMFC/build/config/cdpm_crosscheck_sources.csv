@@ -1,0 +1,2 @@
+file,organisation,contents,used_for,url,match_key,download_url,download_kind,download_note
+InvestmentNeeds/Mitigation_Investment_Needs_v1.1.xlsx,"Repository model: Mitigation Investment Needs v1.1 (CDPM-based global method, Oct 2026)","195 economies, 2030: total and incremental investment and incremental cost; IHLEG / IEA-IFC group totals allocated to countries",Appendix F (cross-check; cached values of Results_Country),,Mitigation_Investment_Needs_v1.1,,repository,"Rebuild with InvestmentNeeds/build/build_investment_model.py, then recalculate"

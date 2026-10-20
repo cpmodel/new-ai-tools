@@ -18,7 +18,7 @@ ABW,g,0.1339862,residual: closes the starting budget (floor 5% of GDP)
 AFG,income,Low income,dashboard (World Bank income group)
 AFG,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 AFG,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-AFG,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+AFG,ig,0.08121,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 AFG,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 AFG,grants,0.02,default: assumption: grants % GDP
 AFG,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -34,7 +34,7 @@ AFG,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 AGO,income,Lower middle income,dashboard (World Bank income group)
 AGO,s,0.73,default: IMF (2015) efficiency gap by income group
 AGO,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-AGO,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+AGO,ig,0.030950000000000002,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 AGO,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 AGO,grants,0.01,default: assumption: grants % GDP
 AGO,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -50,7 +50,7 @@ AGO,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 ALB,income,Upper middle income,dashboard (World Bank income group)
 ALB,s,0.78,"dashboard: PEFA PI-11 = 3, mapped as in InvestmentNeeds v1.1"
 ALB,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-ALB,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+ALB,ig,0.0451,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 ALB,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 ALB,grants,0.0,default: assumption: grants % GDP
 ALB,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -62,11 +62,11 @@ ALB,rents,0.01123,dashboard: fossil rents (WDI oil + gas + coal)
 ALB,delta,0.07,default: common to both models
 ALB,delta_g,0.04,default: common to both models
 ALB,alpha,0.33,default: common to both models
-ALB,g,0.11615850000000001,residual: closes the starting budget (floor 5% of GDP)
+ALB,g,0.11605850000000002,residual: closes the starting budget (floor 5% of GDP)
 ARE,income,High income,dashboard (World Bank income group)
 ARE,s,0.87,default: IMF (2015) efficiency gap by income group
 ARE,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-ARE,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+ARE,ig,0.13996,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 ARE,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 ARE,grants,0.0,default: assumption: grants % GDP
 ARE,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -78,11 +78,11 @@ ARE,rents,0.17634,dashboard: fossil rents (WDI oil + gas + coal)
 ARE,delta,0.07,default: common to both models
 ARE,delta_g,0.04,default: common to both models
 ARE,alpha,0.33,default: common to both models
-ARE,g,0.1165268,residual: closes the starting budget (floor 5% of GDP)
+ARE,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 ARG,income,Upper middle income,dashboard (World Bank income group)
 ARG,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 ARG,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-ARG,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+ARG,ig,0.01865,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 ARG,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 ARG,grants,0.0,default: assumption: grants % GDP
 ARG,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -94,11 +94,11 @@ ARG,rents,0.01933,dashboard: fossil rents (WDI oil + gas + coal)
 ARG,delta,0.07,default: common to both models
 ARG,delta_g,0.04,default: common to both models
 ARG,alpha,0.33,default: common to both models
-ARG,g,0.13783410000000004,residual: closes the starting budget (floor 5% of GDP)
+ARG,g,0.16418410000000003,residual: closes the starting budget (floor 5% of GDP)
 ARM,income,Upper middle income,dashboard (World Bank income group)
 ARM,s,0.6,"dashboard: PEFA PI-11 = 1, mapped as in InvestmentNeeds v1.1"
 ARM,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-ARM,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+ARM,ig,0.015260000000000001,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 ARM,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 ARM,grants,0.0,default: assumption: grants % GDP
 ARM,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -110,11 +110,11 @@ ARM,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 ARM,delta,0.07,default: common to both models
 ARM,delta_g,0.04,default: common to both models
 ARM,alpha,0.33,default: common to both models
-ARM,g,0.14442170000000001,residual: closes the starting budget (floor 5% of GDP)
+ARM,g,0.1741617,residual: closes the starting budget (floor 5% of GDP)
 ATG,income,High income,dashboard (World Bank income group)
 ATG,s,0.87,default: IMF (2015) efficiency gap by income group
 ATG,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-ATG,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+ATG,ig,0.023610000000000003,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 ATG,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 ATG,grants,0.0,default: assumption: grants % GDP
 ATG,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -126,11 +126,11 @@ ATG,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 ATG,delta,0.07,default: common to both models
 ATG,delta_g,0.04,default: common to both models
 ATG,alpha,0.33,default: common to both models
-ATG,g,0.0792781,residual: closes the starting budget (floor 5% of GDP)
+ATG,g,0.0906681,residual: closes the starting budget (floor 5% of GDP)
 AUS,income,High income,dashboard (World Bank income group)
 AUS,s,0.87,default: IMF (2015) efficiency gap by income group
 AUS,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-AUS,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+AUS,ig,0.03904,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 AUS,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 AUS,grants,0.0,default: assumption: grants % GDP
 AUS,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -142,11 +142,11 @@ AUS,rents,0.027679999999999996,dashboard: fossil rents (WDI oil + gas + coal)
 AUS,delta,0.07,default: common to both models
 AUS,delta_g,0.04,default: common to both models
 AUS,alpha,0.33,default: common to both models
-AUS,g,0.2238967,residual: closes the starting budget (floor 5% of GDP)
+AUS,g,0.21985670000000002,residual: closes the starting budget (floor 5% of GDP)
 AUT,income,High income,dashboard (World Bank income group)
 AUT,s,0.87,default: IMF (2015) efficiency gap by income group
 AUT,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-AUT,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+AUT,ig,0.03013,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 AUT,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 AUT,grants,0.0,default: assumption: grants % GDP
 AUT,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -158,11 +158,11 @@ AUT,rents,0.00062,dashboard: fossil rents (WDI oil + gas + coal)
 AUT,delta,0.07,default: common to both models
 AUT,delta_g,0.04,default: common to both models
 AUT,alpha,0.33,default: common to both models
-AUT,g,0.20454719999999998,residual: closes the starting budget (floor 5% of GDP)
+AUT,g,0.2094172,residual: closes the starting budget (floor 5% of GDP)
 AZE,income,Upper middle income,dashboard (World Bank income group)
 AZE,s,0.73,default: IMF (2015) efficiency gap by income group
 AZE,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-AZE,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+AZE,ig,0.07156,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 AZE,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 AZE,grants,0.0,default: assumption: grants % GDP
 AZE,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -174,11 +174,11 @@ AZE,rents,0.2957,dashboard: fossil rents (WDI oil + gas + coal)
 AZE,delta,0.07,default: common to both models
 AZE,delta_g,0.04,default: common to both models
 AZE,alpha,0.33,default: common to both models
-AZE,g,0.10369628,residual: closes the starting budget (floor 5% of GDP)
+AZE,g,0.07713628,residual: closes the starting budget (floor 5% of GDP)
 BDI,income,Low income,dashboard (World Bank income group)
 BDI,s,0.6,"dashboard: PEFA PI-11 = 1, mapped as in InvestmentNeeds v1.1"
 BDI,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BDI,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BDI,ig,0.027770000000000003,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BDI,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 BDI,grants,0.02,default: assumption: grants % GDP
 BDI,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -190,11 +190,11 @@ BDI,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 BDI,delta,0.07,default: common to both models
 BDI,delta_g,0.04,default: common to both models
 BDI,alpha,0.33,default: common to both models
-BDI,g,0.05,residual: closes the starting budget (floor 5% of GDP)
+BDI,g,0.07222719999999998,residual: closes the starting budget (floor 5% of GDP)
 BEL,income,High income,dashboard (World Bank income group)
 BEL,s,0.87,default: IMF (2015) efficiency gap by income group
 BEL,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BEL,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BEL,ig,0.026099999999999998,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BEL,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 BEL,grants,0.0,default: assumption: grants % GDP
 BEL,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -206,11 +206,11 @@ BEL,rents,0.00031,dashboard: fossil rents (WDI oil + gas + coal)
 BEL,delta,0.07,default: common to both models
 BEL,delta_g,0.04,default: common to both models
 BEL,alpha,0.33,default: common to both models
-BEL,g,0.20954300000000003,residual: closes the starting budget (floor 5% of GDP)
+BEL,g,0.21844300000000003,residual: closes the starting budget (floor 5% of GDP)
 BEN,income,Lower middle income,dashboard (World Bank income group)
 BEN,s,0.73,default: IMF (2015) efficiency gap by income group
 BEN,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BEN,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BEN,ig,0.02601,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BEN,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 BEN,grants,0.01,default: assumption: grants % GDP
 BEN,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -222,11 +222,11 @@ BEN,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 BEN,delta,0.07,default: common to both models
 BEN,delta_g,0.04,default: common to both models
 BEN,alpha,0.33,default: common to both models
-BEN,g,0.05,residual: closes the starting budget (floor 5% of GDP)
+BEN,g,0.06881390140000003,residual: closes the starting budget (floor 5% of GDP)
 BFA,income,Low income,dashboard (World Bank income group)
 BFA,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 BFA,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BFA,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BFA,ig,0.04761,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BFA,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 BFA,grants,0.02,default: assumption: grants % GDP
 BFA,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -238,11 +238,11 @@ BFA,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 BFA,delta,0.07,default: common to both models
 BFA,delta_g,0.04,default: common to both models
 BFA,alpha,0.33,default: common to both models
-BFA,g,0.10657237499999996,residual: closes the starting budget (floor 5% of GDP)
+BFA,g,0.11896237499999997,residual: closes the starting budget (floor 5% of GDP)
 BGD,income,Lower middle income,dashboard (World Bank income group)
 BGD,s,0.735,"dashboard: PEFA PI-11 = 2.5, mapped as in InvestmentNeeds v1.1"
 BGD,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BGD,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BGD,ig,0.06317,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BGD,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 BGD,grants,0.01,default: assumption: grants % GDP
 BGD,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -258,7 +258,7 @@ BGD,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 BGR,income,High income,dashboard (World Bank income group)
 BGR,s,0.87,default: IMF (2015) efficiency gap by income group
 BGR,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BGR,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BGR,ig,0.03403,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BGR,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 BGR,grants,0.0,default: assumption: grants % GDP
 BGR,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -270,11 +270,11 @@ BGR,rents,0.00151,dashboard: fossil rents (WDI oil + gas + coal)
 BGR,delta,0.07,default: common to both models
 BGR,delta_g,0.04,default: common to both models
 BGR,alpha,0.33,default: common to both models
-BGR,g,0.32615800000000006,residual: closes the starting budget (floor 5% of GDP)
+BGR,g,0.32712800000000003,residual: closes the starting budget (floor 5% of GDP)
 BHR,income,High income,dashboard (World Bank income group)
 BHR,s,0.87,default: IMF (2015) efficiency gap by income group
 BHR,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BHR,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BHR,ig,0.042460000000000005,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BHR,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 BHR,grants,0.0,default: assumption: grants % GDP
 BHR,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -290,7 +290,7 @@ BHR,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 BHS,income,High income,dashboard (World Bank income group)
 BHS,s,0.87,default: IMF (2015) efficiency gap by income group
 BHS,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BHS,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BHS,ig,0.01894,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BHS,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 BHS,grants,0.0,default: assumption: grants % GDP
 BHS,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -302,11 +302,11 @@ BHS,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 BHS,delta,0.07,default: common to both models
 BHS,delta_g,0.04,default: common to both models
 BHS,alpha,0.33,default: common to both models
-BHS,g,0.09610609999999999,residual: closes the starting budget (floor 5% of GDP)
+BHS,g,0.1121661,residual: closes the starting budget (floor 5% of GDP)
 BIH,income,Upper middle income,dashboard (World Bank income group)
 BIH,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 BIH,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BIH,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BIH,ig,0.03074,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BIH,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 BIH,grants,0.0,default: assumption: grants % GDP
 BIH,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -318,11 +318,11 @@ BIH,rents,0.00302,dashboard: fossil rents (WDI oil + gas + coal)
 BIH,delta,0.07,default: common to both models
 BIH,delta_g,0.04,default: common to both models
 BIH,alpha,0.33,default: common to both models
-BIH,g,0.15261909999999998,residual: closes the starting budget (floor 5% of GDP)
+BIH,g,0.1668791,residual: closes the starting budget (floor 5% of GDP)
 BLR,income,Upper middle income,dashboard (World Bank income group)
 BLR,s,0.73,default: IMF (2015) efficiency gap by income group
 BLR,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BLR,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BLR,ig,0.0222,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BLR,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 BLR,grants,0.0,default: assumption: grants % GDP
 BLR,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -334,11 +334,11 @@ BLR,rents,0.00853,dashboard: fossil rents (WDI oil + gas + coal)
 BLR,delta,0.07,default: common to both models
 BLR,delta_g,0.04,default: common to both models
 BLR,alpha,0.33,default: common to both models
-BLR,g,0.19509532770000007,residual: closes the starting budget (floor 5% of GDP)
+BLR,g,0.21789532770000006,residual: closes the starting budget (floor 5% of GDP)
 BLZ,income,Upper middle income,dashboard (World Bank income group)
 BLZ,s,0.73,default: IMF (2015) efficiency gap by income group
 BLZ,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BLZ,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BLZ,ig,0.059800000000000006,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BLZ,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 BLZ,grants,0.0,default: assumption: grants % GDP
 BLZ,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -350,11 +350,11 @@ BLZ,rents,0.0028199999999999996,dashboard: fossil rents (WDI oil + gas + coal)
 BLZ,delta,0.07,default: common to both models
 BLZ,delta_g,0.04,default: common to both models
 BLZ,alpha,0.33,default: common to both models
-BLZ,g,0.1476392,residual: closes the starting budget (floor 5% of GDP)
+BLZ,g,0.13283920000000002,residual: closes the starting budget (floor 5% of GDP)
 BOL,income,Lower middle income,dashboard (World Bank income group)
 BOL,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 BOL,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BOL,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BOL,ig,0.08102999999999999,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BOL,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 BOL,grants,0.01,default: assumption: grants % GDP
 BOL,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -366,11 +366,11 @@ BOL,rents,0.03117,dashboard: fossil rents (WDI oil + gas + coal)
 BOL,delta,0.07,default: common to both models
 BOL,delta_g,0.04,default: common to both models
 BOL,alpha,0.33,default: common to both models
-BOL,g,0.08041145000000002,residual: closes the starting budget (floor 5% of GDP)
+BOL,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 BRA,income,Upper middle income,dashboard (World Bank income group)
 BRA,s,0.73,default: IMF (2015) efficiency gap by income group
 BRA,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BRA,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BRA,ig,0.022019999999999998,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BRA,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 BRA,grants,0.0,default: assumption: grants % GDP
 BRA,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -382,11 +382,11 @@ BRA,rents,0.02688,dashboard: fossil rents (WDI oil + gas + coal)
 BRA,delta,0.07,default: common to both models
 BRA,delta_g,0.04,default: common to both models
 BRA,alpha,0.33,default: common to both models
-BRA,g,0.15565214960000004,residual: closes the starting budget (floor 5% of GDP)
+BRA,g,0.17863214960000004,residual: closes the starting budget (floor 5% of GDP)
 BRB,income,High income,dashboard (World Bank income group)
 BRB,s,0.87,default: IMF (2015) efficiency gap by income group
 BRB,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BRB,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BRB,ig,0.03076,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BRB,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 BRB,grants,0.0,default: assumption: grants % GDP
 BRB,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -398,11 +398,11 @@ BRB,rents,0.00316,dashboard: fossil rents (WDI oil + gas + coal)
 BRB,delta,0.07,default: common to both models
 BRB,delta_g,0.04,default: common to both models
 BRB,alpha,0.33,default: common to both models
-BRB,g,0.1927891,residual: closes the starting budget (floor 5% of GDP)
+BRB,g,0.19702909999999998,residual: closes the starting budget (floor 5% of GDP)
 BRN,income,High income,dashboard (World Bank income group)
 BRN,s,0.87,default: IMF (2015) efficiency gap by income group
 BRN,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BRN,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BRN,ig,0.017159999999999998,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BRN,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 BRN,grants,0.0,default: assumption: grants % GDP
 BRN,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -418,7 +418,7 @@ BRN,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 BTN,income,Lower middle income,dashboard (World Bank income group)
 BTN,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 BTN,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BTN,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BTN,ig,0.06855,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BTN,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 BTN,grants,0.01,default: assumption: grants % GDP
 BTN,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -434,7 +434,7 @@ BTN,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 BWA,income,Upper middle income,dashboard (World Bank income group)
 BWA,s,0.69,"dashboard: PEFA PI-11 = 2, mapped as in InvestmentNeeds v1.1"
 BWA,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-BWA,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+BWA,ig,0.06236,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 BWA,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 BWA,grants,0.0,default: assumption: grants % GDP
 BWA,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -446,11 +446,11 @@ BWA,rents,0.005,dashboard: fossil rents (WDI oil + gas + coal)
 BWA,delta,0.07,default: common to both models
 BWA,delta_g,0.04,default: common to both models
 BWA,alpha,0.33,default: common to both models
-BWA,g,0.14860540000000003,residual: closes the starting budget (floor 5% of GDP)
+BWA,g,0.1312454,residual: closes the starting budget (floor 5% of GDP)
 CAF,income,Low income,dashboard (World Bank income group)
 CAF,s,0.6,default: IMF (2015) efficiency gap by income group
 CAF,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-CAF,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+CAF,ig,0.06703,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 CAF,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 CAF,grants,0.02,default: assumption: grants % GDP
 CAF,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -466,7 +466,7 @@ CAF,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 CAN,income,High income,dashboard (World Bank income group)
 CAN,s,0.87,default: IMF (2015) efficiency gap by income group
 CAN,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-CAN,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+CAN,ig,0.038740000000000004,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 CAN,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 CAN,grants,0.0,default: assumption: grants % GDP
 CAN,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -478,11 +478,11 @@ CAN,rents,0.03697,dashboard: fossil rents (WDI oil + gas + coal)
 CAN,delta,0.07,default: common to both models
 CAN,delta_g,0.04,default: common to both models
 CAN,alpha,0.33,default: common to both models
-CAN,g,0.20655430000000002,residual: closes the starting budget (floor 5% of GDP)
+CAN,g,0.20281430000000003,residual: closes the starting budget (floor 5% of GDP)
 CHE,income,High income,dashboard (World Bank income group)
 CHE,s,0.87,default: IMF (2015) efficiency gap by income group
 CHE,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-CHE,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+CHE,ig,0.030459999999999997,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 CHE,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 CHE,grants,0.0,default: assumption: grants % GDP
 CHE,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -494,11 +494,11 @@ CHE,rents,1e-05,dashboard: fossil rents (WDI oil + gas + coal)
 CHE,delta,0.07,default: common to both models
 CHE,delta_g,0.04,default: common to both models
 CHE,alpha,0.33,default: common to both models
-CHE,g,0.13237210000000005,residual: closes the starting budget (floor 5% of GDP)
+CHE,g,0.13691210000000006,residual: closes the starting budget (floor 5% of GDP)
 CHL,income,High income,dashboard (World Bank income group)
 CHL,s,0.87,default: IMF (2015) efficiency gap by income group
 CHL,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-CHL,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+CHL,ig,0.023540000000000002,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 CHL,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 CHL,grants,0.0,default: assumption: grants % GDP
 CHL,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -510,11 +510,11 @@ CHL,rents,0.00034,dashboard: fossil rents (WDI oil + gas + coal)
 CHL,delta,0.07,default: common to both models
 CHL,delta_g,0.04,default: common to both models
 CHL,alpha,0.33,default: common to both models
-CHL,g,0.12882500000000002,residual: closes the starting budget (floor 5% of GDP)
+CHL,g,0.14028500000000002,residual: closes the starting budget (floor 5% of GDP)
 CHN,income,Upper middle income,dashboard (World Bank income group)
 CHN,s,0.73,default: IMF (2015) efficiency gap by income group
 CHN,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-CHN,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+CHN,ig,0.15,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 CHN,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 CHN,grants,0.0,default: assumption: grants % GDP
 CHN,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -530,7 +530,7 @@ CHN,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 CIV,income,Lower middle income,dashboard (World Bank income group)
 CIV,s,0.69,"dashboard: PEFA PI-11 = 2, mapped as in InvestmentNeeds v1.1"
 CIV,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-CIV,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+CIV,ig,0.0444,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 CIV,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 CIV,grants,0.01,default: assumption: grants % GDP
 CIV,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -542,11 +542,11 @@ CIV,rents,0.010089999999999998,dashboard: fossil rents (WDI oil + gas + coal)
 CIV,delta,0.07,default: common to both models
 CIV,delta_g,0.04,default: common to both models
 CIV,alpha,0.33,default: common to both models
-CIV,g,0.056233664399999994,residual: closes the starting budget (floor 5% of GDP)
+CIV,g,0.0618336644,residual: closes the starting budget (floor 5% of GDP)
 CMR,income,Lower middle income,dashboard (World Bank income group)
 CMR,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 CMR,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-CMR,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+CMR,ig,0.036610000000000004,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 CMR,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 CMR,grants,0.01,default: assumption: grants % GDP
 CMR,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -558,11 +558,11 @@ CMR,rents,0.02947,dashboard: fossil rents (WDI oil + gas + coal)
 CMR,delta,0.07,default: common to both models
 CMR,delta_g,0.04,default: common to both models
 CMR,alpha,0.33,default: common to both models
-CMR,g,0.05,residual: closes the starting budget (floor 5% of GDP)
+CMR,g,0.0563761129,residual: closes the starting budget (floor 5% of GDP)
 COD,income,Low income,dashboard (World Bank income group)
 COD,s,0.6,"dashboard: PEFA PI-11 = 1, mapped as in InvestmentNeeds v1.1"
 COD,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-COD,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+COD,ig,0.022709999999999998,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 COD,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 COD,grants,0.02,default: assumption: grants % GDP
 COD,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -574,11 +574,11 @@ COD,rents,0.006500000000000001,dashboard: fossil rents (WDI oil + gas + coal)
 COD,delta,0.07,default: common to both models
 COD,delta_g,0.04,default: common to both models
 COD,alpha,0.33,default: common to both models
-COD,g,0.05,residual: closes the starting budget (floor 5% of GDP)
+COD,g,0.06926565000000001,residual: closes the starting budget (floor 5% of GDP)
 COG,income,Lower middle income,dashboard (World Bank income group)
 COG,s,0.73,default: IMF (2015) efficiency gap by income group
 COG,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-COG,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+COG,ig,0.045129999999999997,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 COG,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 COG,grants,0.01,default: assumption: grants % GDP
 COG,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -594,7 +594,7 @@ COG,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 COL,income,Upper middle income,dashboard (World Bank income group)
 COL,s,0.78,"dashboard: PEFA PI-11 = 3, mapped as in InvestmentNeeds v1.1"
 COL,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-COL,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+COL,ig,0.03556,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 COL,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 COL,grants,0.0,default: assumption: grants % GDP
 COL,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -606,11 +606,11 @@ COL,rents,0.04326000000000001,dashboard: fossil rents (WDI oil + gas + coal)
 COL,delta,0.07,default: common to both models
 COL,delta_g,0.04,default: common to both models
 COL,alpha,0.33,default: common to both models
-COL,g,0.133811384,residual: closes the starting budget (floor 5% of GDP)
+COL,g,0.14325138399999998,residual: closes the starting budget (floor 5% of GDP)
 COM,income,Lower middle income,dashboard (World Bank income group)
 COM,s,0.73,default: IMF (2015) efficiency gap by income group
 COM,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-COM,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+COM,ig,0.047080000000000004,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 COM,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 COM,grants,0.01,default: assumption: grants % GDP
 COM,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -626,7 +626,7 @@ COM,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 CPV,income,Upper middle income,dashboard (World Bank income group)
 CPV,s,0.73,default: IMF (2015) efficiency gap by income group
 CPV,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-CPV,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+CPV,ig,0.023639999999999998,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 CPV,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 CPV,grants,0.0,default: assumption: grants % GDP
 CPV,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -638,11 +638,11 @@ CPV,rents,0.0,dashboard rents 17.2% ignored: coal only and fuel exports 0.0% (li
 CPV,delta,0.07,default: common to both models
 CPV,delta_g,0.04,default: common to both models
 CPV,alpha,0.33,default: common to both models
-CPV,g,0.0955059,residual: closes the starting budget (floor 5% of GDP)
+CPV,g,0.11686590000000001,residual: closes the starting budget (floor 5% of GDP)
 CRI,income,High income,dashboard (World Bank income group)
 CRI,s,0.735,"dashboard: PEFA PI-11 = 2.5, mapped as in InvestmentNeeds v1.1"
 CRI,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-CRI,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+CRI,ig,0.02338,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 CRI,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 CRI,grants,0.0,default: assumption: grants % GDP
 CRI,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -654,11 +654,11 @@ CRI,rents,8.999999999999999e-05,dashboard: fossil rents (WDI oil + gas + coal)
 CRI,delta,0.07,default: common to both models
 CRI,delta_g,0.04,default: common to both models
 CRI,alpha,0.33,default: common to both models
-CRI,g,0.05924700000000001,residual: closes the starting budget (floor 5% of GDP)
+CRI,g,0.07086700000000001,residual: closes the starting budget (floor 5% of GDP)
 CYP,income,High income,dashboard (World Bank income group)
 CYP,s,0.87,default: IMF (2015) efficiency gap by income group
 CYP,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-CYP,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+CYP,ig,0.04044,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 CYP,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 CYP,grants,0.0,default: assumption: grants % GDP
 CYP,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -670,11 +670,11 @@ CYP,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 CYP,delta,0.07,default: common to both models
 CYP,delta_g,0.04,default: common to both models
 CYP,alpha,0.33,default: common to both models
-CYP,g,0.17906920000000004,residual: closes the starting budget (floor 5% of GDP)
+CYP,g,0.17362920000000004,residual: closes the starting budget (floor 5% of GDP)
 CZE,income,High income,dashboard (World Bank income group)
 CZE,s,0.87,default: IMF (2015) efficiency gap by income group
 CZE,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-CZE,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+CZE,ig,0.0444,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 CZE,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 CZE,grants,0.0,default: assumption: grants % GDP
 CZE,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -686,11 +686,11 @@ CZE,rents,0.001159999999999999,dashboard: fossil rents (WDI oil + gas + coal)
 CZE,delta,0.07,default: common to both models
 CZE,delta_g,0.04,default: common to both models
 CZE,alpha,0.33,default: common to both models
-CZE,g,0.12066269999999997,residual: closes the starting budget (floor 5% of GDP)
+CZE,g,0.11126269999999998,residual: closes the starting budget (floor 5% of GDP)
 DEU,income,High income,dashboard (World Bank income group)
 DEU,s,0.87,default: IMF (2015) efficiency gap by income group
 DEU,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-DEU,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+DEU,ig,0.023929999999999996,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 DEU,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 DEU,grants,0.0,default: assumption: grants % GDP
 DEU,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -702,11 +702,11 @@ DEU,rents,0.00046,dashboard: fossil rents (WDI oil + gas + coal)
 DEU,delta,0.07,default: common to both models
 DEU,delta_g,0.04,default: common to both models
 DEU,alpha,0.33,default: common to both models
-DEU,g,0.15613190000000002,residual: closes the starting budget (floor 5% of GDP)
+DEU,g,0.16720190000000001,residual: closes the starting budget (floor 5% of GDP)
 DJI,income,Lower middle income,dashboard (World Bank income group)
 DJI,s,0.735,"dashboard: PEFA PI-11 = 2.5, mapped as in InvestmentNeeds v1.1"
 DJI,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-DJI,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+DJI,ig,0.07432,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 DJI,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 DJI,grants,0.01,default: assumption: grants % GDP
 DJI,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -722,7 +722,7 @@ DJI,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 DMA,income,Upper middle income,dashboard (World Bank income group)
 DMA,s,0.73,default: IMF (2015) efficiency gap by income group
 DMA,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-DMA,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+DMA,ig,0.13957,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 DMA,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 DMA,grants,0.0,default: assumption: grants % GDP
 DMA,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -734,11 +734,11 @@ DMA,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 DMA,delta,0.07,default: common to both models
 DMA,delta_g,0.04,default: common to both models
 DMA,alpha,0.33,default: common to both models
-DMA,g,0.1253098,residual: closes the starting budget (floor 5% of GDP)
+DMA,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 DNK,income,High income,dashboard (World Bank income group)
 DNK,s,0.87,default: IMF (2015) efficiency gap by income group
 DNK,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-DNK,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+DNK,ig,0.03248,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 DNK,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 DNK,grants,0.0,default: assumption: grants % GDP
 DNK,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -750,11 +750,11 @@ DNK,rents,0.0032500000000000003,dashboard: fossil rents (WDI oil + gas + coal)
 DNK,delta,0.07,default: common to both models
 DNK,delta_g,0.04,default: common to both models
 DNK,alpha,0.33,default: common to both models
-DNK,g,0.33583680000000005,residual: closes the starting budget (floor 5% of GDP)
+DNK,g,0.3383568,residual: closes the starting budget (floor 5% of GDP)
 DOM,income,Upper middle income,dashboard (World Bank income group)
 DOM,s,0.735,"dashboard: PEFA PI-11 = 2.5, mapped as in InvestmentNeeds v1.1"
 DOM,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-DOM,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+DOM,ig,0.01294,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 DOM,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 DOM,grants,0.0,default: assumption: grants % GDP
 DOM,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -766,11 +766,11 @@ DOM,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 DOM,delta,0.07,default: common to both models
 DOM,delta_g,0.04,default: common to both models
 DOM,alpha,0.33,default: common to both models
-DOM,g,0.05,residual: closes the starting budget (floor 5% of GDP)
+DOM,g,0.07911537919999999,residual: closes the starting budget (floor 5% of GDP)
 DZA,income,Upper middle income,dashboard (World Bank income group)
 DZA,s,0.73,default: IMF (2015) efficiency gap by income group
 DZA,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-DZA,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+DZA,ig,0.09193,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 DZA,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 DZA,grants,0.0,default: assumption: grants % GDP
 DZA,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -786,7 +786,7 @@ DZA,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 ECU,income,Upper middle income,dashboard (World Bank income group)
 ECU,s,0.73,default: IMF (2015) efficiency gap by income group
 ECU,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-ECU,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+ECU,ig,0.06389,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 ECU,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 ECU,grants,0.0,default: assumption: grants % GDP
 ECU,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -798,11 +798,11 @@ ECU,rents,0.06417,dashboard: fossil rents (WDI oil + gas + coal)
 ECU,delta,0.07,default: common to both models
 ECU,delta_g,0.04,default: common to both models
 ECU,alpha,0.33,default: common to both models
-ECU,g,0.054523046600000014,residual: closes the starting budget (floor 5% of GDP)
+ECU,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 EGY,income,Lower middle income,dashboard (World Bank income group)
 EGY,s,0.73,default: IMF (2015) efficiency gap by income group
 EGY,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-EGY,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+EGY,ig,0.041609999999999994,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 EGY,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 EGY,grants,0.01,default: assumption: grants % GDP
 EGY,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -818,7 +818,7 @@ EGY,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 ESP,income,High income,dashboard (World Bank income group)
 ESP,s,0.87,default: IMF (2015) efficiency gap by income group
 ESP,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-ESP,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+ESP,ig,0.02048,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 ESP,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 ESP,grants,0.0,default: assumption: grants % GDP
 ESP,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -830,11 +830,11 @@ ESP,rents,1e-05,dashboard: fossil rents (WDI oil + gas + coal)
 ESP,delta,0.07,default: common to both models
 ESP,delta_g,0.04,default: common to both models
 ESP,alpha,0.33,default: common to both models
-ESP,g,0.1533156,residual: closes the starting budget (floor 5% of GDP)
+ESP,g,0.1678356,residual: closes the starting budget (floor 5% of GDP)
 EST,income,High income,dashboard (World Bank income group)
 EST,s,0.87,default: IMF (2015) efficiency gap by income group
 EST,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-EST,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+EST,ig,0.04978,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 EST,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 EST,grants,0.0,default: assumption: grants % GDP
 EST,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -846,11 +846,11 @@ EST,rents,0.00962,dashboard: fossil rents (WDI oil + gas + coal)
 EST,delta,0.07,default: common to both models
 EST,delta_g,0.04,default: common to both models
 EST,alpha,0.33,default: common to both models
-EST,g,0.1665784,residual: closes the starting budget (floor 5% of GDP)
+EST,g,0.1517984,residual: closes the starting budget (floor 5% of GDP)
 ETH,income,Low income,dashboard (World Bank income group)
 ETH,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 ETH,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-ETH,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+ETH,ig,0.08885,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 ETH,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 ETH,grants,0.02,default: assumption: grants % GDP
 ETH,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -866,7 +866,7 @@ ETH,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 FIN,income,High income,dashboard (World Bank income group)
 FIN,s,0.87,default: IMF (2015) efficiency gap by income group
 FIN,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-FIN,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+FIN,ig,0.04243,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 FIN,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 FIN,grants,0.0,default: assumption: grants % GDP
 FIN,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -878,11 +878,11 @@ FIN,rents,0.00046,dashboard: fossil rents (WDI oil + gas + coal)
 FIN,delta,0.07,default: common to both models
 FIN,delta_g,0.04,default: common to both models
 FIN,alpha,0.33,default: common to both models
-FIN,g,0.22455590000000003,residual: closes the starting budget (floor 5% of GDP)
+FIN,g,0.21712590000000004,residual: closes the starting budget (floor 5% of GDP)
 FJI,income,Upper middle income,dashboard (World Bank income group)
 FJI,s,0.735,"dashboard: PEFA PI-11 = 2.5, mapped as in InvestmentNeeds v1.1"
 FJI,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-FJI,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+FJI,ig,0.03669,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 FJI,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 FJI,grants,0.0,default: assumption: grants % GDP
 FJI,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -894,11 +894,11 @@ FJI,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 FJI,delta,0.07,default: common to both models
 FJI,delta_g,0.04,default: common to both models
 FJI,alpha,0.33,default: common to both models
-FJI,g,0.1293029875,residual: closes the starting budget (floor 5% of GDP)
+FJI,g,0.13761298749999998,residual: closes the starting budget (floor 5% of GDP)
 FRA,income,High income,dashboard (World Bank income group)
 FRA,s,0.87,default: IMF (2015) efficiency gap by income group
 FRA,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-FRA,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+FRA,ig,0.03609,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 FRA,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 FRA,grants,0.0,default: assumption: grants % GDP
 FRA,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -910,11 +910,11 @@ FRA,rents,7.000000000000001e-05,dashboard: fossil rents (WDI oil + gas + coal)
 FRA,delta,0.07,default: common to both models
 FRA,delta_g,0.04,default: common to both models
 FRA,alpha,0.33,default: common to both models
-FRA,g,0.1980887,residual: closes the starting budget (floor 5% of GDP)
+FRA,g,0.1969987,residual: closes the starting budget (floor 5% of GDP)
 GAB,income,Upper middle income,dashboard (World Bank income group)
 GAB,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 GAB,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-GAB,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+GAB,ig,0.01564,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 GAB,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 GAB,grants,0.0,default: assumption: grants % GDP
 GAB,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -926,11 +926,11 @@ GAB,rents,0.15826,dashboard: fossil rents (WDI oil + gas + coal)
 GAB,delta,0.07,default: common to both models
 GAB,delta_g,0.04,default: common to both models
 GAB,alpha,0.33,default: common to both models
-GAB,g,0.05,residual: closes the starting budget (floor 5% of GDP)
+GAB,g,0.0683403235,residual: closes the starting budget (floor 5% of GDP)
 GBR,income,High income,dashboard (World Bank income group)
 GBR,s,0.87,default: IMF (2015) efficiency gap by income group
 GBR,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-GBR,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+GBR,ig,0.02746,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 GBR,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 GBR,grants,0.0,default: assumption: grants % GDP
 GBR,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -942,11 +942,11 @@ GBR,rents,0.00588,dashboard: fossil rents (WDI oil + gas + coal)
 GBR,delta,0.07,default: common to both models
 GBR,delta_g,0.04,default: common to both models
 GBR,alpha,0.33,default: common to both models
-GBR,g,0.20017970000000002,residual: closes the starting budget (floor 5% of GDP)
+GBR,g,0.20771970000000003,residual: closes the starting budget (floor 5% of GDP)
 GEO,income,Upper middle income,dashboard (World Bank income group)
 GEO,s,0.87,"dashboard: PEFA PI-11 = 4, mapped as in InvestmentNeeds v1.1"
 GEO,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-GEO,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+GEO,ig,0.059539999999999996,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 GEO,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 GEO,grants,0.0,default: assumption: grants % GDP
 GEO,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -958,11 +958,11 @@ GEO,rents,0.00046,dashboard: fossil rents (WDI oil + gas + coal)
 GEO,delta,0.07,default: common to both models
 GEO,delta_g,0.04,default: common to both models
 GEO,alpha,0.33,default: common to both models
-GEO,g,0.17281319999999997,residual: closes the starting budget (floor 5% of GDP)
+GEO,g,0.15827319999999998,residual: closes the starting budget (floor 5% of GDP)
 GHA,income,Lower middle income,dashboard (World Bank income group)
 GHA,s,0.6,"dashboard: PEFA PI-11 = 1, mapped as in InvestmentNeeds v1.1"
 GHA,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-GHA,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+GHA,ig,0.01,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 GHA,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 GHA,grants,0.01,default: assumption: grants % GDP
 GHA,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -974,11 +974,11 @@ GHA,rents,0.04426,dashboard: fossil rents (WDI oil + gas + coal)
 GHA,delta,0.07,default: common to both models
 GHA,delta_g,0.04,default: common to both models
 GHA,alpha,0.33,default: common to both models
-GHA,g,0.05159739999999999,residual: closes the starting budget (floor 5% of GDP)
+GHA,g,0.0915974,residual: closes the starting budget (floor 5% of GDP)
 GIN,income,Lower middle income,dashboard (World Bank income group)
 GIN,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 GIN,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-GIN,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+GIN,ig,0.01901,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 GIN,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 GIN,grants,0.01,default: assumption: grants % GDP
 GIN,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -990,11 +990,11 @@ GIN,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 GIN,delta,0.07,default: common to both models
 GIN,delta_g,0.04,default: common to both models
 GIN,alpha,0.33,default: common to both models
-GIN,g,0.05,residual: closes the starting budget (floor 5% of GDP)
+GIN,g,0.07962539999999999,residual: closes the starting budget (floor 5% of GDP)
 GMB,income,Low income,dashboard (World Bank income group)
 GMB,s,0.6,"dashboard: PEFA PI-11 = 1, mapped as in InvestmentNeeds v1.1"
 GMB,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-GMB,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+GMB,ig,0.05344,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 GMB,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 GMB,grants,0.02,default: assumption: grants % GDP
 GMB,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1010,7 +1010,7 @@ GMB,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 GNB,income,Low income,dashboard (World Bank income group)
 GNB,s,0.6,default: IMF (2015) efficiency gap by income group
 GNB,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-GNB,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+GNB,ig,0.01617,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 GNB,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 GNB,grants,0.02,default: assumption: grants % GDP
 GNB,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1026,7 +1026,7 @@ GNB,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 GNQ,income,Upper middle income,dashboard (World Bank income group)
 GNQ,s,0.73,default: IMF (2015) efficiency gap by income group
 GNQ,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-GNQ,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+GNQ,ig,0.04305,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 GNQ,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 GNQ,grants,0.0,default: assumption: grants % GDP
 GNQ,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1042,7 +1042,7 @@ GNQ,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 GRC,income,High income,dashboard (World Bank income group)
 GRC,s,0.87,default: IMF (2015) efficiency gap by income group
 GRC,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-GRC,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+GRC,ig,0.02412,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 GRC,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 GRC,grants,0.0,default: assumption: grants % GDP
 GRC,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1054,11 +1054,11 @@ GRC,rents,0.00027,dashboard: fossil rents (WDI oil + gas + coal)
 GRC,delta,0.07,default: common to both models
 GRC,delta_g,0.04,default: common to both models
 GRC,alpha,0.33,default: common to both models
-GRC,g,0.17781000000000002,residual: closes the starting budget (floor 5% of GDP)
+GRC,g,0.18869000000000002,residual: closes the starting budget (floor 5% of GDP)
 GRD,income,Upper middle income,dashboard (World Bank income group)
 GRD,s,0.73,default: IMF (2015) efficiency gap by income group
 GRD,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-GRD,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+GRD,ig,0.023610000000000003,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 GRD,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 GRD,grants,0.0,default: assumption: grants % GDP
 GRD,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1070,11 +1070,11 @@ GRD,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 GRD,delta,0.07,default: common to both models
 GRD,delta_g,0.04,default: common to both models
 GRD,alpha,0.33,default: common to both models
-GRD,g,0.1488366,residual: closes the starting budget (floor 5% of GDP)
+GRD,g,0.1702266,residual: closes the starting budget (floor 5% of GDP)
 GTM,income,Upper middle income,dashboard (World Bank income group)
 GTM,s,0.735,"dashboard: PEFA PI-11 = 2.5, mapped as in InvestmentNeeds v1.1"
 GTM,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-GTM,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+GTM,ig,0.01534,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 GTM,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 GTM,grants,0.0,default: assumption: grants % GDP
 GTM,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1086,11 +1086,11 @@ GTM,rents,0.0011799999999999998,dashboard: fossil rents (WDI oil + gas + coal)
 GTM,delta,0.07,default: common to both models
 GTM,delta_g,0.04,default: common to both models
 GTM,alpha,0.33,default: common to both models
-GTM,g,0.05,residual: closes the starting budget (floor 5% of GDP)
+GTM,g,0.0725324582,residual: closes the starting budget (floor 5% of GDP)
 GUY,income,High income,dashboard (World Bank income group)
 GUY,s,0.87,default: IMF (2015) efficiency gap by income group
 GUY,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-GUY,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+GUY,ig,0.12491,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 GUY,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 GUY,grants,0.0,default: assumption: grants % GDP
 GUY,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1106,7 +1106,7 @@ GUY,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 HKG,income,High income,dashboard (World Bank income group)
 HKG,s,0.87,default: IMF (2015) efficiency gap by income group
 HKG,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-HKG,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+HKG,ig,0.05801,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 HKG,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 HKG,grants,0.0,default: assumption: grants % GDP
 HKG,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1118,11 +1118,11 @@ HKG,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 HKG,delta,0.07,default: common to both models
 HKG,delta_g,0.04,default: common to both models
 HKG,alpha,0.33,default: common to both models
-HKG,g,0.08388999999999998,residual: closes the starting budget (floor 5% of GDP)
+HKG,g,0.060879999999999976,residual: closes the starting budget (floor 5% of GDP)
 HND,income,Lower middle income,dashboard (World Bank income group)
 HND,s,0.73,default: IMF (2015) efficiency gap by income group
 HND,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-HND,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+HND,ig,0.03401,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 HND,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 HND,grants,0.01,default: assumption: grants % GDP
 HND,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1134,11 +1134,11 @@ HND,rents,1e-05,dashboard: fossil rents (WDI oil + gas + coal)
 HND,delta,0.07,default: common to both models
 HND,delta_g,0.04,default: common to both models
 HND,alpha,0.33,default: common to both models
-HND,g,0.09196456249999999,residual: closes the starting budget (floor 5% of GDP)
+HND,g,0.10795456249999998,residual: closes the starting budget (floor 5% of GDP)
 HRV,income,High income,dashboard (World Bank income group)
 HRV,s,0.87,default: IMF (2015) efficiency gap by income group
 HRV,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-HRV,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+HRV,ig,0.04535,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 HRV,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 HRV,grants,0.0,default: assumption: grants % GDP
 HRV,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1150,11 +1150,11 @@ HRV,rents,0.0046300000000000004,dashboard: fossil rents (WDI oil + gas + coal)
 HRV,delta,0.07,default: common to both models
 HRV,delta_g,0.04,default: common to both models
 HRV,alpha,0.33,default: common to both models
-HRV,g,0.1999493,residual: closes the starting budget (floor 5% of GDP)
+HRV,g,0.1895993,residual: closes the starting budget (floor 5% of GDP)
 HTI,income,Lower middle income,dashboard (World Bank income group)
 HTI,s,0.73,default: IMF (2015) efficiency gap by income group
 HTI,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-HTI,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+HTI,ig,0.03368,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 HTI,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 HTI,grants,0.01,default: assumption: grants % GDP
 HTI,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1170,7 +1170,7 @@ HTI,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 HUN,income,High income,dashboard (World Bank income group)
 HUN,s,0.87,default: IMF (2015) efficiency gap by income group
 HUN,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-HUN,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+HUN,ig,0.05847,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 HUN,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 HUN,grants,0.0,default: assumption: grants % GDP
 HUN,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1182,11 +1182,11 @@ HUN,rents,0.0032400000000000003,dashboard: fossil rents (WDI oil + gas + coal)
 HUN,delta,0.07,default: common to both models
 HUN,delta_g,0.04,default: common to both models
 HUN,alpha,0.33,default: common to both models
-HUN,g,0.16958610000000002,residual: closes the starting budget (floor 5% of GDP)
+HUN,g,0.14611610000000003,residual: closes the starting budget (floor 5% of GDP)
 IDN,income,Upper middle income,dashboard (World Bank income group)
 IDN,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 IDN,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-IDN,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+IDN,ig,0.03421,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 IDN,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 IDN,grants,0.0,default: assumption: grants % GDP
 IDN,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1202,7 +1202,7 @@ IDN,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 IND,income,Lower middle income,dashboard (World Bank income group)
 IND,s,0.73,default: IMF (2015) efficiency gap by income group
 IND,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-IND,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+IND,ig,0.05106,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 IND,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 IND,grants,0.01,default: assumption: grants % GDP
 IND,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1214,11 +1214,11 @@ IND,rents,0.01683,dashboard: fossil rents (WDI oil + gas + coal)
 IND,delta,0.07,default: common to both models
 IND,delta_g,0.04,default: common to both models
 IND,alpha,0.33,default: common to both models
-IND,g,0.0957054,residual: closes the starting budget (floor 5% of GDP)
+IND,g,0.0946454,residual: closes the starting budget (floor 5% of GDP)
 IRL,income,High income,dashboard (World Bank income group)
 IRL,s,0.87,default: IMF (2015) efficiency gap by income group
 IRL,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-IRL,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+IRL,ig,0.02398,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 IRL,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 IRL,grants,0.0,default: assumption: grants % GDP
 IRL,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1230,11 +1230,11 @@ IRL,rents,0.00053,dashboard: fossil rents (WDI oil + gas + coal)
 IRL,delta,0.07,default: common to both models
 IRL,delta_g,0.04,default: common to both models
 IRL,alpha,0.33,default: common to both models
-IRL,g,0.13858900000000002,residual: closes the starting budget (floor 5% of GDP)
+IRL,g,0.14960900000000002,residual: closes the starting budget (floor 5% of GDP)
 IRN,income,Upper middle income,dashboard (World Bank income group)
 IRN,s,0.73,default: IMF (2015) efficiency gap by income group
 IRN,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-IRN,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+IRN,ig,0.01141,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 IRN,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 IRN,grants,0.0,default: assumption: grants % GDP
 IRN,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1250,7 +1250,7 @@ IRN,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 IRQ,income,Upper middle income,dashboard (World Bank income group)
 IRQ,s,0.73,default: IMF (2015) efficiency gap by income group
 IRQ,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-IRQ,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+IRQ,ig,0.06753999999999999,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 IRQ,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 IRQ,grants,0.0,default: assumption: grants % GDP
 IRQ,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1266,7 +1266,7 @@ IRQ,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 ISL,income,High income,dashboard (World Bank income group)
 ISL,s,0.87,default: IMF (2015) efficiency gap by income group
 ISL,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-ISL,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+ISL,ig,0.03017,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 ISL,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 ISL,grants,0.0,default: assumption: grants % GDP
 ISL,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1278,11 +1278,11 @@ ISL,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 ISL,delta,0.07,default: common to both models
 ISL,delta_g,0.04,default: common to both models
 ISL,alpha,0.33,default: common to both models
-ISL,g,0.26125529999999997,residual: closes the starting budget (floor 5% of GDP)
+ISL,g,0.2660853,residual: closes the starting budget (floor 5% of GDP)
 ISR,income,High income,dashboard (World Bank income group)
 ISR,s,0.87,default: IMF (2015) efficiency gap by income group
 ISR,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-ISR,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+ISR,ig,0.02568,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 ISR,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 ISR,grants,0.0,default: assumption: grants % GDP
 ISR,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1294,11 +1294,11 @@ ISR,rents,0.00442,dashboard: fossil rents (WDI oil + gas + coal)
 ISR,delta,0.07,default: common to both models
 ISR,delta_g,0.04,default: common to both models
 ISR,alpha,0.33,default: common to both models
-ISR,g,0.1739981,residual: closes the starting budget (floor 5% of GDP)
+ISR,g,0.18331809999999998,residual: closes the starting budget (floor 5% of GDP)
 ITA,income,High income,dashboard (World Bank income group)
 ITA,s,0.87,default: IMF (2015) efficiency gap by income group
 ITA,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-ITA,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+ITA,ig,0.02303,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 ITA,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 ITA,grants,0.0,default: assumption: grants % GDP
 ITA,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1310,7 +1310,7 @@ ITA,rents,0.0010199999999999999,dashboard: fossil rents (WDI oil + gas + coal)
 ITA,delta,0.07,default: common to both models
 ITA,delta_g,0.04,default: common to both models
 ITA,alpha,0.33,default: common to both models
-ITA,g,0.2009895,residual: closes the starting budget (floor 5% of GDP)
+ITA,g,0.2129595,residual: closes the starting budget (floor 5% of GDP)
 JAM,income,Upper middle income,dashboard (World Bank income group)
 JAM,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 JAM,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
@@ -1330,7 +1330,7 @@ JAM,g,0.1499369375,residual: closes the starting budget (floor 5% of GDP)
 JOR,income,Upper middle income,dashboard (World Bank income group)
 JOR,s,0.6,"dashboard: PEFA PI-11 = 1, mapped as in InvestmentNeeds v1.1"
 JOR,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-JOR,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+JOR,ig,0.03129,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 JOR,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 JOR,grants,0.0,default: assumption: grants % GDP
 JOR,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1342,11 +1342,11 @@ JOR,rents,0.000569999999999999,dashboard: fossil rents (WDI oil + gas + coal)
 JOR,delta,0.07,default: common to both models
 JOR,delta_g,0.04,default: common to both models
 JOR,alpha,0.33,default: common to both models
-JOR,g,0.06425339999999999,residual: closes the starting budget (floor 5% of GDP)
+JOR,g,0.07796339999999999,residual: closes the starting budget (floor 5% of GDP)
 JPN,income,High income,dashboard (World Bank income group)
 JPN,s,0.87,default: IMF (2015) efficiency gap by income group
 JPN,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-JPN,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+JPN,ig,0.05024,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 JPN,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 JPN,grants,0.0,default: assumption: grants % GDP
 JPN,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1358,11 +1358,11 @@ JPN,rents,0.00010999999999999999,dashboard: fossil rents (WDI oil + gas + coal)
 JPN,delta,0.07,default: common to both models
 JPN,delta_g,0.04,default: common to both models
 JPN,alpha,0.33,default: common to both models
-JPN,g,0.10222999999999997,residual: closes the starting budget (floor 5% of GDP)
+JPN,g,0.08698999999999997,residual: closes the starting budget (floor 5% of GDP)
 KAZ,income,Upper middle income,dashboard (World Bank income group)
 KAZ,s,0.735,"dashboard: PEFA PI-11 = 2.5, mapped as in InvestmentNeeds v1.1"
 KAZ,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-KAZ,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+KAZ,ig,0.01564,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 KAZ,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 KAZ,grants,0.0,default: assumption: grants % GDP
 KAZ,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1374,11 +1374,11 @@ KAZ,rents,0.17737999999999998,dashboard: fossil rents (WDI oil + gas + coal)
 KAZ,delta,0.07,default: common to both models
 KAZ,delta_g,0.04,default: common to both models
 KAZ,alpha,0.33,default: common to both models
-KAZ,g,0.0881169,residual: closes the starting budget (floor 5% of GDP)
+KAZ,g,0.11747690000000001,residual: closes the starting budget (floor 5% of GDP)
 KEN,income,Lower middle income,dashboard (World Bank income group)
 KEN,s,0.735,"dashboard: PEFA PI-11 = 2.5, mapped as in InvestmentNeeds v1.1"
 KEN,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-KEN,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+KEN,ig,0.05519,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 KEN,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 KEN,grants,0.01,default: assumption: grants % GDP
 KEN,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1410,7 +1410,7 @@ KGZ,g,0.14302800000000002,residual: closes the starting budget (floor 5% of GDP)
 KHM,income,Lower middle income,dashboard (World Bank income group)
 KHM,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 KHM,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-KHM,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+KHM,ig,0.03407,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 KHM,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 KHM,grants,0.01,default: assumption: grants % GDP
 KHM,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1422,11 +1422,11 @@ KHM,rents,0.00046,dashboard: fossil rents (WDI oil + gas + coal)
 KHM,delta,0.07,default: common to both models
 KHM,delta_g,0.04,default: common to both models
 KHM,alpha,0.33,default: common to both models
-KHM,g,0.05485480000000001,residual: closes the starting budget (floor 5% of GDP)
+KHM,g,0.07078480000000001,residual: closes the starting budget (floor 5% of GDP)
 KNA,income,High income,dashboard (World Bank income group)
 KNA,s,0.87,default: IMF (2015) efficiency gap by income group
 KNA,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-KNA,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+KNA,ig,0.12783,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 KNA,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 KNA,grants,0.0,default: assumption: grants % GDP
 KNA,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1438,11 +1438,11 @@ KNA,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 KNA,delta,0.07,default: common to both models
 KNA,delta_g,0.04,default: common to both models
 KNA,alpha,0.33,default: common to both models
-KNA,g,0.0799325,residual: closes the starting budget (floor 5% of GDP)
+KNA,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 KOR,income,High income,dashboard (World Bank income group)
 KOR,s,0.87,default: IMF (2015) efficiency gap by income group
 KOR,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-KOR,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+KOR,ig,0.0479,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 KOR,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 KOR,grants,0.0,default: assumption: grants % GDP
 KOR,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1454,11 +1454,11 @@ KOR,rents,0.00034,dashboard: fossil rents (WDI oil + gas + coal)
 KOR,delta,0.07,default: common to both models
 KOR,delta_g,0.04,default: common to both models
 KOR,alpha,0.33,default: common to both models
-KOR,g,0.06212970000000001,residual: closes the starting budget (floor 5% of GDP)
+KOR,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 KWT,income,High income,dashboard (World Bank income group)
 KWT,s,0.87,default: IMF (2015) efficiency gap by income group
 KWT,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-KWT,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+KWT,ig,0.06842,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 KWT,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 KWT,grants,0.0,default: assumption: grants % GDP
 KWT,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1474,7 +1474,7 @@ KWT,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 LAO,income,Lower middle income,dashboard (World Bank income group)
 LAO,s,0.6,"dashboard: PEFA PI-11 = 1, mapped as in InvestmentNeeds v1.1"
 LAO,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-LAO,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+LAO,ig,0.062380000000000005,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 LAO,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 LAO,grants,0.01,default: assumption: grants % GDP
 LAO,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1490,7 +1490,7 @@ LAO,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 LBN,income,Lower middle income,dashboard (World Bank income group)
 LBN,s,0.73,default: IMF (2015) efficiency gap by income group
 LBN,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-LBN,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+LBN,ig,0.02059,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 LBN,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 LBN,grants,0.01,default: assumption: grants % GDP
 LBN,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1506,7 +1506,7 @@ LBN,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 LBR,income,Low income,dashboard (World Bank income group)
 LBR,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 LBR,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-LBR,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+LBR,ig,0.06475,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 LBR,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 LBR,grants,0.02,default: assumption: grants % GDP
 LBR,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1538,7 +1538,7 @@ LBY,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 LCA,income,Upper middle income,dashboard (World Bank income group)
 LCA,s,0.73,default: IMF (2015) efficiency gap by income group
 LCA,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-LCA,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+LCA,ig,0.04306,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 LCA,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 LCA,grants,0.0,default: assumption: grants % GDP
 LCA,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1550,11 +1550,11 @@ LCA,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 LCA,delta,0.07,default: common to both models
 LCA,delta_g,0.04,default: common to both models
 LCA,alpha,0.33,default: common to both models
-LCA,g,0.0977748,residual: closes the starting budget (floor 5% of GDP)
+LCA,g,0.09971479999999999,residual: closes the starting budget (floor 5% of GDP)
 LKA,income,Upper middle income,dashboard (World Bank income group)
 LKA,s,0.73,default: IMF (2015) efficiency gap by income group
 LKA,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-LKA,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+LKA,ig,0.03789,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 LKA,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 LKA,grants,0.0,default: assumption: grants % GDP
 LKA,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1570,7 +1570,7 @@ LKA,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 LSO,income,Lower middle income,dashboard (World Bank income group)
 LSO,s,0.69,"dashboard: PEFA PI-11 = 2, mapped as in InvestmentNeeds v1.1"
 LSO,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-LSO,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+LSO,ig,0.10604,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 LSO,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 LSO,grants,0.01,default: assumption: grants % GDP
 LSO,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1582,11 +1582,11 @@ LSO,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 LSO,delta,0.07,default: common to both models
 LSO,delta_g,0.04,default: common to both models
 LSO,alpha,0.33,default: common to both models
-LSO,g,0.1542992,residual: closes the starting budget (floor 5% of GDP)
+LSO,g,0.0982592,residual: closes the starting budget (floor 5% of GDP)
 LTU,income,High income,dashboard (World Bank income group)
 LTU,s,0.87,default: IMF (2015) efficiency gap by income group
 LTU,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-LTU,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+LTU,ig,0.03124,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 LTU,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 LTU,grants,0.0,default: assumption: grants % GDP
 LTU,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1598,11 +1598,11 @@ LTU,rents,0.00016,dashboard: fossil rents (WDI oil + gas + coal)
 LTU,delta,0.07,default: common to both models
 LTU,delta_g,0.04,default: common to both models
 LTU,alpha,0.33,default: common to both models
-LTU,g,0.15678050000000002,residual: closes the starting budget (floor 5% of GDP)
+LTU,g,0.16054050000000003,residual: closes the starting budget (floor 5% of GDP)
 LUX,income,High income,dashboard (World Bank income group)
 LUX,s,0.87,default: IMF (2015) efficiency gap by income group
 LUX,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-LUX,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+LUX,ig,0.041609999999999994,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 LUX,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 LUX,grants,0.0,default: assumption: grants % GDP
 LUX,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1614,11 +1614,11 @@ LUX,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 LUX,delta,0.07,default: common to both models
 LUX,delta_g,0.04,default: common to both models
 LUX,alpha,0.33,default: common to both models
-LUX,g,0.24356570000000002,residual: closes the starting budget (floor 5% of GDP)
+LUX,g,0.23695570000000002,residual: closes the starting budget (floor 5% of GDP)
 LVA,income,High income,dashboard (World Bank income group)
 LVA,s,0.87,default: IMF (2015) efficiency gap by income group
 LVA,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-LVA,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+LVA,ig,0.050140000000000004,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 LVA,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 LVA,grants,0.0,default: assumption: grants % GDP
 LVA,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1630,11 +1630,11 @@ LVA,rents,0.00065,dashboard: fossil rents (WDI oil + gas + coal)
 LVA,delta,0.07,default: common to both models
 LVA,delta_g,0.04,default: common to both models
 LVA,alpha,0.33,default: common to both models
-LVA,g,0.158925,residual: closes the starting budget (floor 5% of GDP)
+LVA,g,0.14378500000000002,residual: closes the starting budget (floor 5% of GDP)
 MAC,income,High income,dashboard (World Bank income group)
 MAC,s,0.87,default: IMF (2015) efficiency gap by income group
 MAC,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MAC,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MAC,ig,0.03272,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MAC,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 MAC,grants,0.0,default: assumption: grants % GDP
 MAC,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1646,11 +1646,11 @@ MAC,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 MAC,delta,0.07,default: common to both models
 MAC,delta_g,0.04,default: common to both models
 MAC,alpha,0.33,default: common to both models
-MAC,g,0.18322000000000002,residual: closes the starting budget (floor 5% of GDP)
+MAC,g,0.18550000000000003,residual: closes the starting budget (floor 5% of GDP)
 MAR,income,Lower middle income,dashboard (World Bank income group)
 MAR,s,0.69,"dashboard: PEFA PI-11 = 2, mapped as in InvestmentNeeds v1.1"
 MAR,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MAR,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MAR,ig,0.04402999999999999,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MAR,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 MAR,grants,0.01,default: assumption: grants % GDP
 MAR,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1662,11 +1662,11 @@ MAR,rents,9.9999999999999e-05,dashboard: fossil rents (WDI oil + gas + coal)
 MAR,delta,0.07,default: common to both models
 MAR,delta_g,0.04,default: common to both models
 MAR,alpha,0.33,default: common to both models
-MAR,g,0.12499071950000003,residual: closes the starting budget (floor 5% of GDP)
+MAR,g,0.13096071950000004,residual: closes the starting budget (floor 5% of GDP)
 MDA,income,Upper middle income,dashboard (World Bank income group)
 MDA,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 MDA,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MDA,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MDA,ig,0.014570000000000001,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MDA,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 MDA,grants,0.0,default: assumption: grants % GDP
 MDA,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1678,11 +1678,11 @@ MDA,rents,0.00012,dashboard: fossil rents (WDI oil + gas + coal)
 MDA,delta,0.07,default: common to both models
 MDA,delta_g,0.04,default: common to both models
 MDA,alpha,0.33,default: common to both models
-MDA,g,0.1348369,residual: closes the starting budget (floor 5% of GDP)
+MDA,g,0.1652669,residual: closes the starting budget (floor 5% of GDP)
 MDG,income,Low income,dashboard (World Bank income group)
 MDG,s,0.6,"dashboard: PEFA PI-11 = 1, mapped as in InvestmentNeeds v1.1"
 MDG,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MDG,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MDG,ig,0.02993,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MDG,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 MDG,grants,0.02,default: assumption: grants % GDP
 MDG,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1694,11 +1694,11 @@ MDG,rents,0.00084,dashboard: fossil rents (WDI oil + gas + coal)
 MDG,delta,0.07,default: common to both models
 MDG,delta_g,0.04,default: common to both models
 MDG,alpha,0.33,default: common to both models
-MDG,g,0.05,residual: closes the starting budget (floor 5% of GDP)
+MDG,g,0.06609825,residual: closes the starting budget (floor 5% of GDP)
 MDV,income,Upper middle income,dashboard (World Bank income group)
 MDV,s,0.69,"dashboard: PEFA PI-11 = 2, mapped as in InvestmentNeeds v1.1"
 MDV,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MDV,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MDV,ig,0.15,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MDV,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 MDV,grants,0.0,default: assumption: grants % GDP
 MDV,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1710,11 +1710,11 @@ MDV,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 MDV,delta,0.07,default: common to both models
 MDV,delta_g,0.04,default: common to both models
 MDV,alpha,0.33,default: common to both models
-MDV,g,0.07119400000000001,residual: closes the starting budget (floor 5% of GDP)
+MDV,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 MEX,income,Upper middle income,dashboard (World Bank income group)
 MEX,s,0.73,default: IMF (2015) efficiency gap by income group
 MEX,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MEX,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MEX,ig,0.02167,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MEX,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 MEX,grants,0.0,default: assumption: grants % GDP
 MEX,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1726,11 +1726,11 @@ MEX,rents,0.02173,dashboard: fossil rents (WDI oil + gas + coal)
 MEX,delta,0.07,default: common to both models
 MEX,delta_g,0.04,default: common to both models
 MEX,alpha,0.33,default: common to both models
-MEX,g,0.07361372799999999,residual: closes the starting budget (floor 5% of GDP)
+MEX,g,0.09694372799999999,residual: closes the starting budget (floor 5% of GDP)
 MKD,income,Upper middle income,dashboard (World Bank income group)
 MKD,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 MKD,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MKD,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MKD,ig,0.04096,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MKD,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 MKD,grants,0.0,default: assumption: grants % GDP
 MKD,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1742,11 +1742,11 @@ MKD,rents,8.999999999999999e-05,dashboard: fossil rents (WDI oil + gas + coal)
 MKD,delta,0.07,default: common to both models
 MKD,delta_g,0.04,default: common to both models
 MKD,alpha,0.33,default: common to both models
-MKD,g,0.10271011600000002,residual: closes the starting budget (floor 5% of GDP)
+MKD,g,0.10675011600000002,residual: closes the starting budget (floor 5% of GDP)
 MLI,income,Low income,dashboard (World Bank income group)
 MLI,s,0.735,"dashboard: PEFA PI-11 = 2.5, mapped as in InvestmentNeeds v1.1"
 MLI,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MLI,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MLI,ig,0.04165,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MLI,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 MLI,grants,0.02,default: assumption: grants % GDP
 MLI,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1758,11 +1758,11 @@ MLI,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 MLI,delta,0.07,default: common to both models
 MLI,delta_g,0.04,default: common to both models
 MLI,alpha,0.33,default: common to both models
-MLI,g,0.08042919999999999,residual: closes the starting budget (floor 5% of GDP)
+MLI,g,0.0987792,residual: closes the starting budget (floor 5% of GDP)
 MLT,income,High income,dashboard (World Bank income group)
 MLT,s,0.87,default: IMF (2015) efficiency gap by income group
 MLT,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MLT,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MLT,ig,0.02955,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MLT,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 MLT,grants,0.0,default: assumption: grants % GDP
 MLT,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1774,11 +1774,11 @@ MLT,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 MLT,delta,0.07,default: common to both models
 MLT,delta_g,0.04,default: common to both models
 MLT,alpha,0.33,default: common to both models
-MLT,g,0.1620274,residual: closes the starting budget (floor 5% of GDP)
+MLT,g,0.1674774,residual: closes the starting budget (floor 5% of GDP)
 MMR,income,Lower middle income,dashboard (World Bank income group)
 MMR,s,0.6,"dashboard: PEFA PI-11 = 1, mapped as in InvestmentNeeds v1.1"
 MMR,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MMR,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MMR,ig,0.06315,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MMR,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 MMR,grants,0.01,default: assumption: grants % GDP
 MMR,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1794,7 +1794,7 @@ MMR,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 MNE,income,Upper middle income,dashboard (World Bank income group)
 MNE,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 MNE,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MNE,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MNE,ig,0.06908,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MNE,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 MNE,grants,0.0,default: assumption: grants % GDP
 MNE,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1806,11 +1806,11 @@ MNE,rents,0.00145,dashboard: fossil rents (WDI oil + gas + coal)
 MNE,delta,0.07,default: common to both models
 MNE,delta_g,0.04,default: common to both models
 MNE,alpha,0.33,default: common to both models
-MNE,g,0.2020900740000001,residual: closes the starting budget (floor 5% of GDP)
+MNE,g,0.17801007400000007,residual: closes the starting budget (floor 5% of GDP)
 MNG,income,Upper middle income,dashboard (World Bank income group)
 MNG,s,0.78,"dashboard: PEFA PI-11 = 3, mapped as in InvestmentNeeds v1.1"
 MNG,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MNG,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MNG,ig,0.06752,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MNG,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 MNG,grants,0.0,default: assumption: grants % GDP
 MNG,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1822,11 +1822,11 @@ MNG,rents,0.0639,dashboard: fossil rents (WDI oil + gas + coal)
 MNG,delta,0.07,default: common to both models
 MNG,delta_g,0.04,default: common to both models
 MNG,alpha,0.33,default: common to both models
-MNG,g,0.1495112687,residual: closes the starting budget (floor 5% of GDP)
+MNG,g,0.12699126870000002,residual: closes the starting budget (floor 5% of GDP)
 MOZ,income,Low income,dashboard (World Bank income group)
 MOZ,s,0.6,"dashboard: PEFA PI-11 = 1, mapped as in InvestmentNeeds v1.1"
 MOZ,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MOZ,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MOZ,ig,0.059480000000000005,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MOZ,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 MOZ,grants,0.02,default: assumption: grants % GDP
 MOZ,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1838,11 +1838,11 @@ MOZ,rents,0.07426,dashboard: fossil rents (WDI oil + gas + coal)
 MOZ,delta,0.07,default: common to both models
 MOZ,delta_g,0.04,default: common to both models
 MOZ,alpha,0.33,default: common to both models
-MOZ,g,0.11103615000000001,residual: closes the starting budget (floor 5% of GDP)
+MOZ,g,0.11155615,residual: closes the starting budget (floor 5% of GDP)
 MRT,income,Lower middle income,dashboard (World Bank income group)
 MRT,s,0.69,"dashboard: PEFA PI-11 = 2, mapped as in InvestmentNeeds v1.1"
 MRT,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MRT,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MRT,ig,0.02165,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MRT,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 MRT,grants,0.01,default: assumption: grants % GDP
 MRT,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1854,11 +1854,11 @@ MRT,rents,0.0067,dashboard: fossil rents (WDI oil + gas + coal)
 MRT,delta,0.07,default: common to both models
 MRT,delta_g,0.04,default: common to both models
 MRT,alpha,0.33,default: common to both models
-MRT,g,0.07499439999999999,residual: closes the starting budget (floor 5% of GDP)
+MRT,g,0.10334439999999999,residual: closes the starting budget (floor 5% of GDP)
 MUS,income,Upper middle income,dashboard (World Bank income group)
 MUS,s,0.73,default: IMF (2015) efficiency gap by income group
 MUS,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MUS,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MUS,ig,0.03998,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MUS,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 MUS,grants,0.0,default: assumption: grants % GDP
 MUS,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1870,11 +1870,11 @@ MUS,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 MUS,delta,0.07,default: common to both models
 MUS,delta_g,0.04,default: common to both models
 MUS,alpha,0.33,default: common to both models
-MUS,g,0.1406087,residual: closes the starting budget (floor 5% of GDP)
+MUS,g,0.14562870000000003,residual: closes the starting budget (floor 5% of GDP)
 MWI,income,Low income,dashboard (World Bank income group)
 MWI,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 MWI,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MWI,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MWI,ig,0.03616,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MWI,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 MWI,grants,0.02,default: assumption: grants % GDP
 MWI,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1886,11 +1886,11 @@ MWI,rents,0.00017,dashboard: fossil rents (WDI oil + gas + coal)
 MWI,delta,0.07,default: common to both models
 MWI,delta_g,0.04,default: common to both models
 MWI,alpha,0.33,default: common to both models
-MWI,g,0.05,residual: closes the starting budget (floor 5% of GDP)
+MWI,g,0.06993879999999998,residual: closes the starting budget (floor 5% of GDP)
 MYS,income,Upper middle income,dashboard (World Bank income group)
 MYS,s,0.73,default: IMF (2015) efficiency gap by income group
 MYS,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-MYS,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+MYS,ig,0.062329999999999997,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 MYS,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 MYS,grants,0.0,default: assumption: grants % GDP
 MYS,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -1906,7 +1906,7 @@ MYS,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 NAM,income,Lower middle income,dashboard (World Bank income group)
 NAM,s,0.73,default: IMF (2015) efficiency gap by income group
 NAM,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-NAM,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+NAM,ig,0.047380000000000005,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 NAM,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 NAM,grants,0.01,default: assumption: grants % GDP
 NAM,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1918,11 +1918,11 @@ NAM,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 NAM,delta,0.07,default: common to both models
 NAM,delta_g,0.04,default: common to both models
 NAM,alpha,0.33,default: common to both models
-NAM,g,0.2646052,residual: closes the starting budget (floor 5% of GDP)
+NAM,g,0.26722519999999994,residual: closes the starting budget (floor 5% of GDP)
 NER,income,Low income,dashboard (World Bank income group)
 NER,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 NER,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-NER,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+NER,ig,0.08294,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 NER,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 NER,grants,0.02,default: assumption: grants % GDP
 NER,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1938,7 +1938,7 @@ NER,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 NGA,income,Lower middle income,dashboard (World Bank income group)
 NGA,s,0.6,"dashboard: PEFA PI-11 = 1, mapped as in InvestmentNeeds v1.1"
 NGA,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-NGA,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+NGA,ig,0.01183,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 NGA,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 NGA,grants,0.01,default: assumption: grants % GDP
 NGA,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1954,7 +1954,7 @@ NGA,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 NIC,income,Lower middle income,dashboard (World Bank income group)
 NIC,s,0.73,default: IMF (2015) efficiency gap by income group
 NIC,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-NIC,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+NIC,ig,0.04568,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 NIC,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 NIC,grants,0.01,default: assumption: grants % GDP
 NIC,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -1966,11 +1966,11 @@ NIC,rents,0.00021,dashboard: fossil rents (WDI oil + gas + coal)
 NIC,delta,0.07,default: common to both models
 NIC,delta_g,0.04,default: common to both models
 NIC,alpha,0.33,default: common to both models
-NIC,g,0.1364451245,residual: closes the starting budget (floor 5% of GDP)
+NIC,g,0.1407651245,residual: closes the starting budget (floor 5% of GDP)
 NLD,income,High income,dashboard (World Bank income group)
 NLD,s,0.87,default: IMF (2015) efficiency gap by income group
 NLD,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-NLD,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+NLD,ig,0.03392,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 NLD,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 NLD,grants,0.0,default: assumption: grants % GDP
 NLD,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1982,11 +1982,11 @@ NLD,rents,0.00336,dashboard: fossil rents (WDI oil + gas + coal)
 NLD,delta,0.07,default: common to both models
 NLD,delta_g,0.04,default: common to both models
 NLD,alpha,0.33,default: common to both models
-NLD,g,0.19702560000000002,residual: closes the starting budget (floor 5% of GDP)
+NLD,g,0.19810560000000002,residual: closes the starting budget (floor 5% of GDP)
 NOR,income,High income,dashboard (World Bank income group)
 NOR,s,0.87,default: IMF (2015) efficiency gap by income group
 NOR,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-NOR,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+NOR,ig,0.0602,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 NOR,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 NOR,grants,0.0,default: assumption: grants % GDP
 NOR,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -1998,11 +1998,11 @@ NOR,rents,0.10007999999999999,dashboard: fossil rents (WDI oil + gas + coal)
 NOR,delta,0.07,default: common to both models
 NOR,delta_g,0.04,default: common to both models
 NOR,alpha,0.33,default: common to both models
-NOR,g,0.24203460000000002,residual: closes the starting budget (floor 5% of GDP)
+NOR,g,0.2168346,residual: closes the starting budget (floor 5% of GDP)
 NPL,income,Lower middle income,dashboard (World Bank income group)
 NPL,s,0.735,"dashboard: PEFA PI-11 = 2.5, mapped as in InvestmentNeeds v1.1"
 NPL,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-NPL,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+NPL,ig,0.04152,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 NPL,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 NPL,grants,0.01,default: assumption: grants % GDP
 NPL,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2014,7 +2014,7 @@ NPL,rents,6e-05,dashboard: fossil rents (WDI oil + gas + coal)
 NPL,delta,0.07,default: common to both models
 NPL,delta_g,0.04,default: common to both models
 NPL,alpha,0.33,default: common to both models
-NPL,g,0.08447680000000002,residual: closes the starting budget (floor 5% of GDP)
+NPL,g,0.09295680000000002,residual: closes the starting budget (floor 5% of GDP)
 NRU,income,High income,dashboard (World Bank income group)
 NRU,s,0.6,"dashboard: PEFA PI-11 = 1, mapped as in InvestmentNeeds v1.1"
 NRU,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
@@ -2034,7 +2034,7 @@ NRU,g,0.1335541,residual: closes the starting budget (floor 5% of GDP)
 NZL,income,High income,dashboard (World Bank income group)
 NZL,s,0.87,default: IMF (2015) efficiency gap by income group
 NZL,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-NZL,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+NZL,ig,0.05225,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 NZL,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 NZL,grants,0.0,default: assumption: grants % GDP
 NZL,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -2046,11 +2046,11 @@ NZL,rents,0.004279999999999999,dashboard: fossil rents (WDI oil + gas + coal)
 NZL,delta,0.07,default: common to both models
 NZL,delta_g,0.04,default: common to both models
 NZL,alpha,0.33,default: common to both models
-NZL,g,0.25514250000000005,residual: closes the starting budget (floor 5% of GDP)
+NZL,g,0.23789250000000003,residual: closes the starting budget (floor 5% of GDP)
 OMN,income,High income,dashboard (World Bank income group)
 OMN,s,0.87,default: IMF (2015) efficiency gap by income group
 OMN,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-OMN,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+OMN,ig,0.15,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 OMN,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 OMN,grants,0.0,default: assumption: grants % GDP
 OMN,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -2066,7 +2066,7 @@ OMN,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 PAK,income,Lower middle income,dashboard (World Bank income group)
 PAK,s,0.73,default: IMF (2015) efficiency gap by income group
 PAK,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-PAK,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+PAK,ig,0.01737,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 PAK,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 PAK,grants,0.01,default: assumption: grants % GDP
 PAK,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2082,7 +2082,7 @@ PAK,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 PAN,income,High income,dashboard (World Bank income group)
 PAN,s,0.87,default: IMF (2015) efficiency gap by income group
 PAN,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-PAN,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+PAN,ig,0.047439999999999996,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 PAN,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 PAN,grants,0.0,default: assumption: grants % GDP
 PAN,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -2098,7 +2098,7 @@ PAN,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 PER,income,Upper middle income,dashboard (World Bank income group)
 PER,s,0.73,default: IMF (2015) efficiency gap by income group
 PER,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-PER,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+PER,ig,0.04077,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 PER,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 PER,grants,0.0,default: assumption: grants % GDP
 PER,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -2110,11 +2110,11 @@ PER,rents,0.00509,dashboard: fossil rents (WDI oil + gas + coal)
 PER,delta,0.07,default: common to both models
 PER,delta_g,0.04,default: common to both models
 PER,alpha,0.33,default: common to both models
-PER,g,0.06828690000000001,residual: closes the starting budget (floor 5% of GDP)
+PER,g,0.07251690000000001,residual: closes the starting budget (floor 5% of GDP)
 PHL,income,Upper middle income,dashboard (World Bank income group)
 PHL,s,0.78,"dashboard: PEFA PI-11 = 3, mapped as in InvestmentNeeds v1.1"
 PHL,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-PHL,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+PHL,ig,0.03741,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 PHL,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 PHL,grants,0.0,default: assumption: grants % GDP
 PHL,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -2126,7 +2126,7 @@ PHL,rents,0.0028399999999999996,dashboard: fossil rents (WDI oil + gas + coal)
 PHL,delta,0.07,default: common to both models
 PHL,delta_g,0.04,default: common to both models
 PHL,alpha,0.33,default: common to both models
-PHL,g,0.0715719,residual: closes the starting budget (floor 5% of GDP)
+PHL,g,0.0791619,residual: closes the starting budget (floor 5% of GDP)
 PLW,income,High income,dashboard (World Bank income group)
 PLW,s,0.735,"dashboard: PEFA PI-11 = 2.5, mapped as in InvestmentNeeds v1.1"
 PLW,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
@@ -2162,7 +2162,7 @@ PNG,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 POL,income,High income,dashboard (World Bank income group)
 POL,s,0.87,default: IMF (2015) efficiency gap by income group
 POL,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-POL,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+POL,ig,0.04309,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 POL,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 POL,grants,0.0,default: assumption: grants % GDP
 POL,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -2174,7 +2174,7 @@ POL,rents,0.00387,dashboard: fossil rents (WDI oil + gas + coal)
 POL,delta,0.07,default: common to both models
 POL,delta_g,0.04,default: common to both models
 POL,alpha,0.33,default: common to both models
-POL,g,0.1509233,residual: closes the starting budget (floor 5% of GDP)
+POL,g,0.14283330000000002,residual: closes the starting budget (floor 5% of GDP)
 PRI,income,High income,dashboard (World Bank income group)
 PRI,s,0.87,default: IMF (2015) efficiency gap by income group
 PRI,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
@@ -2194,7 +2194,7 @@ PRI,g,0.189939,residual: closes the starting budget (floor 5% of GDP)
 PRT,income,High income,dashboard (World Bank income group)
 PRT,s,0.87,default: IMF (2015) efficiency gap by income group
 PRT,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-PRT,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+PRT,ig,0.01844,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 PRT,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 PRT,grants,0.0,default: assumption: grants % GDP
 PRT,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -2206,11 +2206,11 @@ PRT,rents,0.00052,dashboard: fossil rents (WDI oil + gas + coal)
 PRT,delta,0.07,default: common to both models
 PRT,delta_g,0.04,default: common to both models
 PRT,alpha,0.33,default: common to both models
-PRT,g,0.16579690000000002,residual: closes the starting budget (floor 5% of GDP)
+PRT,g,0.18235690000000002,residual: closes the starting budget (floor 5% of GDP)
 PRY,income,Upper middle income,dashboard (World Bank income group)
 PRY,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 PRY,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-PRY,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+PRY,ig,0.03336,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 PRY,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 PRY,grants,0.0,default: assumption: grants % GDP
 PRY,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -2242,7 +2242,7 @@ QAT,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 ROU,income,High income,dashboard (World Bank income group)
 ROU,s,0.87,default: IMF (2015) efficiency gap by income group
 ROU,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-ROU,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+ROU,ig,0.034820000000000004,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 ROU,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 ROU,grants,0.0,default: assumption: grants % GDP
 ROU,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -2254,11 +2254,11 @@ ROU,rents,0.00933,dashboard: fossil rents (WDI oil + gas + coal)
 ROU,delta,0.07,default: common to both models
 ROU,delta_g,0.04,default: common to both models
 ROU,alpha,0.33,default: common to both models
-ROU,g,0.09153959999999998,residual: closes the starting budget (floor 5% of GDP)
+ROU,g,0.09171959999999998,residual: closes the starting budget (floor 5% of GDP)
 RUS,income,High income,dashboard (World Bank income group)
 RUS,s,0.87,default: IMF (2015) efficiency gap by income group
 RUS,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-RUS,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+RUS,ig,0.01935,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 RUS,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 RUS,grants,0.0,default: assumption: grants % GDP
 RUS,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -2270,11 +2270,11 @@ RUS,rents,0.16144000000000003,dashboard: fossil rents (WDI oil + gas + coal)
 RUS,delta,0.07,default: common to both models
 RUS,delta_g,0.04,default: common to both models
 RUS,alpha,0.33,default: common to both models
-RUS,g,0.1321026,residual: closes the starting budget (floor 5% of GDP)
+RUS,g,0.14775259999999998,residual: closes the starting budget (floor 5% of GDP)
 RWA,income,Low income,dashboard (World Bank income group)
 RWA,s,0.825,"dashboard: PEFA PI-11 = 3.5, mapped as in InvestmentNeeds v1.1"
 RWA,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-RWA,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+RWA,ig,0.07229000000000001,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 RWA,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 RWA,grants,0.02,default: assumption: grants % GDP
 RWA,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2286,11 +2286,11 @@ RWA,rents,0.0005099999999999999,dashboard: fossil rents (WDI oil + gas + coal)
 RWA,delta,0.07,default: common to both models
 RWA,delta_g,0.04,default: common to both models
 RWA,alpha,0.33,default: common to both models
-RWA,g,0.05586524999999999,residual: closes the starting budget (floor 5% of GDP)
+RWA,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 SAU,income,High income,dashboard (World Bank income group)
 SAU,s,0.87,default: IMF (2015) efficiency gap by income group
 SAU,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-SAU,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+SAU,ig,0.10241,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 SAU,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 SAU,grants,0.0,default: assumption: grants % GDP
 SAU,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -2306,7 +2306,7 @@ SAU,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 SDN,income,Low income,dashboard (World Bank income group)
 SDN,s,0.6,default: IMF (2015) efficiency gap by income group
 SDN,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-SDN,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+SDN,ig,0.0269,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 SDN,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 SDN,grants,0.02,default: assumption: grants % GDP
 SDN,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2322,7 +2322,7 @@ SDN,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 SEN,income,Lower middle income,dashboard (World Bank income group)
 SEN,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 SEN,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-SEN,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+SEN,ig,0.04118,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 SEN,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 SEN,grants,0.01,default: assumption: grants % GDP
 SEN,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2334,11 +2334,11 @@ SEN,rents,3e-05,dashboard: fossil rents (WDI oil + gas + coal)
 SEN,delta,0.07,default: common to both models
 SEN,delta_g,0.04,default: common to both models
 SEN,alpha,0.33,default: common to both models
-SEN,g,0.07739260349999999,residual: closes the starting budget (floor 5% of GDP)
+SEN,g,0.0862126035,residual: closes the starting budget (floor 5% of GDP)
 SGP,income,High income,dashboard (World Bank income group)
 SGP,s,0.87,default: IMF (2015) efficiency gap by income group
 SGP,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-SGP,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+SGP,ig,0.046529999999999995,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 SGP,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 SGP,grants,0.0,default: assumption: grants % GDP
 SGP,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -2370,7 +2370,7 @@ SLB,g,0.14315200000000003,residual: closes the starting budget (floor 5% of GDP)
 SLE,income,Low income,dashboard (World Bank income group)
 SLE,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 SLE,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-SLE,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+SLE,ig,0.01572,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 SLE,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 SLE,grants,0.02,default: assumption: grants % GDP
 SLE,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2386,7 +2386,7 @@ SLE,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 SLV,income,Upper middle income,dashboard (World Bank income group)
 SLV,s,0.735,"dashboard: PEFA PI-11 = 2.5, mapped as in InvestmentNeeds v1.1"
 SLV,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-SLV,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+SLV,ig,0.02537,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 SLV,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 SLV,grants,0.0,default: assumption: grants % GDP
 SLV,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -2398,7 +2398,7 @@ SLV,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 SLV,delta,0.07,default: common to both models
 SLV,delta_g,0.04,default: common to both models
 SLV,alpha,0.33,default: common to both models
-SLV,g,0.1001403981,residual: closes the starting budget (floor 5% of GDP)
+SLV,g,0.1197703981,residual: closes the starting budget (floor 5% of GDP)
 SOM,income,Low income,dashboard (World Bank income group)
 SOM,s,0.6,default: IMF (2015) efficiency gap by income group
 SOM,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
@@ -2418,7 +2418,7 @@ SOM,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 SRB,income,Upper middle income,dashboard (World Bank income group)
 SRB,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 SRB,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-SRB,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+SRB,ig,0.03915,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 SRB,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 SRB,grants,0.0,default: assumption: grants % GDP
 SRB,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -2430,11 +2430,11 @@ SRB,rents,0.00756,dashboard: fossil rents (WDI oil + gas + coal)
 SRB,delta,0.07,default: common to both models
 SRB,delta_g,0.04,default: common to both models
 SRB,alpha,0.33,default: common to both models
-SRB,g,0.15675080000000005,residual: closes the starting budget (floor 5% of GDP)
+SRB,g,0.16260080000000005,residual: closes the starting budget (floor 5% of GDP)
 STP,income,Lower middle income,dashboard (World Bank income group)
 STP,s,0.6,"dashboard: PEFA PI-11 = 1, mapped as in InvestmentNeeds v1.1"
 STP,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-STP,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+STP,ig,0.03295,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 STP,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 STP,grants,0.01,default: assumption: grants % GDP
 STP,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2450,7 +2450,7 @@ STP,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 SUR,income,Upper middle income,dashboard (World Bank income group)
 SUR,s,0.73,default: IMF (2015) efficiency gap by income group
 SUR,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-SUR,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+SUR,ig,0.07586,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 SUR,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 SUR,grants,0.0,default: assumption: grants % GDP
 SUR,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -2462,11 +2462,11 @@ SUR,rents,0.07944,dashboard: fossil rents (WDI oil + gas + coal)
 SUR,delta,0.07,default: common to both models
 SUR,delta_g,0.04,default: common to both models
 SUR,alpha,0.33,default: common to both models
-SUR,g,0.0979786,residual: closes the starting budget (floor 5% of GDP)
+SUR,g,0.0671186,residual: closes the starting budget (floor 5% of GDP)
 SVK,income,High income,dashboard (World Bank income group)
 SVK,s,0.87,default: IMF (2015) efficiency gap by income group
 SVK,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-SVK,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+SVK,ig,0.0363,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 SVK,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 SVK,grants,0.0,default: assumption: grants % GDP
 SVK,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -2478,11 +2478,11 @@ SVK,rents,0.00016,dashboard: fossil rents (WDI oil + gas + coal)
 SVK,delta,0.07,default: common to both models
 SVK,delta_g,0.04,default: common to both models
 SVK,alpha,0.33,default: common to both models
-SVK,g,0.12278970000000002,residual: closes the starting budget (floor 5% of GDP)
+SVK,g,0.12148970000000002,residual: closes the starting budget (floor 5% of GDP)
 SVN,income,High income,dashboard (World Bank income group)
 SVN,s,0.87,default: IMF (2015) efficiency gap by income group
 SVN,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-SVN,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+SVN,ig,0.038079999999999996,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 SVN,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 SVN,grants,0.0,default: assumption: grants % GDP
 SVN,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -2494,11 +2494,11 @@ SVN,rents,0.00027,dashboard: fossil rents (WDI oil + gas + coal)
 SVN,delta,0.07,default: common to both models
 SVN,delta_g,0.04,default: common to both models
 SVN,alpha,0.33,default: common to both models
-SVN,g,0.13979820000000004,residual: closes the starting budget (floor 5% of GDP)
+SVN,g,0.13671820000000004,residual: closes the starting budget (floor 5% of GDP)
 SWE,income,High income,dashboard (World Bank income group)
 SWE,s,0.87,default: IMF (2015) efficiency gap by income group
 SWE,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-SWE,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+SWE,ig,0.0451,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 SWE,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 SWE,grants,0.0,default: assumption: grants % GDP
 SWE,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -2510,11 +2510,11 @@ SWE,rents,0.00027,dashboard: fossil rents (WDI oil + gas + coal)
 SWE,delta,0.07,default: common to both models
 SWE,delta_g,0.04,default: common to both models
 SWE,alpha,0.33,default: common to both models
-SWE,g,0.3220639999999999,residual: closes the starting budget (floor 5% of GDP)
+SWE,g,0.3119639999999999,residual: closes the starting budget (floor 5% of GDP)
 SWZ,income,Lower middle income,dashboard (World Bank income group)
 SWZ,s,0.73,default: IMF (2015) efficiency gap by income group
 SWZ,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-SWZ,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+SWZ,ig,0.03138,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 SWZ,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 SWZ,grants,0.01,default: assumption: grants % GDP
 SWZ,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2526,11 +2526,11 @@ SWZ,rents,0.0013700000000000001,dashboard: fossil rents (WDI oil + gas + coal)
 SWZ,delta,0.07,default: common to both models
 SWZ,delta_g,0.04,default: common to both models
 SWZ,alpha,0.33,default: common to both models
-SWZ,g,0.21460400000000004,residual: closes the starting budget (floor 5% of GDP)
+SWZ,g,0.23322400000000001,residual: closes the starting budget (floor 5% of GDP)
 SYC,income,High income,dashboard (World Bank income group)
 SYC,s,0.6,"dashboard: PEFA PI-11 = 1, mapped as in InvestmentNeeds v1.1"
 SYC,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-SYC,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+SYC,ig,0.04915,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 SYC,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 SYC,grants,0.0,default: assumption: grants % GDP
 SYC,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -2542,11 +2542,11 @@ SYC,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 SYC,delta,0.07,default: common to both models
 SYC,delta_g,0.04,default: common to both models
 SYC,alpha,0.33,default: common to both models
-SYC,g,0.20255740000000005,residual: closes the starting budget (floor 5% of GDP)
+SYC,g,0.18840740000000006,residual: closes the starting budget (floor 5% of GDP)
 SYR,income,Low income,dashboard (World Bank income group)
 SYR,s,0.6,default: IMF (2015) efficiency gap by income group
 SYR,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-SYR,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+SYR,ig,0.01872,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 SYR,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 SYR,grants,0.02,default: assumption: grants % GDP
 SYR,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2558,11 +2558,11 @@ SYR,rents,0.06344999999999999,dashboard: fossil rents (WDI oil + gas + coal)
 SYR,delta,0.07,default: common to both models
 SYR,delta_g,0.04,default: common to both models
 SYR,alpha,0.33,default: common to both models
-SYR,g,0.05,residual: closes the starting budget (floor 5% of GDP)
+SYR,g,0.08837,residual: closes the starting budget (floor 5% of GDP)
 TCD,income,Low income,dashboard (World Bank income group)
 TCD,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 TCD,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-TCD,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+TCD,ig,0.020030000000000003,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 TCD,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 TCD,grants,0.02,default: assumption: grants % GDP
 TCD,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2578,7 +2578,7 @@ TCD,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 TGO,income,Lower middle income,dashboard (World Bank income group)
 TGO,s,0.69,"dashboard: PEFA PI-11 = 2, mapped as in InvestmentNeeds v1.1"
 TGO,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-TGO,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+TGO,ig,0.03191,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 TGO,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 TGO,grants,0.01,default: assumption: grants % GDP
 TGO,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2590,11 +2590,11 @@ TGO,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 TGO,delta,0.07,default: common to both models
 TGO,delta_g,0.04,default: common to both models
 TGO,alpha,0.33,default: common to both models
-TGO,g,0.0573181445,residual: closes the starting budget (floor 5% of GDP)
+TGO,g,0.07540814450000001,residual: closes the starting budget (floor 5% of GDP)
 THA,income,Upper middle income,dashboard (World Bank income group)
 THA,s,0.73,default: IMF (2015) efficiency gap by income group
 THA,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-THA,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+THA,ig,0.049850000000000005,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 THA,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 THA,grants,0.0,default: assumption: grants % GDP
 THA,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -2606,11 +2606,11 @@ THA,rents,0.01456,dashboard: fossil rents (WDI oil + gas + coal)
 THA,delta,0.07,default: common to both models
 THA,delta_g,0.04,default: common to both models
 THA,alpha,0.33,default: common to both models
-THA,g,0.0755961,residual: closes the starting budget (floor 5% of GDP)
+THA,g,0.07074609999999999,residual: closes the starting budget (floor 5% of GDP)
 TJK,income,Lower middle income,dashboard (World Bank income group)
 TJK,s,0.735,"dashboard: PEFA PI-11 = 2.5, mapped as in InvestmentNeeds v1.1"
 TJK,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-TJK,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+TJK,ig,0.07258,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 TJK,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 TJK,grants,0.01,default: assumption: grants % GDP
 TJK,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2622,7 +2622,7 @@ TJK,rents,0.009439999999999999,dashboard: fossil rents (WDI oil + gas + coal)
 TJK,delta,0.07,default: common to both models
 TJK,delta_g,0.04,default: common to both models
 TJK,alpha,0.33,default: common to both models
-TJK,g,0.10064627500000001,residual: closes the starting budget (floor 5% of GDP)
+TJK,g,0.078066275,residual: closes the starting budget (floor 5% of GDP)
 TKM,income,Upper middle income,dashboard (World Bank income group)
 TKM,s,0.73,default: IMF (2015) efficiency gap by income group
 TKM,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
@@ -2690,7 +2690,7 @@ TTO,g,0.13893420000000004,residual: closes the starting budget (floor 5% of GDP)
 TUN,income,Lower middle income,dashboard (World Bank income group)
 TUN,s,0.69,"dashboard: PEFA PI-11 = 2, mapped as in InvestmentNeeds v1.1"
 TUN,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-TUN,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+TUN,ig,0.03323,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 TUN,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 TUN,grants,0.01,default: assumption: grants % GDP
 TUN,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2702,11 +2702,11 @@ TUN,rents,0.0204,dashboard: fossil rents (WDI oil + gas + coal)
 TUN,delta,0.07,default: common to both models
 TUN,delta_g,0.04,default: common to both models
 TUN,alpha,0.33,default: common to both models
-TUN,g,0.166882,residual: closes the starting budget (floor 5% of GDP)
+TUN,g,0.18365199999999998,residual: closes the starting budget (floor 5% of GDP)
 TUR,income,Upper middle income,dashboard (World Bank income group)
 TUR,s,0.73,default: IMF (2015) efficiency gap by income group
 TUR,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-TUR,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+TUR,ig,0.03329,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 TUR,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 TUR,grants,0.0,default: assumption: grants % GDP
 TUR,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -2718,11 +2718,11 @@ TUR,rents,0.00192,dashboard: fossil rents (WDI oil + gas + coal)
 TUR,delta,0.07,default: common to both models
 TUR,delta_g,0.04,default: common to both models
 TUR,alpha,0.33,default: common to both models
-TUR,g,0.09349260000000001,residual: closes the starting budget (floor 5% of GDP)
+TUR,g,0.1052026,residual: closes the starting budget (floor 5% of GDP)
 TZA,income,Lower middle income,dashboard (World Bank income group)
 TZA,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 TZA,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-TZA,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+TZA,ig,0.06875,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 TZA,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 TZA,grants,0.01,default: assumption: grants % GDP
 TZA,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2738,7 +2738,7 @@ TZA,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 UGA,income,Low income,dashboard (World Bank income group)
 UGA,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 UGA,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-UGA,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+UGA,ig,0.043789999999999996,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 UGA,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 UGA,grants,0.02,default: assumption: grants % GDP
 UGA,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2750,11 +2750,11 @@ UGA,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 UGA,delta,0.07,default: common to both models
 UGA,delta_g,0.04,default: common to both models
 UGA,alpha,0.33,default: common to both models
-UGA,g,0.05,residual: closes the starting budget (floor 5% of GDP)
+UGA,g,0.06023761279999998,residual: closes the starting budget (floor 5% of GDP)
 UKR,income,Upper middle income,dashboard (World Bank income group)
 UKR,s,0.735,"dashboard: PEFA PI-11 = 2.5, mapped as in InvestmentNeeds v1.1"
 UKR,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-UKR,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+UKR,ig,0.025929999999999998,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 UKR,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 UKR,grants,0.0,default: assumption: grants % GDP
 UKR,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -2766,11 +2766,11 @@ UKR,rents,0.01981,dashboard: fossil rents (WDI oil + gas + coal)
 UKR,delta,0.07,default: common to both models
 UKR,delta_g,0.04,default: common to both models
 UKR,alpha,0.33,default: common to both models
-UKR,g,0.18253690000000003,residual: closes the starting budget (floor 5% of GDP)
+UKR,g,0.2016069,residual: closes the starting budget (floor 5% of GDP)
 URY,income,High income,dashboard (World Bank income group)
 URY,s,0.87,default: IMF (2015) efficiency gap by income group
 URY,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-URY,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+URY,ig,0.03102,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 URY,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 URY,grants,0.0,default: assumption: grants % GDP
 URY,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -2782,11 +2782,11 @@ URY,rents,0.0001,dashboard: fossil rents (WDI oil + gas + coal)
 URY,delta,0.07,default: common to both models
 URY,delta_g,0.04,default: common to both models
 URY,alpha,0.33,default: common to both models
-URY,g,0.1063541,residual: closes the starting budget (floor 5% of GDP)
+URY,g,0.1103341,residual: closes the starting budget (floor 5% of GDP)
 USA,income,High income,dashboard (World Bank income group)
 USA,s,0.87,default: IMF (2015) efficiency gap by income group
 USA,Rg,0.1,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-USA,ig,0.035,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+USA,ig,0.03469,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 USA,constrained,0.25,default: assumption: credit-constrained share (Findex orders of magnitude)
 USA,grants,0.0,default: assumption: grants % GDP
 USA,nfd,0.0,default: assumption: net foreign debt % GDP
@@ -2798,11 +2798,11 @@ USA,rents,0.011399999999999999,dashboard: fossil rents (WDI oil + gas + coal)
 USA,delta,0.07,default: common to both models
 USA,delta_g,0.04,default: common to both models
 USA,alpha,0.33,default: common to both models
-USA,g,0.10310899999999999,residual: closes the starting budget (floor 5% of GDP)
+USA,g,0.103419,residual: closes the starting budget (floor 5% of GDP)
 UZB,income,Lower middle income,dashboard (World Bank income group)
 UZB,s,0.78,"dashboard: PEFA PI-11 = 3, mapped as in InvestmentNeeds v1.1"
 UZB,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-UZB,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+UZB,ig,0.04948,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 UZB,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 UZB,grants,0.01,default: assumption: grants % GDP
 UZB,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2814,11 +2814,11 @@ UZB,rents,0.11962000000000002,dashboard: fossil rents (WDI oil + gas + coal)
 UZB,delta,0.07,default: common to both models
 UZB,delta_g,0.04,default: common to both models
 UZB,alpha,0.33,default: common to both models
-UZB,g,0.061264680800000026,residual: closes the starting budget (floor 5% of GDP)
+UZB,g,0.06178468080000003,residual: closes the starting budget (floor 5% of GDP)
 VCT,income,Upper middle income,dashboard (World Bank income group)
 VCT,s,0.73,default: IMF (2015) efficiency gap by income group
 VCT,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-VCT,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+VCT,ig,0.07740999999999999,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 VCT,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 VCT,grants,0.0,default: assumption: grants % GDP
 VCT,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -2830,11 +2830,11 @@ VCT,rents,0.0,dashboard: fossil rents (WDI oil + gas + coal)
 VCT,delta,0.07,default: common to both models
 VCT,delta_g,0.04,default: common to both models
 VCT,alpha,0.33,default: common to both models
-VCT,g,0.13980859999999998,residual: closes the starting budget (floor 5% of GDP)
+VCT,g,0.10739859999999997,residual: closes the starting budget (floor 5% of GDP)
 VEN,income,Lower middle income,dashboard (World Bank income group)
 VEN,s,0.73,default: IMF (2015) efficiency gap by income group
 VEN,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-VEN,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+VEN,ig,0.13349,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 VEN,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 VEN,grants,0.01,default: assumption: grants % GDP
 VEN,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2850,7 +2850,7 @@ VEN,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 VNM,income,Upper middle income,dashboard (World Bank income group)
 VNM,s,0.645,"dashboard: PEFA PI-11 = 1.5, mapped as in InvestmentNeeds v1.1"
 VNM,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-VNM,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+VNM,ig,0.05771,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 VNM,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 VNM,grants,0.0,default: assumption: grants % GDP
 VNM,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -2862,7 +2862,7 @@ VNM,rents,0.01373,dashboard: fossil rents (WDI oil + gas + coal)
 VNM,delta,0.07,default: common to both models
 VNM,delta_g,0.04,default: common to both models
 VNM,alpha,0.33,default: common to both models
-VNM,g,0.055231100000000005,residual: closes the starting budget (floor 5% of GDP)
+VNM,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 VUT,income,Lower middle income,dashboard (World Bank income group)
 VUT,s,0.735,"dashboard: PEFA PI-11 = 2.5, mapped as in InvestmentNeeds v1.1"
 VUT,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
@@ -2914,7 +2914,7 @@ XKX,g,0.12962520000000002,residual: closes the starting budget (floor 5% of GDP)
 YEM,income,Low income,dashboard (World Bank income group)
 YEM,s,0.6,default: IMF (2015) efficiency gap by income group
 YEM,Rg,0.2,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-YEM,ig,0.06,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+YEM,ig,0.03265,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 YEM,constrained,0.6,default: assumption: credit-constrained share (Findex orders of magnitude)
 YEM,grants,0.02,default: assumption: grants % GDP
 YEM,nfd,0.3,default: assumption: net foreign debt % GDP
@@ -2930,7 +2930,7 @@ YEM,g,0.05,residual: closes the starting budget (floor 5% of GDP)
 ZAF,income,Upper middle income,dashboard (World Bank income group)
 ZAF,s,0.73,default: IMF (2015) efficiency gap by income group
 ZAF,Rg,0.15,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-ZAF,ig,0.045,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+ZAF,ig,0.02359,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 ZAF,constrained,0.35,default: assumption: credit-constrained share (Findex orders of magnitude)
 ZAF,grants,0.0,default: assumption: grants % GDP
 ZAF,nfd,0.2,default: assumption: net foreign debt % GDP
@@ -2942,11 +2942,11 @@ ZAF,rents,0.02866,dashboard: fossil rents (WDI oil + gas + coal)
 ZAF,delta,0.07,default: common to both models
 ZAF,delta_g,0.04,default: common to both models
 ZAF,alpha,0.33,default: common to both models
-ZAF,g,0.16454110000000002,residual: closes the starting budget (floor 5% of GDP)
+ZAF,g,0.1859511,residual: closes the starting budget (floor 5% of GDP)
 ZMB,income,Lower middle income,dashboard (World Bank income group)
 ZMB,s,0.735,"dashboard: PEFA PI-11 = 2.5, mapped as in InvestmentNeeds v1.1"
 ZMB,Rg,0.17,default: assumption: return on public capital higher where capital is scarce (IMF literature 10-25%)
-ZMB,ig,0.05,default: assumption: public investment % GDP by income group (IMF ICSD orders of magnitude)
+ZMB,ig,0.07113,"dashboard: public investment (IMF ICSD, general govt GFCF)"
 ZMB,constrained,0.5,default: assumption: credit-constrained share (Findex orders of magnitude)
 ZMB,grants,0.01,default: assumption: grants % GDP
 ZMB,nfd,0.3,default: assumption: net foreign debt % GDP

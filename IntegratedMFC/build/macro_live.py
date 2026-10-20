@@ -71,25 +71,38 @@ def add(path, panel_long):
              ("pyg", "gdp_dev_pct", "Integrated run: GDP vs today, programme (%)"),
              ("pygb", "gdp_dev_base_pct", "Integrated run: GDP vs today, baseline (%)"),
              ("pyd", "debt_pct_gdp", "Integrated run: debt, programme (% GDP)"),
-             ("pydb", "debt_base_pct_gdp", "Integrated run: debt, baseline (% GDP)")]
-    cols = (["iso3", "country", "income", "model", "model_reason", "status"] + dcodes + acodes +
-            [f"{p}_{y}" for p, *_ in paths for y in YEARS])
+             ("pydb", "debt_base_pct_gdp", "Integrated run: debt, baseline (% GDP)"),
+             ("alt", "alt_gdp_dev_pct", "Other model: GDP vs today, programme (%)"),
+             ("altd", "alt_debt_pct_gdp", "Other model: debt, programme (% GDP)")]
+    DSFK = ["PV public debt / GDP", "PV ext debt / GDP", "PV ext debt / exports",
+            "Ext debt service / exports", "Ext debt service / revenue"]
+    DSFY = list(range(2025, 2035))
+    cols = (["iso3", "country", "income", "model", "model_reason", "status", "alt_model",
+             "dsf_capacity", "dsf_ci", "dsf_rating_base", "dsf_rating_programme"] + dcodes + acodes +
+            [f"{p}_{y}" for p, *_ in paths for y in YEARS] +
+            [f"dsf{x}{j}_{y}" for j in range(len(DSFK)) for x in "bpt" for y in DSFY])
     for j, c in enumerate(cols, 1):
         x = wi.cell(1, j, c); x.font = font(8, True, "FFFFFF"); x.fill = HDR
     lv = long.set_index(["iso3", "indicator", "year"]).value
     for i, row in enumerate(wide.itertuples(index=False), 2):
         rd = row._asdict(); iso = rd["iso3"]
-        vals = [iso, rd["country"], rd["income"], ir.model.get(iso), ir.model_reason.get(iso), ir.status.get(iso)]
+        vals = [iso, rd["country"], rd["income"], ir.model.get(iso), ir.model_reason.get(iso), ir.status.get(iso),
+                ir.alt_model.get(iso)] + [ir[c].get(iso) if c in ir else None for c in
+                                          ("dsf_capacity", "dsf_ci", "dsf_rating_base", "dsf_rating_programme")]
         vals += [rd[c] for c in dcodes + acodes]
         for p, src, _ in paths:
             for y in YEARS:
                 if p in ("cap", "spend", "rev"):                    # as DIGNAD-R: missing year = 0
                     v = 0.0 if y == Y0 else float(lv.get((iso, src, y), 0.0))
                 elif y == Y0:                                       # integrated run starts from 2024
-                    v = 0.0 if p in ("pyg", "pygb") else ir.debt_2024_pct_gdp.get(iso)
+                    v = 0.0 if p in ("pyg", "pygb", "alt") else ir.debt_2024_pct_gdp.get(iso)
                 else:
                     v = pa[str(y)].get((iso, src)) if (iso, src) in pa.index else None
                 vals.append(v)
+        for j_, k_ in enumerate(DSFK):
+            for x, ser in zip("bpt", ("dsf_base", "dsf_prog", "dsf_thr")):
+                key = (iso, f"{ser}|{k_}")
+                vals += [pa[str(y)].get(key) if key in pa.index else None for y in DSFY]
         for j, v in enumerate(vals, 1):
             v = None if (isinstance(v, float) and np.isnan(v)) else v
             wi.cell(i, j, v).font = font(8)
@@ -172,10 +185,12 @@ def add(path, panel_long):
     BASE = ["year", "t", "dis", "tfp", "rents", "cap", "spend", "rev"]
     SV = ["KG", "K", "Y", "Kstar", "GDP", "P", "grants", "revenue", "tr", "prim", "interest", "D", "Dk", "ratio", "rc", "chtm"]
     DEV = ["gdp_dev_prog", "gdp_vs_2024_P", "gdp_vs_2024_B", "debt_diff_pp", "chtm_dev_prog", "tr_diff"]
-    CH = ["ch_gdp_P", "ch_gdp_B", "ch_gdp_py", "ch_gdp_pyb", "ch_debt_P", "ch_debt_B", "ch_debt_py", "ch_debt_pyb",
+    CH = ["ch_gdp_P", "ch_gdp_B", "ch_gdp_py", "ch_gdp_pyb", "ch_gdp_alt", "ch_debt_P", "ch_debt_B", "ch_debt_py",
+          "ch_debt_pyb", "ch_debt_alt",
           "ch_tr_P", "ch_tr_B", "ch_prog", "ch_rev", "ch_rents"]
     CHL = {"ch_gdp_P": "Simple model, programme", "ch_gdp_B": "Simple model, baseline",
            "ch_gdp_py": "Integrated run, programme", "ch_gdp_pyb": "Integrated run, baseline",
+           "ch_gdp_alt": "Other model, programme", "ch_debt_alt": "Other model, programme",
            "ch_debt_P": "Simple model, programme", "ch_debt_B": "Simple model, baseline",
            "ch_debt_py": "Integrated run, programme", "ch_debt_pyb": "Integrated run, baseline",
            "ch_tr_P": "Transfers, programme", "ch_tr_B": "Transfers, baseline",
@@ -236,6 +251,8 @@ def add(path, panel_long):
             "ch_gdp_P": f"={m('P_GDP')}/{m('P_GDP', R0)}*100", "ch_gdp_B": f"={m('B_GDP')}/{m('B_GDP', R0)}*100",
             "ch_gdp_py": f'=IFERROR(IF({py("pyg", rr)}="",NA(),100+{py("pyg", rr)}),NA())',
             "ch_gdp_pyb": f'=IFERROR(IF({py("pygb", rr)}="",NA(),100+{py("pygb", rr)}),NA())',
+            "ch_gdp_alt": f'=IFERROR(IF({py("alt", rr)}="",NA(),100+{py("alt", rr)}),NA())',
+            "ch_debt_alt": f'=IFERROR(IF({py("altd", rr)}="",NA(),{py("altd", rr)}),NA())',
             "ch_debt_P": f"={m('P_ratio')}*100", "ch_debt_B": f"={m('B_ratio')}*100",
             "ch_debt_py": f'=IFERROR(IF({py("pyd", rr)}="",NA(),{py("pyd", rr)}),NA())',
             "ch_debt_pyb": f'=IFERROR(IF({py("pydb", rr)}="",NA(),{py("pydb", rr)}),NA())',
@@ -267,7 +284,8 @@ def add(path, panel_long):
     wv["C5"] = "=Dashboard!$C$4"; wv["C5"].font = font(12, True, ACC); wv.merge_cells("C5:G5")
     wv["B6"] = ('=IF(ISNA(m_row),"Not covered: no NMIM / integrated-run data for this country.",'
                 '"Integrated run used "&INDEX(' + rng("model") + ',m_row)&" ("&INDEX(' + rng("model_reason") +
-                ',m_row)&"); status: "&INDEX(' + rng("status") + ',m_row)&".")')
+                ',m_row)&"); status: "&INDEX(' + rng("status") + ',m_row)&". Cross-check: "&INDEX(' + rng("alt_model") +
+                ',m_row)&".")')
     wv["B6"].font = font(9, True, MUT); wv.merge_cells("B6:G6")
     r = 8
     for c, txt in zip("BCDFG", ["Results", "Integrated run", "", "Simple model (live)", ""]):
@@ -291,6 +309,8 @@ def add(path, panel_long):
          lambda yr: f"={at('B_ratio', yr)}*100", "0.0"),
         ("Debt added by the programme (pp of GDP)", lambda yr: f'=IFERROR({pyv("pyd", yr)}-{pyv("pydb", yr)},"")',
          lambda yr: f"={at('debt_diff_pp', yr)}", "0.0"),
+        ("Cross-check, other model family: GDP vs today's path (%)", lambda yr: f'=IFERROR({pyv("alt", yr)}+0,"")', None, "0.00"),
+        ("Cross-check, other model family: public debt (% GDP)", lambda yr: f'=IFERROR({pyv("altd", yr)}+0,"")', None, "0.0"),
         ("Transfers, programme vs baseline: the fiscal rule (pp of GDP)", None, lambda yr: f"={at('tr_diff', yr)}", "0.00"),
         ("Hand-to-mouth consumption, programme vs baseline (%)", None, lambda yr: f"={at('chtm_dev_prog', yr)}", "0.00"),
         ("Fossil rents, resource block (% GDP)", None, lambda yr: f"={at('rents', yr)}*100", "0.0"),
@@ -301,7 +321,7 @@ def add(path, panel_long):
             x = wv[f"{cc}{r}"]; x.value = fpy(yr) if fpy else "-"; x.number_format = fmt
             x.font = font(10, True); x.border = BOX; x.alignment = Alignment(horizontal="center")
         for cc, yr in (("F", 2030), ("G", 2050)):
-            x = wv[f"{cc}{r}"]; x.value = f'=IF(ISNA(m_row),"",{fsm(yr)[1:]})'; x.number_format = fmt
+            x = wv[f"{cc}{r}"]; x.value = f'=IF(ISNA(m_row),"",{fsm(yr)[1:]})' if fsm else "-"; x.number_format = fmt
             x.font = font(10, True); x.border = BOX; x.alignment = Alignment(horizontal="center")
         r += 1
     r += 1
@@ -340,12 +360,75 @@ def add(path, panel_long):
         ch.set_categories(Reference(wm, min_col=2, max_col=2, min_row=R0, max_row=RL))
         ch.x_axis.delete = False; ch.y_axis.delete = False
         wv.add_chart(ch, anchor)
-    chart("GDP (2024 = 100)", ["ch_gdp_P", "ch_gdp_B", "ch_gdp_py", "ch_gdp_pyb"], "I2", "index")
-    chart("Public debt, % of GDP", ["ch_debt_P", "ch_debt_B", "ch_debt_py", "ch_debt_pyb"], "I18", "% GDP")
+    chart("GDP (2024 = 100)", ["ch_gdp_P", "ch_gdp_B", "ch_gdp_py", "ch_gdp_pyb", "ch_gdp_alt"], "I2", "index")
+    chart("Public debt, % of GDP", ["ch_debt_P", "ch_debt_B", "ch_debt_py", "ch_debt_pyb", "ch_debt_alt"], "I18", "% GDP")
     chart("Simple model: transfers under the fiscal rule, % of GDP", ["ch_tr_P", "ch_tr_B"], "I34", "% GDP")
     chart("Simple model: programme, pricing revenue and rents, % of GDP", ["ch_prog", "ch_rev", "ch_rents"], "I50", "% GDP")
 
-    extra = [wb[n] for n in ("Macro_assumptions", "Macro_model", "Macro_inputs")]
+    # ---- DSA: LIC-DSF-lite for the selected country --------------------------------------
+    wd = wb.create_sheet("DSA")
+    wd.sheet_view.showGridLines = False
+    for col, w in zip("ABCDEFGHI", [2, 34, 11, 11, 11, 11, 11, 12, 12]):
+        wd.column_dimensions[col].width = w
+    wd["B2"] = "Debt sustainability: LIC-DSF-lite"; wd["B2"].font = font(16, True)
+    wd["B3"] = ("The integrated run's simplified World Bank-IMF LIC-DSF, for low and lower-middle income countries: five "
+                "indicators against the thresholds for the country's debt-carrying capacity, 2025-2034, before and with the "
+                "programme. Capacity comes from the Composite Indicator where the dashboard has a CPIA score (IDA countries), "
+                "medium otherwise. Mechanical rating; illustrative, not a DSA. Coefficients and thresholds to check against "
+                "the current Guidance Note.")
+    wd["B3"].font = font(9, italic=True, color=MUT); wd["B3"].alignment = Alignment(wrap_text=True, vertical="top")
+    wd.merge_cells("B3:I3"); wd.row_dimensions[3].height = 54
+    wd["B5"] = "Country (pick it on the Dashboard sheet)"; wd["B5"].font = font(10, True)
+    wd["C5"] = "=Dashboard!$C$4"; wd["C5"].font = font(12, True, ACC); wd.merge_cells("C5:I5")
+    gi = lambda c: f"INDEX({rng(c)},m_row)"
+    wd["B6"] = (f'=IF(ISNA(m_row),"Not covered.",IF({gi("dsf_rating_base")}="","Not assessed: LIC-DSF-lite covers low '
+                f'and lower-middle income countries with a macro result.","Capacity: "&{gi("dsf_capacity")}&IF({gi("dsf_ci")}="",'
+                f'" (no CPIA: medium assumed)"," (CI "&TEXT({gi("dsf_ci")},"0.00")&")")&".   Risk rating: "&{gi("dsf_rating_base")}'
+                f'&" before the programme, "&{gi("dsf_rating_programme")}&" with it."))')
+    wd["B6"].font = font(10, True); wd.merge_cells("B6:I6")
+    r = 8
+    for c, t_ in zip("BCDEFGHI", ["Indicator", "Threshold", "Base 2025", "Base max", "Prog. 2025", "Prog. max",
+                                   "Base breach", "Prog. breach"]):
+        x = wd[f"{c}{r}"]; x.value = t_; x.font = font(9, True, "FFFFFF"); x.fill = HDR
+        x.alignment = Alignment(horizontal="center", wrap_text=True)
+    r += 1
+    dsr = lambda x, j: (f"INDEX(Macro_inputs!${IC[f'dsf{x}{j}_{DSFY[0]}']}$2:${IC[f'dsf{x}{j}_{DSFY[-1]}']}${NI},m_row,0)")
+    for j, k_ in enumerate(DSFK):
+        cells = [k_, f'=IFERROR(IF(INDEX({rng(f"dsft{j}_{DSFY[0]}")},m_row)="","",INDEX({rng(f"dsft{j}_{DSFY[0]}")},m_row)),"")',
+                 f'=IFERROR(IF(INDEX({rng(f"dsfb{j}_{DSFY[0]}")},m_row)="","",INDEX({rng(f"dsfb{j}_{DSFY[0]}")},m_row)),"")', f'=IFERROR(IF(COUNT({dsr("b", j)})=0,"",MAX({dsr("b", j)})),"")',
+                 f'=IFERROR(IF(INDEX({rng(f"dsfp{j}_{DSFY[0]}")},m_row)="","",INDEX({rng(f"dsfp{j}_{DSFY[0]}")},m_row)),"")', f'=IFERROR(IF(COUNT({dsr("p", j)})=0,"",MAX({dsr("p", j)})),"")',
+                 f'=IF(OR(C{r}="",E{r}=""),"",IF(E{r}>C{r},"breach","-"))', f'=IF(OR(C{r}="",G{r}=""),"",IF(G{r}>C{r},"breach","-"))']
+        for c, v in zip("BCDEFGHI", cells):
+            x = wd[f"{c}{r}"]; x.value = v; x.font = font(10, c in "HI"); x.border = BOX
+            x.number_format = "0.0"; x.alignment = Alignment(horizontal="left" if c == "B" else "center")
+        r += 1
+    wd.cell(r + 1, 2, ("Ratios in % (PV = present value). Max = highest value 2025-2034. A breach of the PV of public debt "
+                       "benchmark or of any external threshold moves the mechanical rating up. Exports are an assumption "
+                       "(25-30% of GDP) until the dashboard has trade ratios; see MacroFiscalModels/TODO.md.")).font = font(8, italic=True, color=MUT)
+    # chart data, years down
+    c0 = 12
+    wd.cell(c0, 11, "year").font = font(8, True)
+    labels = ["PV public debt / GDP, baseline", "PV public debt / GDP, programme", "PV public debt / GDP, benchmark",
+              "PV ext debt / GDP, baseline", "PV ext debt / GDP, programme", "PV ext debt / GDP, threshold"]
+    srcs = [("b", 0), ("p", 0), ("t", 0), ("b", 1), ("p", 1), ("t", 1)]
+    for j, lab in enumerate(labels):
+        wd.cell(c0, 12 + j, lab).font = font(8, True)
+    for t_, y in enumerate(DSFY):
+        wd.cell(c0 + 1 + t_, 11, y)
+        for j, (x, kk) in enumerate(srcs):
+            wd.cell(c0 + 1 + t_, 12 + j, f'=IFERROR(IF(INDEX({rng(f"dsf{x}{kk}_{y}")},m_row)="",NA(),INDEX({rng(f"dsf{x}{kk}_{y}")},m_row)),NA())').number_format = "0.0"
+    for cc in range(11, 18):
+        wd.column_dimensions[get_column_letter(cc)].hidden = True
+    for title, cols_, anchor in [("PV of public debt, % of GDP", [12, 13, 14], "B17"),
+                                 ("PV of external public debt, % of GDP", [15, 16, 17], "B33")]:
+        ch = LineChart(); ch.title = title; ch.height = 7.5; ch.width = 17; ch.legend.position = "b"; ch.varyColors = False
+        for cc in cols_:
+            ch.add_data(Reference(wd, min_col=cc, max_col=cc, min_row=c0, max_row=c0 + len(DSFY)), titles_from_data=True)
+        ch.set_categories(Reference(wd, min_col=11, max_col=11, min_row=c0 + 1, max_row=c0 + len(DSFY)))
+        ch.x_axis.delete = False; ch.y_axis.delete = False
+        wd.add_chart(ch, anchor)
+
+    extra = [wb[n] for n in ("DSA", "Macro_assumptions", "Macro_model", "Macro_inputs")]
     rest = [ws for ws in wb._sheets if ws not in extra]
     k = rest.index(wv) + 1
     wb._sheets = rest[:k] + extra + rest[k:]

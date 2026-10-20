@@ -20,10 +20,10 @@ Open work, in priority order. Move items to `CAVEATS.md` when done.
 ## From the integration (2026-10-20)
 
 10. **Energy savings in DIGNAD-lite and DIGNAR-lite** (item 1) now also matters for consistency: GIMF-lite countries get the savings channel, the others do not.
-11. **Trade ratios for the DSF.** The WEO extract has exports and imports for country groups only; add WDI NE.EXP.GNFS.ZS and NE.IMP.GNFS.ZS to the dashboard (Appendix C) and use them in `integrated.dsf_baseline`.
-12. **CPIA, reserves, remittances** in the dashboard for the DSF Composite Indicator (today: medium capacity for all).
-13. **External share of public debt** from IDS (PPG external stock / gross debt) instead of the income-group default.
-14. **R pipeline parity** for Appendix C and D is written but unverified (R was not available); run `Rscript build_global_indicators.R` and diff against the Python output.
+11. **Trade ratios for the DSF.** The WEO extract has exports and imports for country groups only; add WDI NE.EXP.GNFS.ZS and NE.IMP.GNFS.ZS to the dashboard (Appendix C) and use them in `integrated.dsf_baseline`. Still open (2026-10-20): no country trade series in any repository source, and the WDI API is not reachable from the cloud session; needs a manual download into `raw_data/`. Until then exports (DSF denominators) and imports (reserve cover in the CI) are assumptions.
+12. **Done 2026-10-20 (see CAVEATS).** ~~CPIA, reserves, remittances in the dashboard for the DSF Composite Indicator.~~ Dashboard v1.3 Appendix C, from the Climate Fiscal Risk Dashboard v1.5; `integrated.dsf_capacity` computes the CI where CPIA exists (66 assessed countries: 30 weak, 25 medium, 11 strong).
+13. **Done 2026-10-20.** ~~External share of public debt from IDS instead of the income-group default.~~ Dashboard v1.3 Appendix C; used in `integrated.dsf_baseline` (default only where IDS has no stock).
+14. **R pipeline parity** for Appendix C, D and E is written but unverified (R was not available, again on 2026-10-20 for the v1.3 additions); run `Rscript build_global_indicators.R` and diff against the Python output.
 15. **Pricing beyond power:** road fuels and industry in PriceFeasibility would raise the revenue estimate.
 16. **Programme pricing interaction:** the tariff rise (F1) has an economic cost that the macro models do not see.
 
@@ -32,7 +32,7 @@ Open work, in priority order. Move items to `CAVEATS.md` when done.
 
 ## DIGNAD-R Excel (proof of concept, 2026-10-20)
 
-19. Move the four augmented inputs (public investment, return on public capital, hand-to-mouth share, grants) into the dashboard's Appendix C with real sources; then DIGNAD-R Excel reads the dashboard columns only.
+19. **Partly done 2026-10-20.** Public investment is in the dashboard's Appendix C (IMF ICSD, to 2019) and read by `calibration.py` and DIGNAD-R Excel v0.3. Still defaults: return on public capital (no cross-country source), grants (needs OECD CRS or IMF GFS), hand-to-mouth share (Findex account ownership is now in Appendix C as a candidate proxy, not used: 1 - account ownership would halve the shares and drive the multipliers, so it needs a judgement first).
 20. A second fiscal instrument (consumption tax) to close the gap to Python DIGNAD-lite where the rule has to tighten.
 21. Energy savings and per-country overrides on the Assumptions sheet.
 22. **Done 2026-10-20 (see `IntegratedMFC/CAVEATS.md`).** ~~Wire `Outputs` into the country tool or the dashboard (Appendix D) as a live module.~~ DIGNAD-R runs live for the selected country on the Integrated MF-C tool's Macro sheet (all 186 countries), with the integrated run's paths beside it.
@@ -43,9 +43,10 @@ Open work, in priority order. Move items to `CAVEATS.md` when done.
 of the time is spent building the Newton Jacobian in `pf_solver.jacobian`, one entry at a time into
 a `lil_matrix`; the model equations themselves are cheap. In order:
 
-23. **Assemble the Jacobian in one go** (collect row, column, value arrays; build a `csc_matrix`
+23. **Done 2026-10-20.** ~~Assemble the Jacobian in one go~~ (collect row, column, value arrays; build a `csc_matrix`
     once). Tested on KEN, LBR, AGO, USA: 6-13x faster, results identical (max difference 0.0).
-    About a minute for all countries. No change to the method.
+    About a minute for all countries. No change to the method. Done: `--all` 1m41s (from about 10 min),
+    results byte-for-byte identical; 3m10s with the cross-check model added.
 24. **One pass, no retries, at this stage**: start each run with the fiscal-rule speed saved in
     `results/integrated_settings.csv` from the last run instead of trying 0.05, 0.2, 0.4 in turn
     (Liberia-type countries pay for up to three full solves); start the programme solve from the

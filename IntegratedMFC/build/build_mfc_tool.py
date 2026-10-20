@@ -125,14 +125,45 @@ def extract_macro_fiscal(long):
     emit(ir.debt_2030_pct_gdp, "mf_debt_2030_pct_gdp")
     emit(ir.debt_2050_pct_gdp, "mf_debt_2050_pct_gdp", 2050)
     emit(p50("debt_pct_gdp") - p50("debt_base_pct_gdp"), "mf_debt_vs_base_2050_pp", 2050)
+    emit(ir.alt_gdp_dev_2050_pct, "mf_alt_gdp_dev_2050_pct", 2050)
+    emit(ir.alt_debt_2050_pct_gdp, "mf_alt_debt_2050_pct_gdp", 2050)
+    emit(ir.dsf_ci, "mf_dsf_ci", "2024")
     emit(ir.dsf_rating_base.map(RISK), "mf_dsf_risk_base_code", "2024-2050")
     emit(ir.dsf_rating_programme.map(RISK), "mf_dsf_risk_code", "2024-2050")
     return pd.DataFrame(out, columns=["iso3", "indicator", "value", "year", "source"])
 
 
+# ---------------------------------------------------------------- module: CDPM-method cross-check
+V11 = os.path.join(INV, "Mitigation_Investment_Needs_v1.1.xlsx")
+SRC_V11 = "Mitigation_Investment_Needs_v1.1.xlsx (InvestmentNeeds v1.1, CDPM-based method, model output)"
+
+
+def extract_cdpm_crosscheck(long):
+    """The v1.1 workbook: the CDPM-based global method (group totals allocated to countries).
+    Reads the values cached in the workbook, so it must have been recalculated and saved."""
+    import openpyxl
+    wb = openpyxl.load_workbook(V11, read_only=True, data_only=True)
+    rows = list(wb["Results_Country"].iter_rows(min_row=4, values_only=True))
+    rc = pd.DataFrame(rows[1:], columns=rows[0]).dropna(subset=["ISO3"]).set_index("ISO3")
+    if rc["Total investment I"].isna().all():
+        sys.exit(f"{V11} has no cached values: open and save it in Excel, or recalculate with LibreOffice.")
+    inp = {r[0]: r[2] for r in wb["Inputs"].iter_rows(values_only=True) if r and isinstance(r[0], str)}
+    share = rc.Group.map({"AE": inp.get("p_ps_ae"), "China": inp.get("p_ps_chn"), "EMDC": inp.get("p_ps_emdc")})
+    out = []
+    for code, ser in [("cdpm_total_inv_2030_pct_gdp", rc["I, % GDP"].astype(float) * 100),
+                      ("cdpm_incr_inv_2030_pct_gdp", rc["dI, % GDP"].astype(float) * 100),
+                      ("cdpm_incr_cost_b_2030_pct_gdp", rc["(b) % GDP"].astype(float) * 100),
+                      ("cdpm_public_need_2030_pct_gdp", rc["I, % GDP"].astype(float) * 100 * share.astype(float))]:
+        for iso, v in ser.items():
+            if pd.notna(v):
+                out.append((iso, code, float(v), "2030", SRC_V11))
+    return pd.DataFrame(out, columns=["iso3", "indicator", "value", "year", "source"])
+
+
 # name, extract function, block its blocks follow in reading order, dashboard blocks it replaces
 MODULES = [("investment_needs", extract_investment_needs, "Context 3", []),
-           ("macro_fiscal", extract_macro_fiscal, "Investment 2", ["Appendix D"])]
+           ("macro_fiscal", extract_macro_fiscal, "Investment 2", ["Appendix D"]),
+           ("cdpm_crosscheck", extract_cdpm_crosscheck, "Appendix E", [])]
 
 
 # ---------------------------------------------------------------- merge and build
@@ -152,7 +183,7 @@ def main():
         dropped = sorted(set(rows.iso3) - set(meta.index))
         if dropped:
             print(f"{name}: {len(dropped)} economies not in the dashboard, left out: {', '.join(dropped)}")
-        rows = rows[rows.iso3.isin(meta.index)]
+        rows = rows[rows.iso3.isin(meta.index)].assign(value=lambda d: d.value.round(3))   # as the panel
         rows = rows.join(meta, on="iso3")[long.columns]
         rows.to_csv(os.path.join(OUT, f"{name}_long.csv"), index=False)
         mcfg = pd.read_csv(os.path.join(CONFIG, f"{name}_indicators.csv"))

@@ -4,10 +4,10 @@ Self-contained. No network access, no API keys, no hardcoded paths.
 
 ```
 config/
-  indicators.csv        THE definition: 65 indicators, 11 blocks, one row each
+  indicators.csv        THE definition: 80 indicators, 12 blocks, one row each
   sources.csv           source metadata (coverage is derived, not stored)
-raw_data/               23 source files the scripts read
-raw_data_not_used/      12 downloaded but superseded or too thin
+raw_data/               25 source files the scripts read
+raw_data_not_used/      11 downloaded but superseded or too thin
 scripts/
   build_global_indicators.py    preprocessing -> the panel      (Python)
   build_global_indicators.R     identical pipeline              (R)
@@ -97,16 +97,21 @@ into the Sources sheet, so it cannot drift.
 
 | Stage | File | Rows |
 |---|---|---|
-| 1 | `global_long_all_years.csv` — every source, every year | 113,729 |
-| 2 | `global_data_long.csv` — latest observation per country × indicator | 10,182 |
-| 3 | `global_data_wide.csv` — one row per country, plus `__year` columns | 217 × 65 |
+| 1 | `global_long_all_years.csv` — every source, every year | 129,531 |
+| 2 | `global_data_long.csv` — latest observation per country × indicator | 12,413 |
+| 3 | `global_data_wide.csv` — one row per country, plus `__year` columns | 217 × 80 |
 
 Python writes `global_*`, R writes `global_*_R`, so you can diff them. Verified
 identical in a clean-room run: same row count, zero value mismatches, zero year
-mismatches, identical coverage on the original 53 indicators. Parity for the 11 added
-in Appendix C and D (October 2026) is written but not yet verified in R.
+mismatches, identical coverage on the original 53 indicators. Parity for the 27 added
+in the Fiscal block and Appendix C, D and E (October 2026) is written but not yet verified in R.
 
-**Appendix C and D.** Appendix C holds WEO ratios the macro-fiscal models start from.
+**Appendix C, D and E.** Appendix C holds what the macro-fiscal models start from: WEO ratios,
+public investment (IMF ICSD, to 2019) and the debt-sustainability inputs (external PPG debt and
+its share of public debt from IDS; concessional share, CPIA, remittances, reserves and Findex
+account ownership from the Climate Fiscal Risk Dashboard v1.5, copied into `raw_data/`).
+Appendix E is fiscal risk from the same dashboard (rating, rollover, external and short-term
+debt, climate-institution flags).
 Appendix D is model output read from `MacroFiscalModels/results/integrated_results.csv`
 (see `MacroFiscalModels/Docs/UserGuide_4_Integrated.md`); it is not data and is not
 scored. Build order after a raw-data change: build the panel, run
@@ -127,7 +132,6 @@ scored. Build order after a raw-data change: build the panel, run
 
 | File | Reason |
 |---|---|
-| `dataset_*ICSD*.csv` | IMF capital stock — ends 2019, never made the indicator set |
 | `CRDF-PP_2024.xlsx` | OECD provider perspective — recipient perspective used instead |
 | `CRDF-RP_all_years_2000-2024.xlsx` | 25-year panel — held for trend work |
 | `UNUWIDERGRD_2025.xlsx` | WoRLD's excise and resource columns covered it |

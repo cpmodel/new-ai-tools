@@ -7,3 +7,4 @@ To ship a new version: bump `VERSION` in `build_country_tool.py`, move the previ
 |---|---|---|
 | 0.1 | 2026-10-20 | First version: 186 countries; Country sheet with four sections, settings with sources, four charts; Results, Paths, Settings, Countries and Calc sheets |
 | 0.2 | 2026-10-20 | Charts: one colour per series (v0.1 coloured each year as a series in Excel); two columns of charts, result and difference from baseline; baseline GDP and debt paths from the same macro model (no programme; fossil rents still fall for DIGNAR-lite countries). v0.1 in `Archive/` |
+| 0.3 | 2026-10-20 | Rebuilt on the re-run integrated run: public investment from the dashboard (IMF ICSD) in the calibration; LIC-DSF-lite with debt-carrying capacity from the Composite Indicator (CPIA, remittances, reserves) where the dashboard has CPIA, and the external share of public debt from IDS. v0.2 in `Archive/` |

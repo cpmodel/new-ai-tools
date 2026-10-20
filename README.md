@@ -86,13 +86,16 @@ Also as a light three-tab Excel screening workbook,
 
 ## IntegratedMFC
 
-The Integrated MF-C (macro-fiscal climate) tool, `IntegratedMFC/Integrated_MFC_Tool_v0.3.xlsx`:
+The Integrated MF-C (macro-fiscal climate) tool, `IntegratedMFC/Integrated_MFC_Tool_v0.4.xlsx`:
 the Global Fiscal Indicators dashboard with the mitigation investment needs from NMIM v0.2 spliced
 in as two blocks (Investment 1: need by sector, incremental cost by cost-of-capital lens, path to
 2050; Investment 2: public investment needs, from the direct budget need to all investment needing
 public money, and who else pays) and the MacroFiscalModels integrated run as two Macro blocks
 (financing gap after carbon pricing; growth, debt and DSF risk) replacing Appendix D, with a Macro
-sheet that puts the run's paths beside a live formula version of DIGNAD-lite / DIGNAR-lite. Built in modules by `IntegratedMFC/build/build_mfc_tool.py` with
+sheet that puts the run's paths (and the other model family's, as a cross-check) beside a live
+formula version of DIGNAD-lite / DIGNAR-lite, a DSA sheet (LIC-DSF-lite indicators against
+thresholds), fiscal risk from the Climate Fiscal Risk Dashboard v1.5, and a CDPM-method
+cross-check of the investment need. Built in modules by `IntegratedMFC/build/build_mfc_tool.py` with
 the dashboard's own builder; more modules to follow. See
 [`IntegratedMFC/README.md`](IntegratedMFC/README.md).
 
@@ -126,7 +129,7 @@ Simplified Python versions of the IMF GIMF, DIGNAD and DIGNAR models and the Wor
 LIC-DSF. `integrated.py` chains the dashboard, NMIM (investment needs), PriceFeasibility
 (feasible power-sector carbon pricing, whose revenue finances part of the budget need), the
 macro model and the DSF for every country, and its results feed the dashboard's Appendix D.
-The standalone single-country tool is `MacroFiscalModels/MacroFiscal_CountryTool_v0.2.xlsx`. See
+The standalone single-country tool is `MacroFiscalModels/MacroFiscal_CountryTool_v0.3.xlsx`. See
 [`MacroFiscalModels/README.md`](MacroFiscalModels/README.md) and the method note
 `MacroFiscalModels_Method_v0_1.md` (equations, data needs, validation); pitch deck and user
 guides in `MacroFiscalModels/Docs/`. Calibrations are illustrative.
@@ -144,10 +147,11 @@ Dashboards and data on tax, macro-fiscal, and carbon/climate policy indicators.
 - **`TECP + Validation/`** — Total Effective Carbon Price data, elasticities, and
   validation materials (`Total_Effective_Carbon_Price.pdf`, `CPATPriceElasticities.xlsx`)
 - **`build/`** — Self-contained Python/R pipeline that builds the Global Fiscal
-  Indicators workbook (65 indicators, 11 blocks, including macro-model inputs and the
-  integrated scenario from MacroFiscalModels) from raw source files; see
+  Indicators workbook (80 indicators, 12 blocks, including macro-model and debt-sustainability
+  inputs, the integrated scenario from MacroFiscalModels and fiscal risk from the Climate Fiscal
+  Risk Dashboard v1.5) from raw source files; see
   [SETUP.md](SETUP.md) for requirements and build steps
-- **`Global_fiscal_indicators_v1.2.xlsx`** — The dashboard workbook (current version; v1.0 and
+- **`Global_fiscal_indicators_v1.3.xlsx`** — The dashboard workbook (current version; v1.0 and
   later superseded versions in `Archive/`, history in `VersionNotes.md`)
 - **`TaxMacroFiscalDashboard_v1.0.pptx`** — Dashboard overview deck
 

@@ -1,23 +1,27 @@
 # IntegratedMFC — Integrated MF-C tool (macro-fiscal climate)
 
-**The tool:** `Integrated_MFC_Tool_v0.3.xlsx`. Pick a country on the **Dashboard** sheet and it
-shows the Global Fiscal Indicators dashboard, the country's mitigation investment needs
-(including its public investment needs), and what the programme does to growth and public debt.
-The **Macro** sheet next to it has the same country's paths, with a live simple macro model you
-can change. No Python needed to use it.
+**The tool:** `Integrated_MFC_Tool_v0.4.xlsx`. Pick a country on the **Dashboard** sheet and it
+shows the Global Fiscal Indicators dashboard (with fiscal risk), the country's mitigation
+investment needs (including its public investment needs, and a CDPM-method cross-check), and
+what the programme does to growth, public debt and debt risk. The **Macro** sheet has the same
+country's paths, with the other model family as a cross-check and a live simple macro model you
+can change; the **DSA** sheet has the debt-sustainability indicators against their thresholds.
+No Python needed to use it.
 
 It is built in modules, so more can be added. Now:
 
 | Module | Blocks | Source | Coverage |
 |---|---|---|---|
-| Macro-fiscal dashboard | Fiscal, PIMA, Finance 1-2, Context 1-3, Appendix A-C (59 indicators; Appendix D replaced by the macro-fiscal module) | `TaxMacroFiscalDashboard/` panel, v1.2 | 217 |
+| Macro-fiscal dashboard | Fiscal, PIMA, Finance 1-2, Context 1-3, Appendix A-C and E (74 indicators; Appendix D replaced by the macro-fiscal module). Appendix C has the model and DSF inputs, Appendix E fiscal risk from the Climate Fiscal Risk Dashboard v1.5 | `TaxMacroFiscalDashboard/` panel, v1.3 | 217 |
 | Investment needs | **Investment 1**, need and cost: net zero and incremental investment 2030, incremental by sector, incremental 2050, incremental cost under three cost-of-capital lenses, cost-of-capital penalty, cost per tonne, abatement, PV of cost 2025-2050 (18) | NMIM v0.2, `InvestmentNeeds/national_model/results/nmim_summary_v0_2.csv` | 186 |
 | | **Investment 2**, public investment needs: direct budget need (P1 + public gap of P4) and its parts, incremental budget need, PIMA-adjusted budget need, plus regulated utilities, all investment needing public money, private capital and its parts, private share (11) | NMIM v0.2; PIMA adjustment also uses the dashboard's PEFA PI-11 | 186 |
 | Macro-fiscal | **Macro 1**, financing: financing gap = incremental budget need less feasible power carbon-pricing revenue, 2030; pricing share of the need 2025-2050; feasible carbon tax; abatement (6) | MacroFiscalModels integrated run (`results/integrated_results.csv`, PriceFeasibility inside) | 186 |
-| | **Macro 2**, growth and debt: GDP vs today's path 2030 and 2050, GDP vs no-programme baseline 2050, public debt 2030 and 2050, debt added by the programme, LIC-DSF-lite risk before and with the programme (8) | integrated run (`integrated_results.csv`, `integrated_paths.csv`) | 184 (DSF: 66 LIC/LMIC) |
-| | **Macro sheet**: the integrated run's GDP and debt paths beside **DIGNAD-R**, the simple recursive DIGNAD-lite / DIGNAR-lite in formulas, for the Dashboard's country, with charts and yellow assumptions | `MacroFiscalModels/ExcelDIGNAD/build_dignad_excel.py` (equations, assumptions, inputs) | 186 |
+| | **Macro 2**, growth and debt: GDP vs today's path 2030 and 2050, GDP vs no-programme baseline 2050, public debt 2030 and 2050, debt added by the programme, cross-check with the other model family (GDP and debt 2050), LIC-DSF Composite Indicator, LIC-DSF-lite risk before and with the programme (11) | integrated run (`integrated_results.csv`, `integrated_paths.csv`) | 184 (DSF: 66 LIC/LMIC) |
+| | **Macro sheet**: the integrated run's GDP and debt paths, the other model family's, and **DIGNAD-R**, the simple recursive DIGNAD-lite / DIGNAR-lite in formulas, for the Dashboard's country, with charts and yellow assumptions | `MacroFiscalModels/ExcelDIGNAD/build_dignad_excel.py` (equations, assumptions, inputs) | 186 |
+| | **DSA sheet**: LIC-DSF-lite's five indicators against the thresholds for the country's debt-carrying capacity, 2025-2034, before and with the programme, breaches, ratings and charts | integrated run (`integrated_paths.csv`) | 66 LIC/LMIC |
+| CDPM-method cross-check | **Appendix F**: total and incremental need, incremental cost (6%), and public need at a flat group share, 2030, from the CDPM-based global method (4) | `InvestmentNeeds/Mitigation_Investment_Needs_v1.1.xlsx` (cached values) | 194 |
 
-The investment blocks sit after Context 3, the macro blocks after them, then the appendices. The investment blocks and read High / Medium / Low
+The investment blocks sit after Context 3, the macro blocks after them, then the appendices. The investment blocks read High / Medium / Low
 (magnitudes, like the Context blocks), with 1-10 scores on the same 5th-95th percentile rescale as
 every other indicator. Values are in % of NMIM's GDP for the year, except the cost per tonne
 (USD/tCO2e), abatement (% of baseline emissions) and the private share (%). The year column is the
@@ -26,11 +30,16 @@ scenario year (2030, 2050 or 2025-2050).
 **Why NMIM.** InvestmentNeeds has two models. The v1.1 workbook allocates published group totals
 (IHLEG, IEA-IFC) to countries for 2030 and applies one public share per country group, so it has
 no country estimate of public needs. NMIM builds the need country by country to 2050, splits it by
-who pays, and is the model MacroFiscalModels runs (Appendix D). The tool uses NMIM only; v1.1 stays
-in `InvestmentNeeds/` as the global reference.
+who pays, and is the model MacroFiscalModels runs (Appendix D). The tool's investment blocks use
+NMIM; v1.1, the CDPM-based method, appears only as the Appendix F cross-check. The CDPM model itself
+(CDPM / SiSePuede pathways) is not in these repositories, so its own outputs cannot be added yet.
 
 **Macro-fiscal: two models, on purpose.**
 
+- *Cross-check* (pre-computed): the integrated run also solves the other model family on the
+  same programme - DIGNAD-lite where GIMF-lite was chosen, GIMF-lite otherwise (no resource
+  block, so for DIGNAR-lite countries it leaves out the fall in rents). A large gap between the two
+  says the answer depends on the model, not only on the data.
 - *Integrated run* (pre-computed, Python, `MacroFiscalModels/integrated.py`): one model per
   country by `calibration.py`'s rule - GIMF-lite (135 countries, mostly upper-middle and high
   income, market finance), DIGNAD-lite (35, low income and concessional borrowers), DIGNAR-lite
@@ -90,7 +99,9 @@ It reads repository files only. Rebuild after any of its inputs changes:
 
 - the dashboard panel: `TaxMacroFiscalDashboard/build/scripts/build_global_indicators.py`;
 - NMIM: `InvestmentNeeds/national_model/nmim_v0_2.py`;
-- the integrated run: `MacroFiscalModels/integrated.py --all` (about 10 minutes; after NMIM and
+- the v1.1 workbook (Appendix F): `InvestmentNeeds/build/build_investment_model.py`, then
+  recalculate and save it (the extractor reads cached values);
+- the integrated run: `MacroFiscalModels/integrated.py --all` (about 3 minutes; after NMIM and
   the dashboard panel).
 
 `python3 IntegratedMFC/build/macro_live.py --check KEN AGO` prints DIGNAD-R's results from its
@@ -115,6 +126,11 @@ Use `block_kind` = `assessment` (Good / Medium / Bad), `context` (High / Medium 
   rests on the Power Sector Reform Tracker (ends 2013), with 60 countries set or updated by
   judgement; power sector staff should review them.
 - **The typology splits investment, not incremental cost.**
+- **Debt sustainability is simplified.** LIC-DSF-lite takes debt-carrying capacity from the
+  Composite Indicator where the dashboard has a CPIA score (IDA countries) and medium otherwise;
+  exports (all external ratios' denominators) and imports (reserve cover) are still assumptions,
+  because no country trade series is in the repository sources; no MAC-DSA for market-access
+  countries.
 - **Macro calibrations are illustrative** (MacroFiscalModels method note, section 6): four
   DIGNAD-R inputs (public investment, return on public capital, hand-to-mouth share, grants) are
   income-group defaults; DSF coefficients and thresholds still need checking against the Guidance

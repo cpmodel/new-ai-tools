@@ -18,6 +18,8 @@ Steps for one country:
  4. Macro model: GIMF-lite takes the whole programme; DIGNAD-lite and DIGNAR-lite the public part
     (DIGNAR-lite adds falling fossil rents). If the fiscal rule cannot stabilise debt, the rule is
     tightened (twice); if it still cannot, the status says so.
+ 4b. Cross-check: the other family of model on the same programme (DIGNAD-lite where GIMF-lite
+    was chosen, GIMF-lite otherwise), reported as alt_* (GIMF-lite has no resource block).
  5. LIC-DSF-lite (low and lower-middle income only): a baseline from the panel, shifted by the
     macro model's growth and primary deficit; mechanical risk rating.
 """
@@ -31,15 +33,17 @@ import pandas as pd
 import calibration as cb
 from nmim_bridge import programme, run_gimf, run_dignad, dsf_overlay, _nmim
 from pricing_bridge import pricing_revenue
-from lic_dsf import Inputs, Terms, assess
+from lic_dsf import Inputs, Terms, assess, composite_indicator
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, "results", "integrated_results.csv")
 Y0 = 2025
 RISK_CODE = {"Low": 1, "Moderate": 2, "High": 3}
 # DSF-only defaults (author's assumptions), LIC / LMIC
-EXT_SHARE = (0.60, 0.50)      # external share of public debt
+EXT_SHARE = (0.60, 0.50)      # external share of public debt, where IDS has no PPG external stock
 EXPORTS = (0.25, 0.30)        # exports of goods and services, % GDP (WEO extract has no country trade data)
+IMPORTS = (0.35, 0.40)        # imports, % GDP: only to turn reserves (% GDP) into import cover for the CI
+WORLD_GROWTH = 0.033          # world real growth in the Composite Indicator (assumption, recent average)
 
 
 def _panel_value(iso, col):
@@ -62,8 +66,11 @@ def dsf_baseline(iso, prog, sh):
     pb = _panel_value(iso, "primary_balance_pct_gdp")
     if pb is None:
         pb = -2.0; notes.append("primary deficit 2% of GDP")
-    notes += ["external share of debt", "exports / GDP", "capacity medium (no CPIA)"]
-    ext = v["debt"] * EXT_SHARE[k] * gdp[0]
+    es = _panel_value(iso, "ext_share_public_debt_pct")
+    if es is None:
+        es = 100 * EXT_SHARE[k]; notes.append("external share of debt")
+    notes.append("exports / GDP")
+    ext = v["debt"] * es / 100 * gdp[0]
     priv = v["rstar"] + 0.03                                   # nominal commercial rate
     conc = min(max(v["conc_share"], 0.0), 1.0)
     inp = Inputs(gdp0=gdp[0], g=g, exports0=EXPORTS[k] * gdp[0], gx=g + 0.02,
@@ -73,6 +80,24 @@ def dsf_baseline(iso, prog, sh):
                  new_terms=[Terms(conc, 0.01, 40, 10), Terms(1 - conc, priv, 10, 3)] if 0 < conc < 1
                  else [Terms(1.0, 0.01 if conc >= 1 else priv, 40 if conc >= 1 else 10, 10 if conc >= 1 else 3)])
     return inp, notes
+
+
+def dsf_capacity(iso, sh):
+    """Debt-carrying capacity from the Composite Indicator, where the dashboard has a CPIA score
+    (IDA countries); medium otherwise. Returns (class, CI or None, note or None)."""
+    cpia = _panel_value(iso, "cpia_overall")
+    if cpia is None:
+        return "medium", None, "capacity medium (no CPIA)"
+    k = 0 if cb.values(sh)["income"] == "Low income" else 1
+    gr = _panel_value(iso, "real_gdp_growth_5y_avg_pct")
+    rem = _panel_value(iso, "remittances_pct_gdp")
+    res = _panel_value(iso, "reserves_pct_gdp")
+    notes = ["imports / GDP for reserve cover"] + (["growth 4%"] if gr is None else []) + \
+            (["remittances 0"] if rem is None else []) + (["reserves 15% of GDP"] if res is None else [])
+    ci, cls = composite_indicator(cpia=cpia, growth=(gr if gr is not None else 4.0) / 100,
+                                  reserves_cov=(res if res is not None else 15.0) / 100 / IMPORTS[k],
+                                  remittances=(rem if rem is not None else 0.0) / 100, world_growth=WORLD_GROWTH)
+    return cls, ci, "; ".join(notes)
 
 
 def _run_macro(model, prog, sh, rev):
@@ -145,12 +170,29 @@ def run(iso, mode="hybrid", paths=None):
     except RuntimeError as e:
         r.update(status=str(e).split(" (")[0])
         m = None
+    alt = "DIGNAD-lite" if model == "GIMF-lite" else "GIMF-lite"
+    try:
+        ma = _run_macro(alt, prog, sh, rev)
+        r.update(alt_model=alt, alt_status=f"ok, fiscal rule tightened to {ma['rule']}" if ma["tightened"] else "ok",
+                 alt_gdp_dev_2030_pct=100 * (ma["y"][i30] - 1), alt_gdp_dev_2050_pct=100 * (ma["y"][i50] - 1),
+                 alt_debt_2030_pct_gdp=100 * ma["debt"][i30], alt_debt_2050_pct_gdp=100 * ma["debt"][i50])
+        if paths is not None:
+            n = len(prog["years"])
+            paths["alt_gdp_dev_pct"] = 100 * (ma["y"][:n] - 1)
+            paths["alt_debt_pct_gdp"] = 100 * ma["debt"][:n]
+            paths["alt_gdp_dev_base_pct"] = 100 * (ma["y_base"][:n] - 1)
+            paths["alt_debt_base_pct_gdp"] = 100 * ma["debt_base"][:n]
+    except RuntimeError as e:
+        r.update(alt_model=alt, alt_status=str(e).split(" (")[0])
     if v["income"] in ("Low income", "Lower middle income") and m is not None:
         inp, notes = dsf_baseline(iso, prog, sh)
-        a0 = assess(inp, "medium")
-        a1 = assess(dsf_overlay(inp, m["y"], m["pdef"], m["pdef0"]), "medium")
+        cls, ci, cnote = dsf_capacity(iso, sh)
+        notes.append(cnote)
+        a0 = assess(inp, cls)
+        a1 = assess(dsf_overlay(inp, m["y"], m["pdef"], m["pdef0"]), cls)
         r.update(dsf_rating_base=a0["overall"], dsf_rating_programme=a1["overall"],
-                 dsf_risk_code=RISK_CODE[a1["overall"]], dsf_assumptions="; ".join(notes))
+                 dsf_risk_code=RISK_CODE[a1["overall"]], dsf_capacity=cls,
+                 dsf_ci=ci if ci is not None else np.nan, dsf_assumptions="; ".join(notes))
         if paths is not None:
             for k in a0["thresholds"]:
                 paths[f"dsf_base|{k}"] = a0["base"]["ind"][k][1:]          # projection years 1-10 = 2025-2034

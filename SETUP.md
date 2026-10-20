@@ -15,10 +15,10 @@ refresh), no API keys, no hardcoded paths.
 ```
 TaxMacroFiscalDashboard/build/
   config/
-    indicators.csv        THE definition: 65 indicators, 11 blocks, one row each
+    indicators.csv        THE definition: 80 indicators, 12 blocks, one row each
     sources.csv            source metadata (coverage is derived, not stored)
-  raw_data/                23 source files the scripts read
-  raw_data_not_used/       12 downloaded but superseded or too thin
+  raw_data/                25 source files the scripts read
+  raw_data_not_used/       11 downloaded but superseded or too thin
   raw_data_downloaded/     where download_sources.py puts fresh copies (never raw_data/)
   scripts/
     build_global_indicators.py    preprocessing -> the panel      (Python)
@@ -73,7 +73,7 @@ so you can read the output.
 | File | What it does |
 |---|---|
 | `0_setup.bat` | Installs the Python packages. Run once. |
-| `0b_download_sources.bat` | Optional. Re-fetches the 6 sources with a direct URL into `raw_data_downloaded\`, and prints a checklist for the 13 that need manual download. |
+| `0b_download_sources.bat` | Optional. Re-fetches the 6 sources with a direct URL into `raw_data_downloaded\`, and prints a checklist for the 15 that need manual download. |
 | `1_build_database.bat` | Preprocessing: raw files -> `output\global_data_*.csv` |
 | `2_build_tool.bat` | The tool: panel -> `TaxMacroFiscalDashboard\Global_fiscal_indicators_v<version>.xlsx` (versioned; older versions in `TaxMacroFiscalDashboard\Archive\`, see `VersionNotes.md`) |
 
@@ -125,7 +125,7 @@ positional index. Doing it by hand in Excel works too — Save As `.xlsx`, named
 the UNDP review PDF, and the PSRT archive via the Dataverse API. `download_sources.py`
 fetches these.
 
-**13 are `manual`.** The publisher offers only a landing page or an interactive query
+**15 are `manual`.** The publisher offers only a landing page or an interactive query
 builder: the IMF portals render their download links in JavaScript, and IDS, PEFA and
 OECD all require you to build a query first. The `download_note` column records the
 settings to pick — for IDS, for instance, Country=all, Counterpart-Area=World, the 19
@@ -163,16 +163,21 @@ into the Sources sheet, so it cannot drift.
 
 | Stage | File | Rows |
 |---|---|---|
-| 1 | `global_long_all_years.csv` — every source, every year | 105,072 |
-| 2 | `global_data_long.csv` — latest observation per country × indicator | 8,057 |
-| 3 | `global_data_wide.csv` — one row per country, plus `__year` columns | 217 × 64 |
+| 1 | `global_long_all_years.csv` — every source, every year | 129,531 |
+| 2 | `global_data_long.csv` — latest observation per country × indicator | 12,413 |
+| 3 | `global_data_wide.csv` — one row per country, plus `__year` columns | 217 × 80 |
 
 Python writes `global_*`, R writes `global_*_R`, so you can diff them. Verified
 identical in a clean-room run: same row count, zero value mismatches, zero year
-mismatches, identical coverage on the original 53 indicators. Parity for the 11 added
-in Appendix C and D (October 2026) is written but not yet verified in R.
+mismatches, identical coverage on the original 53 indicators. Parity for the 27 added
+in the Fiscal block and Appendix C, D and E (October 2026) is written but not yet verified in R.
 
-**Appendix C and D.** Appendix C holds WEO ratios the macro-fiscal models start from.
+**Appendix C, D and E.** Appendix C holds what the macro-fiscal models start from: WEO ratios,
+public investment (IMF ICSD, to 2019) and the debt-sustainability inputs (external PPG debt and
+its share of public debt from IDS; concessional share, CPIA, remittances, reserves and Findex
+account ownership from the Climate Fiscal Risk Dashboard v1.5, copied into `raw_data/`).
+Appendix E is fiscal risk from the same dashboard (rating, rollover, external and short-term
+debt, climate-institution flags).
 Appendix D is model output read from `MacroFiscalModels/results/integrated_results.csv`
 (see `MacroFiscalModels/Docs/UserGuide_4_Integrated.md`); it is not data and is not
 scored. Build order after a raw-data change: build the panel, run
@@ -193,7 +198,6 @@ scored. Build order after a raw-data change: build the panel, run
 
 | File | Reason |
 |---|---|
-| `dataset_*ICSD*.csv` | IMF capital stock — ends 2019, never made the indicator set |
 | `CRDF-PP_2024.xlsx` | OECD provider perspective — recipient perspective used instead |
 | `CRDF-RP_all_years_2000-2024.xlsx` | 25-year panel — held for trend work |
 | `UNUWIDERGRD_2025.xlsx` | WoRLD's excise and resource columns covered it |
@@ -302,12 +306,14 @@ engine and not committed.
 Requirements: Python with `pandas`, `numpy`, `openpyxl`.
 
 ```bash
-python3 IntegratedMFC/build/build_mfc_tool.py   # -> IntegratedMFC/Integrated_MFC_Tool_v0.3.xlsx
+python3 IntegratedMFC/build/build_mfc_tool.py   # -> IntegratedMFC/Integrated_MFC_Tool_v0.4.xlsx
 ```
 
 It reads the dashboard panel and config (`TaxMacroFiscalDashboard/build/output/`, `config/`),
 `InvestmentNeeds/national_model/results/nmim_summary_v0_2.csv` and
-`MacroFiscalModels/results/integrated_{results,paths}.csv` (and imports the DIGNAD-R equations from
+`MacroFiscalModels/results/integrated_{results,paths}.csv`, the cached values of
+`InvestmentNeeds/Mitigation_Investment_Needs_v1.1.xlsx` (Appendix F cross-check; recalculate it
+after a rebuild) (and imports the DIGNAD-R equations from
 `MacroFiscalModels/ExcelDIGNAD/build_dignad_excel.py`), and runs
 `TaxMacroFiscalDashboard/build/scripts/build_dashboard.py` on the merged panel. Rebuild it after
 rebuilding any of those (after the integrated run, section 4). Modules and how to add one:
@@ -328,7 +334,7 @@ It runs the NMIM engine (`InvestmentNeeds/national_model/nmim_v0_2.py`, which re
 `InvestmentNeeds/national_model/data/*.csv`) for the chosen country and writes charts and
 paths to `MacroFiscalModels/results/`.
 
-Integrated run (all countries, about 10 minutes), then refresh the dashboard:
+Integrated run (all countries, about 3 minutes), then refresh the dashboard:
 
 ```bash
 python3 MacroFiscalModels/integrated.py --all
@@ -341,5 +347,5 @@ It reads the dashboard panel, NMIM and `PriceFeasibility/output/country_metrics.
 Standalone country tool (Excel, no Python needed to use it), rebuilt after the integrated run:
 
 ```bash
-python3 MacroFiscalModels/build_country_tool.py   # -> MacroFiscalModels/MacroFiscal_CountryTool_v0.2.xlsx
+python3 MacroFiscalModels/build_country_tool.py   # -> MacroFiscalModels/MacroFiscal_CountryTool_v0.3.xlsx
 ```

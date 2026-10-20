@@ -118,7 +118,7 @@
 # =============================================================================
 
 import re, sys, glob, zipfile, unicodedata, warnings
-import numpy as np, pandas as pd
+import numpy as np, pandas as pd, openpyxl
 warnings.filterwarnings("ignore")
 
 # Paths resolve relative to this script unless overridden by CLI flag or env var:
@@ -280,7 +280,8 @@ for iso in set(pb.index) & set(nb.index):
         if pd.notna(a) and pd.notna(b): emit(iso, "interest_pct_gdp", y, a - b, wf + " (derived)")
 # macro-model inputs (Appendix C): ratios WEO already publishes, plus average growth.
 # (Exports and imports in this WEO extract cover country groups only, so trade ratios
-# for the DSF need a WDI download; not added yet.)
+# for the DSF need a WDI download; not added yet. Other DSF and model inputs - external
+# PPG debt, CPIA, remittances, reserves, public investment - are added further down.)
 for ind, code in [("Revenue, General government, Percent of GDP", "revenue_pct_gdp"),
                   ("Primary net lending (+) / net borrowing (-), General government, Percent of GDP", "primary_balance_pct_gdp"),
                   ("Gross capital formation, Percent of GDP", "gross_capital_formation_pct_gdp"),
@@ -410,6 +411,69 @@ for code, ind in [("DT.DOD.PRVT.CD", "ids_private_creditor_share_pct"),
     for iso in set(part) & set(tot):
         for y in set(part[iso]) & set(tot[iso]):
             if tot[iso][y] > 0: emit(iso, ind, y, part[iso][y] / tot[iso][y] * 100, IDS_F)
+
+# external PPG debt (DSF inputs): stock over same-year WEO GDP, and its share of gross debt
+gdpu, gdebt = weo_ser(GDPU), weo_ser(G)
+for iso, d in tot.items():
+    for y, v in d.items():
+        yy = str(y)
+        if iso in gdpu.index and yy in gdpu.columns and pd.notna(gdpu.loc[iso, yy]) and gdpu.loc[iso, yy] > 0:
+            e = v / 1e9 / gdpu.loc[iso, yy] * 100                       # WEO GDP is in USD bn
+            emit(iso, "ext_ppg_debt_pct_gdp", y, e, f"{IDS_F} + WEO")
+            if iso in gdebt.index and pd.notna(gdebt.loc[iso, yy]) and gdebt.loc[iso, yy] > 0:
+                emit(iso, "ext_share_public_debt_pct", y, min(100.0, e / gdebt.loc[iso, yy] * 100), f"{IDS_F} + WEO")
+
+# --- IMF ICSD: general government investment (macro-model input) -----------
+ICSD_F = glob.glob(RAW + "dataset_*IMF_FAD_ICSD*.csv")[0]
+icsd = pd.read_csv(ICSD_F, low_memory=False)
+icsd = icsd[icsd.INDICATOR == "Gross fixed capital formation, General government, Constant prices, Percent of GDP"]
+icsd["iso"] = to_iso(icsd.COUNTRY, "IMF ICSD")
+for _, r in icsd[icsd.iso.notna()].iterrows():
+    for y in [c for c in icsd.columns if str(c).isdigit() and int(c) >= 2010]:
+        emit(r.iso, "public_investment_pct_gdp", y, r[y], ICSD_F.split("/")[-1])
+
+# --- Climate Fiscal Risk Dashboard v1.5 (World Bank; fiscal-risk upgrade) -----
+# TimeSeriesData holds WDI, IDS-derived and fiscal-space (Kose et al., CCDFS) series
+# 2015-2023 by ISO3; PointInTimeData holds yes/no flags on climate institutions.
+CFR_F = "CFRiskDashboardV1.5.xlsx"
+_cw = openpyxl.load_workbook(RAW + CFR_F, read_only=True, data_only=True)
+_ts = pd.DataFrame(list(_cw["TimeSeriesData"].iter_rows(values_only=True)))
+_ts.columns = _ts.iloc[0]; _ts = _ts[1:]
+CY = [c for c in _ts.columns if isinstance(c, int)]
+def cfr(code):
+    """iso -> {year: value} for one CFRisk series ('NA' text is missing)."""
+    out = {}
+    for _, r in _ts[_ts.VariableCode == code].iterrows():
+        d = {y: float(r[y]) for y in CY if isinstance(r[y], (int, float)) and not isinstance(r[y], bool)
+             and pd.notna(r[y])}
+        if d: out[r.ISO3] = d
+    return out
+for code, ind, scale in [("WB.FSI.BX.TRF.PWKR.DT.GD.ZS", "remittances_pct_gdp", 1),
+                         ("WB.FSI.FX.OWN.TOTL.ZS", "account_ownership_pct", 1),
+                         ("WB.CCDFS.concggd", "concessional_share_ext_debt_pct", 1),
+                         ("WB.CCDFS.sovrate", "sovereign_rating_index", 1),
+                         ("WB.CCDFS.debtduey", "debt_maturing_12m_pct_gdp", 1),
+                         ("WB.CCDFS.stdebtres", "st_ext_debt_pct_reserves", 1),
+                         ("WB.CCDFS.xtdebty", "ext_debt_total_pct_gdp", 1)]:
+    for iso, d in cfr(code).items():
+        for y, v in d.items(): emit(iso, ind, y, v * scale, f"{CFR_F} ({code})")
+# overall CPIA = average of its four cluster averages (the IRAI definition)
+_cl = [cfr(c) for c in ("IQ.CPA.ECON.XQ", "IQ.CPA.STRC.XQ", "IQ.CPA.SOCI.XQ", "IQ.CPA.PUBS.XQ")]
+for iso in set.intersection(*[set(c) for c in _cl]):
+    for y in set.intersection(*[set(c[iso]) for c in _cl]):
+        emit(iso, "cpia_overall", y, np.mean([c[iso][y] for c in _cl]), f"{CFR_F} (IQ.CPA cluster averages)")
+# reserves over same-year WEO GDP
+for iso, d in cfr("WB.FSI.FI.RES.XGLD.CD").items():
+    for y, v in d.items():
+        yy = str(y)
+        if iso in gdpu.index and yy in gdpu.columns and pd.notna(gdpu.loc[iso, yy]) and gdpu.loc[iso, yy] > 0:
+            emit(iso, "reserves_pct_gdp", y, v / 1e9 / gdpu.loc[iso, yy] * 100, f"{CFR_F} (FI.RES.XGLD.CD) + WEO")
+_pt = pd.DataFrame(list(_cw["PointInTimeData"].iter_rows(values_only=True)))
+_pt.columns = _pt.iloc[0]; _pt = _pt[1:]
+for col, ind in [("CCinPIM", "climate_in_pim"), ("CCBudgetTagging", "climate_budget_tagging"),
+                 ("NationalCCFund", "national_climate_fund")]:
+    for _, r in _pt.iterrows():
+        if isinstance(r[col], bool): emit(r.ISO3, ind, 2021, 1 if r[col] else 0, f"{CFR_F} (PointInTimeData {col})")
 
 # --- World Bank BOOST -------------------------------------------------------
 BOOST_F = "WB_BOOST_WIDEF.csv"

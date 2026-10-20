@@ -22,7 +22,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl.workbook.defined_name import DefinedName
 from openpyxl.worksheet.datavalidation import DataValidation
 
-VERSION = "0.2"
+VERSION = "0.3"
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..", "..")
 PANEL = os.path.join(ROOT, "TaxMacroFiscalDashboard", "build", "output", "global_data_wide.csv")
@@ -45,7 +45,7 @@ DASH = [("gross_debt_pct_gdp", "Gross debt, general govt (% GDP)", "IMF WEO"),
         ("ids_private_creditor_rate_pct", "Interest rate, private creditors (%)", "World Bank IDS"),
         ("fossil_rents_total_pct_gdp", "Fossil rents, oil + gas + coal (% GDP)", "WDI")]
 # augmented: income-group defaults until data are added to the dashboard (LIC, LMIC, UMIC, HIC)
-AUGD = [("public_investment_pct_gdp", "Public investment (% GDP)", (6.0, 5.0, 4.5, 3.5), "Default by income group (IMF ICSD orders of magnitude); candidate for dashboard Appendix C"),
+AUGD = [("public_investment_pct_gdp", "Public investment (% GDP)", (6.0, 5.0, 4.5, 3.5), "Dashboard Appendix C (IMF ICSD, general govt GFCF, to 2019) where available; else default by income group"),
         ("return_public_capital_pct", "Return on public capital (%)", (20, 17, 15, 10), "Default by income group (IMF literature 10-25%)"),
         ("hand_to_mouth_pct", "Hand-to-mouth households (%)", (60, 50, 35, 25), "Default by income group (Findex orders of magnitude); candidate: Findex"),
         ("grants_pct_gdp", "Grants (% GDP)", (2.0, 1.0, 0.0, 0.0), "Default by income group; candidate: OECD CRS / IMF GFS"),
@@ -101,11 +101,16 @@ def load_inputs():
         if "tightened to" in st:
             return float(st.split("tightened to")[1])
         return 0.2 if ir.loc[iso, "model"] == "DIGNAR-lite" else 0.05
-    for code, _, vals, _ in AUGD:
-        wide[code] = [rule(c) for c in w.index] if code == "fiscal_rule_speed" else [vals[INCOME.index(i)] for i in w.income]
     years = {c: w[c + "__year"] for c, *_ in DASH}
-    for code, *_ in AUGD:
-        years[code] = "2026 run" if code == "fiscal_rule_speed" else "default"
+    for code, _, vals, _ in AUGD:
+        dflt = pd.Series([vals[INCOME.index(i)] for i in w.income], index=w.index) if vals else None
+        if code == "fiscal_rule_speed":
+            wide[code] = [rule(c) for c in w.index]; years[code] = "2026 run"
+        elif code in w.columns:                    # now in the dashboard: data where it exists
+            wide[code] = w[code].fillna(dflt)
+            years[code] = w[code + "__year"].where(w[code].notna(), "default")
+        else:
+            wide[code] = dflt; years[code] = "default"
     p = pd.read_csv(PATHS)
     p = p[p.iso3.isin(COUNTRIES) & p.series.isin([c for c, *_ in LONG])]
     long = p.melt(id_vars=["iso3", "series"], var_name="year", value_name="value").dropna()

@@ -18,7 +18,7 @@ Results are pre-computed; changing an assumption needs a re-run:
 
 ```bash
 cd MacroFiscalModels
-python3 integrated.py --all          # results/integrated_{results,paths,settings}.csv (about 10 minutes)
+python3 integrated.py --all          # results/integrated_{results,paths,settings}.csv (about 3 minutes)
 python3 build_country_tool.py        # -> MacroFiscal_CountryTool_v<VERSION>.xlsx (in MacroFiscalModels/)
 ```
 

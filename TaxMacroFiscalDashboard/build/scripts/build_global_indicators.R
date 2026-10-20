@@ -241,7 +241,8 @@ setorder(gg, iso, year); GDPdt <- gg[, .SD[.N], by = iso]      # latest actual y
 GDP <- setNames(GDPdt$gdp, GDPdt$iso)
 
 # macro-model inputs (Appendix C): ratios WEO already publishes, plus average growth.
-# (Exports and imports in this WEO extract cover country groups only; not added.)
+# (Exports and imports in this WEO extract cover country groups only; not added. Other DSF
+# and model inputs - external PPG debt, CPIA, remittances, reserves, public investment - below.)
 for (p in list(c("Revenue, General government, Percent of GDP", "revenue_pct_gdp"),
                c("Primary net lending (+) / net borrowing (-), General government, Percent of GDP", "primary_balance_pct_gdp"),
                c("Gross capital formation, Percent of GDP", "gross_capital_formation_pct_gdp"),
@@ -340,6 +341,55 @@ for (cd in list(c("DT.DOD.PRVT.CD", "ids_private_creditor_share_pct"),
   pt <- merge(ids_panel(cd[1]), tot, by = c("iso3", "year"), suffixes = c("", ".t"))
   pt <- pt[v.t > 0]
   emit(pt$iso3, cd[2], pt$year, pt$v / pt$v.t * 100, IDS_F)
+}
+
+# external PPG debt (DSF inputs): stock over same-year WEO GDP (USD bn), and its share of gross debt
+ep <- merge(tot, gg[, .(iso3 = iso, year, gdp)], by = c("iso3", "year"))[gdp > 0]
+ep[, e := v / 1e9 / gdp * 100]
+emit(ep$iso3, "ext_ppg_debt_pct_gdp", ep$year, ep$e, paste(IDS_F, "+ WEO"))
+ep <- merge(ep, gd[, .(iso3 = iso, year, gdebt = v)], by = c("iso3", "year"))[!is.na(gdebt) & gdebt > 0]
+emit(ep$iso3, "ext_share_public_debt_pct", ep$year, pmin(100, ep$e / ep$gdebt * 100), paste(IDS_F, "+ WEO"))
+
+## --- IMF ICSD: general government investment (macro-model input) -------------
+ICSD_F <- list.files(RAW, pattern = "^dataset_.*IMF_FAD_ICSD.*csv$", full.names = TRUE)[1]
+ic <- as.data.table(read.csv(ICSD_F, check.names = FALSE, encoding = "UTF-8"))
+ic <- ic[INDICATOR == "Gross fixed capital formation, General government, Constant prices, Percent of GDP"]
+ic[, iso := to_iso(COUNTRY, "IMF ICSD")]
+icy <- grep("^[0-9]{4}$", names(ic), value = TRUE); icy <- icy[as.integer(icy) >= 2010]
+icm <- melt(ic[!is.na(iso), c("iso", icy), with = FALSE], id.vars = "iso", variable.name = "year",
+            value.name = "v", variable.factor = FALSE)
+emit(icm$iso, "public_investment_pct_gdp", icm$year, icm$v, basename(ICSD_F))
+
+## --- Climate Fiscal Risk Dashboard v1.5 (World Bank; fiscal-risk upgrade) -------
+CFR_F <- "CFRiskDashboardV1.5.xlsx"
+ts_ <- as.data.table(read_excel(file.path(RAW, CFR_F), sheet = "TimeSeriesData", col_types = "text"))
+cy <- grep("^20[0-9]{2}$", names(ts_), value = TRUE)
+cfr <- function(code) {
+  m <- melt(ts_[VariableCode == code, c("ISO3", cy), with = FALSE], id.vars = "ISO3",
+            variable.name = "year", value.name = "v", variable.factor = FALSE)
+  m[, v := suppressWarnings(as.numeric(v))][!is.na(v)][, .(iso3 = ISO3, year, v)]
+}
+for (cd in list(c("WB.FSI.BX.TRF.PWKR.DT.GD.ZS", "remittances_pct_gdp"),
+                c("WB.FSI.FX.OWN.TOTL.ZS", "account_ownership_pct"),
+                c("WB.CCDFS.concggd", "concessional_share_ext_debt_pct"),
+                c("WB.CCDFS.sovrate", "sovereign_rating_index"),
+                c("WB.CCDFS.debtduey", "debt_maturing_12m_pct_gdp"),
+                c("WB.CCDFS.stdebtres", "st_ext_debt_pct_reserves"),
+                c("WB.CCDFS.xtdebty", "ext_debt_total_pct_gdp"))) {
+  d <- cfr(cd[1]); emit(d$iso3, cd[2], d$year, d$v, paste0(CFR_F, " (", cd[1], ")"))
+}
+# overall CPIA = average of its four cluster averages (the IRAI definition)
+cl <- Reduce(function(a, b) merge(a, b, by = c("iso3", "year")),
+             lapply(c("IQ.CPA.ECON.XQ", "IQ.CPA.STRC.XQ", "IQ.CPA.SOCI.XQ", "IQ.CPA.PUBS.XQ"),
+                    function(k) { d <- cfr(k); setnames(d, "v", k); d }))
+emit(cl$iso3, "cpia_overall", cl$year, rowMeans(cl[, 3:6]), paste(CFR_F, "(IQ.CPA cluster averages)"))
+rs <- merge(cfr("WB.FSI.FI.RES.XGLD.CD"), gg[, .(iso3 = iso, year, gdp)], by = c("iso3", "year"))[gdp > 0]
+emit(rs$iso3, "reserves_pct_gdp", rs$year, rs$v / 1e9 / rs$gdp * 100, paste(CFR_F, "(FI.RES.XGLD.CD) + WEO"))
+pt_ <- as.data.table(read_excel(file.path(RAW, CFR_F), sheet = "PointInTimeData", col_types = "text"))
+for (cd in list(c("CCinPIM", "climate_in_pim"), c("CCBudgetTagging", "climate_budget_tagging"),
+                c("NationalCCFund", "national_climate_fund"))) {
+  d <- pt_[get(cd[1]) %in% c("TRUE", "FALSE")]
+  emit(d$ISO3, cd[2], 2021, as.integer(d[[cd[1]]] == "TRUE"), paste0(CFR_F, " (PointInTimeData ", cd[1], ")"))
 }
 
 ## --- World Bank BOOST --------------------------------------------------------
