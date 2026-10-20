@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # =============================================================================
-# NMIM v0.1 - data extraction
+# NMIM v0.2 - data extraction
 # =============================================================================
 # Reads repository sources and writes the national model's input tables to
 # national_model/data/ in CPAT code conventions (mit.<indicator>.<fuel>.<sector>).
@@ -13,6 +13,8 @@
 #   cbam.csv           CBAM goods output, growth and emission factors (CBAM tool)
 #   emissions.csv      CPAT 2024 CO2 and GHG
 #   elasticities.csv   CPAT income elasticities and AEEI by CPAT income group
+#   power_market.csv   power market structure, private participation, cost recovery,
+#                      RISE scores (v0.2: drives the investment typology)
 #
 # Sources (all in the repository, no network):
 #   TaxMacroFiscalDashboard/build/output/imffossilfuelsubsidiesdata_sheets.xlsx (CPAT panel)
@@ -20,10 +22,13 @@
 #   CPAT_excel_not_master/mitigation_copypaste/data/ elasticities.csv, countries.csv, fuel_units.csv
 #   CBAMPolicyTool/CBAM_Policy_Tool_global_v1.0.xlsx, sheet "Country data"
 #   InvestmentNeeds/Mitigation_Investment_Needs_v1.1.xlsx, sheet Country_Data (WACC)
+#   TaxMacroFiscalDashboard/build/raw_data/ dataverse_files.zip (Power Sector Reform
+#     Tracker), 2024-PPI-Full-DTA.dta (World Bank PPI); output/global_data_wide.csv (RISE,
+#     explicit fossil fuel subsidies)
 #
-# Run: python InvestmentNeeds/national_model/extract_data_v0_1.py
+# Run: python InvestmentNeeds/national_model/extract_data_v0_2.py
 # =============================================================================
-import os, re, unicodedata
+import os, re, unicodedata, zipfile
 import numpy as np, pandas as pd, openpyxl
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -202,5 +207,142 @@ cb.to_csv(os.path.join(OUT, "cbam.csv"), index=False)
 # --- CPAT elasticities (income and AEEI) ----------------------------------------
 el = pd.read_csv(os.path.join(MVP, "elasticities.csv"))
 el[el.type.isin(["inc", "aei"])].to_csv(os.path.join(OUT, "elasticities.csv"), index=False)
+
+# --- power market structure (v0.2) --------------------------------------------
+# pms: 1 vertically integrated utility, no IPPs; 2 single buyer with IPPs; 3 wholesale competition.
+# Order: (i) curated rows for countries the Power Sector Reform Tracker (non-OECD, ends 2013) does
+# not cover, (ii) curated updates where PSRT is out of date or codes a market law that never opened
+# a market, (iii) PSRT 2013 (3 if r_wem, 2 if r_ipp, else 1, as the dashboard), (iv) PSRT 1 is
+# raised to 2 where PPI records two or more private generation projects reaching close 2014-2024.
+CURATED = {  # iso: (pms, independent regulator, unbundled, privatised, note)
+ "AUS": (3, 1, 1, 1, "NEM wholesale and retail competition (WA separate)"),
+ "AUT": (3, 1, 1, 0, "EU internal market; utilities majority public"),
+ "BEL": (3, 1, 1, 1, "EU internal market"),
+ "BRB": (1, 1, 0, 1, "Private VIU (Barbados Light & Power) under FTC regulation"),
+ "CAN": (2, 1, 1, 0, "Mixed: Alberta and Ontario markets; most provinces crown VIUs buying from IPPs"),
+ "CHE": (3, 1, 1, 0, "Wholesale market; retail open to large users; cantonal public utilities"),
+ "CHL": (3, 1, 1, 1, "Unbundled, privatised, cost-based pool and regulated auctions"),
+ "COM": (1, 0, 0, 0, "State VIU"),
+ "CPV": (2, 1, 0, 0, "State utility (Electra) buying from wind IPP (Cabeolica)"),
+ "CZE": (3, 1, 1, 0, "EU internal market; CEZ majority state"),
+ "DEU": (3, 1, 1, 1, "EU internal market"),
+ "DNK": (3, 1, 1, 0, "EU internal market (Nord Pool)"),
+ "ESP": (3, 1, 1, 1, "EU internal market"),
+ "EST": (3, 1, 1, 0, "EU internal market (Nord Pool); Eesti Energia state"),
+ "FIN": (3, 1, 1, 0, "EU internal market (Nord Pool)"),
+ "FRA": (3, 1, 1, 0, "EU internal market; EDF state-owned"),
+ "GBR": (3, 1, 1, 1, "Wholesale and retail competition; private networks"),
+ "GRC": (3, 1, 1, 1, "EU internal market; PPC majority private since 2021"),
+ "HKG": (1, 0, 0, 1, "Two private VIUs under Scheme of Control agreements"),
+ "HUN": (3, 1, 1, 0, "EU internal market; MVM state"),
+ "IRL": (3, 1, 1, 0, "Single Electricity Market; ESB state"),
+ "ISL": (3, 1, 1, 0, "Unbundled; Landsvirkjun state-dominant"),
+ "ISR": (2, 1, 0, 0, "IEC dominant, buying from IPPs; 2018 reform"),
+ "ITA": (3, 1, 1, 1, "EU internal market"),
+ "JPN": (3, 1, 1, 1, "JEPX wholesale; retail fully open 2016; legal unbundling of networks 2020"),
+ "KNA": (1, 0, 0, 0, "State VIU (SKELEC)"),
+ "KOR": (2, 0, 1, 0, "KEPCO single buyer from its generation subsidiaries and IPPs (cost-based pool)"),
+ "LUX": (3, 1, 1, 0, "EU internal market"),
+ "MAC": (1, 1, 0, 1, "Private concession VIU (CEM)"),
+ "MEX": (3, 1, 1, 0, "Wholesale market (MEM) since 2016; CFE dominant; 2025 law restores CFE priority"),
+ "MLT": (1, 1, 0, 0, "Enemalta VIU (EU derogation)"),
+ "NLD": (3, 1, 1, 1, "EU internal market; networks public"),
+ "NOR": (3, 1, 1, 0, "Nord Pool; Statkraft state"),
+ "NRU": (1, 0, 0, 0, "State VIU"),
+ "NZL": (3, 1, 1, 0, "Wholesale market; gentailers majority state-owned"),
+ "PLW": (1, 0, 0, 0, "State VIU (PPUC)"),
+ "POL": (3, 1, 1, 0, "EU internal market; utilities majority state"),
+ "PRT": (3, 1, 1, 1, "EU internal market (MIBEL)"),
+ "SLB": (1, 0, 0, 0, "State VIU (Solomon Power)"),
+ "SOM": (1, 0, 0, 1, "No national grid; private local VIUs"),
+ "STP": (1, 0, 0, 0, "State VIU (EMAE)"),
+ "SVK": (3, 1, 1, 0, "EU internal market"),
+ "SVN": (3, 1, 1, 0, "EU internal market"),
+ "SWE": (3, 1, 1, 0, "Nord Pool; Vattenfall state"),
+ "TUR": (3, 1, 1, 1, "EPIAS wholesale market; privatised distribution"),
+ "USA": (3, 1, 1, 1, "Mixed: ~two-thirds of load in ISO/RTO markets; rest regulated VIUs"),
+ "VCT": (1, 0, 0, 0, "State VIU (VINLEC)"),
+ "WSM": (2, 1, 0, 0, "State utility (EPC) buying from solar IPPs"),
+}
+UPDATES = {  # iso: (pms, note) - curated updates to PSRT 2013
+ "VNM": (3, "Vietnam Wholesale Electricity Market operating since 2019"),
+ "AFG": (2, "PSRT codes a market; DABS buys imports and IPP power (single buyer)"),
+ "QAT": (2, "PSRT codes a market; Kahramaa single buyer from IWPPs"),
+ "EGY": (2, "2015 Electricity Law allows a market; EETC still single buyer from IPPs"),
+ "ARE": (2, "Single buyers (EWEC, DEWA) from IWPPs"),
+ "OMN": (2, "Nama PWP single buyer; spot market from 2022 is small"),
+ "JOR": (2, "NEPCO single buyer from IPPs"),
+ "PAK": (2, "CPPA-G single buyer; competitive market (CTBCM) only starting"),
+ "NGA": (2, "Unbundled and privatised, but NBET bulk trader buys from gencos"),
+ "GHA": (2, "Wholesale market rules (2016) not operating; ECG buys from IPPs"),
+ "MNG": (2, "Single buyer model"),
+ "DMA": (1, "Private VIU (DOMLEC)"),
+}
+z = zipfile.ZipFile(os.path.join(DASH, "raw_data", "dataverse_files.zip"))
+psrt = pd.read_stata(z.open([n for n in z.namelist() if n.endswith("PSRT_V1_Database.dta")][0]))
+psrt = psrt[psrt.year == psrt.year.max()].copy()
+PNAME = {"Cote d'Ivoire": "CIV", "Macedonia, FYR": "MKD", "Swaziland": "SWZ", "Vietnam": "VNM", "Cape Verde": "CPV",
+         "Guyana, CR": "GUY", "Somalia": "SOM", "St. Vincent and Grenadines": "VCT", "Turkiye": "TUR"}
+nm2iso = {r["name"]: r["iso"] for _, r in ct.iterrows()}
+iso_of = lambda n: PNAME.get(str(n), nm2iso.get(str(n)))
+psrt["iso"] = psrt.cntry.map(iso_of)
+psrt = psrt.dropna(subset=["iso"]).set_index("iso")
+ppi = pd.read_stata(os.path.join(DASH, "raw_data", "2024-PPI-Full-DTA.dta"))
+ppi = ppi[(ppi.ssector == "Electricity") & (ppi.status_n != "Cancelled")].copy()
+ppi["iso"] = ppi.country.map(iso_of)
+ppi["inv24"] = pd.to_numeric(ppi.investment, errors="coerce") * pd.to_numeric(ppi.CPI2024, errors="coerce")
+ppi["IY"] = pd.to_numeric(ppi.IY, errors="coerce")
+seg = ppi.Segment.astype(str)
+rec = ppi[ppi.IY.between(2015, 2024)]
+gen = rec[seg.loc[rec.index].str.contains("generation")]
+dist = ppi[seg.str.contains("distribution") & (ppi.status_n == "Active")]
+tra = ppi[seg.str.contains("transmission") & (ppi.status_n == "Active")]
+ipp14 = ppi[ppi.IY.between(2014, 2024) & seg.str.contains("generation")].groupby("iso").size()
+wide_pm = wide.reindex(ct.iso)
+cp_ = lambda m: cpv(m)
+rp = {k: cp_(f"mit.rp.ecy.{k}.1") for k in ("res", "ind", "other")}
+sc_ = {k: cp_(f"mit.sup.cost.ecy.{k}.1") for k in ("res", "ind", "other")}
+cn = {k: cp_(f"mit.con.ecy.{k}.1") for k in ("res", "ind", "other")}
+esub = cp_("mit.expsub.con.ecy.all.1"); gdpc = cp_("mit.gdp.pre.lvl.1")
+pm = []
+for _, c in ct.iterrows():
+    i = c.iso
+    if i in CURATED:
+        s_, reg, und, prv, note = CURATED[i]; src = "Curated (not in PSRT)"; cos = np.nan
+    elif i in psrt.index:
+        r = psrt.loc[i]
+        s_ = 3 if r.r_wem == 1 else (2 if r.r_ipp == 1 else 1)
+        reg, und, prv, cos = int(r.r_reg), int(r.r_und), int(r.r_prv), int(r.r_cos)
+        src, note = "PSRT 2013", ""
+        if i in UPDATES:
+            s_, note = UPDATES[i]; src = "PSRT 2013, curated update"
+        elif s_ == 1 and ipp14.get(i, 0) >= 2:
+            s_, src, note = 2, "PSRT 2013, PPI update", f"{int(ipp14.get(i))} private generation projects 2014-2024 (PPI)"
+    else:
+        reg = und = prv = cos = np.nan
+        s_ = 2 if ipp14.get(i, 0) >= 2 else 1
+        src, note = "PPI rule (no PSRT)", f"{int(ipp14.get(i, 0))} private generation projects 2014-2024 (PPI)"
+    num = sum(float(rp[k].get(i, np.nan) or 0) * float(cn[k].get(i, np.nan) or 0) for k in rp
+              if pd.notna(rp[k].get(i)) and pd.notna(sc_[k].get(i)) and pd.notna(cn[k].get(i)))
+    den = sum(float(sc_[k].get(i)) * float(cn[k].get(i)) for k in rp
+              if pd.notna(rp[k].get(i)) and pd.notna(sc_[k].get(i)) and pd.notna(cn[k].get(i)))
+    g = gen[gen.iso == i]
+    gdp_i = c.gdp24 if pd.notna(c.gdp24) else gdpc.get(i)
+    pm.append(dict(
+        iso=i, pms=s_, pms_src=src, pms_note=note, reg_indep=reg, unbundled=und, privatised=prv, cost_reflective_psrt=cos,
+        ppi_elec_bn_yr=rec[rec.iso == i].inv24.sum() / 10 / 1000,
+        ppi_gen_n_1524=len(g),
+        ppi_vre_share=(g[g.technol.astype(str).str.contains("Solar|Wind")].inv24.sum() / g.inv24.sum()) if g.inv24.sum() > 0 else np.nan,
+        ppi_merchant_share=(g[(g.PRS.astype(str) == "Sales to wholesale market") | (g.stype.astype(str) == "Merchant")].inv24.sum()
+                            / g.inv24.sum()) if g.inv24.sum() > 0 else np.nan,
+        ppi_private_dist=int((dist.iso == i).any()), ppi_private_trans=int((tra.iso == i).any()),
+        cr_ecy=(num / den) if den > 0 else np.nan,
+        ecy_sub_pct_gdp=(float(esub.get(i)) / float(gdp_i) * 100) if pd.notna(esub.get(i)) and gdp_i else np.nan,
+        ffs_exp_pct_gdp=wide_pm.ff_subsidy_explicit_pct_gdp.get(i),
+        rise_re=wide_pm.rise_renewable_energy_score.get(i), rise_lpf=wide_pm.rise_level_playing_field_score.get(i)))
+pm = pd.DataFrame(pm)
+pm["ppi_elec_pct_gdp"] = pm.ppi_elec_bn_yr / pm.iso.map(ct.set_index("iso").gdp24) * 100
+pm.to_csv(os.path.join(OUT, "power_market.csv"), index=False)
+print("power market structure:", pm.pms.value_counts().sort_index().to_dict(), pm.pms_src.value_counts().to_dict())
 
 print(f"countries {len(ct)}, energy rows {len(en)}, power {len(pw)}, CBAM {len(cb)}")

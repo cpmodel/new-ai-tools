@@ -1,6 +1,6 @@
-# NMIM: a national model of net zero mitigation investment (method, v0.1)
+# NMIM: a national model of net zero mitigation investment (method, v0.2)
 
-NMIM estimates, for each of 186 countries and each year from 2024 to 2050, the investment a net zero path needs, the investment a current-trends baseline would make anyway, and the incremental cost of the difference under three cost-of-capital lenses. It is a simplified stock-and-flow model built to CPAT norms: CPAT's own data, codes and activity equation, a CPAT-layout workbook in live formulas, and a Python engine that evaluates the same equations for every country.
+NMIM estimates, for each of 186 countries and each year from 2024 to 2050, the investment a net zero path needs, the investment a current-trends baseline would make anyway, and the incremental cost of the difference under three cost-of-capital lenses. It is a simplified stock-and-flow model built to CPAT norms: CPAT's own data, codes and activity equation, a CPAT-layout workbook in live formulas, and a Python engine that evaluates the same equations for every country. Version 0.2 adds a typology of who pays: every investment line is split into five types, from pure public to pure private, using each country's power market structure, electricity cost recovery, cost of capital and fossil fuel subsidies (section 4).
 
 World results, 2030 (USD bn a year, 2024 prices):
 
@@ -16,6 +16,19 @@ World results, 2030 (USD bn a year, 2024 prices):
 
 Incremental cost in a year is the annual cost of all incremental capital then in service, so it rises as the net zero capital stock builds: USD 1.2 tn in 2040 and 1.8-2.0 tn in 2050 at (a) and (b), while lens (c) turns to a net saving of USD 0.7 tn in 2040 and 1.0 tn in 2050. Present value 2025-2050: USD 10.4 tn at (a), 11.3 tn at (b), -3.3 tn at (c). Cumulative abatement is 710 GtCO2e.
 
+Who pays, 2030 net zero investment (share of each group's total):
+
+| | Advanced economies | China | Other EMDCs | World |
+|---|---|---|---|---|
+| P1 Pure public | 8% | 5% | 20% | 10% (USD 511 bn) |
+| P2 Regulated utility | 22% | 41% | 14% | 26% (1,307 bn) |
+| P3 Contracted revenue | 23% | 23% | 15% | 21% (1,063 bn) |
+| P4 Viability gap | 5% | 11% | 29% | 13% (655 bn) |
+| P5 Pure private | 42% | 21% | 22% | 31% (1,567 bn) |
+| Direct budget need (P1 + public gap of P4) | 209 bn (9%) | 120 bn (8%) | 379 bn (29%) | 708 bn (14%) |
+
+In other EMDCs, half of net zero investment (P1 and P4) needs public money beyond a guarantee, against an eighth in advanced economies. In low-income countries, two-thirds of needs fall on the budget.
+
 ## 1. Structure
 
 | Item | Choice |
@@ -26,7 +39,7 @@ Incremental cost in a year is the annual cost of all incremental capital then in
 | Units | PJ, TWh, GW, USD bn (2024 prices), MtCO2e |
 | Codes | CPAT: `mit.<indicator>.<fuel>.<sector>.<scenario>`; results `<iso>.mit...` |
 
-One equation specification (`nmim_v0_1.py`: `PARAMS`, `SCALARS`, `ROWS`) is evaluated in Python for every country and rendered as Excel formulas for the country chosen on the workbook's Settings sheet. Every same-year reference points to a row computed earlier, which the engine asserts, so the two implementations follow the same order. The check script confirms they agree to 1e-9 for eight countries.
+One equation specification (`nmim_v0_2.py`: `PARAMS`, `SCALARS`, `ROWS`) is evaluated in Python for every country and rendered as Excel formulas for the country chosen on the workbook's Settings sheet. Every same-year reference points to a row computed earlier, which the engine asserts, so the two implementations follow the same order. The check script confirms they agree to 1e-9 for eight countries.
 
 ## 2. Data
 
@@ -39,7 +52,11 @@ One equation specification (`nmim_v0_1.py`: `PARAMS`, `SCALARS`, `ROWS`) is eval
 | Generation and capacity by source | Ember yearly electricity data (latest year) | Power base year, capacity factors, fossil trend |
 | GDP, PPP GDP, growth 2025-2026 | IMF WEO | Activity, price level |
 | CBAM goods output, growth, process emission factors | CBAM Policy Tool global v1.0, Country data (57 countries) | Industrial process CO2 |
-| Market WACC | Mitigation Investment Needs v1.1 (observed IRENA/Steffen, Damodaran build, else IHLEG group rate) | Lens (a) |
+| Market WACC | Mitigation Investment Needs v1.1 (observed IRENA/Steffen, Damodaran build, else IHLEG group rate) | Lens (a), typology |
+| Power market structure, regulator, unbundling, privatisation | Power Sector Reform Tracker v1 (Urpelainen and Yang 2019; 142 non-OECD countries to 2013), curated for 48 countries it does not cover and 12 where it is out of date | Typology |
+| Private participation in electricity, 2014-2024 | World Bank PPI database 2024 (projects, investment, segment, technology, revenue source) | Typology (structure update), PowerMarket sheet |
+| Electricity retail price and supply cost by sector; explicit electricity subsidies | IMF CPAT 2024 panel | Typology (cost recovery) |
+| Explicit fossil fuel subsidies (% GDP); RISE scores | TaxMacroFiscalDashboard (IMF FFS; World Bank RISE 2023) | Typology; PowerMarket sheet |
 
 ## 3. Equations
 
@@ -77,25 +94,71 @@ IC(c)_t = IC(b)_t - air pollution avoided_t
 
 Lives: generation 25, grids 40, vehicles 12, buildings 25, industry 25 years. Present values discount 2025-2050 at the lens rate (WACC for a, 6% for b and c).
 
-## 4. Validation
+## 4. Investment typology: who pays
+
+Each investment line is split into five types by where repayment comes from:
+
+| Type | Repaid by | Typical NMIM lines |
+|---|---|---|
+| P1 Pure public | Taxes | Land use, public buildings, grid extension for access, public buses |
+| P2 Regulated utility | Tariffs on a regulated asset base | Grids; utility-built generation in integrated markets |
+| P3 Contracted revenue | A long-term contract with a public or regulated buyer | IPP solar and wind, CfDs, charging concessions |
+| P4 Viability gap | Market revenue plus a public top-up | CCS, industrial fuel switch, aviation and shipping, EVs and heat pumps where capital is dear |
+| P5 Pure private | The investor's own savings or sales | EVs, heat pumps, merchant and distributed solar, captured methane |
+
+**Power market structure** sets the starting split of power investment. `pms` is 1 for a vertically integrated utility with no IPPs, 2 for a single buyer with IPPs, 3 for wholesale competition. It is the Power Sector Reform Tracker's 2013 coding (3 if a wholesale market, 2 if IPPs, as on the dashboard). For the 48 countries PSRT does not cover (OECD and small states) it is curated, and for 12 where PSRT is out of date or codes a market law that never opened a market it is updated (for example Viet Nam to 3 with its 2019 wholesale market; Egypt, Pakistan, Nigeria and Ghana to 2, single buyers). Where PSRT gives 1 but PPI records two or more private generation projects reaching close in 2014-2024, it is raised to 2 (16 countries). Result: 38 countries at 1, 86 at 2, 62 at 3. Each row carries its source and a note (PowerMarket sheet).
+
+| Power generation | Utility (P2) | Contracted (P3) | Merchant and distributed (P5) |
+|---|---|---|---|
+| 1 Vertically integrated | 70% | 25% | 5% |
+| 2 Single buyer | 35% | 55% | 10% |
+| 3 Wholesale market | 10% | 55% | 35% |
+
+Grids are P2, except a private contracted share (0 / 5 / 15% by structure) for merchant storage and tendered lines.
+
+**Three pressure indices move investment toward the budget:**
+
+```
+u = MIN(1, MAX(0, (1 - cost recovery) / 0.5))       utility: retail price / supply cost (CPAT)
+h = MIN(1, MAX(0, (WACC - 6%) / 8%))                cost of capital
+v = MIN(1, MAX(0, explicit fossil subsidies % GDP / 2))
+```
+
+- Generation: P1 = P2₀ × u × 0.5 (the budget pays for utility plants tariffs do not repay); P4 = P3₀ × u × 0.4 (contracted IPPs need guarantees or top-ups from a weak buyer) + P5₀ × min(1, 0.4h).
+- Grids: P1 = P2₀ × min(1, 0.6u + access), with access 25% (LIC) and 10% (LMIC).
+- End use (transport, buildings): a public share by income group (transport 15/10/5/5%; buildings 40/40/35/30%), contracted 10% in transport, and the market remainder split P4 = m and P5 = 1 − m, where m = min(1, 0.4h + 0.2v + credit constraint 30% LIC / 15% LMIC).
+- Industry: CCS on CBAM goods is P4; fuel switch is P4 at 30% + 70% × m, the rest P5.
+- Non-CO2: P1 by income (30/25/20/20%), P5 = 35% × (1 − m) (methane captured and sold), the rest P4. Land use: P1 by income (80/70/60/50%), the rest P4 (results-based payments, carbon credits). Other energy CO2: P4.
+- Unmodelled clean investment (calibration term): half on the generation split, half on the buildings split.
+
+The direct budget need is P1 plus 30% of P4 (the public gap); private capital is P3 + P5 + 70% of P4. All type shares are on the Inputs sheet (`ty_*`, marked †), the country shares in Mitigation section 1 and the results in section 12; the Typology sheet shows them for the selected country.
+
+| Structure | Countries | 2030 net zero investment (USD bn) | P1 | P2 | P3 | P4 | P5 |
+|---|---|---|---|---|---|---|---|
+| 1 Vertically integrated | 38 | 74 | 25% | 23% | 6% | 28% | 20% |
+| 2 Single buyer | 86 | 2,225 | 10% | 34% | 20% | 14% | 22% |
+| 3 Wholesale market | 62 | 2,804 | 10% | 19% | 22% | 11% | 38% |
+
+## 5. Validation
 
 | Check | Result |
 |---|---|
 | Workbook = Python (key rows, 2024-2050) | Relative difference < 1e-9 for IND, USA, CHN, BRA, KEN, EGY, DEU, IDN |
-| Identities | Generation balance, non-negative capacity and investment, sector sum, net zero below baseline: all pass |
+| Identities | Generation balance, non-negative capacity and investment, sector sum, type sum (P1-P5 = total), net zero below baseline: all pass |
+| Typology vs IEA-IFC | Private capital is 57% of other EMDCs' 2030 net zero investment; IEA-IFC (2023) put the private share of EMDE clean energy investment needed at about 60% |
 | Net zero investment 2030 vs IHLEG/IEA | USD 5.10 tn vs 4.8 tn clean energy + ~0.4 tn nature |
 | Baseline investment 2030 vs IEA 2024 | USD 2.08 tn vs ~2.0 tn (calibrated in 2025, then grows) |
 | EMDCs other than China, net zero 2030 | USD 1.30 tn vs IHLEG 1.6 tn clean energy + 0.35 tn nature |
 | Baseline GHG 2030 | 58.2 Gt vs ~53-57 Gt for current policies |
 | Energy CO2 2024 | 11 rows + power = 33.6 Gt; CPAT 39.0 Gt; the gap is carried as other energy CO2, so totals tie to CPAT |
 
-The full report is `check_report_v0_1.md`.
+The full report is `check_report_v0_2.md`.
 
-## 5. Comparison with the v1.1 allocation
+## 6. Comparison with the v1.1 allocation
 
 NMIM's 2030 net zero investment matches v1.1's at world level (USD 5.10 tn vs 5.20 tn) but distributes it differently: China needs more (1.53 vs 0.86 tn) because its coal-heavy power must be replaced by 2040; advanced economies (2.27 vs 2.39 tn) and other EMDCs (1.30 vs 1.95 tn) need less. Incremental investment is a larger share of the total (59% vs 24-38%): it is measured against a current-trends baseline that invests USD 2.1 tn, not against the CCDR or McKinsey definitions behind v1.1's shares.
 
-## 6. Open issues
+## 7. Open issues
 
 - **Baseline composition.** Baseline levels are calibrated to IEA 2024 investment, but the bottom-up baseline still has no buildings or industry spending, so incremental investment in those sectors may be overstated; the calibration term holds that spending in both scenarios.
 - **No price response.** CPAT's price and efficiency elasticities are off (real prices fixed); carbon pricing is not modelled.
@@ -105,13 +168,15 @@ NMIM's 2030 net zero investment matches v1.1's at world level (USD 5.10 tn vs 5.
 - **Residual emissions** of 10 Gt in 2050 (non-CO2, process, other energy) need removals or deeper abatement, which are not modelled.
 - **Formula length.** Several workbook formulas exceed the 100-character norm; they should be split into helper rows.
 - **Damodaran data** are still not loaded in the v1.1 WACC.
+- **Typology shares are judgements**, applied to country data. They should be replaced with observed public-private splits (CCDR investment plans, CPI Global Landscape of Climate Finance, IEA World Energy Investment by source). PSRT ends in 2013; the curated structure codes need review by power sector staff. PPI misses most domestic private investment and all of advanced economies.
+- **Cost recovery** compares average retail prices with CPAT supply costs; it does not capture collection losses or arrears, which often matter more for utility creditworthiness.
 
-## 7. Files
+## 8. Files
 
 | File | Role |
 |---|---|
-| `extract_data_v0_1.py` | Data extraction to `data/*.csv` |
-| `nmim_v0_1.py` | Equation specification and Python engine; writes `results/` |
-| `build_workbook_v0_1.py` | Builds `NMIM_v0.1.xlsx` (CPAT layout) |
-| `check_v0_1.py` | LibreOffice checks; writes `check_report_v0_1.md` |
-| `PLAN_v0_1.md` | Build plan |
+| `extract_data_v0_2.py` | Data extraction to `data/*.csv`, including `power_market.csv` |
+| `nmim_v0_2.py` | Equation specification and Python engine; writes `results/` |
+| `build_workbook_v0_2.py` | Builds `NMIM_v0.2.xlsx` (CPAT layout; Typology and PowerMarket sheets) |
+| `check_v0_2.py` | LibreOffice checks; writes `check_report_v0_2.md` |
+| `Old/` | v0.1 workbook, plan, check report and summary |

@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 # =============================================================================
-# NMIM v0.1 - National Mitigation Investment Model: equation spec and engine
+# NMIM v0.2 - National Mitigation Investment Model: equation spec and engine
 # =============================================================================
 # One equation spec drives both implementations:
 #   - this engine evaluates it for every country (Python), and
-#   - build_workbook_v0_1.py renders the same templates as Excel formulas for the
+#   - build_workbook_v0_2.py renders the same templates as Excel formulas for the
 #     country chosen on the Settings sheet (CPAT Mitigation layout).
-# So the workbook and the engine cannot drift apart; check_v0_1.py confirms it.
+# So the workbook and the engine cannot drift apart; check_v0_2.py confirms it.
 #
 # Template grammar (used in ROWS and SCALARS):
 #   [code]        this year's value of row `code`
@@ -18,12 +18,13 @@
 #   @field        country data field (Data sheet)
 #   YEAR          the year
 #   Excel functions MAX, MIN, IF, CHOOSE, ABS; ^ for powers; = for equality.
+#   v0.2 adds section 12, investment by type (who pays), from country power market data.
 #
 # Codes follow CPAT: mit.<indicator>.<fuel>.<sector>[.<scenario>], scenario 1 =
 # baseline (current trends), 2 = net zero.
 #
-# Run: python InvestmentNeeds/national_model/nmim_v0_1.py
-#      -> results/nmim_results_v0_1.csv (long), results/nmim_summary_v0_1.csv
+# Run: python InvestmentNeeds/national_model/nmim_v0_2.py
+#      -> results/nmim_results_v0_2.csv (long), results/nmim_summary_v0_2.csv
 # =============================================================================
 import os, re, math
 import numpy as np, pandas as pd
@@ -31,7 +32,7 @@ import numpy as np, pandas as pd
 HERE = os.path.dirname(os.path.abspath(__file__))
 DATA = os.path.join(HERE, "data")
 RES = os.path.join(HERE, "results")
-VERSION = "0.1"
+VERSION = "0.2"
 Y0, Y1 = 2024, 2050
 YEARS = list(range(Y0, Y1 + 1))
 HIST = [2021, 2022, 2023]
@@ -133,6 +134,50 @@ PARAMS = [
  ("life_bld", 25, "years", "Asset life, buildings", "Method note", "M"),
  ("life_ind", 25, "years", "Asset life, industry", "Method note", "M"),
  ("life_grid", 40, "years", "Asset life, grids and storage", "Method note", "M"),
+ # investment typology (who pays): P1 pure public, P2 regulated utility, P3 contracted revenue,
+ # P4 viability gap, P5 pure private. Shares are judgements (†) applied to country data.
+ ("ty_g2_vi", 0.70, "share", "Generation, utility-built (P2), vertically integrated market", "Assumption. †", "P"),
+ ("ty_g2_sb", 0.35, "share", "Generation, utility-built (P2), single buyer with IPPs", "Assumption. †", "P"),
+ ("ty_g2_wm", 0.10, "share", "Generation, utility-built (P2), wholesale market", "Assumption. †", "P"),
+ ("ty_g3_vi", 0.25, "share", "Generation, contracted IPPs (P3), vertically integrated market", "Assumption. †", "P"),
+ ("ty_g3_sb", 0.55, "share", "Generation, contracted IPPs (P3), single buyer", "Assumption; IEA-IFC (2023) PPAs dominate EMDE renewables. †", "P"),
+ ("ty_g3_wm", 0.55, "share", "Generation, contracted (P3: CfDs, auctions, corporate PPAs), wholesale market", "Assumption. †", "P"),
+ ("ty_r3_vi", 0.00, "share", "Grids and storage, private contracted (P3), vertically integrated", "Assumption. †", "P"),
+ ("ty_r3_sb", 0.05, "share", "Grids and storage, private contracted (P3), single buyer", "Assumption; PPI private transmission rare. †", "P"),
+ ("ty_r3_wm", 0.15, "share", "Grids and storage, private contracted (P3), wholesale market", "Assumption: merchant/contracted storage, OFTO-type lines. †", "P"),
+ ("ty_cr_gap", 0.50, "ratio", "Tariff under-recovery at which the utility pressure index reaches 1", "Assumption: cost recovery 50% or less. †", "P"),
+ ("ty_ku1", 0.50, "share", "Share of utility generation the budget pays at full under-recovery (P2 to P1)", "Assumption. †", "P"),
+ ("ty_ku4", 0.40, "share", "Share of contracted generation needing a public top-up at full under-recovery (P3 to P4)", "Assumption. †", "P"),
+ ("ty_kur", 0.60, "share", "Share of utility grid investment the budget pays at full under-recovery (P2 to P1)", "Assumption. †", "P"),
+ ("ty_acc_lic", 0.25, "share", "Grid investment for access paid by the budget, low income", "Assumption; access extension has no paying customers at first. †", "P"),
+ ("ty_acc_lmic", 0.10, "share", "Grid investment for access paid by the budget, lower middle income", "Assumption. †", "P"),
+ ("ty_h_span", 0.08, "rate", "WACC above 6% at which the capital-cost pressure index reaches 1", "Assumption: WACC 14% or more. †", "P"),
+ ("ty_kh", 0.40, "share", "Share of market investment needing a top-up at full capital-cost pressure (P5 to P4)", "Assumption. †", "P"),
+ ("ty_v_span", 2.0, "% GDP", "Explicit fossil fuel subsidies at which the subsidy pressure index reaches 1", "Assumption. †", "P"),
+ ("ty_kv", 0.20, "share", "Share of market end-use investment needing a top-up at full subsidy pressure", "Assumption. †", "P"),
+ ("ty_ci_lic", 0.30, "share", "Credit-constraint top-up share, low income", "Assumption. †", "P"),
+ ("ty_ci_lmic", 0.15, "share", "Credit-constraint top-up share, lower middle income", "Assumption. †", "P"),
+ ("ty_t1_lic", 0.15, "share", "Transport, public (P1: public buses, fleets), low income", "Assumption. †", "P"),
+ ("ty_t1_lmic", 0.10, "share", "Transport, public (P1), lower middle income", "Assumption. †", "P"),
+ ("ty_t1_umic", 0.05, "share", "Transport, public (P1), upper middle income", "Assumption. †", "P"),
+ ("ty_t1_hic", 0.05, "share", "Transport, public (P1), high income", "Assumption. †", "P"),
+ ("ty_t3", 0.10, "share", "Transport, contracted (P3: charging concessions, bus leasing)", "Assumption. †", "P"),
+ ("ty_b1_lic", 0.40, "share", "Buildings, public (P1: public buildings, social housing), low income", "Assumption. †", "P"),
+ ("ty_b1_lmic", 0.40, "share", "Buildings, public (P1), lower middle income", "Assumption. †", "P"),
+ ("ty_b1_umic", 0.35, "share", "Buildings, public (P1), upper middle income", "Assumption. †", "P"),
+ ("ty_b1_hic", 0.30, "share", "Buildings, public (P1), high income", "Assumption. †", "P"),
+ ("ty_i4", 0.30, "share", "Industrial fuel switch needing a top-up (P4) with no country pressure", "Assumption; CCS on CBAM goods is all P4. †", "P"),
+ ("ty_n1_lic", 0.30, "share", "Non-CO2, public (P1: waste, agriculture extension), low income", "Assumption. †", "P"),
+ ("ty_n1_lmic", 0.25, "share", "Non-CO2, public (P1), lower middle income", "Assumption. †", "P"),
+ ("ty_n1_umic", 0.20, "share", "Non-CO2, public (P1), upper middle income", "Assumption. †", "P"),
+ ("ty_n1_hic", 0.20, "share", "Non-CO2, public (P1), high income", "Assumption. †", "P"),
+ ("ty_n5", 0.35, "share", "Non-CO2, private (P5: oil and gas methane, captured gas sold) before pressure", "Assumption; IEA Global Methane Tracker. †", "P"),
+ ("ty_l1_lic", 0.80, "share", "Land use, public (P1: forest protection), low income; rest P4", "Assumption. †", "P"),
+ ("ty_l1_lmic", 0.70, "share", "Land use, public (P1), lower middle income", "Assumption. †", "P"),
+ ("ty_l1_umic", 0.60, "share", "Land use, public (P1), upper middle income", "Assumption. †", "P"),
+ ("ty_l1_hic", 0.50, "share", "Land use, public (P1), high income", "Assumption. †", "P"),
+ ("ty_cal_pow", 0.50, "share", "Power share of unmodelled clean investment (rest end use)", "IEA WEI 2024: ~half power and grids. †", "M"),
+ ("ty_p4_gap", 0.30, "share", "Public share of P4 capital (the viability gap)", "Assumption. †", "P"),
 ]
 P = {p[0]: p[1] for p in PARAMS}
 
@@ -157,6 +202,7 @@ def load_data():
     pw = pd.read_csv(os.path.join(DATA, "power.csv")).set_index("iso")
     em = pd.read_csv(os.path.join(DATA, "emissions.csv")).set_index("iso")
     cb = pd.read_csv(os.path.join(DATA, "cbam.csv")).set_index("iso")
+    pm = pd.read_csv(os.path.join(DATA, "power_market.csv")).set_index("iso")
     el = pd.read_csv(os.path.join(DATA, "elasticities.csv"))
     elv = {(r.type, r.fuel_group, r.sector_group): r for r in el.itertuples()}
     ENW = en.pivot_table(index=["iso", "year"], columns="code", values="value_pj")
@@ -211,6 +257,11 @@ def load_data():
         else:
             d["cbam_proc24"], d["cbam_g"] = 0.0, 0.0
         d["cal24"] = 0.0
+        # power market and pricing (typology); missing cost recovery = full recovery
+        q = pm.loc[iso] if iso in pm.index else None
+        d["pms"] = float(q.pms) if q is not None else 2.0
+        d["cr_ecy"] = float(q.cr_ecy) if q is not None and pd.notna(q.cr_ecy) else 1.0
+        d["ffs_exp"] = float(q.ffs_exp_pct_gdp) if q is not None and pd.notna(q.ffs_exp_pct_gdp) else 0.0
         D[iso] = d
     return D
 
@@ -261,7 +312,49 @@ SCALARS = [
  ("crf_b_veh", "CRF at 6%, vehicles", "x", "{r_wb}/(1-(1+{r_wb})^-{veh_life})"),
  ("crf_b_bld", "CRF at 6%, buildings", "x", "{r_wb}/(1-(1+{r_wb})^-{life_bld})"),
  ("crf_b_ind", "CRF at 6%, industry", "x", "{r_wb}/(1-(1+{r_wb})^-{life_ind})"),
+ # investment typology (who pays): pressure indices, then type shares by sector
+ ("pms", "Power market structure (1 integrated, 2 single buyer, 3 wholesale)", "code", "@pms"),
+ ("ty_u", "Utility pressure index: electricity tariff under-recovery", "0-1", "MIN(1,MAX(0,(1-@cr_ecy)/{ty_cr_gap}))"),
+ ("ty_h", "Capital-cost pressure index: market WACC above 6%", "0-1", "MIN(1,MAX(0,(#wacc-{r_wb})/{ty_h_span}))"),
+ ("ty_v", "Subsidy pressure index: explicit fossil fuel subsidies", "0-1", "MIN(1,MAX(0,@ffs_exp/{ty_v_span}))"),
+ ("ty_m", "Top-up share of market end-use investment (P5 to P4)", "share",
+  "MIN(1,#ty_h*{ty_kh}+#ty_v*{ty_kv}+CHOOSE(#inc,{ty_ci_lic},{ty_ci_lmic},0,0))"),
+ ("g2o", "Generation, utility-built share before pressure", "share", "CHOOSE(#pms,{ty_g2_vi},{ty_g2_sb},{ty_g2_wm})"),
+ ("g3o", "Generation, contracted share before pressure", "share", "CHOOSE(#pms,{ty_g3_vi},{ty_g3_sb},{ty_g3_wm})"),
+ ("g5o", "Generation, merchant and distributed share before pressure", "share", "1-#g2o-#g3o"),
+ ("ty_gen_p1", "Type share, generation: P1 pure public", "share", "#g2o*#ty_u*{ty_ku1}"),
+ ("ty_gen_p2", "Type share, generation: P2 regulated utility", "share", "#g2o-#ty_gen_p1"),
+ ("ty_gen_p3", "Type share, generation: P3 contracted revenue", "share", "#g3o*(1-#ty_u*{ty_ku4})"),
+ ("ty_gen_p4", "Type share, generation: P4 viability gap", "share", "#g3o*#ty_u*{ty_ku4}+#g5o*MIN(1,#ty_h*{ty_kh})"),
+ ("ty_gen_p5", "Type share, generation: P5 pure private", "share", "#g5o*(1-MIN(1,#ty_h*{ty_kh}))"),
+ ("gr3", "Grids and storage, private contracted share", "share", "CHOOSE(#pms,{ty_r3_vi},{ty_r3_sb},{ty_r3_wm})"),
+ ("ty_grid_p1", "Type share, grids: P1 pure public", "share",
+  "(1-#gr3)*MIN(1,#ty_u*{ty_kur}+CHOOSE(#inc,{ty_acc_lic},{ty_acc_lmic},0,0))"),
+ ("ty_grid_p2", "Type share, grids: P2 regulated utility", "share", "1-#gr3-#ty_grid_p1"),
+ ("ty_grid_p3", "Type share, grids: P3 contracted revenue", "share", "#gr3"),
+ ("ty_grid_p4", "Type share, grids: P4 viability gap", "share", "0"),
+ ("ty_grid_p5", "Type share, grids: P5 pure private", "share", "0"),
+ ("ty_trn_p1", "Type share, transport: P1 pure public", "share",
+  "CHOOSE(#inc,{ty_t1_lic},{ty_t1_lmic},{ty_t1_umic},{ty_t1_hic})"),
+ ("ty_trn_p2", "Type share, transport: P2 regulated utility", "share", "0"),
+ ("ty_trn_p3", "Type share, transport: P3 contracted revenue", "share", "{ty_t3}"),
+ ("ty_trn_p4", "Type share, transport: P4 viability gap", "share", "(1-#ty_trn_p1-#ty_trn_p3)*#ty_m"),
+ ("ty_trn_p5", "Type share, transport: P5 pure private", "share", "(1-#ty_trn_p1-#ty_trn_p3)*(1-#ty_m)"),
+ ("ty_bld_p1", "Type share, buildings: P1 pure public", "share",
+  "CHOOSE(#inc,{ty_b1_lic},{ty_b1_lmic},{ty_b1_umic},{ty_b1_hic})"),
+ ("ty_bld_p2", "Type share, buildings: P2 regulated utility", "share", "0"),
+ ("ty_bld_p3", "Type share, buildings: P3 contracted revenue", "share", "0"),
+ ("ty_bld_p4", "Type share, buildings: P4 viability gap", "share", "(1-#ty_bld_p1)*#ty_m"),
+ ("ty_bld_p5", "Type share, buildings: P5 pure private", "share", "(1-#ty_bld_p1)*(1-#ty_m)"),
+ ("ty_ih_p4", "Type share, industrial fuel switch: P4 viability gap (rest P5)", "share", "MIN(1,{ty_i4}+(1-{ty_i4})*#ty_m)"),
+ ("ty_nc_p1", "Type share, non-CO2: P1 pure public", "share", "CHOOSE(#inc,{ty_n1_lic},{ty_n1_lmic},{ty_n1_umic},{ty_n1_hic})"),
+ ("ty_nc_p5", "Type share, non-CO2: P5 pure private (rest P4)", "share", "{ty_n5}*(1-#ty_m)"),
+ ("ty_lu_p1", "Type share, land use: P1 pure public (rest P4)", "share",
+  "CHOOSE(#inc,{ty_l1_lic},{ty_l1_lmic},{ty_l1_umic},{ty_l1_hic})"),
 ]
+for _k in range(1, 6):   # unmodelled clean investment: power and end-use mix (IEA WEI 2024)
+    SCALARS.append((f"ty_cal_p{_k}", f"Type share, unmodelled clean investment: P{_k}", "share",
+                    f"{{ty_cal_pow}}*#ty_gen_p{_k}+(1-{{ty_cal_pow}})*#ty_bld_p{_k}"))
 
 # -----------------------------------------------------------------------------
 # ROWS: (section, code, fuel, sector, description, unit, base template, projection template)
@@ -338,8 +431,12 @@ R(S6, "mit.cbam.co2.1", "", "ind", "CBAM-goods process CO2 (CBAM tool output)", 
   "#cbam24*(1+#cbam_g/100)^MIN(YEAR-2024,6)")
 R(S6, "mit.cbam.abt.2", "", "ind", "CBAM-goods process CO2 abated (net zero)", "MtCO2", "0",
   "[mit.cbam.co2.1]*{cbam_a_2050}*(YEAR-2024)/26")
+R(S6, "mit.inv.ixh.2", "", "ind", "Investment: industrial fuel switch", "USD bn", "0",
+  "{k_ind}*MAX(0,[mit.ind.abt.2]-[mit.ind.abt.2@-1])*#pf/1000")
+R(S6, "mit.inv.ccs.2", "", "ind", "Investment: CCS on CBAM-goods process CO2", "USD bn", "0",
+  "{k_ccs}*MAX(0,[mit.cbam.abt.2]-[mit.cbam.abt.2@-1])*#pf/1000")
 R(S6, "mit.inv.ind.2", "", "ind", "Investment: industrial fuel switch and CCS", "USD bn", "0",
-  "({k_ind}*MAX(0,[mit.ind.abt.2]-[mit.ind.abt.2@-1])+{k_ccs}*MAX(0,[mit.cbam.abt.2]-[mit.cbam.abt.2@-1]))*#pf/1000")
+  "[mit.inv.ixh.2]+[mit.inv.ccs.2]")
 
 S7 = "7. Power"
 R(S7, "mit.cap.sol.cost", "", "pow", "Solar capital cost", "USD/kW", "{capex_sol24}", "{capex_sol24}*(1-{lr_sol})^(YEAR-2024)")
@@ -395,8 +492,9 @@ R(S8, "mit.nc.abt.2", "", "", "Non-CO2 and process GHG abated (net zero)", "MtCO
   "#nc24*IF(YEAR<=2030,{nc_2030}*(YEAR-2024)/6,{nc_2030}+({nc_2050}-{nc_2030})*(YEAR-2030)/20)")
 R(S8, "mit.lu.abt.2", "", "", "Net land-use emissions abated (net zero)", "MtCO2e", "0",
   "#lu24*MIN(1,(YEAR-2024)/({lu_T}-2024))")
-R(S8, "mit.inv.nco.2", "", "", "Spending: non-CO2 and land-use abatement", "USD bn", "0",
-  "([mit.nc.abt.2]*{cpt_nc}+[mit.lu.abt.2]*{cpt_afolu})/1000")
+R(S8, "mit.spd.nc.2", "", "", "Spending: non-CO2 and process abatement", "USD bn", "0", "[mit.nc.abt.2]*{cpt_nc}/1000")
+R(S8, "mit.spd.lu.2", "", "", "Spending: land-use abatement", "USD bn", "0", "[mit.lu.abt.2]*{cpt_afolu}/1000")
+R(S8, "mit.inv.nco.2", "", "", "Spending: non-CO2 and land-use abatement", "USD bn", "0", "[mit.spd.nc.2]+[mit.spd.lu.2]")
 
 S9 = "9. Emissions, fuel bills and air pollution"
 EFK = {"gso": "ef_gso", "die": "ef_die", "coa": "ef_coa", "nga": "ef_nga", "lpg": "ef_lpg", "ker": "ef_ker", "oil": "ef_oil"}
@@ -460,6 +558,33 @@ R(S11, "mit.ic.c", "", "", "INCREMENTAL COST (c) 6% + local co-benefits", "USD b
 R(S11, "mit.ghg.abt", "", "", "GHG abated (baseline less net zero)", "MtCO2e", "0", "[mit.ghg.tot.1]-[mit.ghg.tot.2]")
 R(S11, "mit.df.a", "", "", "Discount factor, market WACC", "x", "1", "(1+#wacc)^-(YEAR-2024)")
 R(S11, "mit.df.b", "", "", "Discount factor, 6%", "x", "1", "(1+{r_wb})^-(YEAR-2024)")
+
+S12 = "12. Investment by type: who pays (P1 pure public ... P5 pure private)"
+TYPES = [(1, "P1 pure public"), (2, "P2 regulated utility"), (3, "P3 contracted revenue"),
+         (4, "P4 viability gap"), (5, "P5 pure private")]
+def typ_terms(k, sc):
+    """Investment rows of scenario sc times their type-k share."""
+    t = [f"[mit.inv.{x}.{sc}]*#ty_{x}_p{k}" for x in ("gen", "grid", "trn", "bld", "cal") if HAS(f"mit.inv.{x}.{sc}")]
+    if sc == 2:
+        if k == 4: t += ["[mit.inv.ixh.2]*#ty_ih_p4", "[mit.inv.ccs.2]", "[mit.spd.nc.2]*(1-#ty_nc_p1-#ty_nc_p5)",
+                         "[mit.spd.lu.2]*(1-#ty_lu_p1)", "[mit.inv.oth.2]"]
+        if k == 5: t += ["[mit.inv.ixh.2]*(1-#ty_ih_p4)", "[mit.spd.nc.2]*#ty_nc_p5"]
+        if k == 1: t += ["[mit.spd.nc.2]*#ty_nc_p1", "[mit.spd.lu.2]*#ty_lu_p1"]
+    return "+".join(t) if t else "0"
+for sc in (1, 2):
+    for k, nm in TYPES:
+        R(S12, f"mit.typ.p{k}.{sc}", "", "", f"Investment, {nm}, {'baseline' if sc == 1 else 'net zero'}", "USD bn",
+          "0", typ_terms(k, sc))
+for k, nm in TYPES:
+    R(S12, f"mit.dtyp.p{k}", "", "", f"Incremental investment, {nm}", "USD bn", "0", f"[mit.typ.p{k}.2]-[mit.typ.p{k}.1]")
+R(S12, "mit.typ.bud.2", "", "", "Direct budget need, net zero: P1 + public gap share of P4", "USD bn", "0",
+  "[mit.typ.p1.2]+{ty_p4_gap}*[mit.typ.p4.2]")
+R(S12, "mit.dtyp.bud", "", "", "Direct budget need, incremental: P1 + public gap share of P4", "USD bn", "0",
+  "[mit.dtyp.p1]+{ty_p4_gap}*[mit.dtyp.p4]")
+R(S12, "mit.typ.cnt.2", "", "", "Revenue resting on a public tariff or buyer, net zero (P2 + P3)", "USD bn", "0",
+  "[mit.typ.p2.2]+[mit.typ.p3.2]")
+R(S12, "mit.typ.prv.2", "", "", "Private capital, net zero: P3 + P5 + private part of P4", "USD bn", "0",
+  "[mit.typ.p3.2]+[mit.typ.p5.2]+(1-{ty_p4_gap})*[mit.typ.p4.2]")
 
 ROWIDX = {r["code"]: i for i, r in enumerate(ROWS)}
 assert len(ROWIDX) == len(ROWS), "duplicate codes"
@@ -533,6 +658,15 @@ def summarise(iso, d, S, V):
     out["pv_ic_c"] = sum(V["mit.ic.c"][i] * V["mit.df.b"][i] for i in rng)
     out["cum_abt"] = sum(V["mit.ghg.abt"][i] for i in rng)
     out["co2_model_2024"] = V["mit.co2.en.1"][0]; out["co2_cpat_2024"] = d["co2_24"]
+    for k in range(1, 6):
+        for y in (2030, 2040):
+            out[f"typ{k}_{y}"] = V[f"mit.typ.p{k}.2"][yi[y]]
+        out[f"dtyp{k}_2030"] = V[f"mit.dtyp.p{k}"][yi[2030]]
+        out[f"typ{k}_cum"] = sum(V[f"mit.typ.p{k}.2"][i] for i in rng)
+    out["bud_2030"] = V["mit.typ.bud.2"][yi[2030]]; out["dbud_2030"] = V["mit.dtyp.bud"][yi[2030]]
+    out["prv_2030"] = V["mit.typ.prv.2"][yi[2030]]
+    out["pms"] = d["pms"]; out["cr_ecy"] = d["cr_ecy"]
+    for x in ("ty_u", "ty_h", "ty_v", "ty_m"): out[x] = S[x]
     for k, *_ in SECT:
         out[f"dinv_{k}_2030"] = V[f"mit.dinv.{k}"][yi[2030]]
         out[f"inv2_{k}_2030"] = V[f"mit.inv.{k}.2"][yi[2030]] if f"mit.inv.{k}.2" in V else 0.0
@@ -568,15 +702,18 @@ def main():
             long.append([iso, f"{iso.lower()}.{code}", ROWS[ROWIDX[code]]["unit"]] + V[code])
         summ.append(summarise(iso, d, S, V))
     cols = ["iso", "code", "unit"] + YEARS
-    pd.DataFrame(long, columns=cols).to_csv(os.path.join(RES, "nmim_results_v0_1.csv"), index=False, float_format="%.10g")
+    pd.DataFrame(long, columns=cols).to_csv(os.path.join(RES, "nmim_results_v0_2.csv"), index=False, float_format="%.10g")
     sm = pd.DataFrame(summ)
-    sm.to_csv(os.path.join(RES, "nmim_summary_v0_1.csv"), index=False, float_format="%.10g")
+    sm.to_csv(os.path.join(RES, "nmim_summary_v0_2.csv"), index=False, float_format="%.10g")
     g = sm.groupby("grp")[[c for c in sm.columns if c.endswith("_2030") and not c.startswith(("gdp", "dinv_", "inv2_"))]
                           + ["cum_inv2", "cum_dinv", "pv_ic_a", "pv_ic_b", "pv_ic_c", "cum_abt"]].sum()
     g.loc["World"] = g.sum()
     pd.set_option("display.width", 220)
     print(g.round(0).T)
     print(sm[[f"inv2_{k}_2030" for k, *_ in SECT]].sum().round(0))
+    t = sm.groupby("grp")[[f"typ{k}_2030" for k in range(1, 6)] + ["bud_2030", "prv_2030"]].sum()
+    t.loc["World"] = t.sum()
+    print(t.round(0)); print((t[[f"typ{k}_2030" for k in range(1, 6)]].div(t[[f"typ{k}_2030" for k in range(1, 6)]].sum(axis=1), axis=0) * 100).round(1))
     return sm
 
 if __name__ == "__main__":

@@ -81,11 +81,13 @@ method (October 2026). See [`InvestmentNeeds/README.md`](InvestmentNeeds/README.
   dashboard's cost-of-capital and PIMA indicators; has a Damodaran input sheet for wider
   WACC coverage.
 - **`Mitigation_Investment_Needs_v1.1_summary.png`** — one-page summary of the results
-- **`national_model/`** — NMIM v0.1, a simplified national mitigation investment model:
+- **`national_model/`** — NMIM v0.2, a simplified national mitigation investment model:
   186 countries, 2024-2050, baseline and net zero, CPAT norms (codes, layout, data,
   activity equation), consistent with the CBAM Policy Tool; Python engine + CPAT-layout
-  workbook with live formulas; method note and check report
-- **`Mitigation_Investment_Needs_Methodology.md` / `.docx`** — methodology (v1.1 workbook, sector by sector, sensitivity, national model and data needs)
+  workbook with live formulas; method note and check report. v0.2 adds a typology of who
+  pays (P1 pure public ... P5 pure private) by country and sector, driven by power market
+  structure (PSRT, PPI), electricity cost recovery, WACC and subsidies
+- **`Mitigation_Investment_Needs_Methodology.md` / `.docx`** — methodology (v1.1 workbook, sector by sector, who pays: investment typology and power market structure, sensitivity, national model and data needs)
 - **`CAVEATS.md`**, **`Old/`** — task log and superseded versions
 - **`build/`** — `build_investment_model.py` (workbook), `run_sensitivity.py`
   (Sensitivity sheet), `make_summary_image.py` (summary PNG)

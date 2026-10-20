@@ -26,6 +26,8 @@ What changed in v1.1:
 - **A sensitivity sheet** runs 15 one-at-a-time tests; the 6% result stays a net cost in all but one.
 - **Abatement** rises from 596 to 921 Mt a year per year of investment, because power displaces more carbon per dollar than the note's average.
 
+Who pays (national model, NMIM v0.2): of 2030 net zero investment, 10% is pure public, 26% regulated utility, 21% contracted revenue, 13% viability gap and 31% pure private. In other EMDCs half needs public money beyond a guarantee, and their direct budget need is USD 379 bn in 2030 (see *Who pays*).
+
 ## Scope and definitions
 
 The model covers mitigation only: the investment a country needs in 2030 to be on a net zero path, in USD billion a year at 2023 prices. Adaptation, loss and damage and the just transition are outside it.
@@ -214,6 +216,158 @@ I^{PIMA}_c = I_c\left[(1-\pi_g) + \frac{\pi_g}{1-gap_c}\right]
 
 The dashboard's other PIMA indicators are reported beside each country but do not enter the formula: capital budget execution (BOOST, 104 economies), PEFA PI-12.2 asset monitoring, and whether a climate-PFM diagnostic is on record (UNDP 2022). IMF PIMA and C-PIMA scores themselves are not yet in the data; they would replace the PEFA mapping directly.
 
+## Who pays: a typology of investment needs
+
+Mitigation investment falls into five types, set by one question: where does the money to repay it come from? In 2030, NMIM v0.2 puts 10% of the world's USD 5.1 tn of net zero investment with the budget (P1) and 13% with private investors who need a public top-up (P4). In other EMDCs those two types are half of needs, and in low-income countries 85%.
+
+### The five types
+
+| Type | Where repayment comes from | Who typically finances it | Covers its own cost? | Main instruments | Examples |
+| --- | --- | --- | --- | --- | --- |
+| **P1 Pure public** | Taxes; no user revenue | Budget, concessional loans, grants | No | Budget capital spending, MDB sovereign loans, climate funds | Forest protection, transit rights of way, public building retrofits, R&D, grid extension for access |
+| **P2 Regulated utility** (quasi-public) | Tariffs set by a regulator on a regulated asset base | State or private utilities, sovereign-guaranteed debt | Yes, if tariffs recover costs | Rate-of-return regulation, utility bonds, MDB utility loans | Transmission, distribution, utility-built hydro and nuclear, grid storage |
+| **P3 Contracted revenue** (quasi-private) | A long-term contract with a public or regulated buyer | Independent producers, project finance | Yes, if the buyer is creditworthy | PPAs, contracts for difference, auctions, guarantees | Utility solar and wind, storage with capacity payments, charging concessions |
+| **P4 Viability gap** (private with subsidy) | Market revenue plus a public top-up that closes a cost gap | Firms, with public co-funding | Not yet | Carbon contracts for difference, capital grants, carbon pricing, green procurement | Green steel and cement, CCS, hydrogen, sustainable aviation fuel |
+| **P5 Pure private** | Savings or sales to the investor's own customers | Households, firms, banks | Yes, from fuel and energy savings | Consumer and green loans, standards, feebates | EVs, rooftop solar, heat pumps, industrial efficiency |
+
+P2 and P3 are the quasi-private middle: they pay for themselves, but only through a public decision on tariffs or a public counterparty. Generation with revenues sits here in most countries. P4 is private investment that does not yet cover its cost; the public share is the gap, not the whole project.
+
+![Mitigation investment runs from budget-paid to market-paid](methodology_figures/typology_spectrum.png)
+
+*Investment typology · five types on one spectrum*
+
+### Sector by sector
+
+The same asset can sit in different types depending on the country. The table gives the typical type in each country group.
+
+| Investment | Model sector | Advanced | Middle income | Low income | What decides the type |
+| --- | --- | --- | --- | --- | --- |
+| Utility solar and wind | Generation | P3 (some merchant P5) | P3 | P3 if the buyer is creditworthy, else P2 | Offtaker credit; auctions and guarantees |
+| Hydro, nuclear, geothermal | Generation | P2 | P2 | P2 or P1 | Scale, long lead times, state ownership |
+| Rooftop and distributed solar | Generation | P5 | P5 | P5 | Net metering or self-use savings |
+| Mini-grids and off-grid solar | Generation | n.a. | P4 | P4 | Results-based subsidy for poor customers |
+| Transmission and distribution | Grids | P2 | P2 | P1 or P2 | Cost-reflective tariffs; collection and losses |
+| Grid-scale storage | Grids | P3 | P3 or P2 | P2 | Capacity payments or regulated asset |
+| Grid extension for access | Grids | n.a. | P1 | P1 | No paying customers at the start |
+| EVs (cars, two- and three-wheelers) | Transport | P5 | P5 or P4 | P4 | Upfront premium vs fuel savings; feebates |
+| Electric buses, charging | Transport | P3 or P5 | P3 | P1 or P3 | Municipal concessions, fleet leasing, utilisation risk |
+| Rail, metro, bus rapid transit | Transport | P1 | P1 | P1 | Fares rarely recover capital |
+| Heat pumps and efficiency | Buildings | P5 | P4 | P4 | Savings vs upfront cost; credit access |
+| Public building retrofits | Buildings | P1 | P1 | P1 | The owner is the state |
+| Industrial efficiency and electrification | Industry | P5 | P5 | P5 or P4 | Short paybacks, finance access |
+| Green steel, cement, ammonia, CCS | Industry | P4 | P4 | P4 | No market premium yet; carbon price and CBAM |
+| Methane abatement in oil and gas | Fuels | P5 | P5 | P5 | Captured gas is sold |
+| Hydrogen and biofuels | Fuels | P4 | P4 | P4 | Cost gap to fossil fuels |
+| Forest protection and restoration | AFOLU | P1 | P1 or P4 | P1 or P4 | Public land; results-based payments, carbon credits |
+| Climate-smart agriculture | AFOLU | P4 or P5 | P4 | P4 | Yield gains vs upfront cost |
+| Planning, MRV, R&D | Cross-cutting | P1 | P1 | P1 | Pure public good |
+
+### Power market structure
+
+Power and grids are almost half of net zero investment, and their type depends most on how the sector is organised. NMIM v0.2 gives every country a market structure code from the dashboard's power sector indicators:
+
+| Code | Structure | Who builds generation | Countries |
+| --- | --- | --- | --- |
+| 1 | Vertically integrated utility, no IPPs | The utility, on its regulated balance sheet (P2), or the budget (P1) | 38 |
+| 2 | Single buyer with IPPs | IPPs under PPAs with the utility (P3), plus utility plants (P2) | 86 |
+| 3 | Wholesale competition | Contracted (CfDs, auctions, corporate PPAs: P3) and merchant (P5) | 62 |
+
+- **Source:** the Power Sector Reform Tracker (Urpelainen and Yang; 142 non-OECD countries to 2013): 3 if a wholesale market, 2 if IPPs, else 1, as on the dashboard.
+- **Curated:** the 48 countries PSRT does not cover (OECD and small states), and 12 where it is out of date or codes a market law that never opened a market. For example, Viet Nam is 3 (wholesale market since 2019); Egypt, Pakistan, Nigeria and Ghana are 2 (single buyers).
+- **Updated with PPI:** where PSRT gives 1 but the World Bank PPI database records two or more private generation projects reaching close in 2014-2024, the code is 2 (16 countries).
+- **Also recorded per country** (workbook PowerMarket sheet): independent regulator, unbundling, privatisation, cost-reflective tariffs (PSRT); PPI private electricity investment, its solar and wind and merchant shares, private distribution and transmission; electricity cost recovery and explicit electricity subsidies (CPAT); RISE renewable energy and level playing field scores.
+
+### How the model assigns types
+
+The power market structure sets the starting split of generation; grids are P2 except a private contracted share of 0, 5 and 15% by structure.
+
+| Power generation | Utility (P2) | Contracted (P3) | Merchant and distributed (P5) |
+| --- | --- | --- | --- |
+| 1 Vertically integrated | 70% | 25% | 5% |
+| 2 Single buyer | 35% | 55% | 10% |
+| 3 Wholesale market | 10% | 55% | 35% |
+
+Three country indices, each from 0 to 1, then move investment toward the budget:
+
+```
+u = MIN(1, MAX(0, (1 - cost recovery) / 0.5))     utility: retail price / supply cost (CPAT 2024)
+h = MIN(1, MAX(0, (market WACC - 6%) / 8%))       cost of capital (v1.1 country WACC)
+v = MIN(1, MAX(0, explicit fossil subsidies / 2% of GDP))
+m = MIN(1, 0.4h + 0.2v + credit constraint)       top-up share of market end-use investment
+```
+
+The credit constraint is 30% in low-income and 15% in lower-middle-income countries.
+
+| Sector | Rule |
+| --- | --- |
+| Generation | P1 = P2₀ × 0.5u (utility plants tariffs do not repay); P4 = P3₀ × 0.4u (IPPs need guarantees from a weak buyer) + P5₀ × min(1, 0.4h) |
+| Grids and storage | P1 = P2₀ × min(1, 0.6u + access), access 25% (LIC), 10% (LMIC) |
+| Transport | P1 15/10/5/5% by income (public buses and fleets), P3 10% (charging concessions), the rest P4 = m, P5 = 1 − m |
+| Buildings | P1 40/40/35/30% by income (public buildings, social housing), the rest P4 = m, P5 = 1 − m |
+| Industry | CCS on CBAM goods is P4; fuel switch is P4 = 30% + 70% × m, the rest P5 |
+| Non-CO2 | P1 30/25/20/20% by income, P5 = 35% × (1 − m) (methane captured and sold), the rest P4 |
+| Land use | P1 80/70/60/50% by income, the rest P4 (results-based payments, carbon credits) |
+| Other energy CO2 | P4 (aviation, shipping) |
+| Unmodelled clean investment | Half on the generation split, half on the buildings split (IEA: about half of clean investment is power) |
+
+The **direct budget need** is P1 plus the public gap in P4 (30% of its capital). **Private capital** is P3 + P5 + the other 70% of P4. Every share is a parameter on the workbook's Inputs sheet (`ty_*`, marked † as assumptions). The Typology sheet shows the selected country's indices, its share matrix and its investment by type each year. The engine and the workbook agree to 1e-9, and the five types sum to total investment in every country and year.
+
+### Results
+
+![Who pays for 2030 net zero investment](methodology_figures/typology_by_group.png)
+
+| 2030, USD bn | Advanced economies | China | Other EMDCs | World |
+| --- | --- | --- | --- | --- |
+| P1 Pure public | 174 | 70 | 267 | 511 |
+| P2 Regulated utility | 508 | 620 | 179 | 1,307 |
+| P3 Contracted revenue | 526 | 346 | 191 | 1,063 |
+| P4 Viability gap | 114 | 167 | 374 | 655 |
+| P5 Pure private | 951 | 325 | 291 | 1,567 |
+| **Net zero investment** | **2,273** | **1,526** | **1,303** | **5,103** |
+| Direct budget need (P1 + gap of P4) | 209 | 120 | 379 | 708 |
+| of which incremental | 111 | 82 | 313 | 506 |
+| Private capital, share | 69% | 52% | 57% | 61% |
+
+- **China** is mostly P2 (41%) because its power and grids run through state utilities and grid companies buying from state generators.
+- **Advanced economies** have the largest P5 share (42%): wholesale markets leave room for merchant and distributed power, and households and firms buy EVs, heat pumps and rooftop solar out of savings.
+- **Other EMDCs** need public money beyond a guarantee for half their investment (P1 21%, P4 29%). Their budget need, USD 379 bn in 2030, is 29% of their needs, and 313 bn of it is incremental.
+- **Low-income countries** are 57% P1: land use, grids for access and utilities that do not recover costs. Two-thirds of their USD 88 bn falls on the budget.
+- **Market structure matters:** in wholesale markets 38% of investment is P5; under vertically integrated utilities, 20%, with a quarter P1.
+- The 57% private share for other EMDCs is close to IEA-IFC's estimate that about 60% of EMDE clean energy investment must be private.
+
+### How country context moves an investment
+
+The direction is the same everywhere: the weaker the institutions and the higher the cost of capital, the further toward P1 an investment falls. A solar farm is P3 in Brazil, where the buyer is creditworthy and auctions are tested. In a country whose utility recovers only part of its costs it is effectively P2, and in a fragile state P1, because a public guarantee or the budget stands behind the contract.
+
+| Condition | Moves investment toward | Indicator (dashboard and NMIM) |
+| --- | --- | --- |
+| Utility not creditworthy or tariffs below cost | P3 → P2 → P1 | Cost recovery (CPAT); market structure, regulator (PSRT) |
+| High cost of capital | P5 and P3 → P4 | Country WACC; official-private rate spread (IDS) |
+| Fossil subsidies or no carbon price | P5 → P4 | Explicit subsidies (IMF FFS); carbon pricing |
+| Weak public investment management | Raises the cost of P1 and P2 | PEFA PI-11, capex execution (BOOST); PIMA gap |
+
+Policy moves investment the other way. Cost-reflective tariffs move P1 grids to P2. Guarantees and auctions move P2 generation to P3. Carbon pricing, subsidy reform and CBAM credit move P4 industry toward P5. Each move shifts spending off the budget.
+
+### Financing implications and the three lenses
+
+Only P1 and the gap in P4 are budget spending; for P2 and P3 the public job is to make revenue bankable.
+
+| Type | Public role | Fiscal cost | What lowers the cost of capital | Lens that matters |
+| --- | --- | --- | --- | --- |
+| P1 Pure public | Finance and build it | Full capital cost, on budget | Concessional and MDB sovereign loans; better PIM | (b) 6% or IBRD rate; (c) for the economic case |
+| P2 Regulated utility | Set cost-reflective tariffs; recapitalise utilities | Contingent: guarantees, arrears, tariff shortfalls | Regulatory credibility, utility reform | Between (a) and (b): regulated return |
+| P3 Contracted revenue | Run auctions; stand behind the buyer | Contingent: payment guarantees, FX risk | Guarantees, FX hedging, standard contracts | (a) market WACC, reduced by de-risking |
+| P4 Viability gap | Pay the gap: CfDs, grants, carbon price | The gap only | Carbon contracts for difference, green procurement | (a) for the investor; (c) to justify the subsidy |
+| P5 Pure private | Set standards and prices; ease credit | Little or none; subsidy reform raises revenue | Green credit lines, feebates | (a) market or household rate |
+
+Lens (a) is what P3 to P5 investors see. Lens (b) is the cost of P1 and of utility debt raised on public terms; the gap between (a) and (b) is the value of de-risking for P3 and the case for concessional finance. Lens (c) is the case for spending public money on P1 and the P4 gap: the co-benefits are public, so the budget is the natural payer.
+
+### Weak points
+
+- The type shares are judgements applied to country data. They should be replaced, country by country, with observed public-private splits: CCDR investment plans, CPI's Global Landscape of Climate Finance, IEA World Energy Investment by source of finance.
+- PSRT ends in 2013, and the curated codes need review by power sector staff. PPI misses most domestic private investment and covers no advanced economies.
+- Cost recovery compares average retail prices with CPAT supply costs; it misses collection losses and arrears, which often matter more for a utility's credit.
+
 ## Sensitivity
 
 At the World Bank rate the world result ranges from USD 8 bn to 58 bn a year of net cost across 14 one-at-a-time tests; only reverting to v1.0's calibrated benefits makes it a saving. The three inputs to firm up first are the EV premium, the savings in buildings and industry, and how grid benefits are counted.
@@ -282,7 +436,7 @@ Yes, in stages, with two conditions. I can write and run the whole pipeline (Pyt
 
 Phases 2 and 3 are where most of the gain is: they replace the two parameters the results are most sensitive to (power fuel displacement and end-use savings) with country stock and cost data.
 
-### Built: a simplified national model (NMIM v0.1)
+### Built: a simplified national model (NMIM v0.2)
 
 A first, simplified national model now exists for 186 countries, annual 2024-2050. It puts net zero investment in 2030 at USD 5.1 tn, against IHLEG's 5.2 tn, and baseline investment at USD 2.1 tn, against IEA's 2.0 tn for 2024. It follows CPAT norms: CPAT's 2024 data and codes, CPAT's activity equation with its income-group elasticities, and a CPAT-layout workbook in live formulas. CBAM-goods process emissions come from the CBAM Policy Tool, and market WACC from the v1.1 workbook.
 
@@ -297,7 +451,7 @@ A first, simplified national model now exists for 186 countries, annual 2024-205
 
 Incremental cost here is the annual cost of all incremental capital in service, so it builds up over time: USD 1.2 tn a year by 2040 at (a) and (b). With co-benefits, it is a net saving of USD 0.7 tn a year by 2040.
 
-One equation specification drives both the Python engine and the workbook formulas, and a check confirms they agree to 1e-9 for eight countries. The main simplifications: no price response, power mix set by target dates rather than least cost, car-equivalent vehicles, and assumed costs for buildings and industry. Files are in `InvestmentNeeds/national_model/`; the method note is `NMIM_Method_v0_1.md`.
+One equation specification drives both the Python engine and the workbook formulas, and a check confirms they agree to 1e-9 for eight countries. The main simplifications: no price response, power mix set by target dates rather than least cost, car-equivalent vehicles, and assumed costs for buildings and industry. Version 0.2 adds the typology of who pays, driven by each country's power market structure, cost recovery, WACC and subsidies (see *Who pays*); other results are unchanged from v0.1. Files are in `InvestmentNeeds/national_model/`; the method note is `NMIM_Method_v0_2.md` and the workbook `NMIM_v0.2.xlsx`.
 
 ## Data and assumptions needed
 
@@ -333,6 +487,7 @@ The results are good for orders of magnitude and for comparing lenses, not yet f
 - [ ] Review yellow assumptions: AE/China AFOLU pools, end-use split, China WACC, public shares
 - [ ] Credit avoided fossil plants in growing power systems (power is conservative without it)
 - [ ] Confirm IRENA 2023 unit costs against the primary report
+- [ ] Replace typology shares with observed public-private splits (CCDRs, CPI, IEA WEI); review the curated power market codes
 
 Other limits: one year (2030) rather than a path; average rather than marginal displacement in power; 2024 fuel prices, when US gas and coal were cheap; Ember's "other fossil" priced as oil; no macroeconomic feedback.
 
@@ -342,6 +497,9 @@ Other limits: one year (2030) rather than a path; average rather than marginal d
 - [IHLEG 3 (Bhattacharya et al. 2024)](https://www.lse.ac.uk/granthaminstitute/wp-content/uploads/2024/11/Raising-ambition-and-accelerating-delivery-of-climate-finance_Third-IHLEG-report.pdf), clean energy and nature totals
 - [IEA-IFC (2023), Scaling Up Private Finance for Clean Energy in EMDEs](https://www.iea.org/reports/scaling-up-private-finance-for-clean-energy-in-emerging-and-developing-economies/key-findings), sector shares and private share
 - [IEA World Energy Investment 2024](https://www.iea.org/reports/world-energy-investment-2024/overview-and-key-findings), 2024 clean-energy investment by group (national model calibration)
+- [Urpelainen and Yang (2019), Global patterns of power sector reform, 1982-2013](https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/M7SY6X), Power Sector Reform Tracker (market structure)
+- [World Bank Private Participation in Infrastructure database (2024)](https://ppi.worldbank.org/en/ppidata), private electricity projects
+- [World Bank RISE (2023)](https://rise.esmap.org/), regulatory indicators for sustainable energy
 - [IMF (2015), Making Public Investment More Efficient](https://infrastructuregovern.imf.org/content/dam/PIMA/Forum/IGEUR/Resources/Making%20Public%20Investment%20More%20Efficient%202015.pdf), efficiency gaps
 - IPCC AR6 WGIII Summary for Policymakers, C.9.1 and C.12 (repository copy, `_research/ipcc_pdfs/spm.txt`)
 - IPCC 2006 Guidelines Vol. 2, Table 2.2, CO2 factors (repository copy, `_research/refs/fuel_ef_table.txt`)
