@@ -1,0 +1,43 @@
+{
+ "title": "Excise Diagnostic and Tax & Macro-Fiscal Dashboard",
+ "author": "Stephen Stretton",
+ "slides": [
+  {
+   "layout": "Title and Bullets",
+   "title": "Excise Diagnostic and Tax & Macro-Fiscal Dashboard",
+   "table": {
+    "headers": [
+     "",
+     "Status and timeline"
+    ],
+    "rows": [
+     [
+      "What it is",
+      "Excise Diagnostic (Sierra Leone, Uganda, Liberia) and a dashboard: 53 indicators, 217 countries"
+     ],
+     [
+      "Platform",
+      "Fiscal platform: tax and macro-fiscal data layer"
+     ],
+     [
+      "Status (20 Oct)",
+      "Done: both handed to Dirk early (week of 5 Oct); all 4 Objective 3 milestones complete"
+     ],
+     [
+      "Next",
+      "Owners use them; one week of follow-up support"
+     ],
+     [
+      "Timeline",
+      "Support 8-12 Mar 2027"
+     ],
+     [
+      "Ask / risk",
+      "Owners not yet named; tools not validated"
+     ]
+    ]
+   },
+   "notes": ""
+  }
+ ]
+}

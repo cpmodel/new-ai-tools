@@ -1,0 +1,43 @@
+{
+ "title": "CBAM policy tool",
+ "author": "Stephen Stretton",
+ "slides": [
+  {
+   "layout": "Title and Bullets",
+   "title": "CBAM policy tool",
+   "table": {
+    "headers": [
+     "",
+     "Status and timeline"
+    ],
+    "rows": [
+     [
+      "What it is",
+      "Excel tool: what a domestic carbon price does to heavy industry and the EU CBAM charge; 6 policy scenarios"
+     ],
+     [
+      "Platform",
+      "Fiscal platform (revenue, credits); process emissions feed the investment model"
+     ],
+     [
+      "Status (20 Oct)",
+      "Egypt v3.0 (7 CBAM goods) and a global MVP v1.0 (9 Oct)"
+     ],
+     [
+      "Next",
+      "CBAM modelling inside CPAT (to discuss); port to Python with coded CPAT"
+     ],
+     [
+      "Timeline",
+      "To agree: after the Excel-AI final (4 Dec)"
+     ],
+     [
+      "Ask / risk",
+      "No trade model; elasticities by judgement. Ask: is CBAM in CPAT a priority?"
+     ]
+    ]
+   },
+   "notes": ""
+  }
+ ]
+}

@@ -1,0 +1,43 @@
+{
+ "title": "Investment needs (NMIM)",
+ "author": "Stephen Stretton",
+ "slides": [
+  {
+   "layout": "Title and Bullets",
+   "title": "Investment needs (NMIM)",
+   "table": {
+    "headers": [
+     "",
+     "Status and timeline"
+    ],
+    "rows": [
+     [
+      "What it is",
+      "National mitigation investment model: 186 countries, 2024-2050, built to CPAT norms; who pays (public, utility, private)"
+     ],
+     [
+      "Platform",
+      "Both: investment for pathways; budget need for the fiscal platform"
+     ],
+     [
+      "Status (20 Oct)",
+      "v0.2 (20 Oct). 2030: about USD 5.1tn total, 1.7tn incremental; direct budget need ~14% (85% in low-income countries)"
+     ],
+     [
+      "Next",
+      "Financing and debt layer linked to MFMod; load cost-of-capital data; add a price response"
+     ],
+     [
+      "Timeline",
+      "Proposal stage: fits the pathways timeline (Jan) and the fiscal platform (Feb)"
+     ],
+     [
+      "Ask / risk",
+      "The natural hook for the macro unit: investment -> debt and fiscal space in MFMod"
+     ]
+    ]
+   },
+   "notes": ""
+  }
+ ]
+}

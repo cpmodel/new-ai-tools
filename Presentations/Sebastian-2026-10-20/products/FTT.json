@@ -1,0 +1,43 @@
+{
+ "title": "FTT national (Zoe)",
+ "author": "Stephen Stretton",
+ "slides": [
+  {
+   "layout": "Title and Bullets",
+   "title": "FTT national (Zoe)",
+   "table": {
+    "headers": [
+     "",
+     "Status and timeline"
+    ],
+    "rows": [
+     [
+      "What it is",
+      "National-level data so FTT technology diffusion (power, cars, freight, heat, steel) runs on CPAT's countries"
+     ],
+     [
+      "Platform",
+      "Climate platform; with MFMod, the bridge to the fiscal platform"
+     ],
+     [
+      "Status (20 Oct)",
+      "Zoe delivering; I review. Progress % not yet reported"
+     ],
+     [
+      "Next",
+      "Ask Zoe for a review date; then FTT + MFMod on one Python platform"
+     ],
+     [
+      "Timeline",
+      "FTT project 27 Nov; FTT + MFMod working 12 Feb"
+     ],
+     [
+      "Ask / risk",
+      "Decision: MFMod in or out for Feb (FTT-only is doable in the week)"
+     ]
+    ]
+   },
+   "notes": ""
+  }
+ ]
+}

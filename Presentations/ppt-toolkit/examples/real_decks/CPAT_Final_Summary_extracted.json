@@ -1,0 +1,1148 @@
+{
+  "title": "CPAT_Final_Summary",
+  "slides": [
+    {
+      "layout": "Title Slide",
+      "title": "A new CPAT engine, and what we build on it",
+      "subtitle": "CPAT \u00b7 FOR DISCUSSION \u00b7 SEPTEMBER 2026\nThe problem, the coded and AI-Excel conversion, other products, and what to keep\nAI-Excel\nCoded: Python + Shiny\nOther products",
+      "notes": "Draws on Issues with CPAT and Options for Remediation (first presented April 2026), the Coded CPAT and other AI tools plan (September 2026) and the FY27 work plan."
+    },
+    {
+      "title": "Contents \u2014 Purpose: agree the plan for rebuilding CPAT's engine with AI, in code and in Excel, and decide which smaller products to keep alongside it.",
+      "layout": "Title and Bullets",
+      "bullets": [
+        {
+          "text": "PART 1 \u00b7 SLIDES 3\u20135",
+          "level": 0
+        },
+        {
+          "text": "The problem",
+          "level": 0
+        },
+        {
+          "text": "Three problems",
+          "level": 0
+        },
+        {
+          "text": "Main coding issues",
+          "level": 0
+        },
+        {
+          "text": "Why a patch is not enough",
+          "level": 0
+        },
+        {
+          "text": "PART 2 \u00b7 SLIDES 6\u201312",
+          "level": 0
+        },
+        {
+          "text": "Coded CPAT and AI-Excel",
+          "level": 0
+        },
+        {
+          "text": "Two products compared",
+          "level": 0
+        },
+        {
+          "text": "Purposes of AI-Excel",
+          "level": 0
+        },
+        {
+          "text": "Maintainability",
+          "level": 0
+        },
+        {
+          "text": "Issues and resolutions",
+          "level": 0
+        },
+        {
+          "text": "Status and timeline",
+          "level": 0
+        },
+        {
+          "text": "Where each form goes",
+          "level": 0
+        },
+        {
+          "text": "PART 3 \u00b7 SLIDES 13\u201319",
+          "level": 0
+        },
+        {
+          "text": "Other products",
+          "level": 0
+        },
+        {
+          "text": "Overview (13)",
+          "level": 0
+        },
+        {
+          "text": "A \u00b7 CPAT\u2013SiSePuede (14)",
+          "level": 0
+        },
+        {
+          "text": "B \u00b7 Python platform (15)",
+          "level": 0
+        },
+        {
+          "text": "C \u00b7 Dashboard and policy report (16\u201318)",
+          "level": 0
+        },
+        {
+          "text": "D \u00b7 Total Carbon Price into GHG accounting (19)",
+          "level": 1
+        },
+        {
+          "text": "PART 4 \u00b7 SLIDES 20\u201321",
+          "level": 0
+        },
+        {
+          "text": "Keep, drop and conclude",
+          "level": 0
+        },
+        {
+          "text": "What to keep and what to drop",
+          "level": 0
+        },
+        {
+          "text": "Conclusion and next steps",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "title": "PART 1 \u00b7 THE PROBLEM \u2014 CPAT's mitigation module has three problems",
+      "layout": "Title and Bullets",
+      "bullets": [
+        {
+          "text": "Code quality",
+          "level": 0
+        },
+        {
+          "text": "The module is large, slow, heavy and hard to maintain. No user can understand or validate 250,000+ spreadsheet cells.",
+          "level": 1
+        },
+        {
+          "text": "Empirical validation",
+          "level": 0
+        },
+        {
+          "text": "The WB side has not published CPAT. The IMF publication relies mostly on an elasticity meta-analysis.",
+          "level": 1
+        },
+        {
+          "text": "Short-term usability",
+          "level": 0
+        },
+        {
+          "text": "A few bugs, and hard to demonstrate: it can take ten minutes to load. This limits its use in country work.",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "title": "PART 1 \u00b7 MAIN CODING ISSUES \u2014 Heavy, slow and hard to keep consistent",
+      "layout": "Title and Bullets",
+      "bullets": [
+        {
+          "text": "Heavy",
+          "level": 0
+        },
+        {
+          "text": "Slow",
+          "level": 0
+        },
+        {
+          "text": "Hard to maintain",
+          "level": 0
+        },
+        {
+          "text": "Hard to keep consistent",
+          "level": 0
+        },
+        {
+          "text": "Not fit for the new UI",
+          "level": 0
+        },
+        {
+          "text": "The mitigation module is the largest part of CPAT.",
+          "level": 1
+        },
+        {
+          "text": "Other modules depend on it, so they wait for it.",
+          "level": 1
+        },
+        {
+          "text": "250,000+ cells are hard to understand and validate.",
+          "level": 1
+        },
+        {
+          "text": "Excel, Python CPAT and documentation drift apart; a spreadsheet is hard to publish in a peer-reviewed journal.",
+          "level": 1
+        },
+        {
+          "text": "Policy mixes need every sector and fuel combination handled properly: a fully consistent approach.",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "title": "PART 1 \u00b7 WHY A PATCH IS NOT ENOUGH \u2014 Patching the old Excel will not be enough",
+      "layout": "Title and Bullets",
+      "bullets": [
+        {
+          "text": "So: rebuild the engine with AI, in code and in Excel, and keep them equal.",
+          "level": 1
+        },
+        {
+          "text": "The April option",
+          "level": 0
+        },
+        {
+          "text": "A new engine tab in legacy CPAT",
+          "level": 0
+        },
+        {
+          "text": "Lambda functions, arrays and simpler prices. Result: a more consistent engine, but CPAT not much faster or smaller.",
+          "level": 1
+        },
+        {
+          "text": "What the engine must now do",
+          "level": 0
+        },
+        {
+          "text": "Policy mixes across every sector, fuel and policy",
+          "level": 1
+        },
+        {
+          "text": "A clean back end for the new WB\u2013IMF interface",
+          "level": 1
+        },
+        {
+          "text": "GHG accounting, with every figure traceable",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "title": "PART 2 \u00b7 TWO PRODUCTS, COMPARED \u2014 One set of equations, two forms",
+      "layout": "Title and Bullets",
+      "table": {
+        "headers": [
+          "",
+          "1 \u00b7 Coded (Python + Shiny)",
+          "2 \u00b7 AI-Excel"
+        ],
+        "rows": [
+          [
+            "What it is",
+            "The core engine in Python, with an online Shiny interface",
+            "A cut-down CPAT in Excel, built from scratch with AI"
+          ],
+          [
+            "First uses",
+            "Model comparison; full country work once complete; SiSePuede and pathways tool",
+            "GHG accounting; a clean back end for the new WB\u2013IMF interface"
+          ],
+          [
+            "Users",
+            "Modelers and teams who run code; web users via Shiny",
+            "Economists who work in Excel; IMF and WB CPAT teams"
+          ],
+          [
+            "Strength",
+            "Scales, tests and links to other Python models",
+            "Familiar, transparent cell by cell, easy to audit"
+          ],
+          [
+            "Limit",
+            "Not open to non-coders without Shiny",
+            "Harder to scale; LAMBDA needs a recent Excel"
+          ]
+        ]
+      },
+      "notes": "Both forms share one set of equations and are kept equivalent by script. Each is built component by component, together: distribution, mitigation basics, power, other mitigation and GDP, air pollution, transport."
+    },
+    {
+      "title": "PART 2 \u00b7 THE CASE FOR AI-EXCEL \u2014 AI-Excel serves three purposes",
+      "layout": "Title and Bullets",
+      "bullets": [
+        {
+          "text": "1",
+          "level": 0
+        },
+        {
+          "text": "Input to the WB\u2013IMF process",
+          "level": 0
+        },
+        {
+          "text": "Agreed with Dirk: a contributor to future development, not yet the full CPAT. A base for one maintainable model.",
+          "level": 1
+        },
+        {
+          "text": "2",
+          "level": 0
+        },
+        {
+          "text": "GHG accounting and policy crediting",
+          "level": 0
+        },
+        {
+          "text": "A transparent Excel tool for ex-ante DPF accounting and crediting, where each figure is traceable.",
+          "level": 1
+        },
+        {
+          "text": "3",
+          "level": 0
+        },
+        {
+          "text": "Cross-checking",
+          "level": 0
+        },
+        {
+          "text": "An independent check on the coded engine and on legacy CPAT. Differences point to errors on either side.",
+          "level": 1
+        }
+      ],
+      "notes": "AI-Excel also lowers the risk of building a new user interface on an archaic back end. It is not meant to replace legacy CPAT yet; that is for later discussion."
+    },
+    {
+      "title": "PART 2 \u00b7 MAINTAINABILITY \u2014 Scripts keep code, Excel and docs equal",
+      "layout": "Title and Bullets",
+      "bullets": [
+        {
+          "text": "Excel CPAT",
+          "level": 0
+        },
+        {
+          "text": "Legacy data and parameters",
+          "level": 0
+        },
+        {
+          "text": "Share generators, not context",
+          "level": 0
+        },
+        {
+          "text": "Claude builds the Excel through a Python script. We save (a) that full script and (b) a readable pseudocode version that produces it.",
+          "level": 1
+        },
+        {
+          "text": "Extraction scripts",
+          "level": 0
+        },
+        {
+          "text": "Pull data out, with a source trail",
+          "level": 0
+        },
+        {
+          "text": "Works with Claude or Copilot",
+          "level": 0
+        },
+        {
+          "text": "Any AI coding tool can pick it up. Proprietary data stays ring-fenced outside the shared files.",
+          "level": 1
+        },
+        {
+          "text": "Generative files",
+          "level": 0
+        },
+        {
+          "text": "Build script + pseudocode",
+          "level": 0
+        },
+        {
+          "text": "Python engine",
+          "level": 0
+        },
+        {
+          "text": "AI-Excel",
+          "level": 0
+        },
+        {
+          "text": "Documentation",
+          "level": 0
+        }
+      ],
+      "notes": "Joint working with AI: rather than passing around long context, we keep small generative files and concise scripts. Anyone, with any AI tool, can regenerate the Excel, the code and the documentation from them."
+    },
+    {
+      "title": "PART 2 \u00b7 ISSUES AND RESOLUTIONS \u2014 The main risks are known and manageable",
+      "layout": "Title and Bullets",
+      "table": {
+        "headers": [
+          "Topic",
+          "Issue",
+          "Resolution"
+        ],
+        "rows": [
+          [
+            "IMF ownership",
+            "The IMF may want to take control, and could build its own version.",
+            "Agree the WB side first, then bring the IMF in early. Their version may look like ours."
+          ],
+          [
+            "Compatibility",
+            "LAMBDA functions need recent Excel; older copies, e.g. in finance ministries, may fail.",
+            "Finance ministries are not the first audience. LAMBDAs can be turned back into direct formulae."
+          ],
+          [
+            "Functionality",
+            "Excel CPAT holds many ad hoc changes; the new model will not match them all at first.",
+            "Build a sound, maintainable base; extend it once code and AI-Excel are adequate."
+          ],
+          [
+            "Scope",
+            "Risk of two Excel models to maintain in the long run.",
+            "A contributor to the WB\u2013IMF process, not yet the full CPAT. Long-term, keep one Excel."
+          ],
+          [
+            "Accessibility",
+            "Teams use different AI tools, and some data is proprietary.",
+            "Works with Claude or GitHub Copilot; proprietary data kept ring-fenced."
+          ]
+        ]
+      },
+      "notes": "Ask the room: what other issues should we plan for? These points come from discussion with Dirk."
+    },
+    {
+      "title": "PART 2 \u00b7 CURRENT STATUS \u00b7 28 SEPTEMBER \u2014 Five weeks spent; the proofs of concept are done",
+      "layout": "Title and Bullets",
+      "bullets": [
+        {
+          "text": "Blocked by leave to 14 July and through August (leave without pay). Next: mitigation basics and the Excel MVP, from 5 October.",
+          "level": 1
+        },
+        {
+          "text": "July \u00b7 2 weeks \u00b7 done",
+          "level": 0
+        },
+        {
+          "text": "Proofs of concept",
+          "level": 0
+        },
+        {
+          "text": "Coded CPAT prototype, proof of concept on prices",
+          "level": 1
+        },
+        {
+          "text": "AI dashboard, with full data audit trail",
+          "level": 0
+        },
+        {
+          "text": "Excise Diagnostic",
+          "level": 0
+        },
+        {
+          "text": "September \u00b7 3 weeks \u00b7 done",
+          "level": 0
+        },
+        {
+          "text": "Set-up",
+          "level": 0
+        },
+        {
+          "text": "Requirements and scope",
+          "level": 0
+        },
+        {
+          "text": "AI coding set-up",
+          "level": 0
+        },
+        {
+          "text": "AI-Excel form begun",
+          "level": 0
+        },
+        {
+          "text": "Pathways tool \u00b7 in progress",
+          "level": 0
+        },
+        {
+          "text": "CPAT and SiSePuede",
+          "level": 0
+        },
+        {
+          "text": "Assumptions reconciled; variables mapped",
+          "level": 0
+        },
+        {
+          "text": "Coded CPAT run in full on the SiSePuede side",
+          "level": 1
+        },
+        {
+          "text": "Prices and policies partly brought in",
+          "level": 0
+        }
+      ],
+      "source": "Source: FY27 work plan v1.1"
+    },
+    {
+      "title": "PART 2 \u00b7 MASTER TIMELINE\u00b2 \u2014 Excel MVP\u00b9 by 16 October; all modules by February",
+      "layout": "Title and Bullets",
+      "bullets": [
+        {
+          "text": "Mitigation basics + Excel MVP\u00b9",
+          "level": 0
+        },
+        {
+          "text": "Code MVP + Shiny",
+          "level": 0
+        },
+        {
+          "text": "Distribution",
+          "level": 0
+        },
+        {
+          "text": "Power",
+          "level": 0
+        },
+        {
+          "text": "Air pollution",
+          "level": 0
+        },
+        {
+          "text": "Remainder of mitigation",
+          "level": 0
+        },
+        {
+          "text": "Shiny prototype",
+          "level": 0
+        },
+        {
+          "text": "GHG accounting",
+          "level": 0
+        },
+        {
+          "text": "Transport",
+          "level": 0
+        },
+        {
+          "text": "Policy crediting and FFI",
+          "level": 0
+        },
+        {
+          "text": "Macro-fiscal dashboard updates",
+          "level": 0
+        },
+        {
+          "text": "Policy reports",
+          "level": 0
+        },
+        {
+          "text": "\u00b9 MVP = minimum viable product: mitigation basics working, and matching, in code and AI-Excel. Hatched = leave.",
+          "level": 1
+        },
+        {
+          "text": "\u00b2 In parallel, not shown: CPAT\u2013SiSePuede supervision (half a day a week to mid-Dec, a day a week in Jan); Python platform with Zoe (Feb, about half of each week); Energy GP finance model review (two weeks, late Jan\u2013Feb, not yet slotted).",
+          "level": 1
+        },
+        {
+          "text": "Model + AI-Excel",
+          "level": 0
+        },
+        {
+          "text": "Application",
+          "level": 0
+        },
+        {
+          "text": "Other products",
+          "level": 0
+        },
+        {
+          "text": "Shiny + code",
+          "level": 0
+        },
+        {
+          "text": "5",
+          "level": 0
+        },
+        {
+          "text": "Oct",
+          "level": 0
+        },
+        {
+          "text": "12",
+          "level": 0
+        },
+        {
+          "text": "19",
+          "level": 0
+        },
+        {
+          "text": "26",
+          "level": 0
+        },
+        {
+          "text": "2",
+          "level": 0
+        },
+        {
+          "text": "Nov",
+          "level": 0
+        },
+        {
+          "text": "MVP \u00b7 16 Oct",
+          "level": 0
+        },
+        {
+          "text": "9",
+          "level": 0
+        },
+        {
+          "text": "16",
+          "level": 0
+        },
+        {
+          "text": "23",
+          "level": 0
+        },
+        {
+          "text": "30",
+          "level": 0
+        },
+        {
+          "text": "7",
+          "level": 0
+        },
+        {
+          "text": "Dec",
+          "level": 0
+        },
+        {
+          "text": "14",
+          "level": 0
+        },
+        {
+          "text": "Leave",
+          "level": 0
+        },
+        {
+          "text": "4",
+          "level": 0
+        },
+        {
+          "text": "Jan",
+          "level": 0
+        },
+        {
+          "text": "11",
+          "level": 0
+        },
+        {
+          "text": "18",
+          "level": 0
+        },
+        {
+          "text": "25",
+          "level": 0
+        },
+        {
+          "text": "1",
+          "level": 0
+        },
+        {
+          "text": "Feb",
+          "level": 0
+        },
+        {
+          "text": "8",
+          "level": 0
+        },
+        {
+          "text": "15",
+          "level": 0
+        },
+        {
+          "text": "22",
+          "level": 0
+        },
+        {
+          "text": "1",
+          "level": 0
+        },
+        {
+          "text": "Mar",
+          "level": 0
+        },
+        {
+          "text": "8",
+          "level": 0
+        },
+        {
+          "text": "15",
+          "level": 0
+        }
+      ],
+      "notes": "Done so far (July and September, five weeks): prices proof of concept, AI dashboard and Excise Diagnostic proofs of concept, requirements and AI coding set-up, and the AI-Excel form begun. The week of 26 October is now leave, so distribution takes one week (2 November); all later dates are unchanged."
+    },
+    {
+      "title": "PART 2 \u00b7 WHERE THE CODE AND THE EXCEL GO \u2014 The code feeds SiSePuede; the Excel feeds the WB\u2013IMF process",
+      "layout": "Title and Bullets",
+      "bullets": [
+        {
+          "text": "One engine",
+          "level": 0
+        },
+        {
+          "text": "One set of equations, kept equal by script",
+          "level": 1
+        },
+        {
+          "text": "Coded (Python)",
+          "level": 0
+        },
+        {
+          "text": "With a Shiny web interface",
+          "level": 0
+        },
+        {
+          "text": "AI-Excel",
+          "level": 0
+        },
+        {
+          "text": "A cut-down CPAT in Excel",
+          "level": 0
+        },
+        {
+          "text": "CPAT\u2013SiSePuede pathways tool \u00b7 slide 14",
+          "level": 0
+        },
+        {
+          "text": "Single Python platform with MFMod and FTT \u00b7 slide 15",
+          "level": 1
+        },
+        {
+          "text": "Model comparison and web users via Shiny",
+          "level": 0
+        },
+        {
+          "text": "WB\u2013IMF CPAT process, as a contributor",
+          "level": 0
+        },
+        {
+          "text": "GHG accounting and policy crediting tool",
+          "level": 0
+        },
+        {
+          "text": "Cross-check of the code and legacy CPAT",
+          "level": 0
+        }
+      ],
+      "notes": "The transition to Part 3. The coded engine is the input to the CPAT\u2013SiSePuede project and sits on the single Python platform. AI-Excel goes to the WB\u2013IMF process, GHG accounting and cross-checking. Part 3 starts with the two places the code goes."
+    },
+    {
+      "title": "PART 3 \u00b7 OTHER PRODUCTS \u2014 Small tasks, built on what already exists",
+      "layout": "Title and Bullets",
+      "table": {
+        "headers": [
+          "",
+          "Product",
+          "Starting point (exists)",
+          "Tweak proposed",
+          "Slide"
+        ],
+        "rows": [
+          [
+            "A",
+            "CPAT\u2013SiSePuede",
+            "Coded CPAT runs in full on the SiSePuede side",
+            "Supervise the CPM team: prices, policies, air pollution",
+            "16\u201318"
+          ],
+          [
+            "B",
+            "Single Python platform",
+            "CPAT, MFMod-Python and FTT",
+            "One place to run them, with one user guide",
+            "19"
+          ],
+          [
+            "C",
+            "Dashboard and policy issue report",
+            "Excise Diagnostic; AI macro-fiscal dashboard",
+            "Add tax indicators; frame reports by issue",
+            "16\u201318"
+          ],
+          [
+            "D",
+            "Total Carbon Price into GHG accounting",
+            "Current Total Carbon Price",
+            "Link to the GHG accounting metric; standalone",
+            "19"
+          ]
+        ]
+      },
+      "bullets": [
+        {
+          "text": "Little change is proposed, as there is not time this FY: just tweaks to what is already there.",
+          "level": 0
+        }
+      ]
+    },
+    {
+      "title": "PART 3 \u00b7 A \u00b7 CPAT\u2013SISEPUEDE \u2014 Coded CPAT goes into the country pathways tool",
+      "layout": "Title and Bullets",
+      "bullets": [
+        {
+          "text": "With David Groves: CPAT, CPM (formerly SiSePuede), MANAGE and MINDSET combined into one country policy analysis tool.",
+          "level": 1
+        },
+        {
+          "text": "Done \u00b7 first phase, to July 2026",
+          "level": 0
+        },
+        {
+          "text": "Assumptions and outputs reconciled",
+          "level": 0
+        },
+        {
+          "text": "Variables mapped and outputs compared",
+          "level": 0
+        },
+        {
+          "text": "Coded CPAT runs in full on the SiSePuede side",
+          "level": 1
+        },
+        {
+          "text": "Prices and policies partly brought in",
+          "level": 0
+        },
+        {
+          "text": "This year \u00b7 supervising the CPM team",
+          "level": 0
+        },
+        {
+          "text": "Finish prices, policies and the air pollution translation",
+          "level": 1
+        },
+        {
+          "text": "CPAT-LTS investment approach and policy interface",
+          "level": 1
+        },
+        {
+          "text": "Light touch: about half a day a week, a day a week in January",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "title": "PART 3 \u00b7 B \u00b7 SINGLE PYTHON PLATFORM \u2014 Make existing models easy to use, not develop them further",
+      "layout": "Title and Bullets",
+      "bullets": [
+        {
+          "text": "What",
+          "level": 0
+        },
+        {
+          "text": "CPAT, MFMod-Python and FTT, as they are today, on one common platform.",
+          "level": 1
+        },
+        {
+          "text": "How",
+          "level": 0
+        },
+        {
+          "text": "A shared set-up and one user guide. FTT made ready to run, with data aligned to CPAT countries.",
+          "level": 1
+        },
+        {
+          "text": "Not",
+          "level": 0
+        },
+        {
+          "text": "No further model development, and no full merging of FTT or MFMod into CPAT.",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "title": "PART 3 \u00b7 C \u00b7 DASHBOARD AND POLICY ISSUE REPORT \u2014 Two prototypes become two products",
+      "layout": "Title and Bullets",
+      "bullets": [
+        {
+          "text": "Prototype \u00b7 done",
+          "level": 0
+        },
+        {
+          "text": "Excise Diagnostic",
+          "level": 0
+        },
+        {
+          "text": "Country tax system: excises, subsidies, electricity pricing",
+          "level": 1
+        },
+        {
+          "text": "Prototype \u00b7 done",
+          "level": 0
+        },
+        {
+          "text": "Macro-fiscal indicators",
+          "level": 0
+        },
+        {
+          "text": "AI dashboard with a full data audit trail",
+          "level": 1
+        },
+        {
+          "text": "Brought together",
+          "level": 0
+        },
+        {
+          "text": "Output 1",
+          "level": 0
+        },
+        {
+          "text": "Dashboard",
+          "level": 0
+        },
+        {
+          "text": "Macro-fiscal indicators, now with excise and other tax indicators, and the Total Carbon Price",
+          "level": 1
+        },
+        {
+          "text": "Output 2",
+          "level": 0
+        },
+        {
+          "text": "Policy issue report",
+          "level": 0
+        },
+        {
+          "text": "One issue in one country, e.g. feebates: the situation, best practice and reform",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "title": "PART 3 \u00b7 C \u00b7 THE DASHBOARD INTERFACE IN DEVELOPMENT \u2014 The interface in development",
+      "layout": "Half Half",
+      "image": {
+        "path": "images/slide17_pic0.png"
+      },
+      "bullets": [
+        {
+          "text": "A country profile",
+          "level": 0
+        },
+        {
+          "text": "Kenya shown: 35 of 35 indicators with data",
+          "level": 1
+        },
+        {
+          "text": "Grouped by question",
+          "level": 0
+        },
+        {
+          "text": "Fossil revenue, mitigation cost, fiscal space, investment, cost of capital, finance",
+          "level": 1
+        },
+        {
+          "text": "Scored and sourced",
+          "level": 0
+        },
+        {
+          "text": "Each indicator rated, scored out of 10, with year and coverage",
+          "level": 1
+        }
+      ],
+      "notes": "AI-built dashboard proof of concept, with a full data audit trail. The tax indicators from the Excise Diagnostic join this base."
+    },
+    {
+      "title": "PART 3 \u00b7 C \u00b7 POLICY ISSUE REPORT \u2014 One issue, one country, for example feebates",
+      "layout": "Title and Bullets",
+      "bullets": [
+        {
+          "text": "1",
+          "level": 0
+        },
+        {
+          "text": "The situation",
+          "level": 0
+        },
+        {
+          "text": "Where the country stands on the issue, drawn from the dashboard and diagnostic.",
+          "level": 1
+        },
+        {
+          "text": "2",
+          "level": 0
+        },
+        {
+          "text": "Best practice",
+          "level": 0
+        },
+        {
+          "text": "The best policy design, and what other countries did and learned.",
+          "level": 1
+        },
+        {
+          "text": "3",
+          "level": 0
+        },
+        {
+          "text": "Reform",
+          "level": 0
+        },
+        {
+          "text": "The opportunities for reform in that country, and how to get there.",
+          "level": 1
+        }
+      ],
+      "notes": "The dashboard says what is there; the policy issue report says what to do next. Together they give a fast, sourced starting point for policy dialogue."
+    },
+    {
+      "title": "PART 3 \u00b7 D \u00b7 TOTAL CARBON PRICE INTO GHG ACCOUNTING \u2014 Bring the Total Carbon Price into GHG accounting",
+      "layout": "Title and Bullets",
+      "bullets": [
+        {
+          "text": "A standalone product",
+          "level": 0
+        },
+        {
+          "text": "Delivered on its own, not as part of Coded CPAT.",
+          "level": 1
+        },
+        {
+          "text": "Linked to GHG accounting",
+          "level": 0
+        },
+        {
+          "text": "Consistent with the GHG accounting metric.",
+          "level": 1
+        },
+        {
+          "text": "Also in the dashboard",
+          "level": 0
+        },
+        {
+          "text": "Shown alongside the macro-fiscal and tax indicators.",
+          "level": 1
+        }
+      ]
+    },
+    {
+      "title": "PART 4 \u00b7 WHAT TO KEEP AND WHAT TO DROP \u2014 The plan is full to 20 March: anything added must replace something",
+      "layout": "Title and Bullets",
+      "bullets": [
+        {
+          "text": "KEEP \u00b7 CORE",
+          "level": 0
+        },
+        {
+          "text": "Coded CPAT and AI-Excel. Funded; the base for everything else",
+          "level": 1
+        },
+        {
+          "text": "GHG accounting. A corporate requirement; no DPF tool exists",
+          "level": 1
+        },
+        {
+          "text": "CPAT\u2013SiSePuede. Funded; light-touch supervision",
+          "level": 1
+        },
+        {
+          "text": "KEEP \u00b7 SMALL",
+          "level": 0
+        },
+        {
+          "text": "Python platform. Access only",
+          "level": 0
+        },
+        {
+          "text": "Dashboard and policy report. Prototypes exist; funding to confirm",
+          "level": 1
+        },
+        {
+          "text": "Policy crediting and FFI. One week, on GHG accounting",
+          "level": 1
+        },
+        {
+          "text": "Total Carbon Price into GHG accounting. Not yet scheduled",
+          "level": 1
+        },
+        {
+          "text": "Energy GP code help. Not on the timeline; needs a slot",
+          "level": 1
+        },
+        {
+          "text": "DROP OR DEFER",
+          "level": 0
+        },
+        {
+          "text": "Patching legacy Excel (new tab, Lambdas): superseded",
+          "level": 1
+        },
+        {
+          "text": "Validating legacy CPAT: separate note",
+          "level": 0
+        },
+        {
+          "text": "Full CPAT replacement; merging FTT or MFMod: later",
+          "level": 1
+        },
+        {
+          "text": "April items not in FY27 plan: ETS pilot, downstream pricing, CPAT paper",
+          "level": 1
+        }
+      ],
+      "source": "Source: FY27 work plan v1.1 (28 Sept 2026)",
+      "notes": "For discussion. The work plan selects GHG accounting (3a) and marks policy crediting (3b) and the tax/fiscal dashboard (3c) as possibly dropped, at five weeks each. The master timeline gives them much less: one week for policy crediting and FFI, two weeks each for the dashboard and policy reports. The Energy GP coding help (3d, two weeks) is in the work plan but not on the master timeline, so it needs a slot or should go. The April items (ETS pilot, downstream industrial pricing, CPAT working paper) do not appear in the FY27 plan; confirm whether they are done, handed over or dropped."
+    },
+    {
+      "title": "CONCLUSION \u2014 One AI-built engine, two forms, a few small products",
+      "layout": "Title and Bullets",
+      "bullets": [
+        {
+          "text": "Fixes the module's problems",
+          "level": 0
+        },
+        {
+          "text": "A compact, traceable engine replaces 250,000+ cells and handles policy mixes.",
+          "level": 1
+        },
+        {
+          "text": "Each form has a home",
+          "level": 0
+        },
+        {
+          "text": "Code into SiSePuede and the Python platform; AI-Excel into the WB\u2013IMF process and GHG accounting.",
+          "level": 1
+        },
+        {
+          "text": "Focus wins",
+          "level": 0
+        },
+        {
+          "text": "Keep the core; other products are small tweaks or wait.",
+          "level": 1
+        },
+        {
+          "text": "NEXT STEPS",
+          "level": 0
+        },
+        {
+          "text": "Informal chats in the office before 16 October",
+          "level": 1
+        },
+        {
+          "text": "Excel and coded MVP by 16 October",
+          "level": 0
+        },
+        {
+          "text": "Agree on the WB side, then bring the IMF in",
+          "level": 1
+        },
+        {
+          "text": "Confirm GHG accounting and policy crediting requirements",
+          "level": 1
+        },
+        {
+          "text": "Agree the keep-or-drop list",
+          "level": 0
+        },
+        {
+          "text": "Choose a country project (to be defined)",
+          "level": 0
+        }
+      ]
+    }
+  ]
+}

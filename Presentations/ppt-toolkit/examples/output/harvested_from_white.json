@@ -1,0 +1,47 @@
+{
+  "title": "sample_white",
+  "slides": [
+    {
+      "layout": "Title Slide",
+      "title": "Carbon Pricing Options for Uzbekistan",
+      "subtitle": "CPAT Workshop -- Draft Findings\nOctober 2026",
+      "notes": "Welcome the group and set expectations for the session."
+    },
+    {
+      "layout": "Title and Bullets",
+      "title": "Why consider a carbon tax now?",
+      "bullets": [
+        {
+          "text": "Uzbekistan's emissions intensity is above the regional average",
+          "level": 0
+        },
+        {
+          "text": "Energy subsidies currently blunt price signals for households and firms",
+          "level": 1
+        },
+        {
+          "text": "A phased carbon tax ($5 in 2027 rising to $20 in 2030) is evaluated using CPAT",
+          "level": 0
+        },
+        {
+          "text": "Revenue recycling options can offset distributional impacts on poorer households",
+          "level": 0
+        },
+        {
+          "text": "Source: CPAT model runs, World Bank staff estimates",
+          "level": 0
+        }
+      ],
+      "notes": "Emphasize this is a policy option, not a recommendation."
+    },
+    {
+      "layout": "Half Half",
+      "title": "Projected impact on household welfare"
+    },
+    {
+      "layout": "Closing",
+      "title": "Thank you",
+      "message": "Questions or follow-up?\ncpat@worldbank.org\nhttps://www.worldbank.org/en/topic/climatechange/brief/climate-policy-assessment-tool"
+    }
+  ]
+}

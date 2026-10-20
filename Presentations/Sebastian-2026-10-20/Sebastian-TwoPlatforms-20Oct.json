@@ -1,0 +1,545 @@
+{
+ "title": "Climate-fiscal tools: two Python platforms",
+ "author": "Stephen Stretton",
+ "slides": [
+  {
+   "layout": "Title Slide",
+   "title": "Climate-fiscal tools: two Python platforms",
+   "subtitle": "Status, timeline and asks\nStephen Stretton, meeting with Sebastian, 20 Oct 2026"
+  },
+  {
+   "layout": "Title and Bullets",
+   "title": "Summary: one code base, two platforms",
+   "bullets": [
+    {
+     "text": "\u2022 Climate policy platform (the pathways project): coded CPAT + CDPM (formerly SiSePuede) + FTT",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Fiscal policy platform: coded CPAT + MFMod-Python (macro unit) + investment needs + CBAM",
+     "level": 0
+    },
+    {
+     "text": "\u2013 Coded CPAT sits in both; the Excel-AI model is the checked reference",
+     "level": 1
+    },
+    {
+     "text": "\u2022 Goal of one Python platform: work with the macro unit on a shared code base",
+     "level": 0
+    },
+    {
+     "text": "\u2022 On track: Edmundo meeting went well (19 Oct); Excel-AI MVP due 23 Oct",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Today: agree the two platforms, the macro-unit link, and the look-ahead topics",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "layout": "Title and Bullets",
+   "title": "The products at a glance",
+   "table": {
+    "headers": [
+     "Product",
+     "Platform",
+     "Status",
+     "Next date"
+    ],
+    "rows": [
+     [
+      "CPAT-AI (Excel-AI)",
+      "Reference",
+      "MVP 70%, v6.2",
+      "23 Oct"
+     ],
+     [
+      "Coded CPAT (Python)",
+      "Both",
+      "Runs; final 10%",
+      "11 Dec"
+     ],
+     [
+      "CPAT-CDPM pathways (Edmundo)",
+      "Climate",
+      "On track",
+      "15 Jan"
+     ],
+     [
+      "FTT national (Zoe)",
+      "Climate",
+      "Zoe delivering",
+      "27 Nov"
+     ],
+     [
+      "Investment needs (NMIM)",
+      "Both",
+      "v0.2",
+      "tbc"
+     ],
+     [
+      "CBAM policy tool",
+      "Fiscal",
+      "Egypt v3.0, global v1.0",
+      "tbc"
+     ],
+     [
+      "Excise + Macro-Fiscal Dashboard",
+      "Fiscal",
+      "Handed to Dirk",
+      "8-12 Mar"
+     ]
+    ]
+   }
+  },
+  {
+   "layout": "Section Divider",
+   "title": "Two platforms"
+  },
+  {
+   "layout": "Title and Bullets",
+   "title": "A. Climate policy platform: the pathways project",
+   "bullets": [
+    {
+     "text": "\u2022 What: one Python tool for country decarbonisation pathways and their costs",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Parts: coded CPAT, CDPM (formerly SiSePuede; Edmundo), FTT national data (Zoe), investment needs",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Users: one integrated flow, not several tools; pilots Libya, Egypt, Morocco",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Status: Edmundo on track; Egypt proof of concept close to CPAT",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Timeline: integration 4-8 Jan; pilots 11-15 Jan; full integration end Jan",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Open: separate running subsidies from upfront public investment",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "layout": "Title and Bullets",
+   "title": "B. Fiscal policy platform: with the macro unit",
+   "bullets": [
+    {
+     "text": "\u2022 What: one Python platform for climate-related fiscal policy, shared with the macro unit",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Parts: coded CPAT (revenue, prices, distribution), MFMod-Python (ModelFlow), FTT, investment needs, CBAM",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Why: MFMod handles investment, debt and growth; CPAT handles energy, prices and revenue",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Already linked: CPAT's GDP block uses MFMod fiscal multipliers",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Timeline: FTT + MFMod working 12 Feb; GHG accounting, crediting, FFI 5 Mar",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Discussed with Charl; next step: a first call with the macro unit",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "layout": "Section Divider",
+   "title": "Products"
+  },
+  {
+   "layout": "Title and Bullets",
+   "title": "CPAT-AI (Excel-AI): mitigation MVP",
+   "table": {
+    "headers": [
+     "",
+     "Status and timeline"
+    ],
+    "rows": [
+     [
+      "What it is",
+      "Cut-down CPAT in Excel, rebuilt with AI from legacy CPAT; every figure traceable to equation, parameter and source"
+     ],
+     [
+      "Platform",
+      "Reference model for both platforms; feeds the WB-IMF CPAT process"
+     ],
+     [
+      "Status (20 Oct)",
+      "v6.2 (20 Oct): mitigation, power and distribution built; legacy bugs fixed, not copied; MVP 70%"
+     ],
+     [
+      "Next",
+      "Equations list, traceability, known-gaps note; Kacper holds the bug list while I travel"
+     ],
+     [
+      "Timeline",
+      "MVP 23 Oct; power 2-13 Nov; remaining mitigation 16-27 Nov; final 4 Dec"
+     ],
+     [
+      "Ask / risk",
+      "Ownership with the IMF/CPAT team; one Excel model, not two; data requests (GAINS, VAT)"
+     ]
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "layout": "Title and Bullets",
+   "title": "Coded CPAT (Python)",
+   "table": {
+    "headers": [
+     "",
+     "Status and timeline"
+    ],
+    "rows": [
+     [
+      "What it is",
+      "Python reimplementation of CPAT (mitigation + distribution), same codes as the Excel; Shiny app on top"
+     ],
+     [
+      "Platform",
+      "The core of BOTH platforms: climate pathways and fiscal"
+     ],
+     [
+      "Status (20 Oct)",
+      "Runs end to end; 57 tests; exports back to the legacy layout. Final Python 10%"
+     ],
+     [
+      "Next",
+      "Port the validated Excel MVP logic; Python-vs-Excel comparison on the same inputs"
+     ],
+     [
+      "Timeline",
+      "Enhanced version to Edmundo early Nov; final Python 11 Dec; Shiny app 5 Feb"
+     ],
+     [
+      "Ask / risk",
+      "Open fixes: distribution revenue units, national totals, full electricity price build-up"
+     ]
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "layout": "Title and Bullets",
+   "title": "Pathways: CPAT-CDPM integration (Edmundo)",
+   "table": {
+    "headers": [
+     "",
+     "Status and timeline"
+    ],
+    "rows": [
+     [
+      "What it is",
+      "Coded CPAT inside CDPM (formerly SiSePuede; Edmundo Molina, Tec de Monterrey; with Dave Groves and Sonya Sampson): one pathways tool"
+     ],
+     [
+      "Platform",
+      "Climate platform (pathways project)"
+     ],
+     [
+      "Status (20 Oct)",
+      "Edmundo meeting 19 Oct went well: on track. CPAT sent; CPAT-CDPM repo created. Egypt proof of concept close to CPAT (-7.3% vs -8.0% emissions)"
+     ],
+     [
+      "Next",
+      "Integrate early (no wait for a final product); one user flow; methodology note on subsidies vs public investment"
+     ],
+     [
+      "Timeline",
+      "User-flow workshop early Nov; integration 4-8 Jan; pilots (Libya, Egypt, Morocco) 11-15 Jan; end Jan"
+     ],
+     [
+      "Ask / risk",
+      "Agree the methodology split (running subsidies vs upfront public investment) before integration"
+     ]
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "layout": "Title and Bullets",
+   "title": "FTT national (Zoe)",
+   "table": {
+    "headers": [
+     "",
+     "Status and timeline"
+    ],
+    "rows": [
+     [
+      "What it is",
+      "National-level data so FTT technology diffusion (power, cars, freight, heat, steel) runs on CPAT's countries"
+     ],
+     [
+      "Platform",
+      "Climate platform; with MFMod, the bridge to the fiscal platform"
+     ],
+     [
+      "Status (20 Oct)",
+      "Zoe delivering; I review. Progress % not yet reported"
+     ],
+     [
+      "Next",
+      "Ask Zoe for a review date; then FTT + MFMod on one Python platform"
+     ],
+     [
+      "Timeline",
+      "FTT project 27 Nov; FTT + MFMod working 12 Feb"
+     ],
+     [
+      "Ask / risk",
+      "Decision: MFMod in or out for Feb (FTT-only is doable in the week)"
+     ]
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "layout": "Title and Bullets",
+   "title": "Investment needs (NMIM)",
+   "table": {
+    "headers": [
+     "",
+     "Status and timeline"
+    ],
+    "rows": [
+     [
+      "What it is",
+      "National mitigation investment model: 186 countries, 2024-2050, built to CPAT norms; who pays (public, utility, private)"
+     ],
+     [
+      "Platform",
+      "Both: investment for pathways; budget need for the fiscal platform"
+     ],
+     [
+      "Status (20 Oct)",
+      "v0.2 (20 Oct). 2030: about USD 5.1tn total, 1.7tn incremental; direct budget need ~14% (85% in low-income countries)"
+     ],
+     [
+      "Next",
+      "Financing and debt layer linked to MFMod; load cost-of-capital data; add a price response"
+     ],
+     [
+      "Timeline",
+      "Proposal stage: fits the pathways timeline (Jan) and the fiscal platform (Feb)"
+     ],
+     [
+      "Ask / risk",
+      "The natural hook for the macro unit: investment -> debt and fiscal space in MFMod"
+     ]
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "layout": "Title and Bullets",
+   "title": "CBAM policy tool",
+   "table": {
+    "headers": [
+     "",
+     "Status and timeline"
+    ],
+    "rows": [
+     [
+      "What it is",
+      "Excel tool: what a domestic carbon price does to heavy industry and the EU CBAM charge; 6 policy scenarios"
+     ],
+     [
+      "Platform",
+      "Fiscal platform (revenue, credits); process emissions feed the investment model"
+     ],
+     [
+      "Status (20 Oct)",
+      "Egypt v3.0 (7 CBAM goods) and a global MVP v1.0 (9 Oct)"
+     ],
+     [
+      "Next",
+      "CBAM modelling inside CPAT (to discuss); port to Python with coded CPAT"
+     ],
+     [
+      "Timeline",
+      "To agree: after the Excel-AI final (4 Dec)"
+     ],
+     [
+      "Ask / risk",
+      "No trade model; elasticities by judgement. Ask: is CBAM in CPAT a priority?"
+     ]
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "layout": "Title and Bullets",
+   "title": "Excise Diagnostic and Tax & Macro-Fiscal Dashboard",
+   "table": {
+    "headers": [
+     "",
+     "Status and timeline"
+    ],
+    "rows": [
+     [
+      "What it is",
+      "Excise Diagnostic (Sierra Leone, Uganda, Liberia) and a dashboard: 53 indicators, 217 countries"
+     ],
+     [
+      "Platform",
+      "Fiscal platform: tax and macro-fiscal data layer"
+     ],
+     [
+      "Status (20 Oct)",
+      "Done: both handed to Dirk early (week of 5 Oct); all 4 Objective 3 milestones complete"
+     ],
+     [
+      "Next",
+      "Owners use them; one week of follow-up support"
+     ],
+     [
+      "Timeline",
+      "Support 8-12 Mar 2027"
+     ],
+     [
+      "Ask / risk",
+      "Owners not yet named; tools not validated"
+     ]
+    ]
+   },
+   "notes": ""
+  },
+  {
+   "layout": "Title and Bullets",
+   "title": "Timeline: FY27 milestones",
+   "table": {
+    "headers": [
+     "Date",
+     "Milestone",
+     "Platform"
+    ],
+    "rows": [
+     [
+      "19 Oct",
+      "Edmundo on track (done)",
+      "Climate"
+     ],
+     [
+      "23 Oct",
+      "Excel-AI mitigation MVP",
+      "Both (reference)"
+     ],
+     [
+      "27 Nov",
+      "Zoe's FTT national project",
+      "Climate"
+     ],
+     [
+      "4 Dec",
+      "Final Excel-AI",
+      "Both (reference)"
+     ],
+     [
+      "11 Dec",
+      "Final coded CPAT (Python)",
+      "Both"
+     ],
+     [
+      "15 Jan",
+      "Pathways tool: integration and pilots",
+      "Climate"
+     ],
+     [
+      "5 Feb",
+      "Shiny app over coded CPAT",
+      "Both"
+     ],
+     [
+      "12 Feb",
+      "FTT + MFMod working",
+      "Fiscal (macro)"
+     ],
+     [
+      "5 Mar",
+      "GHG accounting, crediting, FFI",
+      "Fiscal"
+     ],
+     [
+      "20 Mar",
+      "Handover; contract ends",
+      "-"
+     ]
+    ]
+   },
+   "notes": "Slack is about 3 days before 4 Dec; power was built early, which covers the trip."
+  },
+  {
+   "layout": "Title and Bullets",
+   "title": "Looking ahead: topics to agree",
+   "bullets": [
+    {
+     "text": "\u2022 Expenditure policy: PFRs lack an expenditure-policy chapter; the platforms can supply one",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Energy fiscal risks: what the finance ministry carries (subsidies, utilities, fuel revenue); scope to agree",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Investment process: who pays (public, utility, private) and the budget need, from NMIM",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Macro unit: shared Python code base; MFMod for debt and growth",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "layout": "Title and Bullets",
+   "title": "Asks for today",
+   "bullets": [
+    {
+     "text": "\u2022 Agree the two platforms, with coded CPAT in both",
+     "level": 0
+    },
+    {
+     "text": "\u2022 An introduction to the macro unit (MFMod-Python) for a first call in November",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Steer on the look-ahead: expenditure policy, energy fiscal risks, the investment process",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Decide: MFMod in or out for the February FTT milestone",
+     "level": 0
+    },
+    {
+     "text": "\u2022 Resources: Claude Code ($200); widening the prototype team",
+     "level": 0
+    },
+    {
+     "text": "\u2022 CBAM in CPAT: priority or not?",
+     "level": 0
+    }
+   ]
+  },
+  {
+   "layout": "Closing",
+   "title": "Thank you",
+   "message": "Away 21 Oct to about 2 Nov; Kacper covers CPAT\nStephen Stretton"
+  }
+ ]
+}

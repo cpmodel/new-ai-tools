@@ -1,0 +1,43 @@
+{
+ "title": "Coded CPAT (Python)",
+ "author": "Stephen Stretton",
+ "slides": [
+  {
+   "layout": "Title and Bullets",
+   "title": "Coded CPAT (Python)",
+   "table": {
+    "headers": [
+     "",
+     "Status and timeline"
+    ],
+    "rows": [
+     [
+      "What it is",
+      "Python reimplementation of CPAT (mitigation + distribution), same codes as the Excel; Shiny app on top"
+     ],
+     [
+      "Platform",
+      "The core of BOTH platforms: climate pathways and fiscal"
+     ],
+     [
+      "Status (20 Oct)",
+      "Runs end to end; 57 tests; exports back to the legacy layout. Final Python 10%"
+     ],
+     [
+      "Next",
+      "Port the validated Excel MVP logic; Python-vs-Excel comparison on the same inputs"
+     ],
+     [
+      "Timeline",
+      "Enhanced version to Edmundo early Nov; final Python 11 Dec; Shiny app 5 Feb"
+     ],
+     [
+      "Ask / risk",
+      "Open fixes: distribution revenue units, national totals, full electricity price build-up"
+     ]
+    ]
+   },
+   "notes": ""
+  }
+ ]
+}

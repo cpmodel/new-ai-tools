@@ -1,0 +1,43 @@
+{
+ "title": "Pathways: CPAT-CDPM integration (Edmundo)",
+ "author": "Stephen Stretton",
+ "slides": [
+  {
+   "layout": "Title and Bullets",
+   "title": "Pathways: CPAT-CDPM integration (Edmundo)",
+   "table": {
+    "headers": [
+     "",
+     "Status and timeline"
+    ],
+    "rows": [
+     [
+      "What it is",
+      "Coded CPAT inside CDPM (formerly SiSePuede; Edmundo Molina, Tec de Monterrey; with Dave Groves and Sonya Sampson): one pathways tool"
+     ],
+     [
+      "Platform",
+      "Climate platform (pathways project)"
+     ],
+     [
+      "Status (20 Oct)",
+      "Edmundo meeting 19 Oct went well: on track. CPAT sent; CPAT-CDPM repo created. Egypt proof of concept close to CPAT (-7.3% vs -8.0% emissions)"
+     ],
+     [
+      "Next",
+      "Integrate early (no wait for a final product); one user flow; methodology note on subsidies vs public investment"
+     ],
+     [
+      "Timeline",
+      "User-flow workshop early Nov; integration 4-8 Jan; pilots (Libya, Egypt, Morocco) 11-15 Jan; end Jan"
+     ],
+     [
+      "Ask / risk",
+      "Agree the methodology split (running subsidies vs upfront public investment) before integration"
+     ]
+    ]
+   },
+   "notes": ""
+  }
+ ]
+}

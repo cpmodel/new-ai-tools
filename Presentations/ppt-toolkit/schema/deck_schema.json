@@ -1,0 +1,120 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://sjstretton/PlanningPPTsAndGeneral/ppt-toolkit/deck_schema.json",
+  "title": "PPT Toolkit Deck",
+  "description": "Template-agnostic description of a slide deck. An LLM (or harvest.py) produces a JSON document matching this schema; render.py turns it into a .pptx using either the 'white' or 'wb' template. Every slide picks one of the 5 canonical layouts and fills in that layout's fields -- fields for other layouts are ignored.",
+  "type": "object",
+  "required": ["title", "slides"],
+  "properties": {
+    "title": { "type": "string", "description": "Deck title, used for document metadata." },
+    "author": { "type": "string" },
+    "slides": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/definitions/slide" }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "slide": {
+      "type": "object",
+      "required": ["layout"],
+      "properties": {
+        "layout": {
+          "type": "string",
+          "enum": ["Title Slide", "Section Divider", "Half Half", "Title and Bullets", "Closing"],
+          "description": "Must be one of the 5 layout names present in both templates/*.pptx files."
+        },
+        "title": {
+          "type": "string",
+          "description": "Used by every layout as the title placeholder text."
+        },
+        "subtitle": {
+          "type": "string",
+          "description": "Title Slide only: subtitle/byline text (e.g. presenter, date, event)."
+        },
+        "bullets": {
+          "type": "array",
+          "items": {
+            "oneOf": [
+              { "type": "string" },
+              {
+                "type": "object",
+                "required": ["text"],
+                "properties": {
+                  "text": { "type": "string" },
+                  "level": { "type": "integer", "minimum": 0, "maximum": 4, "default": 0 }
+                },
+                "additionalProperties": false
+              }
+            ]
+          },
+          "description": "Half Half / Title and Bullets: bullet body text. Plain strings are level 0; use {text, level} for nested/indented bullets."
+        },
+        "message": {
+          "type": "string",
+          "description": "Closing: the closing/thank-you message body text (supports multiple lines via \\n)."
+        },
+        "image": {
+          "type": "object",
+          "description": "Half Half: image to place in the picture placeholder.",
+          "properties": {
+            "path": { "type": "string", "description": "Path to an image file, resolved relative to the deck JSON file." },
+            "alt_text": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "chart": {
+          "type": "object",
+          "description": "Optional chart data, rendered as a native PowerPoint chart in the body/bullet placeholder (replacing 'bullets' if both are given). Works on 'Half Half' and 'Title and Bullets'; on 'Half Half' the separate 'image' field still targets the picture placeholder independently.",
+          "required": ["type", "categories", "series"],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": ["bar", "column", "line", "pie"]
+            },
+            "categories": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "series": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": ["name", "values"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "values": { "type": "array", "items": { "type": "number" } }
+                },
+                "additionalProperties": false
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        "table": {
+          "type": "object",
+          "description": "Optional table data, rendered as a native PowerPoint table in the body area.",
+          "required": ["headers", "rows"],
+          "properties": {
+            "headers": { "type": "array", "items": { "type": "string" } },
+            "rows": {
+              "type": "array",
+              "items": { "type": "array", "items": { "type": "string" } }
+            }
+          },
+          "additionalProperties": false
+        },
+        "source": {
+          "type": "string",
+          "description": "Footnote / data-source citation shown in small print. Currently appended to the body text; a dedicated footnote placeholder is a possible future addition (see README)."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Speaker notes for this slide."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

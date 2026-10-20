@@ -1,0 +1,43 @@
+{
+ "title": "CPAT-AI (Excel-AI): mitigation MVP",
+ "author": "Stephen Stretton",
+ "slides": [
+  {
+   "layout": "Title and Bullets",
+   "title": "CPAT-AI (Excel-AI): mitigation MVP",
+   "table": {
+    "headers": [
+     "",
+     "Status and timeline"
+    ],
+    "rows": [
+     [
+      "What it is",
+      "Cut-down CPAT in Excel, rebuilt with AI from legacy CPAT; every figure traceable to equation, parameter and source"
+     ],
+     [
+      "Platform",
+      "Reference model for both platforms; feeds the WB-IMF CPAT process"
+     ],
+     [
+      "Status (20 Oct)",
+      "v6.2 (20 Oct): mitigation, power and distribution built; legacy bugs fixed, not copied; MVP 70%"
+     ],
+     [
+      "Next",
+      "Equations list, traceability, known-gaps note; Kacper holds the bug list while I travel"
+     ],
+     [
+      "Timeline",
+      "MVP 23 Oct; power 2-13 Nov; remaining mitigation 16-27 Nov; final 4 Dec"
+     ],
+     [
+      "Ask / risk",
+      "Ownership with the IMF/CPAT team; one Excel model, not two; data requests (GAINS, VAT)"
+     ]
+    ]
+   },
+   "notes": ""
+  }
+ ]
+}
