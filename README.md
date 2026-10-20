@@ -89,17 +89,16 @@ Also as a light three-tab Excel screening workbook,
 ## IntegratedMacroFiscalClimateTool
 
 The Integrated MF-C (macro-fiscal climate) tool,
-`IntegratedMacroFiscalClimateTool/Integrated_MFC_Tool_v0.5.xlsx`. Its front page is a **Fiscal
-outlook**: pick a country, set the levers (new taxes as pp of GDP a year, new public investment
-and other spending, the fiscal rule, and power-sector carbon pricing - a carbon tax, a feebate or
-both, with the most effective politically feasible mix found live under limits on tariff rises,
-bottom-40% losses and losses to coal and oil generators), and read revenue, expenditure, balance,
-debt, growth and green public investment to 2050, computed live by DIGNAD-R (the recursive
-DIGNAD-lite / DIGNAR-lite). The **Pricing** sheet shows the carbon tax and feebate options. Behind
-them: the Global Fiscal Indicators dashboard with the mitigation investment needs from NMIM v0.2
-(Investment 1 and 2 blocks), the MacroFiscalModels integrated run (Macro 1 and 2 blocks, the
-Macro sheet with the cross-check model family), a DSA sheet (LIC-DSF-lite), fiscal risk from the
-Climate Fiscal Risk Dashboard v1.5, and a CDPM-method cross-check of the investment need. Built in
+`IntegratedMacroFiscalClimateTool/Integrated_MFC_Tool_v0.6.xlsx`. The **Dashboard** is the front page
+and drives everything: pick a country and a scenario (revenue increase and public investment increase
+in pp of GDP, the climate investment programme on/off, power-sector carbon pricing - a carbon tax, a
+feebate or the most effective politically feasible mix) and read headline results and the key time
+series: public debt, revenue and expenditure, growth, green investment, the carbon price, debt
+sustainability. Detail tabs: **Indicators** (the Global Fiscal Indicators country profile, with the
+investment and macro blocks), **Fiscal outlook** (revenue and spending item by item to 2050), **Macro &
+debt** (the integrated run, the live DIGNAD-R model and LIC-DSF-lite), **Green investment** (NMIM v0.2
+live: investment by sector, who pays, budget need, cost, emissions; its assumptions drive the fiscal
+outlook) and **Carbon pricing**; secondary levers on **Policy settings**. Built in
 modules by `IntegratedMacroFiscalClimateTool/build/build_mfc_tool.py` with the dashboard's own
 builder. The source models (InvestmentNeeds, MacroFiscalModels, PriceFeasibility,
 TaxMacroFiscalDashboard) are subfolders of it. See

@@ -67,21 +67,25 @@ GRID = [0, 1, 2, 3, 4, 5, 7.5, 10, 12.5, 15, 20, 25, 30, 40, 50, 60, 75, 100, 12
 MODES = ["None", "Manual", "Feasible carbon tax", "Feasible feebate", "Feasible hybrid"]
 
 # ---- the levers: (name, default, label, unit/note) -------------------------------------------
+# MAIN levers sit on the Dashboard, the rest on Policy settings
+MAIN = [
+    ("f_tax_step", 0.0, "Revenue: increase each year", "pp of GDP a year"),
+    ("f_tax_max", 3.0, "Revenue: total increase, at most", "pp of GDP"),
+    ("f_pi", 0.0, "Public investment: increase", "pp of GDP a year"),
+    ("f_prog", "On", "Climate investment programme (NMIM budget need)", "On / Off"),
+    ("f_cp_mode", "Feasible hybrid", "Carbon pricing, power sector", "see Carbon pricing"),
+]
 LEVERS = [
-    ("New taxes and spending", None, None, None),
-    ("f_tax_step", 0.0, "New taxes: increase each year", "pp of GDP a year"),
-    ("f_tax_start", 2026, "New taxes: first year", "year"),
-    ("f_tax_max", 3.0, "New taxes: ceiling on the total increase", "pp of GDP"),
+    ("New revenue and spending", None, None, None),
+    ("f_tax_start", 2026, "New revenue: first year", "year"),
     ("f_tax_cap", 0.5, "Share of new taxes (and carbon tax) that falls on capital", "0 = VAT-like, no effect on investment; 1 = like the base tax"),
-    ("f_pi", 0.0, "New public investment", "pp of GDP a year, at full scale"),
     ("f_oth", 0.0, "Other new spending (wages, goods, transfers)", "pp of GDP a year, at full scale"),
     ("f_sp_start", 2026, "New spending: first year", "year"),
     ("f_sp_ramp", 3, "New spending: years to full scale", "years"),
     ("f_rule", 1.0, "Fiscal rule strength", "1 = as calibrated (transfers adjust to debt); 0 = off, debt absorbs everything"),
-    ("Carbon pricing, power sector (PriceFeasibility)", None, None, None),
-    ("f_cp_mode", "Feasible hybrid", "Mode", "None / Manual / Feasible carbon tax / Feasible feebate / Feasible hybrid"),
-    ("f_cp_tax", 0.0, "Manual: carbon tax", "USD/tCO2, Manual mode only"),
-    ("f_cp_fee", 0.0, "Manual: feebate rate", "USD/tCO2, Manual mode only"),
+    ("Carbon pricing (PriceFeasibility)", None, None, None),
+    ("f_cp_tax", 0.0, "Manual mode: carbon tax", "USD/tCO2"),
+    ("f_cp_fee", 0.0, "Manual mode: feebate rate", "USD/tCO2"),
     ("f_cp_start", 2026, "First year", "year"),
     ("f_cp_phase", 1, "Phase-in", "years in equal steps (also divides F1, the first-year tariff rise)"),
     ("f_F1", pf.DEFAULT_THRESHOLDS["f1"], "Limit F1: first-year rise in the residential tariff", "%"),
@@ -90,6 +94,7 @@ LEVERS = [
     ("f_cp_rebate", 0.0, "Revenue use: rebated to the bottom 40%", "share of carbon tax revenue (lowers F2)"),
     ("f_cp_green", 0.0, "Revenue use: green public investment", "share of carbon tax revenue; the rest goes to the budget"),
 ]
+PS = "'Carbon pricing'"
 
 
 def pricing_inputs(isos, years):
@@ -145,11 +150,16 @@ def recursion_extra(c, pr, on_lever, M, rr):
     }
 
 
-def shared_columns(py, M, rr, t):
-    """Year-level columns: lever paths and the carbon pricing path (policy scenario only)."""
+def shared_columns(rows, M, rr, t):
+    """Year-level columns: lever paths and the carbon pricing path (policy scenario only). Power CO2
+    and GDP come live from NMIM (GI_Model)."""
+    import nmim_live
+    y = 2024 + t
+    gdp = f"=IFERROR({nmim_live.ref(rows, 'mit.gdp.lvl', y)},NA())"
+    co2 = lambda sc: f"IFERROR({nmim_live.power_co2(rows, y, sc)},0)"
     if t == 0:
         return {k: "=0" for k in ("dtax", "ramp", "cpT", "cpF", "cpE", "crev")} | {
-            "co2": f'=IF(p_programme=1,N({py("co2n", rr)}),N({py("co2b", rr)}))'}
+            "gdpusd": gdp, "co2": f"=IF(p_programme=1,{co2(2)},{co2(1)})"}
     yr = f"$B{rr}"
     ph = f"IF({yr}>=f_cp_start,MIN(1,({yr}-f_cp_start+1)/MAX(1,f_cp_phase)),0)"
     return {
@@ -157,8 +167,9 @@ def shared_columns(py, M, rr, t):
         "ramp": f"=IF({yr}>=f_sp_start,MIN(1,({yr}-f_sp_start+1)/MAX(1,f_sp_ramp)),0)",
         "cpT": f"=cp_T*{ph}", "cpF": f"=cp_F*{ph}",
         "cpE": f"=IFERROR({pf_E(M['cpT'] + str(rr), M['cpF'] + str(rr))},0)",
-        "co2": f'=IF(p_programme=1,N({py("co2n", rr)}),N({py("co2b", rr)})*(1-{M["cpE"]}{rr}))',
-        "crev": f'=IFERROR({M["cpT"]}{rr}*{M["co2"]}{rr}/1000/{py("gdpusd", rr)},0)',
+        "gdpusd": gdp,
+        "co2": f"=IF(p_programme=1,{co2(2)},{co2(1)}*(1-{M['cpE']}{rr}))",
+        "crev": f'=IFERROR({M["cpT"]}{rr}*{M["co2"]}{rr}/1000/{M["gdpusd"]}{rr},0)',
     }
 
 
@@ -169,21 +180,21 @@ def add_sheets(wb, ctx):
     at = lambda col, yr: f"Macro_model!${M[col]}${R0 + yr - 2024}"
 
     # ---- Pricing: scalars, live grid, the three optima -----------------------------------------
-    wp = wb.create_sheet("Pricing")
+    wp = wb.create_sheet("Carbon pricing")
     wp.sheet_view.showGridLines = False
     wp.column_dimensions["A"].width = 2; wp.column_dimensions["B"].width = 44
     wp["B2"] = "Carbon pricing in the power sector: what is feasible, and what it raises"; wp["B2"].font = font(16, True)
-    wp["B3"] = ("PriceFeasibility v0.1 in formulas, for the country picked on the Fiscal outlook sheet. A carbon tax raises the "
+    wp["B3"] = ("PriceFeasibility v0.1 in formulas, for the country picked on the Dashboard. A carbon tax raises the "
                 "tariff (abatement through substitution and lower demand) and raises revenue; a feebate charges generators "
                 "above the average emission rate and pays those below it, so it abates through substitution only, moves "
                 "tariffs little and raises nothing. The grid shows abatement (% of baseline fossil power CO2) for each tax "
-                "and feebate rate: green where all three limits hold. Limits, phase-in and "
-                "rebate share are set on the Fiscal outlook sheet; priors on Macro_assumptions. Illustrative: priors, not "
+                "and feebate rate: green where all three limits hold. The mode is set on the Dashboard; limits, phase-in and "
+                "rebate share on Policy settings; priors on Macro_assumptions. Illustrative: priors, not "
                 "country evidence, set several parameters (see PriceFeasibility/README.md).")
     wp["B3"].font = font(9, italic=True, color=MUT); wp["B3"].alignment = Alignment(wrap_text=True, vertical="top")
     wp.merge_cells("B3:Q3"); wp.row_dimensions[3].height = 66
     wp["B5"] = "Country"; wp["B5"].font = font(10, True)
-    wp["C5"] = "=Dashboard!$C$4"; wp["C5"].font = font(12, True, ACC); wp.merge_cells("C5:J5")
+    wp["C5"] = "=sel_country"; wp["C5"].font = font(12, True, ACC); wp.merge_cells("C5:J5")
     wp["B6"] = ('=IF(ISNA(m_row),"Not covered.",IF(i_pf_e0="","No PriceFeasibility data for this country (no Ember '
                 'power data or tariff): carbon pricing is off.",IF(N(i_pf_e0)=0,"No fossil power generation: nothing to price.","")))')
     wp["B6"].font = font(10, True, ACC); wp.merge_cells("B6:Q6")
@@ -192,7 +203,7 @@ def add_sheets(wb, ctx):
     for nm, _, lab in PF_PAR:
         wp.cell(r, 2, lab).font = font(9)
         x = wp.cell(r, 3, f'=IF(i_{nm}="","",i_{nm})'); x.number_format = "0.000"; x.font = font(9, True)
-        r += 1
+        wp.merge_cells(f"C{r}:E{r}"); r += 1
     r += 1
     wp.cell(r, 2, "Helpers").font = font(10, True); r += 1
     for nm, lab, f in [("q_dp1", "Tariff rise per USD/t of tax (share)", "=IFERROR(i_pf_phi*i_pf_e_avg/i_pf_p_res,0)"),
@@ -202,7 +213,7 @@ def add_sheets(wb, ctx):
                        ("q_f3f", "F3 per USD/t of feebate", "=IFERROR(IF(N(i_pf_hi_share)>0,100*MAX(i_pf_e_hi-i_pf_e_avg,0)/(pf_wholesale*i_pf_p_res),0),0)")]:
         wp.cell(r, 2, lab).font = font(9)
         x = wp.cell(r, 3, f); x.number_format = "0.00000"; x.font = font(9)
-        name(wb, nm, f"Pricing!$C${r}"); r += 1
+        wp.merge_cells(f"C{r}:E{r}"); name(wb, nm, f"{PS}!$C${r}"); r += 1
 
     # grid: tax rates down (rows), feebate rates across (columns); E% shown, score hidden at the right
     r += 1
@@ -236,7 +247,7 @@ def add_sheets(wb, ctx):
     TB, FB = S0 + n + 1, S0 + n + 2
     wp.cell(G0 - 2, TB, f"=MIN({MAXR},IFERROR(f_F1*MAX(1,f_cp_phase)/(100*q_dp1),{MAXR}),"
                         f"IFERROR(f_F2/(100*i_pf_b40*q_dp1*(1-q_cover)),{MAXR}),IFERROR(f_F3/q_f3t,{MAXR}))")
-    name(wb, "q_Tb", f"Pricing!${cl(TB)}${G0 - 2}")
+    name(wb, "q_Tb", f"{PS}!${cl(TB)}${G0 - 2}")
     for k in range(NS + 1):
         rr = G0 + k
         T = f"{cl(TB)}{rr}"; Fe = f"{cl(FB)}{rr}"
@@ -268,7 +279,7 @@ def add_sheets(wb, ctx):
             x = wp.cell(r, 9 + j, f'=IF(i_{k}="","",i_{k})' if k else 0)
             x.font = font(9, color=MUT); x.number_format = "0.0"; x.alignment = Alignment(horizontal="center")
         r += 1
-    wp.cell(r, 2, "In use (mode on the Fiscal outlook sheet)").font = font(9, True, ACC)
+    wp.cell(r, 2, "In use (mode on the Dashboard)").font = font(9, True, ACC)
     _row_metrics(wp, r, '=CHOOSE(cp_mode,0,f_cp_tax,o_tax_T,0,o_hyb_T)', '=CHOOSE(cp_mode,0,f_cp_fee,0,o_fee_F,o_hyb_F)', "cp", wb)
     for c in range(3, 9):
         wp.cell(r, c).fill = SEC
@@ -284,74 +295,55 @@ def add_sheets(wb, ctx):
         wp.row_dimensions[r].height = 30; r += 1
     wp["B5"].font = font(10, True)
 
-    # ---- Fiscal outlook ----------------------------------------------------------------------
-    wo = wb.create_sheet("Fiscal outlook", 1)
+    # ---- Policy settings: the secondary levers -----------------------------------------------
+    wsx = wb.create_sheet("Policy settings")
+    wsx.sheet_view.showGridLines = False
+    for col, w in zip("ABCD", [2, 52, 14, 70]):
+        wsx.column_dimensions[col].width = w
+    wsx["B2"] = "Policy settings: the levers behind the main ones"; wsx["B2"].font = font(16, True)
+    wsx["B3"] = ("The main levers (new revenue, public investment, the climate programme, the carbon pricing mode) are on the "
+                 "Dashboard. These refine them. Model assumptions: Macro_assumptions (macro model, pricing priors) and "
+                 "GI_Inputs (investment needs).")
+    wsx["B3"].font = font(9, italic=True, color=MUT); wsx["B3"].alignment = Alignment(wrap_text=True, vertical="top")
+    wsx.merge_cells("B3:D3"); wsx.row_dimensions[3].height = 30
+    r = 5
+    for key, dflt, lab, unit in LEVERS:
+        if dflt is None:
+            for c in "BCD":
+                wsx[f"{c}{r}"].fill = SEC
+            wsx[f"B{r}"] = key; wsx[f"B{r}"].font = font(10, True); r += 1
+            continue
+        wsx[f"B{r}"] = lab; wsx[f"B{r}"].font = font(9); wsx[f"B{r}"].border = BOX
+        x = wsx[f"C{r}"]; x.value = dflt; x.fill = YEL; x.font = font(10, True, "0000FF"); x.border = BOX
+        x.alignment = Alignment(horizontal="center")
+        wsx[f"D{r}"] = unit; wsx[f"D{r}"].font = font(8, italic=True, color=MUT)
+        name(wb, key, f"'Policy settings'!$C${r}")
+        r += 1
+    name(wb, "cp_mode", f"{PS}!$Z$1")
+    wp["Z1"] = '=IFERROR(MATCH(f_cp_mode,{"' + '","'.join(MODES) + '"},0),1)'
+    wp.column_dimensions["Z"].hidden = True
+
+    # ---- Fiscal outlook: the table and charts -------------------------------------------------
+    wo = wb.create_sheet("Fiscal outlook")
     wo.sheet_view.showGridLines = False
     YRS = [2024, 2025, 2026, 2027, 2028, 2029, 2030, 2035, 2040, 2045, 2050]
     YC = [get_column_letter(3 + j) for j in range(len(YRS))]           # C..M
     wo.column_dimensions["A"].width = 2; wo.column_dimensions["B"].width = 50
     for c in YC:
-        wo.column_dimensions[c].width = 8.5
-    wo["B2"] = "Fiscal outlook: revenue, spending, debt and growth to 2050"; wo["B2"].font = font(16, True)
-    wo["B3"] = ("Pick a country, set the yellow levers, read the outlook. The policy scenario is the no-new-measures "
-                "baseline plus the climate programme (NMIM's incremental budget need, if p_programme = 1 on "
-                "Macro_assumptions), your new taxes and spending, and carbon pricing in the power sector. Computed live "
-                "by DIGNAD-R, the simple recursive DIGNAD-lite / DIGNAR-lite (Macro sheet), so growth responds to public "
-                "capital and to taxes on capital, and the fiscal rule adjusts transfers to debt. The baseline holds the 2024 "
-                "position (revenue, spending and debt ratios, trend growth), except that fossil rents fall: it is a reference "
-                "point, not a WEO forecast, and growth is shown above or below trend. Illustrative calibration: use it to "
-                "compare packages.")
+        wo.column_dimensions[c].width = 8
+    wo["B2"] = "Fiscal outlook: revenue, spending, balance and debt to 2050"; wo["B2"].font = font(16, True)
+    wo["B3"] = ("The Dashboard's scenario item by item, computed live by DIGNAD-R (Macro & debt). The baseline holds the 2024 "
+                "position except that fossil rents fall: a reference point, not a forecast; growth is shown against trend.")
     wo["B3"].font = font(9, italic=True, color=MUT); wo["B3"].alignment = Alignment(wrap_text=True, vertical="top")
-    wo.merge_cells("B3:M3"); wo.row_dimensions[3].height = 66
-    wo["B5"] = "Country"; wo["B5"].font = font(11, True)
-    wo["C5"] = "Kenya"; wo["C5"].font = font(12, True, "0000FF"); wo["C5"].fill = PatternFill("solid", fgColor="FFFF00")
-    wo["C5"].border = BOX; wo["C5"].alignment = Alignment(horizontal="center"); wo.merge_cells("C5:F5")
-    dv = DataValidation(type="list", formula1=f"=Data_wide!$B$2:$B${last_dash}", allow_blank=False)
-    wo.add_data_validation(dv); dv.add("C5")
-    wo["G5"] = ('=IF(ISNA(m_row),"Not covered: no NMIM / macro data for this country.",INDEX(' + rng("income") +
-                ',m_row)&". Integrated run: "&INDEX(' + rng("model") + ',m_row)&". Climate programme: "&IF(p_programme=1,"on","off")&".")')
-    wo["G5"].font = font(9, True, MUT); wo.merge_cells("G5:M5")
-
+    wo.merge_cells("B3:M3"); wo.row_dimensions[3].height = 26
+    wo["B5"] = "=sel_country"; wo["B5"].font = font(12, True, ACC)
+    wo["C5"] = ('="Revenue +"&TEXT(f_tax_step,"0.0")&"pp of GDP a year (to "&TEXT(f_tax_max,"0.0")&"pp); public investment +"'
+                '&TEXT(f_pi,"0.0")&"pp; climate programme "&f_prog&"; carbon pricing: "&f_cp_mode&" (tax "&TEXT(cp_T,"0")'
+                '&", feebate "&TEXT(cp_F,"0")&" USD/t, "&IF(cp_T+cp_F=0,"none",IF(AND(cp_F1<=f_F1+1E-9,cp_F2<=f_F2+1E-9,'
+                'cp_F3<=f_F3+1E-9),"within the limits","OVER a limit"))&")."')
+    wo["C5"].font = font(9, True, MUT); wo.merge_cells("C5:M5")
+    wo["C5"].alignment = Alignment(wrap_text=True, vertical="top"); wo.row_dimensions[5].height = 26
     r = 7
-    for key, dflt, lab, unit in LEVERS:
-        if dflt is None:
-            for c in ["B"] + YC:
-                wo[f"{c}{r}"].fill = SEC
-            wo[f"B{r}"] = key; wo[f"B{r}"].font = font(10, True); r += 1
-            continue
-        wo[f"B{r}"] = lab; wo[f"B{r}"].font = font(9); wo[f"B{r}"].border = BOX
-        x = wo[f"C{r}"]; x.value = dflt; x.fill = YEL; x.font = font(10, True, "0000FF"); x.border = BOX
-        x.alignment = Alignment(horizontal="center")
-        if key == "f_cp_mode":
-            wo.merge_cells(f"C{r}:D{r}")
-            dvm = DataValidation(type="list", formula1='"' + ",".join(MODES) + '"', allow_blank=False)
-            wo.add_data_validation(dvm); dvm.add(f"C{r}")
-            wo[f"E{r}"] = unit
-        else:
-            wo[f"D{r}"] = unit
-        wo[f"D{r}" if key != "f_cp_mode" else f"E{r}"].font = font(8, italic=True, color=MUT)
-        name(wb, key, f"'Fiscal outlook'!$C${r}")
-        r += 1
-    name(wb, "cp_mode", "Pricing!$Z$1")
-    wp["Z1"] = '=IFERROR(MATCH(f_cp_mode,{"' + '","'.join(MODES) + '"},0),1)'
-    wp.column_dimensions["Z"].hidden = True
-
-    # pricing in use: one summary line
-    r += 1
-    wo[f"B{r}"] = "Carbon pricing in use (details on the Pricing sheet)"; wo[f"B{r}"].font = font(10, True)
-    for c in ["B"] + YC:
-        wo[f"{c}{r}"].fill = SEC
-    r += 1
-    summ = [("Carbon tax / feebate (USD/t, at full rate)", '=TEXT(cp_T,"0.0")&" / "&TEXT(cp_F,"0.0")'),
-            ("Abatement of baseline fossil power CO2 (%)", '=IFERROR(TEXT(cp_E,"0.0"),"-")'),
-            ("F1 tariff rise / F2 bottom-40% loss / F3 coal & oil generators (%)",
-             '=IFERROR(TEXT(cp_F1,"0.0")&" / "&TEXT(cp_F2,"0.00")&" / "&TEXT(cp_F3,"0.0"),"-")'),
-            ("Within the limits?", '=IF(cp_T+cp_F=0,"no pricing",IF(AND(cp_F1<=f_F1+1E-9,cp_F2<=f_F2+1E-9,cp_F3<=f_F3+1E-9),"yes","NO: over a limit"))')]
-    for lab, f in summ:
-        wo[f"B{r}"] = lab; wo[f"B{r}"].font = font(9); wo[f"B{r}"].border = BOX
-        x = wo[f"C{r}"]; x.value = f; x.font = font(10, True, ACC); wo.merge_cells(f"C{r}:F{r}")
-        r += 1
-
     # outlook table
     r += 1
     for c in ["B"] + YC:
@@ -392,7 +384,8 @@ def add_sheets(wb, ctx):
         ("Memo: green public investment, all (programme capital + carbon revenue)",
          sh(lambda y: f"p_programme*{at('cap', y)}+{at('P_green', y)}")),
         ("Memo: fossil power CO2 (Mt)", lambda y: f"={at('co2', y)}"),
-        ("Memo: carbon tax rate in force (USD/t)", lambda y: f"={at('cpT', y)}"),
+        ("Memo: carbon tax in force (USD/t)", lambda y: f"={at('cpT', y)}"),
+        ("Memo: feebate rate in force (USD/t)", lambda y: f"={at('cpF', y)}"),
         ("Baseline: no new measures, no programme", None),
         ("Total revenue", sh(lambda y: at("B_revenue", y), "B")),
         ("Total expenditure", lambda y: f"={at('o_exp_B', y)}"),
@@ -433,29 +426,134 @@ def add_sheets(wb, ctx):
         "The fiscal rule. Transfers fall as debt rises above its 2024 ratio (speed from the integrated run). It offsets part of any "
         "debt-financed package over time: compare the transfers line with the baseline, or set the rule strength to 0.",
         "Carbon pricing. A carbon tax adds revenue and, through the share on capital, a small growth cost; a feebate abates without "
-        "revenue or growth cost in this model. Feasible modes pick the highest-abatement rate on the Pricing grid that keeps F1-F3 "
-        "under the limits above. The integrated run on the Macro sheet is pre-computed with PriceFeasibility's default hybrid and "
+        "revenue or growth cost in this model. Feasible modes pick the highest-abatement rate that keeps F1-F3 under the limits "
+        "(Carbon pricing sheet). The integrated run (Macro & debt) is pre-computed with PriceFeasibility's default hybrid and "
         "does not respond to these levers.",
     ]:
         wo[f"B{r}"] = t_; wo[f"B{r}"].font = font(8, italic=True, color=MUT)
         wo[f"B{r}"].alignment = Alignment(wrap_text=True, vertical="top"); wo.merge_cells(f"B{r}:M{r}")
         wo.row_dimensions[r].height = 44; r += 1
-    wo.freeze_panes = "C6"
+    wo.freeze_panes = "C7"
 
-    def chart(title, cols_, anchor, ytitle):
-        ch = LineChart(); ch.title = title; ch.height = 7.2; ch.width = 16; ch.y_axis.title = ytitle
-        ch.legend.position = "b"; ch.varyColors = False
-        for c in cols_:
-            j = MC.index(c) + 2
-            ch.add_data(Reference(wm, min_col=j, max_col=j, min_row=H0, max_row=RL), titles_from_data=True)
-        ch.set_categories(Reference(wm, min_col=2, max_col=2, min_row=R0, max_row=RL))
-        ch.x_axis.delete = False; ch.y_axis.delete = False
-        wo.add_chart(ch, anchor)
-    chart("Revenue and expenditure, % of GDP", ["o_rev_P", "o_exp_P", "o_rev_B", "o_exp_B"], "O2", "% GDP")
-    chart("Public debt, % of GDP", ["ch_debt_P", "ch_debt_B", "ch_debt_py"], "O17", "% GDP")
-    chart("Overall balance, % of GDP", ["o_bal_P", "o_bal_B"], "O32", "% GDP")
-    chart("New measures, % of GDP", ["o_newtax", "o_crev", "o_grn", "o_newsp"], "O47", "% GDP")
+    import xlcharts
+    cat = (2, R0 + 1, RL)                  # 2025-2050 on a numeric year axis
+    S = lambda cols_: [(MC.index(c) + 2, H0, RL, role) for c, role in cols_]
+    for k, (title, ser, fmt) in enumerate([
+            ("Revenue and expenditure, % of GDP", S([("o_rev_P", "policy"), ("o_exp_P", "run"), ("o_rev_B", "baseline"),
+                                                     ("o_exp_B", "run_base")]), "0"),
+            ("Public debt, % of GDP", S([("ch_debt_P", "policy"), ("ch_debt_B", "baseline"), ("ch_debt_py", "run")]), "0"),
+            ("Overall balance, % of GDP", S([("o_bal_P", "policy"), ("o_bal_B", "baseline")]), "0.0"),
+            ("New measures, % of GDP", S([("o_newtax", "policy"), ("o_crev", "gold"), ("o_grn", "green"),
+                                          ("o_newsp", "purple")]), "0.0"),
+            ("Carbon price in force, USD/t", S([("ch_cpT", "run"), ("ch_cpF", "alt")]), "0")]):
+        wo.add_chart(xlcharts.line(wm, cat, ser, title, yfmt=fmt, width=12), f"{'OW'[k % 2]}{2 + 15 * (k // 2)}")
+    _dashboard(wb, ctx)
     return wo
+
+
+def _dashboard(wb, ctx):
+    """The summary: country selector, the main levers, headline results and the key charts."""
+    import xlcharts
+    M, R0, RL, H0, MC, wm, rng, last_dash = (ctx[k] for k in ("M", "R0", "RL", "H0", "MC", "wm", "rng", "last_dash"))
+    at = lambda col, yr: f"Macro_model!${M[col]}${R0 + yr - 2024}"
+    wd = wb.create_sheet("Dashboard")
+    wd.sheet_view.showGridLines = False
+    for col, w in zip("ABCDE", [2, 44, 11, 11, 2]):
+        wd.column_dimensions[col].width = w
+    wd["B2"] = "Integrated macro-fiscal climate tool"; wd["B2"].font = font(18, True)
+    wd["B3"] = ("Pick a country and a scenario; every tab follows. Detail: Indicators, Fiscal outlook, Macro & debt, Green "
+                "investment, Carbon pricing. More levers: Policy settings. Illustrative calibration.")
+    wd["B3"].font = font(9, italic=True, color=MUT); wd["B3"].alignment = Alignment(wrap_text=True, vertical="top")
+    wd.merge_cells("B3:D3"); wd.row_dimensions[3].height = 40
+    wd["B5"] = "Country"; wd["B5"].font = font(11, True)
+    c = wd["C5"]; c.value = "Kenya"; c.font = font(12, True, "0000FF"); c.fill = PatternFill("solid", fgColor="FFFF00")
+    c.border = BOX; c.alignment = Alignment(horizontal="center"); wd.merge_cells("C5:D5")
+    dv = DataValidation(type="list", formula1=f"=Data_wide!$B$2:$B${last_dash}", allow_blank=False)
+    wd.add_data_validation(dv); dv.add("C5")
+    name(wb, "sel_country", "Dashboard!$C$5")
+    wd["B6"] = ('=IF(ISNA(m_row),"Not covered by the models: indicators only.",INDEX(' + rng("income") +
+                ',m_row)&"; integrated run: "&INDEX(' + rng("model") + ',m_row))')
+    wd["B6"].font = font(9, True, MUT); wd.merge_cells("B6:D6")
+
+    def band(r, text, years=False):
+        for col in "BCD":
+            wd[f"{col}{r}"].fill = HDR
+        wd[f"B{r}"] = text; wd[f"B{r}"].font = font(10, True, "FFFFFF")
+        if years:
+            for col, y in (("C", 2030), ("D", 2050)):
+                x = wd[f"{col}{r}"]; x.value = y; x.font = font(9, True, "FFFFFF"); x.alignment = Alignment(horizontal="center")
+    band(8, "Scenario")
+    r = 9
+    for key, dflt, lab, unit in MAIN:
+        wd[f"B{r}"] = f"{lab} ({unit})" if key not in ("f_prog", "f_cp_mode") else lab
+        wd[f"B{r}"].font = font(9); wd[f"B{r}"].border = BOX
+        x = wd[f"C{r}"]; x.value = dflt; x.fill = YEL; x.font = font(10, True, "0000FF"); x.border = BOX
+        x.alignment = Alignment(horizontal="center")
+        if key in ("f_prog", "f_cp_mode"):
+            opts = ["On", "Off"] if key == "f_prog" else MODES
+            d = DataValidation(type="list", formula1='"' + ",".join(opts) + '"', allow_blank=False)
+            wd.add_data_validation(d); d.add(f"C{r}")
+            if key == "f_cp_mode":
+                wd.merge_cells(f"C{r}:D{r}")
+        name(wb, key, f"Dashboard!$C${r}")
+        r += 1
+    wd["H1"] = '=IF(f_prog="Off",0,1)'; name(wb, "p_programme", "Dashboard!$H$1")
+    wd.column_dimensions["H"].hidden = True
+    wd[f"B{r}"] = ('="Carbon pricing in use: tax "&TEXT(cp_T,"0")&", feebate "&TEXT(cp_F,"0")&" USD/t, abating "&TEXT(cp_E,"0")'
+                   '&"% of power CO2; "&IF(cp_T+cp_F=0,"no pricing",IF(AND(cp_F1<=f_F1+1E-9,cp_F2<=f_F2+1E-9,cp_F3<=f_F3+1E-9),'
+                   '"within the feasibility limits","OVER a feasibility limit"))&"."')
+    wd[f"B{r}"].font = font(8, italic=True, color=ACC); wd.merge_cells(f"B{r}:D{r}"); r += 2
+
+    band(r, "Headline results", years=True); r += 1
+    pg = lambda col, X="P": (lambda y: f"{at(col, y)}/{at(X + '_GDP', y)}*100")
+    kpis = [
+        ("Public debt, % of GDP", lambda y: f"{at('P_ratio', y)}*100", "0.0", True),
+        ("   no new measures", lambda y: f"{at('B_ratio', y)}*100", "0.0", False),
+        ("   integrated run, climate programme", lambda y: f"{at('ch_debt_py', y)}", "0.0", False),
+        ("Overall balance, % of GDP", lambda y: at("o_bal_P", y), "0.0", True),
+        ("Revenue, % of GDP", lambda y: at("o_rev_P", y), "0.0", False),
+        ("Expenditure, % of GDP", lambda y: at("o_exp_P", y), "0.0", False),
+        ("GDP vs no new measures, %", lambda y: at("gdp_dev_prog", y), "0.00", True),
+        ("Green investment need, incremental, % of GDP", lambda y: at("gi_dinv", y), "0.00", True),
+        ("   of which budget need (the climate programme)", lambda y: at("gi_bud", y), "0.00", False),
+        ("Green public investment in the scenario, % of GDP", lambda y: at("o_grn", y), "0.00", False),
+        ("Carbon revenue, % of GDP", lambda y: at("o_crev", y), "0.00", False),
+    ]
+    for lab, fn, fmt, bold in kpis:
+        wd[f"B{r}"] = lab; wd[f"B{r}"].font = font(9, bold); wd[f"B{r}"].border = BOX
+        for col, y in (("C", 2030), ("D", 2050)):
+            x = wd[f"{col}{r}"]; x.value = f'=IF(ISNA(m_row),"",IFERROR({fn(y)},""))'; x.number_format = fmt
+            x.font = font(10, bold); x.border = BOX; x.alignment = Alignment(horizontal="center")
+        r += 1
+    gi = lambda c: f"INDEX({rng(c)},m_row)"
+    wd[f"B{r}"] = "Debt risk, LIC-DSF-lite (before / with programme)"; wd[f"B{r}"].font = font(9, True); wd[f"B{r}"].border = BOX
+    wd[f"C{r}"] = f'=IFERROR(IF({gi("dsf_rating_base")}="","not assessed",{gi("dsf_rating_base")}&" / "&{gi("dsf_rating_programme")}),"")'
+    wd[f"C{r}"].font = font(10, True, ACC); wd[f"C{r}"].alignment = Alignment(horizontal="center"); wd.merge_cells(f"C{r}:D{r}")
+    r += 2
+    wd[f"B{r}"] = ("Policy = the scenario above; no new measures = today's position held (fossil rents fall). The integrated run "
+                   "is pre-computed with the climate programme and default carbon pricing; it does not respond to the levers.")
+    wd[f"B{r}"].font = font(8, italic=True, color=MUT); wd[f"B{r}"].alignment = Alignment(wrap_text=True, vertical="top")
+    wd.merge_cells(f"B{r}:D{r}"); wd.row_dimensions[r].height = 40
+
+    cat = (2, R0 + 1, RL)                  # 2025-2050 on a numeric year axis
+    S = lambda cols_: [(MC.index(c) + 2, H0, RL, role) for c, role in cols_]
+    wv, c0, h0, dl = ctx["dsa"]
+    charts = [
+        xlcharts.line(wm, cat, S([("ch_debt_P", "policy"), ("ch_debt_B", "baseline"), ("ch_debt_py", "run")]),
+                      "Public debt, % of GDP", width=12),
+        xlcharts.line(wm, cat, S([("o_rev_P", "policy"), ("o_exp_P", "run"), ("o_rev_B", "baseline"), ("o_exp_B", "run_base")]),
+                      "Revenue and expenditure, % of GDP", width=12),
+        xlcharts.line(wm, cat, S([("ch_gdpdev_P", "policy"), ("ch_gdpdev_py", "run")]),
+                      "GDP vs no new measures, %", width=12, yfmt="0.0"),
+        xlcharts.line(wm, cat, S([("gi_dinv", "green"), ("gi_bud", "green2"), ("o_grn", "policy")]),
+                      "Green investment, % of GDP", width=12, yfmt="0.0"),
+        xlcharts.line(wm, cat, S([("ch_cpT", "run"), ("ch_cpF", "alt")]), "Carbon price in force, USD/t", width=12),
+        xlcharts.line(wv, (c0, h0 + 1, dl), [(c0 + 1, h0, dl, "baseline"), (c0 + 2, h0, dl, "policy"), (c0 + 3, h0, dl, "limit")],
+                      "Debt sustainability: PV of public debt, % of GDP", width=12, skip=1),
+    ]
+    for k, ch in enumerate(charts):
+        wd.add_chart(ch, f"{'FN'[k % 2]}{2 + 14 * (k // 2)}")
+    return wd
 
 
 def _row_metrics(ws, r, ft, ff, nm, wb):
@@ -468,10 +566,10 @@ def _row_metrics(ws, r, ft, ff, nm, wb):
         x = ws.cell(r, 3 + j, f"=IFERROR({f[1:]},0)")
         x.number_format = "0.0" if j != 4 else "0.00"; x.font = font(9, True); x.alignment = Alignment(horizontal="center")
         x.border = BOX
-    name(wb, f"{nm}_T", f"Pricing!$C${r}"); name(wb, f"{nm}_F", f"Pricing!$D${r}")
+    name(wb, f"{nm}_T", f"{PS}!$C${r}"); name(wb, f"{nm}_F", f"{PS}!$D${r}")
     if nm == "cp":
         for j, k in enumerate(["E", "F1", "F2", "F3"]):
-            name(wb, f"cp_{k}", f"Pricing!${get_column_letter(5 + j)}${r}")
+            name(wb, f"cp_{k}", f"{PS}!${get_column_letter(5 + j)}${r}")
 
 
 def name(wb, n, ref):
@@ -480,7 +578,7 @@ def name(wb, n, ref):
 
 
 # ---- Python copy of the policy scenario, to check the workbook ----------------------------------
-LEVER_DEFAULTS = {k: v for k, v, *_ in LEVERS if v is not None}
+LEVER_DEFAULTS = {k: v for k, v, *_ in MAIN + LEVERS if v is not None}
 
 
 def best_mix(p, lv):
@@ -538,8 +636,9 @@ def simulate(c, pfr, long, lv=None, prm=None):
     g = max(0.05, rev0 - ig - int0 - PV["p_tr_target"]); trbar = rev0 - g - ig - int0
     lam = c.fiscal_rule_speed if pd.notna(c.fiscal_rule_speed) else (PV["p_lambda_f_res"] if res else PV["p_lambda_f"])
     lam *= lv["f_rule"]
-    ser = lambda ind: {r.year: r.value / 100 for r in long[(long.iso3 == c.iso3) & (long.indicator == ind)].itertuples()}
-    cap, spd = ser("pub_cap"), ser("pub_spend")
+    import nmim_bridge                                   # the climate programme, live from NMIM as in GI_Model
+    pg = nmim_bridge.programme(c.iso3)
+    cap = dict(zip(pg["years"].tolist(), pg["pub_cap"])); spd = dict(zip(pg["years"].tolist(), pg["pub_spend"]))
     mix = best_mix(pfr, lv); cT, cF = mix[0], mix[1]
     PVp = PV
     def cpE(T, Fe):
@@ -548,7 +647,8 @@ def simulate(c, pfr, long, lv=None, prm=None):
         dp1 = pfr.pf_phi * pfr.pf_e_avg / pfr.pf_p_res
         return 1 - (1 - pfr.pf_s_max * (1 - np.exp(-(T + Fe) / pfr.pf_tau_switch))) * (1 - min(-PVp["pf_elast"] * dp1 * T, 1))
     out = {}
-    for X, on, L in (("B", 0, 0), ("P", PV["p_programme"], 1)):
+    prog = 1 if lv["f_prog"] == "On" else 0
+    for X, on, L in (("B", 0, 0), ("P", prog, 1)):
         KG, K, D, Dk, rc, GDPp = KG0, K0, D0, Dk0, rstar, GDP0
         path = [dict(GDP=GDP0, ratio=D0 / GDP0, revenue=rev0, crev=0.0, tr=trbar)]
         for t in range(1, dr.T):
@@ -561,7 +661,7 @@ def simulate(c, pfr, long, lv=None, prm=None):
             ph = min(1, (yr - lv["f_cp_start"] + 1) / max(1, lv["f_cp_phase"])) if yr >= lv["f_cp_start"] else 0
             T, Fe = cT * ph, cF * ph
             E = cpE(T, Fe)
-            co2 = pfr[f"co2n_{yr}"] if PV["p_programme"] == 1 else pfr[f"co2b_{yr}"] * (1 - E)
+            co2 = pfr[f"co2n_{yr}"] if prog == 1 else pfr[f"co2b_{yr}"] * (1 - E)
             crv = T * co2 / 1000 / pfr[f"gdpusd_{yr}"] if pd.notna(co2) and pd.notna(pfr[f"gdpusd_{yr}"]) else 0.0
             Pc, Ps = on * cap.get(yr, 0), on * spd.get(yr, 0)
             KGd, Kd = KG * (1 - PV["p_eps_g"] * dis), K * (1 - PV["p_eps_k"] * dis)

@@ -306,7 +306,7 @@ engine and not committed.
 Requirements: Python with `pandas`, `numpy`, `openpyxl`.
 
 ```bash
-python3 IntegratedMacroFiscalClimateTool/build/build_mfc_tool.py   # -> IntegratedMacroFiscalClimateTool/Integrated_MFC_Tool_v0.5.xlsx
+python3 IntegratedMacroFiscalClimateTool/build/build_mfc_tool.py   # -> IntegratedMacroFiscalClimateTool/Integrated_MFC_Tool_v0.6.xlsx
 ```
 
 It reads the dashboard panel and config (`IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/output/`, `config/`),
@@ -316,12 +316,13 @@ It reads the dashboard panel and config (`IntegratedMacroFiscalClimateTool/TaxMa
 after a rebuild) (and imports the DIGNAD-R equations from
 `IntegratedMacroFiscalClimateTool/MacroFiscalModels/ExcelDIGNAD/build_dignad_excel.py`), the
 PriceFeasibility parameters and optima (`IntegratedMacroFiscalClimateTool/PriceFeasibility/output/`)
-and NMIM's power CO2 and GDP paths for the Fiscal outlook and Pricing sheets (`build/outlook.py`), and runs
+NMIM's workbook (`IntegratedMacroFiscalClimateTool/InvestmentNeeds/national_model/NMIM_v0.2.xlsx`, whose
+engine sheets `build/nmim_live.py` copies in), and runs
 `IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/scripts/build_dashboard.py` on the merged panel. Rebuild it after
 rebuilding any of those (after the integrated run, section 4). Modules and how to add one:
 `IntegratedMacroFiscalClimateTool/README.md`.
 
-To check the Fiscal outlook's formulas, `python3 IntegratedMacroFiscalClimateTool/build/outlook.py
+To check the scenario formulas (Dashboard, Fiscal outlook), `python3 IntegratedMacroFiscalClimateTool/build/outlook.py
 --check KEN '{"f_tax_step": 0.5, "f_cp_mode": "Feasible feebate"}'` prints the policy scenario from a
 Python copy of the equations, to compare with the workbook after setting the same levers and
 recalculating (LibreOffice: `soffice --headless --convert-to xlsx`).
