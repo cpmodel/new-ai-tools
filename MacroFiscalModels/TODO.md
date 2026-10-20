@@ -37,6 +37,28 @@ Open work, in priority order. Move items to `CAVEATS.md` when done.
 21. Energy savings and per-country overrides on the Assumptions sheet.
 22. **Done 2026-10-20 (see `IntegratedMFC/CAVEATS.md`).** ~~Wire `Outputs` into the country tool or the dashboard (Appendix D) as a live module.~~ DIGNAD-R runs live for the selected country on the Integrated MF-C tool's Macro sheet (all 186 countries), with the integrated run's paths beside it.
 
+## Speed of the integrated run (2026-10-20)
+
+`integrated.py --all` takes about 10 minutes (2-9 s a country). Profiling one country: almost all
+of the time is spent building the Newton Jacobian in `pf_solver.jacobian`, one entry at a time into
+a `lil_matrix`; the model equations themselves are cheap. In order:
+
+23. **Assemble the Jacobian in one go** (collect row, column, value arrays; build a `csc_matrix`
+    once). Tested on KEN, LBR, AGO, USA: 6-13x faster, results identical (max difference 0.0).
+    About a minute for all countries. No change to the method.
+24. **One pass, no retries, at this stage**: start each run with the fiscal-rule speed saved in
+    `results/integrated_settings.csv` from the last run instead of trying 0.05, 0.2, 0.4 in turn
+    (Liberia-type countries pay for up to three full solves); start the programme solve from the
+    baseline path; reuse the Jacobian across Newton steps (modified Newton). Optional "linear"
+    mode: one Newton step from the steady state (first-order solution, no iterations), checked
+    against the full solve before it is used for anything shipped.
+25. **Parallel and incremental**: run countries in parallel (`multiprocessing`); re-run only
+    countries whose inputs changed (hash of panel row, NMIM paths, PriceFeasibility row).
+26. **One-click run**: a `.bat` (as in the dashboard build) for integrated run -> dashboard panel ->
+    Integrated MF-C tool. Not a VBA macro: the models are Python, a macro would only shell out to
+    them, and `.xlsm` files are often blocked; the Excel side (DIGNAD-R on the Macro sheet) is
+    already one recursive pass with no iteration and recalculates instantly.
+
 ## Other open items
 
 - Country calibrations: `calibration.py` now sets shared settings from the dashboard; macro-model input block in the dashboard still to add (CPIA, reserves, remittances, projected debt service, net foreign assets, labour share, Findex, public capital stock, disaster damages, import share).
