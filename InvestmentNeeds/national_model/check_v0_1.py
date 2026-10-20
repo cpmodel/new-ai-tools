@@ -62,7 +62,7 @@ for sc in (1, 2):
     checks.append((f"fossil + VRE <= generation, scenario {sc}", bool((bal <= get(f"mit.gen.tot.{sc}") + 1e-6).all().all())))
     for code in (f"mit.inv.gen.{sc}", f"mit.inv.grid.{sc}", f"mit.cap.sol.{sc}", f"mit.cap.fos.stk.{sc}", f"mit.inv.trn.{sc}"):
         checks.append((f"{code} >= 0", bool((get(code) >= -1e-9).all().all())))
-tot = get("mit.inv.tot.2"); parts = sum(get(f"mit.inv.{k}.2") for k in ("gen", "grid", "trn", "bld", "ind", "nco", "oth"))
+tot = get("mit.inv.tot.2"); parts = sum(get(f"mit.inv.{k}.2") for k in ("gen", "grid", "trn", "bld", "ind", "nco", "oth", "cal"))
 checks.append(("total net zero investment = sum of sectors", bool(((tot - parts).abs() < 1e-6).all().all())))
 checks.append(("net zero GHG 2050 below baseline (every country)", bool((get("mit.ghg.tot.2")["2050"] <= get("mit.ghg.tot.1")["2050"] + 1e-6).all())))
 for name, ok in checks:
@@ -75,7 +75,7 @@ emdc = s[s.grp == "EMDC"][["inv2_2030"]].sum()
 lines += ["", "## 3. Benchmarks (world)", "", "| Item | Model | Benchmark | Source |", "| --- | --- | --- | --- |",
           f"| Net zero investment 2030, USD bn | {w.inv2_2030:,.0f} | 4,800 clean energy + 400 nature | IHLEG (2024), IEA |",
           f"| of which EMDCs ex-China | {emdc.inv2_2030:,.0f} | 1,600 clean energy + 350 nature | IHLEG (2024) |",
-          f"| Baseline investment 2030 | {w.inv1_2030:,.0f} | ~2,000 clean energy in 2024 | IEA World Energy Investment 2024 (approx.) |",
+          f"| Baseline investment 2030 (calibrated to 2024 by group) | {w.inv1_2030:,.0f} | ~2,000 clean energy in 2024 | IEA World Energy Investment 2024 |",
           f"| Baseline GHG 2030, MtCO2e | {w.ghg1_2030:,.0f} | ~53,000-57,000 | UNEP Emissions Gap (current policies, approx.) |",
           f"| Energy CO2 2024, 11 end-use rows + power vs CPAT | {w.co2_model_2024:,.0f} | {w.co2_cpat_2024:,.0f} | CPAT 2024 panel; the gap is carried as other energy CO2 (mit.co2.res), so totals tie to CPAT |",
           f"| Net zero GHG 2050 (residual) | {w.ghg2_2050:,.0f} | ~0 net with removals | Residual to be met by removals (not modelled) |"]

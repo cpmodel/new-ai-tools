@@ -1,6 +1,18 @@
 # InvestmentNeeds — Mitigation (Net Zero) Investment Needs Model
 
-`Mitigation_Investment_Needs_v1.1.xlsx` (current; v1.0 kept for reference) estimates 2030 **total** and **incremental**
+Two models live here:
+
+- **`Mitigation_Investment_Needs_v1.1.xlsx`** — 2030 snapshot for 195 economies: group totals
+  (IHLEG, IEA-IFC) allocated to countries, three cost-of-capital lenses (this README).
+- **`national_model/NMIM_v0.1.xlsx`** — National Mitigation Investment Model: a simplified
+  national stock-and-flow model for 186 countries, 2024-2050, built to CPAT norms. See
+  [`national_model/NMIM_Method_v0_1.md`](national_model/NMIM_Method_v0_1.md).
+
+Task log: [`CAVEATS.md`](CAVEATS.md). Superseded versions: `Old/`.
+
+## The v1.1 workbook
+
+`Mitigation_Investment_Needs_v1.1.xlsx` (current; v1.0 in `Old/`) estimates 2030 **total** and **incremental**
 mitigation investment needs, and their **incremental cost**, for 195 economies
 (every economy with IMF WEO GDP) and seven sectors, under three cost-of-capital
 lenses:
@@ -99,3 +111,16 @@ See the README sheet in the workbook. The key ones:
   split, the China WACC, public shares, and the PEFA-to-gap mapping.
 - Market rates (nominal) are compared with the 6% WB rate (real), as in the method note.
   Set `p_basis = 1` to compare in real terms.
+
+## National model (NMIM v0.1)
+
+```bash
+python InvestmentNeeds/national_model/extract_data_v0_1.py   # data/*.csv from repo sources
+python InvestmentNeeds/national_model/nmim_v0_1.py           # engine: results/ for all countries
+python InvestmentNeeds/national_model/build_workbook_v0_1.py # NMIM_v0.1.xlsx (CPAT layout)
+python InvestmentNeeds/national_model/check_v0_1.py          # LibreOffice checks -> check_report_v0_1.md
+```
+
+One equation specification drives both the Python engine (all countries) and the
+workbook's live formulas (the country chosen on Settings!C4), and the check confirms they
+agree. Method, data, validation and open issues: `national_model/NMIM_Method_v0_1.md`.

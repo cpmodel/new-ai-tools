@@ -79,8 +79,13 @@ method (October 2026). See [`InvestmentNeeds/README.md`](InvestmentNeeds/README.
   cost of capital, World Bank rate (6%), and World Bank rate with local co-benefits.
   Engineering-based savings for power and transport; Sensitivity sheet. Uses the
   dashboard's cost-of-capital and PIMA indicators; has a Damodaran input sheet for wider
-  WACC coverage. v1.0 is kept for reference.
+  WACC coverage.
 - **`Mitigation_Investment_Needs_v1.1_summary.png`** — one-page summary of the results
+- **`national_model/`** — NMIM v0.1, a simplified national mitigation investment model:
+  186 countries, 2024-2050, baseline and net zero, CPAT norms (codes, layout, data,
+  activity equation), consistent with the CBAM Policy Tool; Python engine + CPAT-layout
+  workbook with live formulas; method note and check report
+- **`CAVEATS.md`**, **`Old/`** — task log and superseded versions
 - **`build/`** — `build_investment_model.py` (workbook), `run_sensitivity.py`
   (Sensitivity sheet), `make_summary_image.py` (summary PNG)
 - **`raw_data/`** — optional inputs (Damodaran `ctryprem.xlsx`)

@@ -34,9 +34,9 @@
 
 | Item | Model | Benchmark | Source |
 | --- | --- | --- | --- |
-| Net zero investment 2030, USD bn | 4,258 | 4,800 clean energy + 400 nature | IHLEG (2024), IEA |
-| of which EMDCs ex-China | 1,175 | 1,600 clean energy + 350 nature | IHLEG (2024) |
-| Baseline investment 2030 | 1,240 | ~2,000 clean energy in 2024 | IEA World Energy Investment 2024 (approx.) |
+| Net zero investment 2030, USD bn | 5,103 | 4,800 clean energy + 400 nature | IHLEG (2024), IEA |
+| of which EMDCs ex-China | 1,303 | 1,600 clean energy + 350 nature | IHLEG (2024) |
+| Baseline investment 2030 (calibrated to 2024 by group) | 2,084 | ~2,000 clean energy in 2024 | IEA World Energy Investment 2024 |
 | Baseline GHG 2030, MtCO2e | 58,156 | ~53,000-57,000 | UNEP Emissions Gap (current policies, approx.) |
 | Energy CO2 2024, 11 end-use rows + power vs CPAT | 33,627 | 39,045 | CPAT 2024 panel; the gap is carried as other energy CO2 (mit.co2.res), so totals tie to CPAT |
 | Net zero GHG 2050 (residual) | 10,029 | ~0 net with removals | Residual to be met by removals (not modelled) |

@@ -123,6 +123,11 @@ PARAMS = [
  ("cpt_afolu", 50, "USD/tCO2e", "Cost per tonne, land-use emissions", "As v1.1 (IPCC AR6 SPM C.9.1). †", "P"),
  ("cpt_res", 100, "USD/tCO2", "Cost per tonne, other energy CO2 (aviation, shipping, other)", "IPCC AR6 SPM C.12 threshold. †", "P"),
  ("lu_T", 2030, "year", "Net land-use emissions brought to zero", "Glasgow Leaders' Declaration on Forests (2021)", "M"),
+ # baseline calibration to current clean-energy investment (IEA World Energy Investment 2024)
+ ("iea24_ae", 1005, "USD bn", "Clean energy investment 2024, advanced economies (residual)",
+  "IEA WEI 2024: world ~2,000 less China 675 less EMDE ex-China ~320", "M"),
+ ("iea24_chn", 675, "USD bn", "Clean energy investment 2024, China", "IEA World Energy Investment 2024", "M"),
+ ("iea24_emdc", 320, "USD bn", "Clean energy investment 2024, EMDEs other than China", "IEA World Energy Investment 2024", "M"),
  # finance
  ("r_wb", 0.06, "rate", "World Bank social discount rate", "Fay et al. (2016)", "G"),
  ("life_bld", 25, "years", "Asset life, buildings", "Method note", "M"),
@@ -205,6 +210,7 @@ def load_data():
             d["cbam_g"] = float(r.growth_pct) if pd.notna(r.growth_pct) else 3.0
         else:
             d["cbam_proc24"], d["cbam_g"] = 0.0, 0.0
+        d["cal24"] = 0.0
         D[iso] = d
     return D
 
@@ -417,21 +423,21 @@ for sc in (1, 2):
     R(S9, f"mit.airpol.{sc}", "", "", "Air pollution cost", "USD bn", ap, ap)
 
 S10 = "10. Investment and incremental investment"
+for sc in (1, 2):
+    R(S10, f"mit.inv.cal.{sc}", "", "", "Clean investment not modelled bottom-up (IEA 2024 calibration; both scenarios)",
+      "USD bn", "0", "@cal24*[mit.gdp.lvl]/#gdp24")
 SECT = [("gen", "Power generation", "vre"), ("grid", "Grids and storage", "grid"), ("trn", "Transport", "veh"),
         ("bld", "Buildings", "bld"), ("ind", "Industry", "ind"), ("nco", "Non-CO2 and land use", None),
-        ("oth", "Other energy CO2", None)]
+        ("oth", "Other energy CO2", None), ("cal", "Unmodelled clean investment (calibration)", "vre")]
+HAS = lambda c: any(r["code"] == c for r in ROWS)
 for k, nm, life in SECT:
-    for sc in (1, 2):
-        src = f"[mit.inv.{k}.{sc}]" if any(r["code"] == f"mit.inv.{k}.{sc}" for r in ROWS) else "0"
-        if src == "0" and sc == 2: raise ValueError(k)
-        if src == "0": continue
-    have1 = any(r["code"] == f"mit.inv.{k}.1" for r in ROWS)
-    R(S10, f"mit.dinv.{k}", "", "", f"Incremental investment: {nm.lower()}", "USD bn", "0",
-      f"[mit.inv.{k}.2]" + (f"-[mit.inv.{k}.1]" if have1 else ""))
+    t = "-".join(x for x in ([f"[mit.inv.{k}.2]"] if HAS(f"mit.inv.{k}.2") else ["0"]) +
+                 ([f"[mit.inv.{k}.1]"] if HAS(f"mit.inv.{k}.1") else []))
+    R(S10, f"mit.dinv.{k}", "", "", f"Incremental investment: {nm.lower()}", "USD bn", "0", t)
 R(S10, "mit.inv.tot.1", "", "", "Total investment, baseline", "USD bn", "0",
   "+".join(f"[mit.inv.{k}.1]" for k, *_ in SECT if any(r["code"] == f"mit.inv.{k}.1" for r in ROWS)))
 R(S10, "mit.inv.tot.2", "", "", "Total investment, net zero", "USD bn", "0",
-  "+".join(f"[mit.inv.{k}.2]" for k, *_ in SECT))
+  "+".join(f"[mit.inv.{k}.2]" for k, *_ in SECT if HAS(f"mit.inv.{k}.2")))
 R(S10, "mit.dinv.tot", "", "", "Incremental investment, total", "USD bn", "0", "[mit.inv.tot.2]-[mit.inv.tot.1]")
 
 S11 = "11. Incremental cost by lens"
@@ -529,12 +535,32 @@ def summarise(iso, d, S, V):
     out["co2_model_2024"] = V["mit.co2.en.1"][0]; out["co2_cpat_2024"] = d["co2_24"]
     for k, *_ in SECT:
         out[f"dinv_{k}_2030"] = V[f"mit.dinv.{k}"][yi[2030]]
-        out[f"inv2_{k}_2030"] = V[f"mit.inv.{k}.2"][yi[2030]]
+        out[f"inv2_{k}_2030"] = V[f"mit.inv.{k}.2"][yi[2030]] if f"mit.inv.{k}.2" in V else 0.0
     return out
+
+def calibrate(D):
+    """Two passes: the baseline's 2025 investment by group is compared with IEA 2024 clean-energy
+    investment; the shortfall is clean investment the bottom-up rows do not model (hydro, nuclear,
+    efficiency beyond the rows, other). It is allocated to countries by 2024 GDP share (cal24), grows
+    with GDP and is added to BOTH scenarios, so it calibrates levels but not incremental investment."""
+    tgt = {1: P["iea24_ae"], 2: P["iea24_chn"], 3: P["iea24_emdc"]}
+    base, gdp = {1: 0.0, 2: 0.0, 3: 0.0}, {1: 0.0, 2: 0.0, 3: 0.0}
+    for iso, d in D.items():
+        d["cal24"] = 0.0
+        S, V = run_country(d)
+        base[d["grp"]] += V["mit.inv.tot.1"][1]; gdp[d["grp"]] += d["gdp24"]
+    gap = {g: max(0.0, tgt[g] - base[g]) for g in tgt}
+    for iso, d in D.items():
+        d["cal24"] = gap[d["grp"]] * d["gdp24"] / gdp[d["grp"]]
+    return {g: (base[g], tgt[g], gap[g]) for g in tgt}
+
+def load_calibrated():
+    D = load_data(); cal = calibrate(D); return D, cal
 
 def main():
     os.makedirs(RES, exist_ok=True)
-    D = load_data()
+    D, cal = load_calibrated()
+    print("baseline calibration (model 2025, IEA 2024, gap):", {k: tuple(round(x) for x in v) for k, v in cal.items()})
     long, summ = [], []
     for iso, d in D.items():
         S, V = run_country(d)

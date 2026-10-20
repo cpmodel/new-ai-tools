@@ -65,7 +65,7 @@ def band(ws, row, text, color, last_col, font=f9b):
 # -----------------------------------------------------------------------------
 # DATA sheet
 # -----------------------------------------------------------------------------
-D = M.load_data()
+D, CAL = M.load_calibrated()
 fields = set()
 for _, _, _, t in M.SCALARS: fields |= set(re.findall(r"@(\w+)", t))
 for r in M.ROWS:
@@ -346,7 +346,8 @@ TXT = [
  ("Method", "See NMIM_Method_v0_1.md. Baseline end use follows CPAT's activity equation with CPAT income-group "
   "elasticities and prices fixed in real terms; net zero applies sector transformations (EV sales, heat "
   "electrification, industrial abatement, fossil-free power by group target year); power capacity is a stock model "
-  "with lives and learning; incremental cost sums capital charges on incremental capital in service."),
+  "with lives and learning; clean investment not modelled bottom-up is calibrated to IEA 2024 by group and added to "
+  "both scenarios; incremental cost sums capital charges on incremental capital in service."),
  ("Consistency", "Codes and data follow CPAT (IMF CPAT 2024 panel; mit.<indicator>.<fuel>.<sector>.<scenario>). "
   "CBAM goods process CO2 comes from the CBAM Policy Tool's Country data. Market WACC is the v1.1 investment-needs "
   "workbook's (observed, Damodaran or IHLEG default)."),
@@ -355,7 +356,7 @@ TXT = [
  ("Caveats", "Simplified: no price response, no power optimisation, car-equivalent vehicles, assumed transformation "
   "dates; several formulas exceed the 100-character norm (to be split). Parameters marked † are assumptions."),
  ("Version log", f"v{M.VERSION} | 2026-10-20 | First build: 186 countries, 11 end-use rows, power stock model, "
-  "three lenses; workbook = Python on key rows (Check)."),
+  "IEA 2024 calibration of investment levels; three lenses; workbook = Python on key rows (Check)."),
 ]
 r = 3
 for h, t in TXT:
