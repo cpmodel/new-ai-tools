@@ -10,6 +10,9 @@ Status: v0.1, power sector only. Response functions are deliberately simple and
 transparent; every non-data parameter is a prior in `PRIORS` and should be
 replaced by country evidence or CPAT runs before results are quoted.
 
+See [`NOTES.md`](NOTES.md) for what this tool is for and how it can be integrated
+with CPAT and the other tools in this repo.
+
 ## Run
 
 ```bash
