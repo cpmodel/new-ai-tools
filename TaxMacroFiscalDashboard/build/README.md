@@ -4,7 +4,7 @@ Self-contained. No network access, no API keys, no hardcoded paths.
 
 ```
 config/
-  indicators.csv        THE definition: 64 indicators, 11 blocks, one row each
+  indicators.csv        THE definition: 65 indicators, 11 blocks, one row each
   sources.csv           source metadata (coverage is derived, not stored)
 raw_data/               23 source files the scripts read
 raw_data_not_used/      12 downloaded but superseded or too thin
@@ -92,9 +92,9 @@ into the Sources sheet, so it cannot drift.
 
 | Stage | File | Rows |
 |---|---|---|
-| 1 | `global_long_all_years.csv` — every source, every year | 105,072 |
-| 2 | `global_data_long.csv` — latest observation per country × indicator | 8,057 |
-| 3 | `global_data_wide.csv` — one row per country, plus `__year` columns | 217 × 64 |
+| 1 | `global_long_all_years.csv` — every source, every year | 113,729 |
+| 2 | `global_data_long.csv` — latest observation per country × indicator | 10,182 |
+| 3 | `global_data_wide.csv` — one row per country, plus `__year` columns | 217 × 65 |
 
 Python writes `global_*`, R writes `global_*_R`, so you can diff them. Verified
 identical in a clean-room run: same row count, zero value mismatches, zero year

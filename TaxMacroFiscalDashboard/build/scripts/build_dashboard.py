@@ -6,7 +6,7 @@ Output: TaxMacroFiscalDashboard/Global_fiscal_indicators_v<VERSION>.xlsx (the sh
 Versioning: bump VERSION when a changed workbook is shipped, move the previous file to
 TaxMacroFiscalDashboard/Archive/ and add a line to TaxMacroFiscalDashboard/VersionNotes.md.
 """
-VERSION = "1.1"
+VERSION = "1.2"
 import re
 import pandas as pd, numpy as np, openpyxl, warnings
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side

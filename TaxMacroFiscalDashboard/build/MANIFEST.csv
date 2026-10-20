@@ -2,10 +2,10 @@ folder,file,size_bytes,md5_12
 .,0_setup.bat,1065,a83d2ae13a1c
 .,1_build_database.bat,2153,6d14c5c5be2a
 .,2_build_tool.bat,1843,79a4b59a1f22
-.,README.md,6463,29787a87100a
+.,README.md,6464,18e1d04f9d64
 .,r_dependencies.R,216,01a04c26d74f
 .,requirements.txt,69,fbb3aa7ad03e
-config,indicators.csv,17603,9cab14e79ea6
+config,indicators.csv,17822,0bc21d9c8148
 config,sources.csv,5072,1ab9cac3fd91
 raw_data,2024-PPI-Full-DTA.dta,14540870,95edd13b2a15
 raw_data,API_EG_IMP_CONS_ZS_DS2_en_csv_v2_160768.zip,69501,169d40b0a853
@@ -42,6 +42,6 @@ raw_data_not_used,rethinking_regulation_data.xlsx,430262,899c53cdbc6f
 raw_data_not_used,rethinking_utilities_data.xlsx,602608,e19c03257914
 raw_data_not_used,rethinking_utilities_governance_index.xlsx,214750,378c0f28165f
 raw_data_not_used,rethinking_utilities_index-restructuringprivatisation.xlsx,51054,504d55de7902
-scripts,build_dashboard.py,21136,69a4acd3b6a0
-scripts,build_global_indicators.R,35555,035a5e3424a0
-scripts,build_global_indicators.py,39531,a9d37e1142a5
+scripts,build_dashboard.py,21136,8f16752359f0
+scripts,build_global_indicators.R,35810,59b3986e8262
+scripts,build_global_indicators.py,39821,7eb06bf30c2d

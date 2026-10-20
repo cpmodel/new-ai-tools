@@ -231,6 +231,9 @@ ir <- Reduce(function(a, b) merge(a, b, by = c("iso", "year")),
 ir <- ir[!is.na(pb) & !is.na(nb) & !is.na(rev) & rev > 0][, itr := (pb - nb) / rev * 100][
         itr >= 0 & itr < 100]
 emit(ir$iso, "interest_to_revenue_pct", ir$year, ir$itr, paste(wf, "(derived)"))
+# the same interest, unscaled: % GDP. Net of interest received, so it can be negative
+ig <- merge(mk(PB, "pb"), mk(NB, "nb"), by = c("iso", "year"))[!is.na(pb) & !is.na(nb)]
+emit(ig$iso, "interest_pct_gdp", ig$year, ig$pb - ig$nb, paste(wf, "(derived)"))
 
 gg <- melt(weo_ser(GDPU), id.vars = "iso", variable.name = "year", value.name = "gdp",
            variable.factor = FALSE)[!is.na(gdp)]

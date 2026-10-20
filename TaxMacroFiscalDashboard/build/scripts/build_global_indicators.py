@@ -273,6 +273,11 @@ for iso in set(pb.index) & set(nb.index) & set(rev.index):
         if pd.notna(a) and pd.notna(b) and pd.notna(c) and c > 0:
             v = (a - b) / c * 100
             if 0 <= v < 100: emit(iso, "interest_to_revenue_pct", y, v, wf + " (derived)")
+# the same interest, unscaled: % GDP. Net of interest received, so it can be negative
+for iso in set(pb.index) & set(nb.index):
+    for y in WY:
+        a, b = pb.loc[iso, y], nb.loc[iso, y]
+        if pd.notna(a) and pd.notna(b): emit(iso, "interest_pct_gdp", y, a - b, wf + " (derived)")
 # macro-model inputs (Appendix C): ratios WEO already publishes, plus average growth.
 # (Exports and imports in this WEO extract cover country groups only, so trade ratios
 # for the DSF need a WDI download; not added yet.)

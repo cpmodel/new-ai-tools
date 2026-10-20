@@ -130,10 +130,10 @@ Dashboards and data on tax, macro-fiscal, and carbon/climate policy indicators.
 - **`TECP + Validation/`** — Total Effective Carbon Price data, elasticities, and
   validation materials (`Total_Effective_Carbon_Price.pdf`, `CPATPriceElasticities.xlsx`)
 - **`build/`** — Self-contained Python/R pipeline that builds the Global Fiscal
-  Indicators workbook (64 indicators, 11 blocks, including macro-model inputs and the
+  Indicators workbook (65 indicators, 11 blocks, including macro-model inputs and the
   integrated scenario from MacroFiscalModels) from raw source files; see
   [SETUP.md](SETUP.md) for requirements and build steps
-- **`Global_fiscal_indicators_v1.1.xlsx`** — The dashboard workbook (current version; v1.0 and
+- **`Global_fiscal_indicators_v1.2.xlsx`** — The dashboard workbook (current version; v1.0 and
   later superseded versions in `Archive/`, history in `VersionNotes.md`)
 - **`TaxMacroFiscalDashboard_v1.0.pptx`** — Dashboard overview deck
 

@@ -15,7 +15,7 @@ refresh), no API keys, no hardcoded paths.
 ```
 TaxMacroFiscalDashboard/build/
   config/
-    indicators.csv        THE definition: 64 indicators, 11 blocks, one row each
+    indicators.csv        THE definition: 65 indicators, 11 blocks, one row each
     sources.csv            source metadata (coverage is derived, not stored)
   raw_data/                23 source files the scripts read
   raw_data_not_used/       12 downloaded but superseded or too thin
