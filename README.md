@@ -18,6 +18,8 @@ fiscal-climate-ai-tools/
 ├── ExciseDiagnostic/            Excise tax diagnostic working paper and data
 ├── InvestmentNeeds/             Mitigation (net zero) investment needs model, by country,
 │                                 sector and cost-of-capital lens
+├── MacroFiscalModels/           GIMF-lite, DIGNAD-lite and LIC-DSF-lite, linked to the
+│                                 national investment model (NMIM)
 ├── TaxMacroFiscalDashboard/     Tax, macro-fiscal, and climate policy dashboards
 │   └── build/                   Raw data, config, and scripts for the Global Fiscal
 │                                 Indicators dashboard (Python + R build pipeline)
@@ -92,6 +94,15 @@ method (October 2026; CDPM was formerly SiSePuede). See [`InvestmentNeeds/README
 - **`build/`** — `build_investment_model.py` (workbook), `run_sensitivity.py`
   (Sensitivity sheet), `make_summary_image.py` (summary PNG)
 - **`raw_data/`** — optional inputs (Damodaran `ctryprem.xlsx`)
+
+## MacroFiscalModels
+
+Simplified Python versions of the IMF GIMF and DIGNAD models and the World Bank-IMF LIC-DSF,
+linked to NMIM: a country's net zero investment programme (budget need, private investment,
+energy savings) runs through GIMF-lite or DIGNAD-lite, and the macro path through the DSF. See
+[`MacroFiscalModels/README.md`](MacroFiscalModels/README.md) and the method note
+`MacroFiscalModels_Method_v0_1.md` (equations, data needs, validation). Calibrations are
+illustrative.
 
 ## TaxMacroFiscalDashboard
 
