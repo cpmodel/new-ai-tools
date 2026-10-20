@@ -171,7 +171,7 @@ const chartBase = (title) => ({
   s.addNotes("The household budget, which the model does not impose, holds to 1e-15, a check that the accounting is consistent.");
 
   // 6 ------------------------------------------------------------ Kenya GIMF chart
-  s = content("Results", `${D.name.toUpperCase()} EXAMPLE · GIMF-LITE`, `${D.name}'s net zero programme could lift GDP about 6% by 2050`);
+  s = content("Results", `${D.name.toUpperCase()} EXAMPLE · GIMF-LITE`, `${D.name}'s net zero programme could lift GDP about ${Math.round(D.gimf["Debt financed"][25])}% by 2050`);
   const yrs = D.years.map(String);
   s.addChart(pres.charts.LINE, Object.keys(D.gimf).map((k) => ({ name: k, labels: yrs, values: D.gimf[k] })),
     Object.assign(chartBase("Real GDP, % deviation from no-programme path"), { x: 0.6, y: 1.7, w: 8.0, h: 4.9, valAxisLabelFormatCode: "0.0" }));
@@ -187,7 +187,7 @@ const chartBase = (title) => ({
   });
   txt(s, `Programme: NMIM v0.2 (${D.name}): public ${D.prog.pub[5]}%, private ${D.prog.prv[5]}% of GDP in 2030. Macro calibration illustrative.`,
     { x: 0.6, y: 6.65, w: 12, h: 0.3, fontSize: 10, color: C.accent4 });
-  s.addNotes("The financing choice moves debt more than GDP: tax financing keeps debt falling with almost the same growth. Without energy savings the gain is about a third as large, so the savings assumption is the one to test first.");
+  s.addNotes("The financing choice moves debt more than GDP: tax financing keeps debt falling with almost the same growth. Most of the gain comes from energy savings, so the savings assumption is the one to test first. Most of Kenya's public budget need is land-use and non-CO2 spending, which builds no capital, so the public part alone adds little to GDP.");
 
   // 7 ------------------------------------------------------------ DIGNAD
   s = content("Results", "DIGNAD-LITE · DISASTERS AND ADAPTATION", "Adapting before a disaster cuts the first-year loss by a sixth");

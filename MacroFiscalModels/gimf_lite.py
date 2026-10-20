@@ -24,7 +24,9 @@ Climate add-on (for the link with InvestmentNeeds/NMIM)
   * ix: incremental private investment, building a 'green' capital stock KX that adds zeta
     units of effective capital per unit (zeta = 0: it only replaces fossil capacity)
   * sav: energy cost savings, % of GDP, entering as a gain in value added (TFP)
-  * dfs: share of the extra public investment that the fiscal rule lets be debt financed
+  * g_extra: incremental public spending that builds no capital (e.g. land use, non-CO2), % of GDP
+  * rev_extra: extra revenue earmarked for the programme (e.g. feasible carbon pricing), % of GDP
+  * dfs: share of the programme (ig_extra + g_extra - rev_extra) the fiscal rule lets be debt financed
 
 Units: steady-state GDP = 1, so ratios are shares of initial GDP.
 """
@@ -111,7 +113,7 @@ def calibrate(p: Params):
     return ss, cal
 
 
-def exo_paths(p: Params, cal, ig_extra=(), ix=(), sav=()):
+def exo_paths(p: Params, cal, ig_extra=(), ix=(), sav=(), g_extra=(), rev_extra=()):
     """Programme paths for t = 1..T; each input is held at its last value after it ends."""
     def pad(a):
         a = np.asarray(a, float)
@@ -121,7 +123,7 @@ def exo_paths(p: Params, cal, ig_extra=(), ix=(), sav=()):
             out[:n] = a[:n]
             out[n:] = a[n - 1]
         return out
-    ige, ixp, svp = pad(ig_extra), pad(ix), pad(sav)
+    ige, ixp, svp, gep, rvp = pad(ig_extra), pad(ix), pad(sav), pad(g_extra), pad(rev_extra)
     ig = p.ig + ige
     kg = np.empty(p.T); kx = np.empty(p.T)
     kg_prev, kx_prev = cal["kg0"], 0.0
@@ -134,7 +136,7 @@ def exo_paths(p: Params, cal, ig_extra=(), ix=(), sav=()):
     kx_inf = ixp[-1] / p.delta
     return dict(ig=ig, ig_extra=ige, ix=ixp, sav=svp, kg=kg, kx=kx,
                 kg_inf=kg_inf, kx_inf=kx_inf, ig_inf=ig[-1], ix_inf=ixp[-1], sav_inf=svp[-1],
-                ige_inf=ige[-1])
+                ige_inf=ige[-1], g_extra=gep, rev_extra=rvp, ge_inf=gep[-1], rv_inf=rvp[-1])
 
 
 def _resid(X, lag, lead, p, cal, ss0, exo):
@@ -162,7 +164,7 @@ def _resid(X, lag, lead, p, cal, ss0, exo):
     div_f = (1 - p.tau_k) * (rk_f * keff + (1 - mc_f) * y_f) - inv_f - adj_f - exo["ix_f"]
     fw = div + v + (1 + r_l) * b_l - (1 + p.rstar + prem_l) * q * nfd_l
     c = co + cl
-    absorb = c + inv + adj + exo["ix"] + p.g + exo["ig"]
+    absorb = c + inv + adj + exo["ix"] + p.g + exo["ge"] + exo["ig"]
     R = np.empty_like(X)
     R[:, 0] = y - A * exo["kg_l"] ** cal["alpha_g"] * keff_l ** p.alpha * l ** (1 - p.alpha)
     R[:, 1] = rk - mc * p.alpha * y / keff_l
@@ -183,8 +185,8 @@ def _resid(X, lag, lead, p, cal, ss0, exo):
     R[:, 13] = (1 + p.tau_c) * co - (1 - cal["beta"] * p.theta) * (fw + hw)           # OLG consumption
     R[:, 14] = (1 + p.tau_c) * cl - p.psi * lab_inc                                   # liquidity-constrained
     tax = tau_l * w * l + p.tau_c * c + p.tau_k * (rk * keff_l + pi_prof)
-    R[:, 15] = b - ((1 + r_l) * b_l + p.g + exo["ig"] + tr - tax)                     # government budget
-    R[:, 16] = (b - b_l) - (p.dfs * exo["ige"] - p.lam_b * (b_l - p.b))               # fiscal rule
+    R[:, 15] = b - ((1 + r_l) * b_l + p.g + exo["ge"] + exo["ig"] + tr - tax - exo["rv"])  # government budget
+    R[:, 16] = (b - b_l) - (p.dfs * (exo["ige"] + exo["ge"] - exo["rv"]) - p.lam_b * (b_l - p.b))  # fiscal rule
     R[:, 17] = nfd - ((1 + p.rstar + prem_l) * nfd_l - nx / q)                        # balance of payments
     R[:, 18] = nx - (cal["x_bar"] * q ** p.eps_x - cal["m_bar"] * (absorb / cal["abs_bar"]) * q ** (-p.eps_m))
     R[:, 19] = y - (absorb + nx)                                                      # goods market
@@ -195,13 +197,14 @@ def _exo_rows(exo, T):
     kg_l = np.concatenate([[exo["kg0"]], exo["kg"][:-1]])
     kx_l = np.concatenate([[0.0], exo["kx"][:-1]])
     ix_f = np.concatenate([exo["ix"][1:], [exo["ix_inf"]]])
-    return dict(ig=exo["ig"], ige=exo["ig_extra"], ix=exo["ix"], ix_f=ix_f, sav=exo["sav"],
+    return dict(ig=exo["ig"], ige=exo["ig_extra"], ge=exo["g_extra"], rv=exo["rev_extra"], ix=exo["ix"], ix_f=ix_f, sav=exo["sav"],
                 kg_l=kg_l, kx_l=kx_l, kx=exo["kx"])
 
 
 def terminal_ss(p, cal, ss0, exo):
     """Steady state with the programme's final values held forever (solved numerically)."""
     e = dict(ig=np.array([exo["ig_inf"]]), ige=np.array([exo["ige_inf"]]), ix=np.array([exo["ix_inf"]]),
+             ge=np.array([exo["ge_inf"]]), rv=np.array([exo["rv_inf"]]),
              ix_f=np.array([exo["ix_inf"]]), sav=np.array([exo["sav_inf"]]),
              kg_l=np.array([exo["kg_inf"]]), kx_l=np.array([exo["kx_inf"]]), kx=np.array([exo["kx_inf"]]))
     pp = p
@@ -212,10 +215,10 @@ def terminal_ss(p, cal, ss0, exo):
     return dict(zip(VARS, solve_static(f, x0)))
 
 
-def solve(p: Params = None, ig_extra=(), ix=(), sav=(), verbose=False):
+def solve(p: Params = None, ig_extra=(), ix=(), sav=(), g_extra=(), rev_extra=(), verbose=False):
     p = p or Params()
     ss0, cal = calibrate(p)
-    exo = exo_paths(p, cal, ig_extra, ix, sav)
+    exo = exo_paths(p, cal, ig_extra, ix, sav, g_extra, rev_extra)
     exo["kg0"] = cal["kg0"]
     ssT = terminal_ss(p, cal, ss0, exo)
     rows = _exo_rows(exo, p.T)
@@ -238,8 +241,8 @@ def solve(p: Params = None, ig_extra=(), ix=(), sav=(), verbose=False):
     out["nfd_gdp"] = out["q"] * out["nfd"] / out["y"]
     keff_l = np.concatenate([[ss0["k"]], out["k"][:-1]]) + p.zeta * rows["kx_l"]
     out["revenue"] = (tau_l * out["w"] * out["l"] + p.tau_c * out["c"]
-                      + p.tau_k * (out["rk"] * keff_l + (1 - out["mc"]) * out["y"]))
-    out["prim_def"] = p.g + out["ig"] + tr - out["revenue"]
+                      + p.tau_k * (out["rk"] * keff_l + (1 - out["mc"]) * out["y"]) + out["rev_extra"])
+    out["prim_def"] = p.g + out["g_extra"] + out["ig"] + tr - out["revenue"]
     # check: OLG households' budget, implied by Walras' law (assets end t = V + B - q*nfd)
     assets = out["v"] + out["b"] - out["q"] * out["nfd"]
     lag = lambda a, a0: np.concatenate([[a0], a[:-1]])

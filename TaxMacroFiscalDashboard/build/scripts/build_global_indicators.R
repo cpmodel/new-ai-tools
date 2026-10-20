@@ -237,6 +237,22 @@ gg <- melt(weo_ser(GDPU), id.vars = "iso", variable.name = "year", value.name = 
 setorder(gg, iso, year); GDPdt <- gg[, .SD[.N], by = iso]      # latest actual year
 GDP <- setNames(GDPdt$gdp, GDPdt$iso)
 
+# macro-model inputs (Appendix C): ratios WEO already publishes, plus average growth.
+# (Exports and imports in this WEO extract cover country groups only; not added.)
+for (p in list(c("Revenue, General government, Percent of GDP", "revenue_pct_gdp"),
+               c("Primary net lending (+) / net borrowing (-), General government, Percent of GDP", "primary_balance_pct_gdp"),
+               c("Gross capital formation, Percent of GDP", "gross_capital_formation_pct_gdp"),
+               c("Current account balance (credit less debit), Percent of GDP", "current_account_pct_gdp"))) {
+  d <- melt(weo_ser(p[1]), id.vars = "iso", variable.name = "year", value.name = "v",
+            variable.factor = FALSE)
+  emit(d$iso, p[2], d$year, d$v, wf)
+}
+GR5 <- WY[as.integer(WY) >= max(as.integer(WY)) - 4]          # last five actual years
+gr <- weo_ser("Gross domestic product (GDP), Constant prices, Percent change")
+gr <- gr[complete.cases(gr[, GR5, with = FALSE])]
+emit(gr$iso, "real_gdp_growth_5y_avg_pct", paste0(GR5[1], "-", GR5[length(GR5)], " avg"),
+     rowMeans(gr[, GR5, with = FALSE]), paste(wf, "(derived)"))
+
 ## --- IMF WoRLD (values already % of GDP) -------------------------------------
 WORLD_F <- "world-imf2026.xlsx"
 wo <- as.data.table(read_excel(file.path(RAW, WORLD_F), sheet = "Data"))
@@ -462,6 +478,23 @@ UNDP_YES <- c("ARM","BGD","BEN","KHM","CHN","COL","ECU","ETH","FJI","GHA","HND",
  "HRV","GMB","MDG","MUS","PER")
 emit(ISO, "climate_pfm_diagnostic_on_record", 2022, as.integer(ISO %in% UNDP_YES),
      "UNDP-Global-Climate-Public-Finance-Review-2022.pdf (Table 4.2)")
+
+## --- integrated scenario (Appendix D): MacroFiscalModels output, not source data --
+# Written by MacroFiscalModels/integrated.py, which reads this panel's source indicators
+# only (never Appendix D), so: build the panel, run integrated.py, build again.
+INT_F <- normalizePath(Sys.getenv("INT_RESULTS", file.path(.here, "..", "..", "..", "MacroFiscalModels",
+                                                        "results", "integrated_results.csv")), mustWork = FALSE)
+if (file.exists(INT_F)) {
+  intr <- as.data.table(read.csv(INT_F, check.names = FALSE))
+  INT_COLS <- list(c("budget_need_2030_pct_gdp", "int_budget_need_2030_pct_gdp", "2030"),
+                   c("pricing_revenue_2030_pct_gdp", "int_pricing_revenue_2030_pct_gdp", "2030"),
+                   c("financing_gap_2030_pct_gdp", "int_financing_gap_2030_pct_gdp", "2030"),
+                   c("gdp_dev_2050_pct", "int_gdp_dev_2050_pct", "2050"),
+                   c("debt_2050_pct_gdp", "int_debt_2050_pct_gdp", "2050"),
+                   c("dsf_risk_code", "int_dsf_risk_code", "2034"))
+  for (p in INT_COLS) if (p[1] %in% names(intr))
+    emit(intr$iso3, p[2], p[3], intr[[p[1]]], "integrated_results.csv (MacroFiscalModels v0.1, model output)")
+}
 
 long_all <- rbindlist(ACC, use.names = TRUE)
 long_all[, value := round(value, 3)]

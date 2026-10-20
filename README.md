@@ -18,8 +18,8 @@ fiscal-climate-ai-tools/
 ├── ExciseDiagnostic/            Excise tax diagnostic working paper and data
 ├── InvestmentNeeds/             Mitigation (net zero) investment needs model, by country,
 │                                 sector and cost-of-capital lens
-├── MacroFiscalModels/           GIMF-lite, DIGNAD-lite and LIC-DSF-lite, linked to the
-│                                 national investment model (NMIM)
+├── MacroFiscalModels/           GIMF-lite, DIGNAD/DIGNAR-lite, LIC-DSF-lite and the
+│                                 integrated run (dashboard, NMIM, PriceFeasibility)
 ├── PriceFeasibility/            Power-sector carbon tax vs feebate metrics under
 │                                 political-feasibility limits (standalone Python)
 ├── TaxMacroFiscalDashboard/     Tax, macro-fiscal, and climate policy dashboards
@@ -106,9 +106,10 @@ method (October 2026; CDPM was formerly SiSePuede). See [`InvestmentNeeds/README
 
 ## MacroFiscalModels
 
-Simplified Python versions of the IMF GIMF and DIGNAD models and the World Bank-IMF LIC-DSF,
-linked to NMIM: a country's net zero investment programme (budget need, private investment,
-energy savings) runs through GIMF-lite or DIGNAD-lite, and the macro path through the DSF. See
+Simplified Python versions of the IMF GIMF, DIGNAD and DIGNAR models and the World Bank-IMF
+LIC-DSF. `integrated.py` chains the dashboard, NMIM (investment needs), PriceFeasibility
+(feasible power-sector carbon pricing, whose revenue finances part of the budget need), the
+macro model and the DSF for every country, and its results feed the dashboard's Appendix D. See
 [`MacroFiscalModels/README.md`](MacroFiscalModels/README.md) and the method note
 `MacroFiscalModels_Method_v0_1.md` (equations, data needs, validation); pitch deck and user
 guides in `MacroFiscalModels/Docs/`. Calibrations are illustrative.
@@ -126,7 +127,8 @@ Dashboards and data on tax, macro-fiscal, and carbon/climate policy indicators.
 - **`TECP + Validation/`** — Total Effective Carbon Price data, elasticities, and
   validation materials (`Total_Effective_Carbon_Price.pdf`, `CPATPriceElasticities.xlsx`)
 - **`build/`** — Self-contained Python/R pipeline that builds the Global Fiscal
-  Indicators workbook (53 indicators, 9 blocks) from raw source files; see
+  Indicators workbook (64 indicators, 11 blocks, including macro-model inputs and the
+  integrated scenario from MacroFiscalModels) from raw source files; see
   [SETUP.md](SETUP.md) for requirements and build steps
 - **`Tax+Macro-Fiscal-Energy_indicators.xlsx`** — Combined tax, macro-fiscal, and
   energy indicators workbook

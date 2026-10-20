@@ -7,6 +7,7 @@
 | `UserGuide_1_GIMF_lite.docx` / `.md` | GIMF-lite: parameters (with data sources), outputs, recipes, reading the results, limits |
 | `UserGuide_2_DIGNAD_lite.docx` / `.md` | DIGNAD-lite: the same for disasters, adaptation and public investment financing |
 | `UserGuide_3_LIC_DSF_lite.docx` / `.md` | LIC-DSF-lite: capacity, inputs, indicators, stress tests, rating |
+| `UserGuide_4_Integrated.docx` / `.md` | Integrated country run: the chain, model choice, outputs, dashboard Appendix D, caveats |
 
 The Markdown files are the sources; the Word files and the deck are generated:
 

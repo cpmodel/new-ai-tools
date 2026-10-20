@@ -1,4 +1,4 @@
-"""DIGNAD-lite: a simplified Debt-Investment-Growth and Natural Disasters model.
+"""DIGNAD-lite (and DIGNAR-lite): a simplified Debt-Investment-Growth and Natural Disasters model.
 
 Inspired by Marto, Papageorgiou & Klyuev (2018, J. Dev. Econ.) / IMF DIGNAD toolkit,
 itself built on the DIG model (Buffie, Berg, Pattillo, Portillo & Zanna, 2012).
@@ -19,6 +19,11 @@ Kept from DIGNAD
   * reconstruction spending financed by grants, concessional loans and commercial debt
   * debt-elastic commercial interest rate; fiscal rule closing the gap with consumption
     tax and transfers.
+
+DIGNAR-lite (Melina, Yang and Zanna 2016, simplified) is the same model with the resource block
+switched on (rents0 > 0): resource rents are an endowment; the government takes gov_take of them
+and savers the rest; total GDP = non-resource GDP + rents. A fall in rents (e.g. global net zero)
+is a permanent fiscal and income shock.
 
 All quantities are per capita, normalised so that steady-state GDP = 1 (ratios = share of GDP).
 """
@@ -74,6 +79,12 @@ class Params:
     prog: tuple = ()
     prog_bbb: float = 0.0     # share of the programme that is adaptation capital
     prog_taper: int = 10
+    prog_spend: tuple = ()    # programme spending that builds no capital (land use, non-CO2), % GDP, same financing
+    rev: tuple = ()           # revenue earmarked for the programme (e.g. feasible carbon pricing), % GDP
+    # DIGNAR-lite resource block (off when rents0 = 0): rents in % of non-resource GDP
+    rents0: float = 0.0       # resource rents before the shock
+    gov_take: float = 0.5     # government's share of rents (royalties, taxes, SOE profits)
+    rents_path: tuple = ()    # rents by year from t = 1, held at the last value (e.g. a net-zero decline)
     T: int = 150
 
 
@@ -92,9 +103,11 @@ def steady_state(p: Params):
     A = 1 / (kg ** psi * k ** p.alpha)
     i = p.delta * k
     # transfers close the steady-state budget (see README for derivation)
-    rhs = p.tau_y + p.grants - p.rstar * p.dc - p.rk * p.dk - p.ig1 - p.ig2 - p.gc
-    tr = (1 + p.tau_c) * (rhs + p.tau_c / (1 + p.tau_c) * ((1 - p.tau_y) - i - p.rstar * p.bp))
-    cs = ((1 - p.tau_y) * (1 - p.phi * (1 - p.alpha)) + (1 - p.phi) * tr - i - p.rstar * p.bp) / ((1 - p.phi) * (1 + p.tau_c))
+    Rn = p.rents0
+    rhs = p.tau_y + p.grants + p.gov_take * Rn - p.rstar * p.dc - p.rk * p.dk - p.ig1 - p.ig2 - p.gc
+    tr = (1 + p.tau_c) * (rhs + p.tau_c / (1 + p.tau_c) * ((1 - p.tau_y) - i - p.rstar * p.bp + (1 - p.gov_take) * Rn))
+    cs = ((1 - p.tau_y) * (1 - p.phi * (1 - p.alpha)) + (1 - p.phi) * tr - i - p.rstar * p.bp
+          + (1 - p.gov_take) * Rn) / ((1 - p.phi) * (1 + p.tau_c))
     ch = ((1 - p.tau_y) * (1 - p.alpha) + tr) / (1 + p.tau_c)
     ss = dict(y=1.0, cs=cs, ch=ch, i=i, k=k, q=1.0, bp=p.bp, rp=p.rstar, kg1=kg1, kg2=kg2,
               dc=p.dc, rc=p.rstar, tr=tr, tauc=p.tau_c)
@@ -107,24 +120,32 @@ def exogenous_paths(p: Params):
     T = p.T
     t = np.arange(1, T + 1)
     rec = p.rec * p.rho_rec ** (t - 1)
-    prog = np.zeros(T)
-    if len(p.prog):
-        n = min(len(p.prog), T)
-        prog[:n] = p.prog[:n]
-        last = p.prog[n - 1]
-        for j in range(p.prog_taper):
-            if n + j < T:
-                prog[n + j] = last * (1 - (j + 1) / (p.prog_taper + 1))
+    def taper(v):
+        out = np.zeros(T)
+        if len(v):
+            n = min(len(v), T)
+            out[:n] = v[:n]
+            for j in range(p.prog_taper):
+                if n + j < T:
+                    out[n + j] = v[n - 1] * (1 - (j + 1) / (p.prog_taper + 1))
+        return out
+    prog, spend, rev = taper(p.prog), taper(p.prog_spend), taper(p.rev)
+    rents = np.full(T, p.rents0)
+    if len(p.rents_path):
+        n = min(len(p.rents_path), T)
+        rents[:n] = p.rents_path[:n]
+        rents[n:] = p.rents_path[n - 1]
     ig1 = p.ig1 + (1 - p.bbb) * rec + (1 - p.prog_bbb) * prog
     ig2 = p.ig2 + p.bbb * rec + p.prog_bbb * prog
     rec = rec + prog
-    grants = p.grants + p.sh_grant * rec
+    fin = rec + spend                                  # spending financed by grants / concessional / commercial
+    grants = p.grants + p.sh_grant * fin
     dk = np.empty(T)
     prev = p.dk
     for j in range(T):
-        prev = p.dk + (prev - p.dk) * (1 - p.amort_k) + p.sh_conc * rec[j]
+        prev = p.dk + (prev - p.dk) * (1 - p.amort_k) + p.sh_conc * fin[j]
         dk[j] = prev
-    return dict(rec=rec, prog=prog, ig1=ig1, ig2=ig2, grants=grants, dk=dk)
+    return dict(rec=rec, prog=prog, spend=spend, rev=rev, rents=rents, ig1=ig1, ig2=ig2, grants=grants, dk=dk)
 
 
 def initial_conditions(p: Params, ss):
@@ -139,16 +160,23 @@ def initial_conditions(p: Params, ss):
     return init, a
 
 
-def residuals(X, p, ss, cal, ex, init, a):
-    """X: (T, NV). Returns (T, NV) residuals. Lag at t=0 from init, lead at T+1 = steady state."""
-    T = p.T
+def residuals(X, p, ss, cal, ex, init, a, term=None):
+    """X: (T, NV). Returns (T, NV) residuals. Lag at t=0 from init, lead at T+1 = terminal steady state."""
+    T = X.shape[0]
+    term = term or ss
     lag = np.vstack([[init[v] for v in VARS], X[:-1]])
-    lead = np.vstack([X[1:], [ss[v] for v in VARS]])
+    lead = np.vstack([X[1:], [term[v] for v in VARS]])
+    return _resid(X, lag, lead, p, ss, cal, ex, a, np.concatenate([[p.dk], ex["dk"][:-1]]))
+
+
+def _resid(X, lag, lead, p, ss, cal, ex, a, dk_l):
+    T = X.shape[0]
     g = lambda M, v: M[:, IX[v]]
     y, cs, ch, i, k, q, bp, rp, kg1, kg2, dc, rc, tr, tauc = (X[:, j] for j in range(NV))
     k_l, kg1_l, kg2_l, bp_l, rp_l, dc_l, rc_l = (g(lag, v) for v in ["k", "kg1", "kg2", "bp", "rp", "dc", "rc"])
     y_f, cs_f, i_f, q_f, tauc_f = (g(lead, v) for v in ["y", "cs", "i", "q", "tauc"])
-    dk = ex["dk"]; dk_l = np.concatenate([[p.dk], dk[:-1]])
+    dk = ex["dk"]
+    rents = ex["rents"]
     beta, psi, A = cal["beta"], cal["psi"], cal["A"]
     lam, lam_f = 1 / (cs * (1 + tauc)), 1 / (cs_f * (1 + tauc_f))
     x, x_f = i / k_l, i_f / k
@@ -162,12 +190,13 @@ def residuals(X, p, ss, cal, ex, init, a):
     R[:, 5] = q - beta * lam_f / lam * ((1 - p.tau_y) * p.alpha * y_f / k + (1 - p.delta) * q_f
                                         - p.kappa / 2 * (x_f - p.delta) ** 2 + p.kappa * (x_f - p.delta) * x_f)
     R[:, 6] = ((1 - p.phi) * cs * (1 + tauc) + i + p.kappa / 2 * (x - p.delta) ** 2 * k_l + (1 + rp_l) * bp_l
-               - (1 - p.tau_y) * (1 - p.phi * (1 - p.alpha)) * y - (1 - p.phi) * tr - bp)  # savers' budget
+               - (1 - p.tau_y) * (1 - p.phi * (1 - p.alpha)) * y - (1 - p.phi) * tr - bp
+               - (1 - p.gov_take) * rents)                                           # savers' budget
     R[:, 7] = rp - (p.rstar + p.eta_p * (np.exp(bp - p.bp) - 1))
     R[:, 8] = kg1 - ((1 - p.delta_g) * kg1_l + p.s * ex["ig1"])
     R[:, 9] = kg2 - ((1 - p.delta_g) * kg2_l + p.s * ex["ig2"] / (1 + p.mu_a))
-    R[:, 10] = dc - ((1 + rc_l) * dc_l + (1 + p.rk) * dk_l - dk + ex["ig1"] + ex["ig2"] + p.gc + tr
-                     - tauc * C - p.tau_y * y - ex["grants"])                         # government budget
+    R[:, 10] = dc - ((1 + rc_l) * dc_l + (1 + p.rk) * dk_l - dk + ex["ig1"] + ex["ig2"] + p.gc + ex["spend"] + tr
+                     - tauc * C - p.tau_y * y - ex["grants"] - ex["rev"] - p.gov_take * rents)  # government budget
     R[:, 11] = rc - (p.rstar + p.eta_g * (np.exp(dc - p.dc) - 1))
     R[:, 12] = tr - (ss["tr"] - p.lam_tr * (dc_l - p.dc))                             # fiscal rule
     R[:, 13] = tauc - (p.tau_c + p.lam_tau * (dc_l - p.dc))
@@ -179,18 +208,35 @@ def solve(p: Params = None, tol=1e-10, maxit=30, verbose=False):
     ss, cal = steady_state(p)
     ex = exogenous_paths(p)
     init, a = initial_conditions(p, ss)
-    X = np.tile([ss[v] for v in VARS], (p.T, 1))
-    F = lambda Z: residuals(Z, p, ss, cal, ex, init, a)
+    term = terminal_ss(p, ss, cal, ex)
+    w8 = np.linspace(0, 1, p.T)[:, None] ** 0.5
+    X = (1 - w8) * np.array([ss[v] for v in VARS]) + w8 * np.array([term[v] for v in VARS])
+    F = lambda Z: residuals(Z, p, ss, cal, ex, init, a, term)
     X = solve_path(F, X, tol, maxit, verbose)
     out = {v: X[:, IX[v]] for v in VARS}
     out.update(ex)
     out["a"] = a
     out["C"] = (1 - p.phi) * out["cs"] + p.phi * out["ch"]
     out["debt"] = out["dc"] + out["dk"]                                   # total public debt (level, ss GDP = 1)
-    out["debt_gdp"] = out["debt"] / out["y"]
-    out["revenue"] = out["tauc"] * out["C"] + p.tau_y * out["y"]
-    out["prim_bal"] = out["revenue"] + out["grants"] - out["ig1"] - out["ig2"] - p.gc - out["tr"]
+    out["gdp"] = out["y"] + out["rents"]                                 # total GDP (non-resource + rents)
+    out["debt_gdp"] = out["debt"] / out["gdp"]
+    out["revenue"] = out["tauc"] * out["C"] + p.tau_y * out["y"] + out["rev"] + p.gov_take * out["rents"]
+    out["prim_bal"] = out["revenue"] + out["grants"] - out["ig1"] - out["ig2"] - p.gc - out["spend"] - out["tr"]
     return out, ss, cal
+
+
+def terminal_ss(p, ss, cal, ex):
+    """Steady state with the exogenous paths at their final values (differs from ss only when
+    something is permanent, e.g. a lower level of resource rents)."""
+    from pf_solver import solve_static
+    if abs(ex["rents"][-1] - p.rents0) < 1e-12:
+        return ss            # programmes taper to zero and concessional loans are repaid: same steady state
+    last = {k: np.array([v[-1]]) for k, v in ex.items()}
+    def f(x):
+        X = x[None, :]
+        return _resid(X, X, X, p, ss, cal, last, np.zeros(1), last["dk"])[0]
+    x = solve_static(f, np.array([ss[v] for v in VARS]))
+    return dict(zip(VARS, x))
 
 
 if __name__ == "__main__":

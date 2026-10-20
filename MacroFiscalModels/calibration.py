@@ -87,6 +87,14 @@ def shared(iso):
         out["rstar"] = (min(max(pr / 100 - 0.03, 0.03), 0.08), f"dashboard: IDS private creditor rate {pr:.1f}% less 3% inflation")
     else:
         out["rstar"] = (0.04 if k < 2 else 0.03, "default: real borrowing cost by income group")
+    fr = _num(row, "fossil_rents_total_pct_gdp")
+    og = (_num(row, "oil_rents_pct_gdp") or 0) + (_num(row, "gas_rents_pct_gdp") or 0)
+    fx = _num(row, "fuel_exports_pct_merch")
+    if fr is not None and og == 0 and fx is not None and fx < 5:
+        # coal rents with no fuel exports (e.g. Cabo Verde, 17% of GDP in WDI): treated as a data error
+        out["rents"] = (0.0, f"dashboard rents {fr:.1f}% ignored: coal only and fuel exports {fx:.1f}% (likely WDI error)")
+    else:
+        out["rents"] = (fr / 100, "dashboard: fossil rents (WDI oil + gas + coal)") if fr is not None else (0.0, "default: no rents data")
     for c, v in COMMON.items():
         out[c] = (v, "default: common to both models")
     # government consumption closes the starting budget so transfers start near TR_TARGET
@@ -143,9 +151,28 @@ def to_dignad(sh, **over):
     return replace(p, **over)
 
 
+RENT_DECLINE_2050 = 0.8   # assumption: fossil rents fall 80% by 2050 on a global net zero path (IEA NZE order of magnitude)
+GOV_TAKE = 0.5            # assumption: government share of fossil rents
+RESOURCE_RICH = 0.10      # rents of at least 10% of GDP route a non-high-income country to DIGNAR-lite
+
+
+def to_dignar(sh, years=26, **over):
+    """DIGNAD-lite with the resource block: rents as % of non-resource GDP, falling RENT_DECLINE_2050
+    by the last year; a firmer fiscal rule (a permanent revenue loss needs one)."""
+    r = values(sh)["rents"]
+    r0 = r / (1 - r)
+    path = tuple(r0 * (1 - RENT_DECLINE_2050 * np.linspace(0, 1, years)))
+    kw = dict(lam_tau=0.2, lam_tr=0.2)
+    kw.update(over)
+    return to_dignad(sh, rents0=r0, gov_take=GOV_TAKE, rents_path=path, **kw)
+
+
 def choose_model(iso, disaster_prone=False):
-    """DIGNAD-lite for low-income, concessional-reliant or disaster-prone countries, else GIMF-lite."""
+    """DIGNAR-lite for resource-rich non-high-income countries; DIGNAD-lite for low-income,
+    concessional-reliant or disaster-prone countries; GIMF-lite otherwise."""
     v = values(shared(iso))
+    if v["rents"] >= RESOURCE_RICH and v["income"] != "High income":
+        return "DIGNAR-lite", f"fossil rents {100 * v['rents']:.0f}% of GDP"
     if v["income"] == "Low income":
         return "DIGNAD-lite", "low-income country"
     if disaster_prone:
@@ -181,8 +208,8 @@ def report(iso):
         r = res[name]
         print(f"   {name:12s} {r['gdp_2030']:6.2f} {r['gdp_2050']:6.2f}   {r['debt_2050']:6.1f}")
     if res["spend_share"] > 0.25:
-        print(f"   WARNING: {100 * res['spend_share']:.0f}% of incremental investment 2025-2035 is non-CO2 / land-use / other"
-              " spending, which the macro models treat as productive public capital (see TODO.md)")
+        print(f"   note: {100 * res['spend_share']:.0f}% of incremental investment 2025-2035 is non-CO2 / land-use / other"
+              " spending, which builds no public capital")
     return res
 
 

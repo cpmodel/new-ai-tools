@@ -1,6 +1,6 @@
 # Macro-fiscal models for the investment needs work: method (v0.1)
 
-Three simplified, open-source re-implementations of IMF and World Bank tools, written so a country's
+Simplified, open-source re-implementations of IMF and World Bank tools, written so a country's
 mitigation investment programme from NMIM (`../InvestmentNeeds/national_model/`) can be run through
 a macro model and a debt sustainability test:
 
@@ -128,6 +128,16 @@ to the commercial-debt gap). Reconstruction and the NMIM programme (`prog`) are 
 financed by grant, concessional and commercial shares; the programme tapers to zero over ten years
 after it ends.
 
+### 2.3 DIGNAR-lite
+
+DIGNAR (Melina, Yang and Zanna 2016) adds natural resources to DIG. DIGNAR-lite is DIGNAD-lite with a
+resource block: rents `R_t` (% of non-resource GDP) are an endowment; the government takes `gov_take`
+of them, savers the rest. The government budget gains `gov_take · R_t`; the savers' budget gains
+`(1 − gov_take) · R_t`; total GDP is non-resource GDP plus rents. A permanent fall in rents is a
+permanent fiscal and income shock, so the model solves for the steady state at the final rent level
+and uses a firmer fiscal rule (0.2). In the integrated run, rents start at the dashboard's fossil rents
+and fall 80% by 2050 on a global net zero path (assumption); government take is 50% (assumption).
+
 ## 3. LIC-DSF
 
 ### 3.1 The framework
@@ -191,16 +201,41 @@ income-group default where the panel has no value. Every setting carries its sou
 lower-middle-income countries whose multilateral share is at least 50%; GIMF-lite otherwise.
 
 **Cross-check** (`cross_check`): both models run on the public part of the NMIM programme with the
-same shared settings. With the shared settings, GIMF-lite still gives about 1.6 times DIGNAD-lite's
-GDP gain (Kenya 2050: 1.85% against 1.15%). The difference is labour supply: in GIMF-lite
+same shared settings. Treating the whole budget need as capital, GIMF-lite gives about 1.6 times
+DIGNAD-lite's GDP gain (Kenya 2050: 1.85% against 1.15%). The difference is labour supply: in GIMF-lite
 employment responds to higher productivity, in DIGNAD-lite it is fixed. With near-fixed labour in
 GIMF-lite (`wage_el` = 50) the gain is 1.03%, close to DIGNAD-lite's. The remaining gap is a
-model difference, not a calibration difference.
+model difference, not a calibration difference. With the capital / spending split (below), the
+capital part is small and the two models give similar results (Kenya 2050: 0.13% and 0.26%).
 
-**Warning on the programme:** non-CO2, land-use and other energy CO2 lines are annual spending in
-NMIM, but the bridge passes them to the macro models as public investment, which builds productive
-capital. Where they are a large share of the programme (Liberia 90%, Kenya 53% of incremental
-investment 2025-2035), the macro gains are overstated. `cross_check` prints a warning above 25%.
+**Capital and spending:** the bridge splits the budget need into capital (public capital in the
+macro models) and spending: P1 and the public gap of P4 on the non-CO2, land-use and other energy CO2
+lines, which NMIM counts as annual spending. Spending enters GIMF-lite as `g_extra` and DIGNAD-lite
+as `prog_spend`, financed like the rest of the programme but building no capital. In Kenya it is
+about 80% of the 2030 budget need, in Liberia 97%.
+
+## 4b. Integrated run
+
+`integrated.py` chains, for each country: the dashboard panel (calibration, section 4a); NMIM (budget
+need split into capital and spending, private investment, energy savings, fossil power CO2 on the net
+zero path); PriceFeasibility (the feasible power-sector mix under limits F1-F3; its tax rate times
+NMIM's power CO2 is revenue, `rev` / `rev_extra`, earmarked for the budget need); the macro model
+(DIGNAR-lite for countries with fossil rents of at least 10% of GDP that are not high income, then
+the rule of section 4a); and LIC-DSF-lite for low and lower-middle income countries.
+
+In both macro models the earmarked revenue enters the government budget and the programme's
+financing: in GIMF-lite the fiscal rule lets `dfs · (ig_extra + g_extra − rev_extra)` be debt
+financed; in DIGNAD-lite the revenue reduces commercial borrowing. If the default rule cannot
+stabilise debt, it is tightened to 0.2, then 0.4; failing that, the country is reported as not
+financeable under the fiscal rule.
+
+The DSF baseline uses the dashboard's revenue and primary balance (Appendix C), NMIM's GDP path,
+the IDS creditor mix for loan terms, and defaults for the external share of debt (60% LIC, 50% LMIC),
+exports (25% / 30% of GDP) and capacity (medium). The macro model's GDP and primary-deficit
+deviations then shift it, as in section 4.
+
+Results go to `results/integrated_results.csv`; the dashboard pipeline reads six of them into
+Appendix D (model output). Appendix C holds the WEO ratios the models start from.
 
 ## 5. Validation
 
@@ -221,6 +256,8 @@ investment 2025-2035), the macro gains are overstated. `cross_check` prints a wa
   two-thirds in the Kenya example.
 - Green private capital adds no output (ζ = 0) by default; carbon pricing (CPAT) is not in the models.
 - DIGNAD-lite lets the programme taper to zero after 2050; GIMF-lite holds it at its 2050 level.
-- Non-CO2, land-use and other spending enter the macro models as productive public capital (section 4a).
 - Utility (P2) investment, repaid by tariffs, enters as private investment: state-owned utility debt and tariff shortfalls are not in public debt.
+- Energy savings are in GIMF-lite only; DIGNAD-lite and DIGNAR-lite countries do not get them.
+- Pricing revenue covers the power sector only; the cost of the tariff rise is not in the macro models.
+- The DSF baseline uses defaults for the external share of debt, exports and capacity.
 - The DSF baseline in the demo uses placeholder ratios scaled to the country's GDP.

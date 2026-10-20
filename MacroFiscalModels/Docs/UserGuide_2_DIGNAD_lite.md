@@ -5,6 +5,9 @@ subtitle: "User guide 2 of 3 · MacroFiscalModels v0.1"
 
 # What it is
 
+The same module is also **DIGNAR-lite** when the resource block is on (see Parameters).
+
+
 DIGNAD-lite is a simplified version of the IMF's Debt-Investment-Growth and Natural Disasters model (Marto, Papageorgiou and Klyuev 2018), which builds on the DIG model of public investment scale-ups in low-income countries (Buffie, Berg, Pattillo, Portillo and Zanna 2012).
 
 It has savers (who borrow abroad at a debt-elastic rate) and hand-to-mouth households; private capital with adjustment costs; **two public capital stocks**, standard and adaptation (adaptation costs more but is destroyed less by disasters); **public investment efficiency** (only a share `s` of each dollar becomes capital); **three kinds of financing**: grants, concessional loans and commercial external debt, whose rate rises with the debt stock; and a fiscal rule in which the consumption tax and transfers close the gap.
@@ -87,6 +90,18 @@ All shares are of GDP; rates are annual and real.
 | `prog` | `()` | Programme of extra public investment, % GDP by year from year 1 |
 | `prog_bbb` | 0.0 | Share of the programme that is adaptation capital |
 | `prog_taper` | 10 | Years over which the programme tapers to zero after its last year |
+| `prog_spend` | `()` | Programme spending that builds no capital (non-CO2, land use), same financing as `prog` |
+| `rev` | `()` | Revenue earmarked for the programme (e.g. feasible carbon pricing), % GDP by year |
+
+## Resource block (DIGNAR-lite)
+
+| Parameter | Default | Meaning | Where to get it |
+|---|---|---|---|
+| `rents0` | 0.0 | Resource rents, % of non-resource GDP; 0 switches the block off | WDI oil + gas + coal rents (dashboard) |
+| `gov_take` | 0.5 | Government share of rents | Resource fiscal regime, EITI |
+| `rents_path` | `()` | Rents by year from year 1, held at the last value | A price and volume scenario; `calibration.to_dignar` uses an 80% fall by 2050 |
+
+With the block on, `out["gdp"]` is total GDP (non-resource + rents) and `debt_gdp` is debt over total GDP. A permanent fall in rents needs a firmer fiscal rule (`lam_tau = lam_tr = 0.2`), which `to_dignar` sets.
 
 # Outputs
 

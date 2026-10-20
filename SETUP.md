@@ -15,7 +15,7 @@ refresh), no API keys, no hardcoded paths.
 ```
 TaxMacroFiscalDashboard/build/
   config/
-    indicators.csv        THE definition: 53 indicators, 9 blocks, one row each
+    indicators.csv        THE definition: 64 indicators, 11 blocks, one row each
     sources.csv            source metadata (coverage is derived, not stored)
   raw_data/                23 source files the scripts read
   raw_data_not_used/       12 downloaded but superseded or too thin
@@ -165,11 +165,18 @@ into the Sources sheet, so it cannot drift.
 |---|---|---|
 | 1 | `global_long_all_years.csv` — every source, every year | 105,072 |
 | 2 | `global_data_long.csv` — latest observation per country × indicator | 8,057 |
-| 3 | `global_data_wide.csv` — one row per country, plus `__year` columns | 217 × 53 |
+| 3 | `global_data_wide.csv` — one row per country, plus `__year` columns | 217 × 64 |
 
 Python writes `global_*`, R writes `global_*_R`, so you can diff them. Verified
 identical in a clean-room run: same row count, zero value mismatches, zero year
-mismatches, identical coverage on all 53 indicators.
+mismatches, identical coverage on the original 53 indicators. Parity for the 11 added
+in Appendix C and D (October 2026) is written but not yet verified in R.
+
+**Appendix C and D.** Appendix C holds WEO ratios the macro-fiscal models start from.
+Appendix D is model output read from `MacroFiscalModels/results/integrated_results.csv`
+(see `MacroFiscalModels/Docs/UserGuide_4_Integrated.md`); it is not data and is not
+scored. Build order after a raw-data change: build the panel, run
+`python3 MacroFiscalModels/integrated.py --all`, build the panel again, build the workbook.
 
 ### Ground rules baked in
 
@@ -302,3 +309,13 @@ python3 run_demo.py KEN
 It runs the NMIM engine (`InvestmentNeeds/national_model/nmim_v0_2.py`, which reads
 `InvestmentNeeds/national_model/data/*.csv`) for the chosen country and writes charts and
 paths to `MacroFiscalModels/results/`.
+
+Integrated run (all countries, about 10 minutes), then refresh the dashboard:
+
+```bash
+python3 MacroFiscalModels/integrated.py --all
+python3 TaxMacroFiscalDashboard/build/scripts/build_global_indicators.py
+python3 TaxMacroFiscalDashboard/build/scripts/build_dashboard.py
+```
+
+It reads the dashboard panel, NMIM and `PriceFeasibility/output/country_metrics.csv`.

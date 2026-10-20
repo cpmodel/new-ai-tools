@@ -26,7 +26,9 @@ out, ss0, ssT, cal = run_gimf(programme("KEN"), Params())
 out, ss0, ssT, cal = solve(Params(), ig_extra=[0.01] * 10, ix=[0.02] * 10, sav=[0.0])
 ```
 
-`run_gimf` takes switches `public`, `private` and `savings` (all `True` by default) to switch each part of the programme off.
+`run_gimf` takes switches `public`, `private` and `savings` (all `True` by default) to switch each part of the programme off. By default (`split=True`) the budget need's non-capital part (non-CO2, land use, other energy CO2) goes in as spending (`g_extra`), not public capital; `rev=` takes an earmarked revenue path such as `pricing_bridge.pricing_revenue(prog)[0]`.
+
+`solve` also takes `g_extra` (public spending that builds no capital) and `rev_extra` (revenue earmarked for the programme), both % of GDP by year.
 
 # Parameters
 
@@ -81,7 +83,7 @@ Change them with `dataclasses.replace(Params(), name=value)`. All shares are of 
 | `b` | 0.50 | Public debt target, % GDP |
 | `lam_b` | 0.05 | Speed at which the fiscal rule returns debt to target |
 | `instrument` | `"tr"` | What closes the fiscal rule: `"tr"` transfers, `"tau_l"` labour tax |
-| `dfs` | 1.0 | Share of the extra public investment the rule lets be debt financed (0 = fully tax financed) |
+| `dfs` | 1.0 | Share of the programme (`ig_extra + g_extra − rev_extra`) the rule lets be debt financed (0 = fully tax financed) |
 
 # Outputs
 

@@ -273,6 +273,19 @@ for iso in set(pb.index) & set(nb.index) & set(rev.index):
         if pd.notna(a) and pd.notna(b) and pd.notna(c) and c > 0:
             v = (a - b) / c * 100
             if 0 <= v < 100: emit(iso, "interest_to_revenue_pct", y, v, wf + " (derived)")
+# macro-model inputs (Appendix C): ratios WEO already publishes, plus average growth.
+# (Exports and imports in this WEO extract cover country groups only, so trade ratios
+# for the DSF need a WDI download; not added yet.)
+for ind, code in [("Revenue, General government, Percent of GDP", "revenue_pct_gdp"),
+                  ("Primary net lending (+) / net borrowing (-), General government, Percent of GDP", "primary_balance_pct_gdp"),
+                  ("Gross capital formation, Percent of GDP", "gross_capital_formation_pct_gdp"),
+                  ("Current account balance (credit less debit), Percent of GDP", "current_account_pct_gdp")]:
+    for iso, row in weo_ser(ind).iterrows():
+        for y in WY: emit(iso, code, y, row[y], wf)
+GR5 = [y for y in WY if int(y) >= int(WY[-1]) - 4]          # last five actual years
+for iso, row in weo_ser("Gross domestic product (GDP), Constant prices, Percent change").iterrows():
+    v = row[GR5]
+    if v.notna().all(): emit(iso, "real_gdp_growth_5y_avg_pct", f"{GR5[0]}-{GR5[-1]} avg", v.mean(), wf + " (derived)")
 GDP = {}                                   # iso -> (usd_bn, year) latest actual
 for iso, row in weo_ser(GDPU).iterrows():
     for y in reversed(WY):
@@ -541,6 +554,23 @@ UNDP_YES = ["ARM","BGD","BEN","KHM","CHN","COL","ECU","ETH","FJI","GHA","HND","I
 for iso in ISO:
     emit(iso, "climate_pfm_diagnostic_on_record", 2022, 1 if iso in UNDP_YES else 0,
          "UNDP-Global-Climate-Public-Finance-Review-2022.pdf (Table 4.2)")
+
+# --- integrated scenario (Appendix D): MacroFiscalModels output, not source data ---
+# Written by MacroFiscalModels/integrated.py, which itself reads this panel's source
+# indicators only (never Appendix D), so: build the panel, run integrated.py, build again.
+INT_F = os.environ.get("INT_RESULTS", os.path.join(_here, "..", "..", "..", "MacroFiscalModels",
+                                                   "results", "integrated_results.csv"))
+if os.path.exists(INT_F):
+    intr = pd.read_csv(INT_F)
+    INT_COLS = [("budget_need_2030_pct_gdp", "int_budget_need_2030_pct_gdp", 2030),
+                ("pricing_revenue_2030_pct_gdp", "int_pricing_revenue_2030_pct_gdp", 2030),
+                ("financing_gap_2030_pct_gdp", "int_financing_gap_2030_pct_gdp", 2030),
+                ("gdp_dev_2050_pct", "int_gdp_dev_2050_pct", 2050),
+                ("debt_2050_pct_gdp", "int_debt_2050_pct_gdp", 2050),
+                ("dsf_risk_code", "int_dsf_risk_code", 2034)]
+    for _, r in intr.iterrows():
+        for col, code, y in INT_COLS:
+            if col in r and pd.notna(r[col]): emit(r.iso3, code, y, r[col], "integrated_results.csv (MacroFiscalModels v0.1, model output)")
 
 long_all = pd.DataFrame(ROWS)
 long_all["value"] = long_all.value.round(3)

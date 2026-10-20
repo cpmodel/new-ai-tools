@@ -85,8 +85,11 @@ Do it only after level 1 has shown the metrics are useful.
   country, using output from this tool run on the same panel: `s_at50`,
   feebate/tax ratio, binding constraint and F1 shadow price. The calibration
   inputs already come from that panel.
-- **MacroFiscalModels.** Revenue from the chosen mix (tax revenue; a feebate
-  raises roughly none) could be fed in as a fiscal input. This is not built.
+- **MacroFiscalModels.** Built (October 2026): `MacroFiscalModels/pricing_bridge.py`
+  turns the feasible mix's tax rate times NMIM's net zero power CO2 into revenue
+  earmarked for the public investment need, and `MacroFiscalModels/integrated.py`
+  runs it through the macro models for every country (a feebate raises roughly
+  none).
 - **ExciseDiagnostic.** Part 1 (fuel) could reuse the F1 logic once road fuels
   are added.
 

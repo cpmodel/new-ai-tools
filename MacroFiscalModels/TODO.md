@@ -13,9 +13,22 @@ Open work, in priority order. Move items to `CAVEATS.md` when done.
 
 5. **Option 2, later: one model with switches.** GIMF-lite as the core, with DIGNAD-lite's financing (concessional / commercial / grants), efficiency and disaster blocks as switches.
 6. **Option 3, later: DIGNAR-style resource block** for resource-rich countries (Melina, Yang and Zanna 2016), using the dashboard's fossil-rent indicators: stranded fossil revenue as a fiscal risk.
-7. **Spending versus capital in the bridge (high priority).** Non-CO2, land-use and other energy CO2 lines are annual spending in NMIM but enter the macro models as productive public capital (Liberia 90%, Kenya 53% of incremental investment 2025-2035). Pass them as government spending, or as capital with a zero domestic return.
+7. **Done 2026-10-20 (see CAVEATS).** ~~Spending versus capital in the bridge.~~ Non-CO2, land-use and other energy CO2 lines are annual spending in NMIM but enter the macro models as productive public capital (Liberia 90%, Kenya 53% of incremental investment 2025-2035). Pass them as government spending, or as capital with a zero domestic return.
 8. **Efficiency of public investment, more fully.** Beyond the PEFA-mapped `s`: PIMA scores where they exist, absorptive capacity (item 3), the reform scenario (closing up to two-thirds of the gap, IMF 2015), and execution rates (BOOST) as a separate leak.
 9. **Tariff revenue versus public return.** Utility (P2) investment is repaid by tariffs and enters the bridge as private investment, so state-owned utility debt and tariff shortfalls are outside public debt. Model the utility explicitly: tariff revenue, cost recovery (NMIM's index), utility debt as a contingent liability in the DSF (PEFA PI-10.3), and the distinction between financial return (tariffs, a transfer from users) and economic return (fuel savings, reliability, access).
+
+## From the integration (2026-10-20)
+
+10. **Energy savings in DIGNAD-lite and DIGNAR-lite** (item 1) now also matters for consistency: GIMF-lite countries get the savings channel, the others do not.
+11. **Trade ratios for the DSF.** The WEO extract has exports and imports for country groups only; add WDI NE.EXP.GNFS.ZS and NE.IMP.GNFS.ZS to the dashboard (Appendix C) and use them in `integrated.dsf_baseline`.
+12. **CPIA, reserves, remittances** in the dashboard for the DSF Composite Indicator (today: medium capacity for all).
+13. **External share of public debt** from IDS (PPG external stock / gross debt) instead of the income-group default.
+14. **R pipeline parity** for Appendix C and D is written but unverified (R was not available); run `Rscript build_global_indicators.R` and diff against the Python output.
+15. **Pricing beyond power:** road fuels and industry in PriceFeasibility would raise the revenue estimate.
+16. **Programme pricing interaction:** the tariff rise (F1) has an economic cost that the macro models do not see.
+
+17. **Data issues found by the integrated run.** Solomon Islands: NMIM budget need 91% of GDP in 2030 (check NMIM land-use / non-CO2 inputs). Cabo Verde: WDI coal rents 17% of GDP with no fuel exports (ignored by `calibration.shared`; flag to the dashboard owner). Libya: rents of 61% of GDP falling 80% cannot be stabilised by the fiscal rule.
+18. **Pitch deck** covers the models, not yet the integrated run; add a slide when the pilots are calibrated.
 
 ## Other open items
 
