@@ -1,22 +1,39 @@
 # IntegratedMFC — Integrated MF-C tool (macro-fiscal climate)
 
-**The tool:** `Integrated_MFC_Tool_v0.1.xlsx`. Pick a country on the **Dashboard** sheet and it
-shows the Global Fiscal Indicators dashboard and the country's mitigation investment needs on one
-page. No Python needed to use it.
+**The tool:** `Integrated_MFC_Tool_v0.2.xlsx`. Pick a country on the **Dashboard** sheet and it
+shows the Global Fiscal Indicators dashboard and the country's mitigation investment needs,
+including its public investment needs, on one page. No Python needed to use it.
 
 It is built in modules, so more can be added. Now:
 
 | Module | Blocks | Source | Coverage |
 |---|---|---|---|
 | Macro-fiscal dashboard | Fiscal, PIMA, Finance 1-2, Context 1-3, Appendix A-D (65 indicators) | `TaxMacroFiscalDashboard/` panel, v1.2 | 217 |
-| Investment needs | **Investment 1**: 2030 need, by sector, and incremental cost under three cost-of-capital lenses (15) | `InvestmentNeeds/Mitigation_Investment_Needs_v1.1.xlsx` | 194 |
-| | **Investment 2**: who pays (P1-P5), budget need, private share, path to 2050 (11) | `InvestmentNeeds/national_model/results/nmim_summary_v0_2.csv` (NMIM v0.2) | 186 |
+| Investment needs | **Investment 1**, need and cost: net zero and incremental investment 2030, incremental by sector, incremental 2050, incremental cost under three cost-of-capital lenses, cost-of-capital penalty, cost per tonne, abatement, PV of cost 2025-2050 (18) | NMIM v0.2, `InvestmentNeeds/national_model/results/nmim_summary_v0_2.csv` | 186 |
+| | **Investment 2**, public investment needs: direct budget need (P1 + public gap of P4) and its parts, incremental budget need, PIMA-adjusted budget need, plus regulated utilities, all investment needing public money, private capital and its parts, private share (11) | NMIM v0.2; PIMA adjustment also uses the dashboard's PEFA PI-11 | 186 |
 
 The investment blocks sit after Context 3, before the appendices, and read High / Medium / Low
 (magnitudes, like the Context blocks), with 1-10 scores on the same 5th-95th percentile rescale as
-every other indicator. All values are in % of the model's own GDP for the year, except the cost
-per tonne (USD/tCO2e) and the private share (%). The year column is the scenario year (2030, 2050
-or 2025-2050). Taiwan (TWN) is in v1.1 but not in the dashboard country list, so it is left out.
+every other indicator. Values are in % of NMIM's GDP for the year, except the cost per tonne
+(USD/tCO2e), abatement (% of baseline emissions) and the private share (%). The year column is the
+scenario year (2030, 2050 or 2025-2050).
+
+**Why NMIM.** InvestmentNeeds has two models. The v1.1 workbook allocates published group totals
+(IHLEG, IEA-IFC) to countries for 2030 and applies one public share per country group, so it has
+no country estimate of public needs. NMIM builds the need country by country to 2050, splits it by
+who pays, and is the model MacroFiscalModels runs (Appendix D). The tool uses NMIM only; v1.1 stays
+in `InvestmentNeeds/` as the global reference.
+
+**Public investment needs, narrow to wide** (Investment 2):
+
+| Measure | Definition |
+|---|---|
+| Direct budget need | P1 pure public + 30% of P4 viability gap (NMIM `ty_p4_gap`): what the budget spends |
+| incremental | the same, net zero less baseline; equals Appendix D's budget need |
+| PIMA-adjusted | budget need / (1 - efficiency gap); gap from PEFA PI-11 where available (40% at 1 to 13% at 4), else IMF (2015) by income (AE 13%, low income 40%, others 27%), as in the v1.1 workbook |
+| Plus regulated utilities | + P2: utility investment repaid by tariffs, a contingent liability where tariffs do not recover costs |
+| All needing public money or a decision | P1 + P2 + all of P4 |
+| Private capital | P3 + P5 + 70% of P4 |
 
 The workbook has the dashboard's sheets: README, Dashboard, Data_wide, Scores, Spec, Sources,
 Data_long. Data_long names the source file for every value; investment rows say
@@ -48,9 +65,6 @@ python3 IntegratedMFC/build/build_mfc_tool.py     # -> IntegratedMFC/Integrated_
 It reads repository files only. Rebuild after any of its inputs changes:
 
 - the dashboard panel: `TaxMacroFiscalDashboard/build/scripts/build_global_indicators.py`;
-- v1.1: `InvestmentNeeds/build/build_investment_model.py`. The extractor reads the values
-  cached in the workbook (Results_Country and Calc), so the workbook must have been recalculated
-  and saved (Excel, or LibreOffice headless) after a rebuild;
 - NMIM: `InvestmentNeeds/national_model/nmim_v0_2.py`.
 
 ### Adding a module
@@ -63,15 +77,17 @@ Use `block_kind` = `assessment` (Good / Medium / Bad), `context` (High / Medium 
 
 ## Caveats
 
-- **Model output, not data.** The investment blocks are scenario results with the caveats of
-  their models: v1.1 is a Tier 3 allocation of group totals (IHLEG, IEA-IFC) to countries; NMIM's
-  typology shares are judgements applied to country data. See `InvestmentNeeds/README.md`,
-  `InvestmentNeeds/CAVEATS.md` and `InvestmentNeeds/national_model/NMIM_Method_v0_2.md`.
-- **Two models, two answers.** v1.1 (2023 prices, allocated totals) and NMIM (2024 prices,
-  bottom-up stocks) give different 2030 needs for the same country. Both are shown, labelled;
-  neither is the reference.
-- **Overlap with Appendix D.** Appendix D's budget need is NMIM's *incremental* budget need passed
-  through MacroFiscalModels; Investment 2's is the budget need of the *whole* net zero programme.
+- **Model output, not data.** The investment blocks are NMIM scenario results with NMIM's
+  caveats (`InvestmentNeeds/national_model/NMIM_Method_v0_2.md`, `InvestmentNeeds/CAVEATS.md`):
+  no price response, power follows target dates, buildings and industry unit costs and the
+  incremental need there may be overstated.
+- **Who pays is a judgement.** The P1-P5 shares, the 30% public gap of P4 and the pressure
+  indices are assumptions applied to country data, not observed splits. Power market structure
+  rests on the Power Sector Reform Tracker (ends 2013), with 60 countries set or updated by
+  judgement; power sector staff should review them.
+- **The typology splits investment, not incremental cost.**
+- **PIMA adjustment** treats the whole budget need as public investment subject to the
+  efficiency gap; PEFA PI-11 covers 82 countries, the rest use income-group gaps.
 - **Scores rank, they do not judge.** A High investment need is a magnitude, not a verdict; do
   not average the investment blocks with the assessment blocks (see the dashboard's README sheet).
 

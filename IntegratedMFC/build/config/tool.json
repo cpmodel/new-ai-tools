@@ -1,15 +1,28 @@
 {
-  "version": "0.1",
+  "version": "0.2",
   "file_stem": "Integrated_MFC_Tool",
   "title": "Integrated MF-C tool — macro-fiscal and climate",
-  "subtitle": "built from the Global Fiscal Indicators dashboard (v1.2 panel) and the mitigation investment needs models (v1.1 workbook, NMIM v0.2).",
+  "subtitle": "built from the Global Fiscal Indicators dashboard (v1.2 panel) and the National Mitigation Investment Model (NMIM v0.2).",
   "readme_replace": {
-    "What this is": "The integrated macro-fiscal climate (MF-C) tool. It puts the Global Fiscal Indicators dashboard and the mitigation investment needs models on one country page: what a country's net zero programme needs and costs, beside whether it can pay for it, build it, and finance it. More modules will be added. The is_ccdr column flags the 98 economies with a published Country Climate and Development Report.",
-    "How it is organised": "Thirteen blocks, in reading order. Four ASSESSMENT blocks carry the diagnosis: fiscal space, delivery, cost of capital, and financing. Three CONTEXT blocks explain it: fossil revenue in the budget, fossil trade and extraction, and power generation. Two INVESTMENT blocks give the need: Investment 1 (2030 snapshot, by sector and cost-of-capital lens) and Investment 2 (who pays, and the path to 2050). They read High / Medium / Low, like the Context blocks. Four APPENDIX blocks - fuel pricing, power market regulation, macro-model inputs and the integrated scenario - are reference detail in grey and carry no block verdict."
+    "What this is": "The integrated macro-fiscal climate (MF-C) tool. It puts the Global Fiscal Indicators dashboard and the mitigation investment needs on one country page: what a country's net zero programme needs and costs, how much of it falls on the budget, beside whether it can pay for it, build it, and finance it. More modules will be added. The is_ccdr column flags the 98 economies with a published Country Climate and Development Report.",
+    "How it is organised": "Thirteen blocks, in reading order. Four ASSESSMENT blocks carry the diagnosis: fiscal space, delivery, cost of capital, and financing. Three CONTEXT blocks explain it: fossil revenue in the budget, fossil trade and extraction, and power generation. Two INVESTMENT blocks give the need: Investment 1 (need by sector, incremental cost under three cost-of-capital lenses, the path to 2050) and Investment 2 (public investment needs: the budget need and who else pays). They read High / Medium / Low, like the Context blocks. Four APPENDIX blocks - fuel pricing, power market regulation, macro-model inputs and the integrated scenario - are reference detail in grey and carry no block verdict."
   },
   "readme_add": [
-    ["Investment blocks are model output", "Investment 1 and 2 are MODEL OUTPUT, not data, from InvestmentNeeds/: the v1.1 workbook (195 economies, 2030, group totals allocated to countries, 2023 prices) and the national model NMIM v0.2 (186 countries, 2024-2050, 2024 prices). Their year is the scenario year. Everything is in % of the model's own GDP for that year, so the two can be compared but will not match: v1.1 allocates IHLEG and IEA-IFC totals, NMIM builds up from stocks. See InvestmentNeeds/README.md and NMIM_Method_v0_2.md."],
-    ["Reading the investment rows", "Incremental cost = annual capital charge on incremental investment less fuel and operating savings (lens c also less local co-benefits); negative = net saving. Lens (a) uses the market WACC, (b) and (c) the World Bank 6% rate. The cost-of-capital penalty is the extra capital charge on total investment at the market rate over 6% (negative where market capital is cheaper). Who pays splits NMIM's net zero investment into P1 pure public, P2 regulated utility, P3 contracted revenue, P4 viability gap and P5 pure private; the direct budget need is P1 plus the public 30% of P4."],
-    ["Overlap with Appendix D", "Appendix D's budget need is the incremental budget need from NMIM, as passed through MacroFiscalModels; Investment 2's is the budget need of the whole net zero programme. Use Investment 2 for size and composition, Appendix D for what it does to the budget and debt."]
+    [
+      "Investment blocks are model output",
+      "Investment 1 and 2 are MODEL OUTPUT, not data, from the National Mitigation Investment Model (InvestmentNeeds/national_model/, NMIM v0.2): 186 countries, 2024-2050, baseline and net zero, 2024 prices, built bottom-up from energy, power and emissions stocks. The same model feeds the macro-fiscal run in Appendix D. Values are % of NMIM's GDP for the year; the year column is the scenario year. See InvestmentNeeds/national_model/NMIM_Method_v0_2.md."
+    ],
+    [
+      "Reading Investment 1",
+      "Incremental = net zero less the current-trends baseline. Incremental cost = annual capital charge on the incremental capital in service less fuel and operating savings (lens c also less local co-benefits); negative = net saving. Lens (a) uses the market WACC, (b) and (c) the World Bank 6% rate; the cost-of-capital penalty is (a) less (b), negative where market capital is cheaper than 6%."
+    ],
+    [
+      "Reading Investment 2",
+      "NMIM splits all net zero investment by who repays it: P1 pure public (taxes), P2 regulated utility (tariffs), P3 contracted revenue (a public or regulated buyer), P4 viability gap (private with a public top-up), P5 pure private. Three public measures, narrow to wide: the direct budget need (P1 + the public 30% of P4: money the budget spends); plus regulated utilities (adds P2, a contingent liability where tariffs do not recover costs); and all investment needing public money or a public decision (P1 + P2 + all of P4). The PIMA-adjusted budget need divides the budget need by (1 - efficiency gap): the gap is mapped from PEFA PI-11 where the dashboard has it (40% at 1 to 13% at 4), else IMF (2015) income-group gaps (AE 13%, low income 40%, others 27%). Private capital is P3 + P5 + the other 70% of P4. The type shares are judgements applied to country data, not observed splits; power market structure rests on PSRT data that end in 2013."
+    ],
+    [
+      "Overlap with Appendix D",
+      "Appendix D's budget need equals Investment 2's incremental budget need (NMIM, via MacroFiscalModels); it is what the macro and debt models are fed. The net zero budget need also counts what the baseline would spend anyway."
+    ]
   ]
 }

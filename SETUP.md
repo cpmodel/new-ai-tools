@@ -302,14 +302,13 @@ engine and not committed.
 Requirements: Python with `pandas`, `numpy`, `openpyxl`.
 
 ```bash
-python3 IntegratedMFC/build/build_mfc_tool.py   # -> IntegratedMFC/Integrated_MFC_Tool_v0.1.xlsx
+python3 IntegratedMFC/build/build_mfc_tool.py   # -> IntegratedMFC/Integrated_MFC_Tool_v0.2.xlsx
 ```
 
 It reads the dashboard panel and config (`TaxMacroFiscalDashboard/build/output/`, `config/`),
-the cached values of `InvestmentNeeds/Mitigation_Investment_Needs_v1.1.xlsx` and
-`InvestmentNeeds/national_model/results/nmim_summary_v0_2.csv`, and runs
+and `InvestmentNeeds/national_model/results/nmim_summary_v0_2.csv`, and runs
 `TaxMacroFiscalDashboard/build/scripts/build_dashboard.py` on the merged panel. Rebuild it after
-rebuilding any of those (recalculate the v1.1 workbook first). Modules and how to add one:
+rebuilding either of those. Modules and how to add one:
 `IntegratedMFC/README.md`.
 
 ---

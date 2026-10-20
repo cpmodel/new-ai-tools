@@ -9,15 +9,15 @@ merged panel and config to build/output/merged/ and runs the dashboard's own bui
 so the integrated workbook reads, scores and looks exactly like the dashboard.
 
 Inputs : TaxMacroFiscalDashboard/build/{output/global_data_long.csv, config/}
-         per module, see MODULES (now: InvestmentNeeds v1.1 workbook and NMIM v0.2 summary)
+         per module, see MODULES (now: InvestmentNeeds NMIM v0.2 summary)
 Output : IntegratedMFC/Integrated_MFC_Tool_v<version>.xlsx (version in config/tool.json)
          build/output/<module>_long.csv (the module's rows, committed)
 
-To add a module: write an extract function returning long rows, add
+To add a module: write an extract function (given the dashboard's long panel) returning long rows, add
 config/<name>_indicators.csv and config/<name>_sources.csv, and register it in MODULES.
 """
 import os, sys, shutil, subprocess
-import numpy as np, pandas as pd, openpyxl
+import numpy as np, pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
@@ -30,60 +30,66 @@ SHIP = os.path.abspath(os.path.join(HERE, ".."))
 
 
 # ---------------------------------------------------------------- module: investment needs
-V11 = os.path.join(INV, "Mitigation_Investment_Needs_v1.1.xlsx")
 NMIM = os.path.join(INV, "national_model", "results", "nmim_summary_v0_2.csv")
-SRC_V11 = "Mitigation_Investment_Needs_v1.1.xlsx (InvestmentNeeds v1.1, model output)"
-SRC_NMIM = "nmim_summary_v0_2.csv (InvestmentNeeds NMIM v0.2, model output)"
+SRC = "nmim_summary_v0_2.csv (InvestmentNeeds NMIM v0.2, model output)"
+SRC_PIMA = "nmim_summary_v0_2.csv + dashboard PEFA PI-11 (InvestmentNeeds NMIM v0.2, model output)"
+# Public investment efficiency gap, as in the v1.1 workbook (IMF 2015, Making Public
+# Investment More Efficient): AE 13%, low income 40%, others 27%; where the dashboard has a
+# PEFA PI-11 score (1-4) the gap runs linearly from 40% at 1 to 13% at 4.
+GAP_AE, GAP_EM, GAP_LIC = 0.13, 0.27, 0.40
 
 
-def _sheet(wb, name, header_row=4):
-    """A results sheet of the v1.1 workbook as a frame. Reads the values Excel or LibreOffice
-    cached on the last save; the workbook must have been recalculated (the build does that)."""
-    rows = list(wb[name].iter_rows(min_row=header_row, values_only=True))
-    df = pd.DataFrame(rows[1:], columns=rows[0]).dropna(subset=["ISO3"])
-    return df
-
-
-def extract_investment_needs():
-    wb = openpyxl.load_workbook(V11, read_only=True, data_only=True)
-    rc = _sheet(wb, "Results_Country")
-    calc = _sheet(wb, "Calc")
-    if rc["Total investment I"].isna().all():
-        sys.exit(f"{V11} has no cached values: open and save it in Excel, or recalculate with LibreOffice.")
-    rc = rc.set_index("ISO3")
-    gdp = rc["GDP 2030 (USD bn)"].astype(float)
-    out = []
-
-    def emit(series, code, src, year=2030):
-        for iso, v in series.items():
-            if v is not None and pd.notna(v) and np.isfinite(float(v)):
-                out.append((iso, code, float(v), str(year), src))
-
-    # Investment 1: v1.1, 2030 snapshot. Shares of GDP come as fractions; report percent.
-    emit(rc["I, % GDP"].astype(float) * 100, "inn_total_inv_2030_pct_gdp", SRC_V11)
-    emit(rc["dI, % GDP"].astype(float) * 100, "inn_incr_inv_2030_pct_gdp", SRC_V11)
-    sec = calc.pivot_table(index="ISO3", columns="Sector",
-                           values="Incremental investment dI (USD bn)", aggfunc="sum")
-    for k in ["GEN", "GRID", "TRN", "BLD", "IND", "FUEL", "AFOLU"]:
-        emit(sec[k] / gdp.reindex(sec.index) * 100, f"inn_incr_inv_{k.lower()}_2030_pct_gdp", SRC_V11)
-    emit(rc["(a) % GDP"].astype(float) * 100, "inn_incr_cost_a_2030_pct_gdp", SRC_V11)
-    emit(rc["(b) % GDP"].astype(float) * 100, "inn_incr_cost_b_2030_pct_gdp", SRC_V11)
-    emit(rc["(c) % GDP"].astype(float) * 100, "inn_incr_cost_c_2030_pct_gdp", SRC_V11)
-    emit(rc["Incr. cost per t (b) USD/t"].astype(float), "inn_cost_per_t_b_2030_usd", SRC_V11)
-    emit(rc["CoC penalty on I (a-b)"].astype(float) / gdp * 100, "inn_coc_penalty_2030_pct_gdp", SRC_V11)
-    emit(rc["PIMA-adjusted I"].astype(float) / gdp * 100, "inn_pima_adj_inv_2030_pct_gdp", SRC_V11)
-
-    # Investment 2: NMIM v0.2. USD bn over the model's own GDP for the year.
+def extract_investment_needs(long):
     nm = pd.read_csv(NMIM).set_index("iso")
     g30, g50 = nm.gdp_2030, nm.gdp_2050
-    emit(nm.inv2_2030 / g30 * 100, "nmim_nz_inv_2030_pct_gdp", SRC_NMIM)
-    for k in range(1, 6):
-        emit(nm[f"typ{k}_2030"] / g30 * 100, f"nmim_typ{k}_2030_pct_gdp", SRC_NMIM)
-    emit(nm.bud_2030 / g30 * 100, "nmim_budget_need_2030_pct_gdp", SRC_NMIM)
-    emit(nm.prv_2030 / nm.inv2_2030 * 100, "nmim_private_share_2030_pct", SRC_NMIM)
-    emit(nm.dinv_2030 / g30 * 100, "nmim_incr_inv_2030_pct_gdp", SRC_NMIM)
-    emit(nm.dinv_2050 / g50 * 100, "nmim_incr_inv_2050_pct_gdp", SRC_NMIM, year=2050)
-    emit(nm.pv_ic_b / g30 * 100, "nmim_pv_incr_cost_b_pct_gdp", SRC_NMIM, year="2025-2050")
+    # NMIM's budget need is P1 + a public share of P4 (ty_p4_gap); recover it from the
+    # results rather than restating it, and check it is one number for every country.
+    p4 = nm.typ4_2030.where(nm.typ4_2030 > 1e-9)
+    gap_share = ((nm.bud_2030 - nm.typ1_2030) / p4).dropna()
+    if gap_share.max() - gap_share.min() > 1e-6:
+        sys.exit("NMIM budget need is not P1 + a fixed share of P4; check ty_p4_gap in nmim_v0_2.py")
+    k4 = float(gap_share.median())
+    out = []
+
+    def emit(series, code, src=SRC, year=2030):
+        for iso, v in series.items():
+            if pd.notna(v) and np.isfinite(float(v)):
+                out.append((iso, code, float(v), str(year), src))
+
+    pct = lambda x, g=g30: x / g * 100
+    # Investment 1: need and cost
+    emit(pct(nm.inv2_2030), "nmim_nz_inv_2030_pct_gdp")
+    emit(pct(nm.dinv_2030), "nmim_incr_inv_2030_pct_gdp")
+    for k in ["gen", "grid", "trn", "bld", "ind", "nco", "oth"]:
+        emit(pct(nm[f"dinv_{k}_2030"]), f"nmim_incr_inv_{k}_2030_pct_gdp")
+    emit(pct(nm.dinv_2050, g50), "nmim_incr_inv_2050_pct_gdp", year=2050)
+    emit(pct(nm.ica_2030), "nmim_incr_cost_a_2030_pct_gdp")
+    emit(pct(nm.icb_2030), "nmim_incr_cost_b_2030_pct_gdp")
+    emit(pct(nm.icc_2030), "nmim_incr_cost_c_2030_pct_gdp")
+    emit(pct(nm.ica_2030 - nm.icb_2030), "nmim_coc_penalty_2030_pct_gdp")
+    abt = nm.ghg1_2030 - nm.ghg2_2030                       # MtCO2e; costs in USD bn
+    emit((nm.icb_2030 * 1000 / abt).where(abt > 1e-6), "nmim_cost_per_t_b_2030_usd")
+    emit(abt / nm.ghg1_2030 * 100, "nmim_abatement_2030_pct")
+    emit(pct(nm.pv_ic_b), "nmim_pv_incr_cost_b_pct_gdp", year="2025-2050")
+
+    # Investment 2: public investment needs
+    emit(pct(nm.bud_2030), "nmim_budget_need_2030_pct_gdp")
+    emit(pct(nm.typ1_2030), "nmim_typ1_2030_pct_gdp")
+    emit(pct(k4 * nm.typ4_2030), "nmim_p4_gap_2030_pct_gdp")
+    emit(pct(nm.dbud_2030), "nmim_budget_need_incr_2030_pct_gdp")
+    pefa = long[long.indicator == "pefa_pi11_pim_score"].set_index("iso3").value
+    income = long.drop_duplicates("iso3").set_index("iso3").income
+    gap = pd.Series({iso: GAP_LIC - (pefa[iso] - 1) / 3 * (GAP_LIC - GAP_AE) if iso in pefa.index
+                     else GAP_AE if nm.grp[iso] == "AE"
+                     else GAP_LIC if income.get(iso) == "Low income" else GAP_EM for iso in nm.index})
+    emit(pct(nm.bud_2030 / (1 - gap)), "nmim_budget_need_pima_2030_pct_gdp", src=SRC_PIMA)
+    emit(pct(nm.typ1_2030 + nm.typ2_2030 + k4 * nm.typ4_2030), "nmim_budget_plus_util_2030_pct_gdp")
+    emit(pct(nm.typ1_2030 + nm.typ2_2030 + nm.typ4_2030), "nmim_public_all_2030_pct_gdp")
+    emit(pct(nm.prv_2030), "nmim_private_2030_pct_gdp")
+    emit(pct(nm.typ3_2030), "nmim_typ3_2030_pct_gdp")
+    emit(pct(nm.typ5_2030), "nmim_typ5_2030_pct_gdp")
+    emit(pct((1 - k4) * nm.typ4_2030), "nmim_p4_private_2030_pct_gdp")
+    emit(nm.prv_2030 / nm.inv2_2030 * 100, "nmim_private_share_2030_pct")
     return pd.DataFrame(out, columns=["iso3", "indicator", "value", "year", "source"])
 
 
@@ -100,7 +106,7 @@ def main():
     meta = long.drop_duplicates("iso3").set_index("iso3")[["country", "region", "income", "is_ccdr"]]
 
     for name, extract, after in MODULES:
-        rows = extract()
+        rows = extract(long)
         dropped = sorted(set(rows.iso3) - set(meta.index))
         if dropped:
             print(f"{name}: {len(dropped)} economies not in the dashboard, left out: {', '.join(dropped)}")
