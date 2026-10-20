@@ -18,6 +18,8 @@ fiscal-climate-ai-tools/
 ├── ExciseDiagnostic/            Excise tax diagnostic working paper and data
 ├── InvestmentNeeds/             Mitigation (net zero) investment needs model, by country,
 │                                 sector and cost-of-capital lens
+├── PriceFeasibility/            Power-sector carbon tax vs feebate metrics under
+│                                 political-feasibility limits (standalone Python)
 ├── TaxMacroFiscalDashboard/     Tax, macro-fiscal, and climate policy dashboards
 │   └── build/                   Raw data, config, and scripts for the Global Fiscal
 │                                 Indicators dashboard (Python + R build pipeline)
@@ -68,6 +70,13 @@ Run modes:
 - **Whole run**: master process file only (stages A1–A6).
 - **Sectoral run**: master file plus one part file per run; Parts 1–4 in any
   order, Part 5 last.
+
+## PriceFeasibility
+
+Standalone metrics comparing a carbon tax/ETS, a feebate and hybrids in the power
+sector: abatement subject to limits on visible tariff rises, bottom-40% burden and
+losses to coal and oil generators, with per-country calibration from the dashboard
+panel and Ember. See [`PriceFeasibility/README.md`](PriceFeasibility/README.md).
 
 ## InvestmentNeeds
 
