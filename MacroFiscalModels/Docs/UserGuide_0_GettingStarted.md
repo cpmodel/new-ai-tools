@@ -67,6 +67,25 @@ print(100 * (out["y"][25] / ss0["y"] - 1))      # GDP gain in 2050, %
 
 `out` holds annual paths from 2025 (index 0); `ss0` is the starting steady state and `ssT` the long-run steady state with the programme.
 
+# Calibrate from the dashboard
+
+`calibration.py` sets the settings both macro models share (efficiency, return on public capital, public investment, taxes, debt, concessional share, constrained households, borrowing cost) from the dashboard panel, with income-group defaults where data are missing. It also chooses the model and runs both on the public part of the programme as a cross-check:
+
+```
+python3 calibration.py KEN SLE UGA LBR
+```
+
+From code:
+
+```python
+from calibration import shared, to_gimf, to_dignad, choose_model
+sh = shared("UGA")                  # {setting: (value, source)}
+p_g, p_d = to_gimf(sh), to_dignad(sh)
+choose_model("UGA")                 # ('DIGNAD-lite', 'low-income country')
+```
+
+Check the warning it prints: where non-CO2 and land-use spending are a large share of the programme, the macro gains are overstated.
+
 # How the pieces connect
 
 1. `nmim_bridge.programme(iso)` runs NMIM for one country and returns, for 2025-2050, as shares of GDP:

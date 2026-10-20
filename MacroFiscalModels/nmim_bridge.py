@@ -39,8 +39,11 @@ def programme(iso, first=2025, last=2050):
     pub = get("mit.dtyp.bud") / gdp
     tot = get("mit.dinv.tot") / gdp
     sav = (get("mit.dfuel") - get("mit.dom")) / gdp
+    # non-CO2, land use and other energy CO2 are annual spending in NMIM, not capital
+    spend = (get("mit.dinv.nco") + get("mit.dinv.oth")) / gdp
+    spend_share = np.divide(spend, tot, out=np.zeros_like(tot), where=tot > 0)
     return dict(iso=iso, name=D[iso]["name"], years=np.arange(first, last + 1), gdp=gdp,
-                pub=pub, prv=tot - pub, tot=tot, sav=sav, wacc=S["wacc"])
+                pub=pub, prv=tot - pub, tot=tot, sav=sav, spend_share=spend_share, wacc=S["wacc"])
 
 
 def run_gimf(prog, p=None, public=True, private=True, savings=True):

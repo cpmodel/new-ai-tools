@@ -169,6 +169,39 @@ private investment (`mit.dinv.tot` less the budget need); and net energy savings
 LIC-DSF-lite baseline: growth by the change in the model's GDP growth, the primary deficit by the
 change in the model's primary deficit.
 
+## 4a. Shared calibration and model choice
+
+`calibration.py` sets the settings the two macro models share once, from the Tax and Macro-Fiscal
+Dashboard panel (`TaxMacroFiscalDashboard/build/output/global_data_wide.csv`), with an
+income-group default where the panel has no value. Every setting carries its source.
+
+| Setting | GIMF-lite / DIGNAD-lite | Source |
+|---|---|---|
+| Efficiency `s` | `s` / `s` | 1 − efficiency gap; gap from PEFA PI-11 (score 1 → 40%, 4 → 13%, as in InvestmentNeeds v1.1), else IMF (2015) by income group |
+| Return on public capital | `Rg` / `Rg` | Default by income group: 20 / 17 / 15 / 10% (LIC to HIC) |
+| Public investment | `ig` / `ig1 + ig2` (15% adaptation) | Default by income group |
+| Taxes | `tau_c, tau_l, tau_k` / `tau_c, tau_y` | Tax revenue (% GDP), split 40% consumption, 45% labour, 15% capital |
+| Public debt | `b` / `dk + dc` | Gross debt (WEO); concessional share = IDS multilateral share of PPG external debt |
+| Constrained households | `psi` / `phi` | Default by income group: 60 / 50 / 35 / 25% |
+| Borrowing cost | `rstar` / `rstar` | IDS private creditor rate less 3%, between 3% and 8%; raised in 0.5-point steps where GIMF-lite's discount factor would exceed 1 (7 low-income countries) |
+| Depreciation, capital share | `delta, delta_g, alpha` | 7%, 4%, 0.33 in both |
+| Government consumption | `g` / `gc` | Residual that closes the starting budget with transfers of 2% of GDP (floor 5%) |
+
+**Model choice** (`choose_model`): DIGNAD-lite for low-income countries, disaster-prone countries and
+lower-middle-income countries whose multilateral share is at least 50%; GIMF-lite otherwise.
+
+**Cross-check** (`cross_check`): both models run on the public part of the NMIM programme with the
+same shared settings. With the shared settings, GIMF-lite still gives about 1.6 times DIGNAD-lite's
+GDP gain (Kenya 2050: 1.85% against 1.15%). The difference is labour supply: in GIMF-lite
+employment responds to higher productivity, in DIGNAD-lite it is fixed. With near-fixed labour in
+GIMF-lite (`wage_el` = 50) the gain is 1.03%, close to DIGNAD-lite's. The remaining gap is a
+model difference, not a calibration difference.
+
+**Warning on the programme:** non-CO2, land-use and other energy CO2 lines are annual spending in
+NMIM, but the bridge passes them to the macro models as public investment, which builds productive
+capital. Where they are a large share of the programme (Liberia 90%, Kenya 53% of incremental
+investment 2025-2035), the macro gains are overstated. `cross_check` prints a warning above 25%.
+
 ## 5. Validation
 
 | Check | Result |
@@ -188,4 +221,6 @@ change in the model's primary deficit.
   two-thirds in the Kenya example.
 - Green private capital adds no output (ζ = 0) by default; carbon pricing (CPAT) is not in the models.
 - DIGNAD-lite lets the programme taper to zero after 2050; GIMF-lite holds it at its 2050 level.
+- Non-CO2, land-use and other spending enter the macro models as productive public capital (section 4a).
+- Utility (P2) investment, repaid by tariffs, enters as private investment: state-owned utility debt and tariff shortfalls are not in public debt.
 - The DSF baseline in the demo uses placeholder ratios scaled to the country's GDP.
