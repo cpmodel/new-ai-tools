@@ -79,6 +79,8 @@ Standalone metrics comparing a carbon tax/ETS, a feebate and hybrids in the powe
 sector: abatement subject to limits on visible tariff rises, bottom-40% burden and
 losses to coal and oil generators, with per-country calibration from the dashboard
 panel and Ember. See [`PriceFeasibility/README.md`](PriceFeasibility/README.md).
+Also as a light three-tab Excel screening workbook,
+`PriceFeasibility/PriceFeasibility_Screen.xlsx`, which reads the dashboard's long data format.
 
 ## InvestmentNeeds
 

@@ -28,6 +28,27 @@ Needs Python 3 with `numpy` and `pandas`. Reads
 (Ember). Writes `output/calibration_inputs.csv` (data used, one row per
 country) and `output/country_metrics.csv` (results).
 
+## Excel screening workbook
+
+`PriceFeasibility_Screen.xlsx` is the same model as live formulas, in three tabs:
+
+- **Screen:** limits, priors and grid steps as yellow input cells; a country
+  picker; the best tax, feebate and hybrid for that country; and a tax-by-feebate
+  grid of abatement, green where all three limits hold, with the best cell
+  outlined.
+- **Countries:** one row per country with every parameter and result.
+- **Data:** long format with the same columns as the dashboard's
+  `global_data_long.csv`. It holds only the indicators used, plus Ember
+  generation and emissions by fuel as extra indicator codes (`gen_*_twh`,
+  `em_*_mt`).
+
+Rebuild and check with `python3 build_workbook.py --check`. The check needs
+LibreOffice, recalculates the workbook and compares it with the Python tool.
+At $50/t the two agree exactly. Under the limits they differ by up to 0.3pp,
+because the workbook solves the tax-only and feebate-only cases exactly and
+searches 11 tax steps for the hybrid, while Python searches a rate grid. The
+workbook doesn't compute the hybrid shadow price.
+
 ## Method
 
 Abatement from a carbon price has two parts:
