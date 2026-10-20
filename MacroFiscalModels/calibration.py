@@ -90,7 +90,7 @@ def shared(iso):
     fr = _num(row, "fossil_rents_total_pct_gdp")
     og = (_num(row, "oil_rents_pct_gdp") or 0) + (_num(row, "gas_rents_pct_gdp") or 0)
     fx = _num(row, "fuel_exports_pct_merch")
-    if fr is not None and og == 0 and fx is not None and fx < 5:
+    if fr is not None and fr >= 1 and og == 0 and fx is not None and fx < 5:
         # coal rents with no fuel exports (e.g. Cabo Verde, 17% of GDP in WDI): treated as a data error
         out["rents"] = (0.0, f"dashboard rents {fr:.1f}% ignored: coal only and fuel exports {fx:.1f}% (likely WDI error)")
     else:

@@ -319,3 +319,9 @@ python3 TaxMacroFiscalDashboard/build/scripts/build_dashboard.py
 ```
 
 It reads the dashboard panel, NMIM and `PriceFeasibility/output/country_metrics.csv`.
+
+Standalone country tool (Excel, no Python needed to use it), rebuilt after the integrated run:
+
+```bash
+python3 MacroFiscalModels/build_country_tool.py   # -> MacroFiscalModels/CountryTool/MacroFiscal_CountryTool_v0.1.xlsx
+```

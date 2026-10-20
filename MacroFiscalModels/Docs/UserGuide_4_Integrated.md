@@ -34,6 +34,10 @@ python3 TaxMacroFiscalDashboard/build/scripts/build_dashboard.py
 
 The order is stable: `integrated.py` reads only the panel's source indicators, never Appendix D. After a change to the raw data, run: build panel, `integrated.py --all`, build panel again, build workbook.
 
+# The country tool
+
+`MacroFiscalModels/CountryTool/MacroFiscal_CountryTool_v0.1.xlsx` shows these results one country at a time, with charts, and needs no Python: open it, go to the **Country** sheet and pick a country in the yellow cell. After a new `integrated.py --all`, rebuild it with `python3 build_country_tool.py`. See `CountryTool/README.md`.
+
 # Which model a country gets
 
 | Rule (first that applies) | Model |

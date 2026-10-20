@@ -1,5 +1,7 @@
 # MacroFiscalModels: GIMF-lite, DIGNAD-lite, DIGNAR-lite and LIC-DSF-lite
 
+**The tool:** `CountryTool/MacroFiscal_CountryTool_v0.1.xlsx` — open it, pick a country, see the whole chain. No Python needed.
+
 Simplified Python versions of three IMF / World Bank tools, linked to the National Mitigation
 Investment Model (`../InvestmentNeeds/national_model/`, NMIM v0.2), so a country's net zero investment
 programme can be run through a macro model and a debt sustainability test.
@@ -12,6 +14,7 @@ programme can be run through a macro model and a debt sustainability test.
 | `nmim_bridge.py` | NMIM → models: public budget need, private investment and energy savings (% GDP, 2025-2050); macro paths → DSF |
 | `calibration.py` | One calibration of the shared settings from the dashboard panel; model choice rule; cross-check of the two models |
 | `integrated.py` | Integrated country run: dashboard -> NMIM -> PriceFeasibility -> GIMF / DIGNAD / DIGNAR-lite -> LIC-DSF-lite -> `results/integrated_results.csv` (dashboard Appendix D) |
+| `build_country_tool.py` | Builds the standalone single-country Excel tool, `CountryTool/MacroFiscal_CountryTool_v<version>.xlsx` (see `CountryTool/README.md`) |
 | `pricing_bridge.py` | PriceFeasibility's feasible power-sector mix -> carbon-pricing revenue earmarked for the budget need |
 | `pf_solver.py` | Perfect-foresight Newton solver (sparse Jacobian) shared by the two macro models |
 | `run_demo.py` | Disaster scenarios, the NMIM programme for one country in GIMF-lite and DIGNAD-lite, and the DSF |
@@ -32,7 +35,8 @@ python3 dignad_lite.py           # disaster test
 python3 lic_dsf.py               # DSF on placeholder data
 python3 calibration.py KEN SLE   # dashboard calibration, model choice, cross-check
 python3 integrated.py KEN SLE    # the whole chain for some countries
-python3 integrated.py --all      # all NMIM countries -> results/integrated_results.csv (~10 min)
+python3 integrated.py --all      # all NMIM countries -> results/integrated_{results,paths,settings}.csv (~10 min)
+python3 build_country_tool.py    # the standalone country tool -> CountryTool/MacroFiscal_CountryTool_v0.1.xlsx
 ```
 
 Outputs go to `results/`: `gimf_<ISO>.png`, `dsf_<ISO>.png`, `dignad_disaster.png`, `paths_<ISO>.csv`.

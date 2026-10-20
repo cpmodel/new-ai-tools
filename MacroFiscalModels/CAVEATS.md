@@ -33,3 +33,9 @@ Append-only log, following the CPAT norm (`../CPAT_excel_not_master/NORMS.md` se
 - **Inputs:** `TaxMacroFiscalDashboard/Tax+Macro-Fiscal-Energy_indicators.xlsx` (the committed v1.0: 53 indicators, 9 blocks).
 - **Outputs:** `TaxMacroFiscalDashboard/Archive/Tax+Macro-Fiscal-Energy_indicators_v1.0.xlsx` (moved, renamed); `TaxMacroFiscalDashboard/Global_fiscal_indicators_v1.1.xlsx` (built and committed); `build_dashboard.py` has a `VERSION` and writes the versioned file to `TaxMacroFiscalDashboard/` (`--ship` to override); `TaxMacroFiscalDashboard/VersionNotes.md`; READMEs, SETUP, `2_build_tool.bat`, MANIFEST entries. Resolves caveat (8) of the previous entry: the workbook is now committed.
 - **Caveats:** The README sheet still says "Compiled 26 August 2026" (the data compilation date), now prefixed with the version.
+
+## 2026-10-20 - Standalone single-country tool (CountryTool v0.1)
+- **Task:** A standalone single-country tool.
+- **Inputs:** `results/integrated_results.csv`, `integrated_paths.csv`, `integrated_settings.csv` from `integrated.py --all` (re-run; results unchanged from the previous entry, plus pricing F1-F3 and abatement columns).
+- **Outputs:** `build_country_tool.py`; `CountryTool/MacroFiscal_CountryTool_v0.1.xlsx` (Country sheet with country pick list, four sections, settings with sources, four charts; Results, Paths, Settings, Countries, Calc and README sheets); `CountryTool/README.md`, `VersionNotes.md`, `Archive/`; `integrated.run(paths=...)`; user guide 4 and README updated. `calibration.shared` no longer labels zero rents as a likely WDI error.
+- **Caveats:** (1) Results are pre-computed: changing an assumption needs `integrated.py --all` and a rebuild. (2) Checked by recalculating in LibreOffice (Kenya and Liberia): values and charts resolve; not opened in Excel itself. (3) All caveats of the integrated run apply (illustrative calibration; savings in GIMF-lite only; power-only pricing; DSF defaults).

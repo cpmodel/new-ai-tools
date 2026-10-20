@@ -104,7 +104,9 @@ def _run_macro(model, prog, sh, rev):
     raise RuntimeError(f"not financeable under the fiscal rule ({last})")
 
 
-def run(iso, mode="hybrid"):
+def run(iso, mode="hybrid", paths=None):
+    """One country. If `paths` is a dict, it is filled with annual series (2025-2050, % of GDP or %)
+    and the calibration settings, for the country tool."""
     sh = cb.shared(iso)
     v = cb.values(sh)
     model, why = cb.choose_model(iso)
@@ -118,6 +120,8 @@ def run(iso, mode="hybrid"):
              budget_need_cum_pct_gdp=100 * prog["pub"].sum(), energy_saving_2050_pct_gdp=100 * prog["sav"][i50],
              pricing_tau_t=mix["tau_t"] if mix else np.nan, pricing_tau_f=mix["tau_f"] if mix else np.nan,
              pricing_binding=mix["binding"] if mix else "no data",
+             pricing_F1=mix["F1"] if mix else np.nan, pricing_F2=mix["F2"] if mix else np.nan,
+             pricing_F3=mix["F3"] if mix else np.nan, pricing_abatement_pct=mix["E"] if mix else np.nan,
              pricing_revenue_2030_pct_gdp=100 * rev[i30],
              pricing_share_of_need_pct=100 * rev.sum() / prog["pub"].sum() if prog["pub"].sum() > 0 else np.nan,
              financing_gap_2030_pct_gdp=100 * (prog["pub"][i30] - rev[i30]),
@@ -128,6 +132,10 @@ def run(iso, mode="hybrid"):
                  gdp_dev_2030_pct=100 * (m["y"][i30] - 1), gdp_dev_2050_pct=100 * (m["y"][i50] - 1),
                  debt_2030_pct_gdp=100 * m["debt"][i30], debt_2050_pct_gdp=100 * m["debt"][i50])
         r["debt_change_2050_pp"] = r["debt_2050_pct_gdp"] - r["debt_2024_pct_gdp"]
+        if paths is not None:
+            n = len(prog["years"])
+            paths["gdp_dev_pct"] = 100 * (m["y"][:n] - 1)
+            paths["debt_pct_gdp"] = 100 * m["debt"][:n]
     except RuntimeError as e:
         r.update(status=str(e).split(" (")[0])
         m = None
@@ -137,6 +145,17 @@ def run(iso, mode="hybrid"):
         a1 = assess(dsf_overlay(inp, m["y"], m["pdef"], m["pdef0"]), "medium")
         r.update(dsf_rating_base=a0["overall"], dsf_rating_programme=a1["overall"],
                  dsf_risk_code=RISK_CODE[a1["overall"]], dsf_assumptions="; ".join(notes))
+        if paths is not None:
+            for k in a0["thresholds"]:
+                paths[f"dsf_base|{k}"] = a0["base"]["ind"][k][1:]          # projection years 1-10 = 2025-2034
+                paths[f"dsf_prog|{k}"] = a1["base"]["ind"][k][1:]
+                paths[f"dsf_thr|{k}"] = a0["thresholds"][k]
+    if paths is not None:
+        for k in ("pub", "pub_cap", "pub_spend", "prv", "sav"):
+            paths[k] = 100 * prog[k]
+        paths["rev"] = 100 * rev
+        paths["settings"] = {k: sh[k] for k in sh}
+        paths["mix"] = mix
     return r
 
 
@@ -154,17 +173,35 @@ def show(r):
         print(f"   LIC-DSF-lite: {r['dsf_rating_base']} -> {r['dsf_rating_programme']}  (assumed: {r['dsf_assumptions']})")
 
 
+PATHS_OUT = os.path.join(HERE, "results", "integrated_paths.csv")
+SETTINGS_OUT = os.path.join(HERE, "results", "integrated_settings.csv")
+YEARS = list(range(Y0, 2051))
+
+
 def run_all(isos=None):
+    """All countries -> integrated_results.csv (one row each), integrated_paths.csv (annual series,
+    long: iso3, series, 2025..2050) and integrated_settings.csv (calibration value and source)."""
     m, D = _nmim()
-    rows = []
+    rows, prow, srow = [], [], []
     for iso in isos or sorted(D):
+        p = {}
         try:
-            rows.append(run(iso))
+            rows.append(run(iso, paths=p))
         except Exception as e:                               # keep going; record the failure
             rows.append(dict(iso3=iso, status=f"error: {str(e)[:80]}"))
+        for k, val in p.items():
+            if k in ("settings", "mix"):
+                continue
+            a = np.atleast_1d(np.asarray(val, float))
+            vals = list(a) + [np.nan] * (len(YEARS) - len(a)) if a.size > 1 else [float(a[0])] + [np.nan] * (len(YEARS) - 1)
+            prow.append([iso, k] + vals[:len(YEARS)])
+        for k, (val, src) in p.get("settings", {}).items():
+            srow.append([iso, k, val, src])
     df = pd.DataFrame(rows)
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     df.to_csv(OUT, index=False, float_format="%.4g")
+    pd.DataFrame(prow, columns=["iso3", "series"] + YEARS).to_csv(PATHS_OUT, index=False, float_format="%.4g")
+    pd.DataFrame(srow, columns=["iso3", "setting", "value", "source"]).to_csv(SETTINGS_OUT, index=False, float_format="%.4g")
     return df
 
 
