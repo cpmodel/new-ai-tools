@@ -41,7 +41,7 @@ Open work, in priority order. Move items to `CAVEATS.md` when done.
 
 From the review in `cpmodel/CPAT-CDPM`, `reports/Public spending efficiency and CBA.md` (sections 4-6, 9). Aim: place climate and energy spending in the wider fiscal picture, not a full allocative-efficiency analysis. Frontier work (Herrera et al., World Bank Fiscal Policy unit) is used as an input only. Items already listed above are cross-referenced, not repeated.
 
-Order: first 23, 32, 35 and 30 (things that are wrong or unused today), then 28-29 and 33-36, then the rest.
+Order: first 23, 36, 32 and 29 (things that are wrong or unused today), then 27-28 and 31-34, then the rest.
 
 **A. Execution efficiency** (extends items 3, 4 and 8)
 
