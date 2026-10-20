@@ -85,6 +85,7 @@ method (October 2026). See [`InvestmentNeeds/README.md`](InvestmentNeeds/README.
   186 countries, 2024-2050, baseline and net zero, CPAT norms (codes, layout, data,
   activity equation), consistent with the CBAM Policy Tool; Python engine + CPAT-layout
   workbook with live formulas; method note and check report
+- **`Mitigation_Investment_Needs_Methodology.md` / `.docx`** — methodology (v1.1 workbook, sector by sector, sensitivity, national model and data needs)
 - **`CAVEATS.md`**, **`Old/`** — task log and superseded versions
 - **`build/`** — `build_investment_model.py` (workbook), `run_sensitivity.py`
   (Sensitivity sheet), `make_summary_image.py` (summary PNG)
