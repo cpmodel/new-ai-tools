@@ -101,8 +101,8 @@ Simplified Python versions of the IMF GIMF and DIGNAD models and the World Bank-
 linked to NMIM: a country's net zero investment programme (budget need, private investment,
 energy savings) runs through GIMF-lite or DIGNAD-lite, and the macro path through the DSF. See
 [`MacroFiscalModels/README.md`](MacroFiscalModels/README.md) and the method note
-`MacroFiscalModels_Method_v0_1.md` (equations, data needs, validation). Calibrations are
-illustrative.
+`MacroFiscalModels_Method_v0_1.md` (equations, data needs, validation); pitch deck and user
+guides in `MacroFiscalModels/Docs/`. Calibrations are illustrative.
 
 ## TaxMacroFiscalDashboard
 

@@ -15,6 +15,7 @@ programme can be run through a macro model and a debt sustainability test.
 | `MacroFiscalModels_Method_v0_1.md` | Method: equations of the full and the lite models, data needs, validation, open issues |
 | `VersionNotes.md` | Version notes |
 | `CAVEATS.md` | Task log |
+| `Docs/` | Pitch deck and user guides (getting started, GIMF-lite, DIGNAD-lite, LIC-DSF-lite); see `Docs/README.md` |
 
 ## Run
 
