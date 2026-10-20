@@ -3,7 +3,7 @@ REM ===========================================================================
 REM  2_build_tool.bat  -  THE TOOL
 REM
 REM  Builds the interactive workbook from the panel produced by step 1.
-REM    output\global_data_long.csv  +  config\  ->  output\Global_fiscal_indicators.xlsx
+REM    output\global_data_long.csv  +  config\  ->  ..\Global_fiscal_indicators_v<VERSION>.xlsx
 REM
 REM  Run 1_build_database.bat first. This step does not read any raw source file,
 REM  so you can re-run it on its own after editing config\indicators.csv - for
@@ -42,7 +42,7 @@ if errorlevel 1 goto :fail
 
 echo.
 echo  === Done ===
-echo  output\Global_fiscal_indicators.xlsx
+echo  ..\Global_fiscal_indicators_v*.xlsx  (TaxMacroFiscalDashboard folder; version set in build_dashboard.py)
 echo.
 echo  Open it, go to the Dashboard sheet, and pick a country in the yellow cell.
 echo  NOTE: Excel may need to recalculate on first open. If the Dashboard looks

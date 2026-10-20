@@ -75,7 +75,7 @@ so you can read the output.
 | `0_setup.bat` | Installs the Python packages. Run once. |
 | `0b_download_sources.bat` | Optional. Re-fetches the 6 sources with a direct URL into `raw_data_downloaded\`, and prints a checklist for the 13 that need manual download. |
 | `1_build_database.bat` | Preprocessing: raw files -> `output\global_data_*.csv` |
-| `2_build_tool.bat` | The tool: panel -> `output\Global_fiscal_indicators.xlsx` |
+| `2_build_tool.bat` | The tool: panel -> `TaxMacroFiscalDashboard\Global_fiscal_indicators_v<version>.xlsx` (versioned; older versions in `TaxMacroFiscalDashboard\Archive\`, see `VersionNotes.md`) |
 
 `1_build_database.bat ccdr` restricts to the 98 published-CCDR economies. Step 1 also
 writes the CPAT `.xlsx` the R route needs, so you can run R afterwards without a
@@ -91,7 +91,7 @@ Paths default to the folders above, resolved relative to the script. From
 
 ```bash
 python build_global_indicators.py        # -> output/global_data_{long_all_years,long,wide}.csv
-python build_dashboard.py                # -> output/Global_fiscal_indicators.xlsx
+python build_dashboard.py                # -> ../../Global_fiscal_indicators_v<version>.xlsx
 ```
 
 Override with flags or environment variables if your layout differs:

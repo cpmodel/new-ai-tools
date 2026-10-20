@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 """Build the interactive workbook from the global (217-country) panel.
 Input : global_data_long.csv  (from build_global_indicators.py)
-Output: Global_fiscal_indicators.xlsx
+Output: TaxMacroFiscalDashboard/Global_fiscal_indicators_v<VERSION>.xlsx (the shipped tool)
+
+Versioning: bump VERSION when a changed workbook is shipped, move the previous file to
+TaxMacroFiscalDashboard/Archive/ and add a line to TaxMacroFiscalDashboard/VersionNotes.md.
 """
+VERSION = "1.1"
 import re
 import pandas as pd, numpy as np, openpyxl, warnings
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
@@ -15,7 +19,10 @@ _here = os.path.dirname(os.path.abspath(__file__))
 _ap = argparse.ArgumentParser()
 _ap.add_argument("--out", default=os.environ.get("OUT_DIR", os.path.join(_here, "..", "output")))
 _ap.add_argument("--config", default=os.environ.get("CONFIG_DIR", os.path.join(_here, "..", "config")))
+_ap.add_argument("--ship", default=os.environ.get("SHIP_DIR", os.path.join(_here, "..", "..")),
+                 help="where the versioned workbook is written (default: TaxMacroFiscalDashboard/)")
 _args, _ = _ap.parse_known_args()
+SHIP = os.path.join(os.path.abspath(_args.ship), "")
 OUT = os.path.join(os.path.abspath(_args.out), "")
 CONFIG = os.path.join(os.path.abspath(_args.config), "")
 F = "Arial"; INK = "0E1B2A"; ACC = "C05621"; MUT = "5A6B7B"
@@ -67,7 +74,7 @@ ws = wb.active; ws.title = "README"
 for col, w_ in [("A",3),("B",30),("C",104)]: ws.column_dimensions[col].width = w_
 ws["B2"] = "Global Fiscal Indicators — climate and mitigation finance"
 ws["B2"].font = Font(name=F, size=16, bold=True, color=INK)
-ws["B3"] = f"{W.shape[0]} countries, {len(spec)} indicators, 16 public datasets. Compiled 26 August 2026."
+ws["B3"] = f"Version {VERSION}. {W.shape[0]} countries, {len(spec)} indicators, 16 public datasets. Compiled 26 August 2026."
 ws["B3"].font = Font(name=F, size=10, italic=True, color=MUT)
 r = 5
 for k, v in [
@@ -291,5 +298,7 @@ for i, row in enumerate(L.itertuples(index=False), 2):
         c.font = Font(name=F, size=9); c.border = BOX
     dl.row_dimensions[i].height = 13
 
-wb.save(OUT + "Global_fiscal_indicators.xlsx")
+_name = f"Global_fiscal_indicators_v{VERSION}.xlsx"
+wb.save(SHIP + _name)
+print(f"wrote {SHIP + _name}")
 print(f"saved | {W.shape[0]} countries | {len(spec)} indicators | {len(QUESTIONS)} blocks | {len(L)} long rows")
