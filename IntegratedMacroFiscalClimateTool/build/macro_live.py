@@ -35,6 +35,7 @@ import xlcharts                                                  # noqa: E402
 Y0, Y1, T = dr.Y0, dr.Y1, dr.T
 YEARS = list(range(Y0, Y1 + 1))
 F = "Arial"; INK = "0E1B2A"; ACC = "C05621"; MUT = "5A6B7B"
+IND, DETAIL, NOTMASTER = "Indicators (not master)", "Detail ->>", "Not master ->>"
 HDR = PatternFill("solid", fgColor=INK); YEL = PatternFill("solid", fgColor="FFF2CC")
 SEC = PatternFill("solid", fgColor="EAE3F2"); AUG = PatternFill("solid", fgColor="E3EAF2")
 thin = Side(style="thin", color="C8D0D6"); BOX = Border(left=thin, right=thin, top=thin, bottom=thin)
@@ -458,26 +459,47 @@ def add(path, panel_long):
     ctx = dict(M=M, R0=R0, RL=RL, H0=H0, MC=MC, wm=wm, rng=rng, last_dash=LASTD, dsa=DSA_DATA,
                gi=(wg, GDC, ghdr, glast), IC=IC, NI=NI)
     outlook.add_sheets(wb, ctx)
+    # the Global Fiscal Indicators profile: kept for reference, not the master (that is
+    # TaxMacroFiscalDashboard/), at the far right behind its own divider
     ind = wb["Indicators"]
+    ind.title = IND
     ind.data_validations.dataValidation = [d for d in ind.data_validations.dataValidation if "C4" not in str(d.sqref)]
     ind["C4"] = "=sel_country"
-    ind["B2"] = "Indicators: the country profile"
-    ind["B7"] = "Pick the country on the Dashboard. ● marks the headline indicator for each block."
+    ind["B2"] = "Indicators: the country profile - NOT MASTER"
+    ind["B7"] = ("NOT MASTER: a copy of the Global Fiscal Indicators dashboard for reference; the master is "
+                 "TaxMacroFiscalDashboard/. Country picked on the Dashboard.")
+    ind["B7"].font = font(9, True, "B22222")
 
-    order = ["README", "Dashboard", "Indicators", "Fiscal outlook", "Macro & debt", "Green investment", "Carbon pricing",
-             "Policy settings", "GI_Inputs", "Macro_assumptions"]
-    tail = ["GI_Model", "GI_Data", "Macro_model", "Macro_inputs"]
-    rest = [ws for ws in wb._sheets if ws.title not in order + tail]
-    wb._sheets = [wb[n] for n in order] + rest + [wb[n] for n in tail]
-    wb.active = 1
+    def divider(title, text):
+        ws = wb.create_sheet(title)
+        ws.sheet_view.showGridLines = False; ws.column_dimensions["B"].width = 90
+        ws["B2"] = title; ws["B2"].font = font(16, True)
+        ws["B4"] = text; ws["B4"].font = font(10, color=MUT); ws["B4"].alignment = Alignment(wrap_text=True, vertical="top")
+        ws.row_dimensions[4].height = 60
+        ws.sheet_properties.tabColor = INK
+        return ws
+    divider(DETAIL, "Everything behind the Dashboard: README; Fiscal outlook (revenue and spending item by item); Macro & debt "
+                    "(macro models and debt sustainability); Green investment (NMIM, live); Carbon pricing (carbon tax vs feebate); "
+                    "Policy settings (secondary levers); model assumptions (GI_Inputs, Macro_assumptions, yellow); engine sheets (grey).")
+    divider(NOTMASTER, "Reference only, not the master: the Global Fiscal Indicators country profile and its data (Data_wide, "
+                       "Scores, Spec, Sources, Data_long). The master dashboard is maintained separately in "
+                       "TaxMacroFiscalDashboard/. Data_wide also supplies the Dashboard's country list.")
+
+    order = (["Dashboard", DETAIL, "README", "Fiscal outlook", "Macro & debt", "Green investment", "Carbon pricing",
+              "Policy settings", "GI_Inputs", "Macro_assumptions", "GI_Model", "GI_Data", "Macro_model", "Macro_inputs",
+              NOTMASTER, IND])
+    rest = [ws for ws in wb._sheets if ws.title not in order]          # Data_wide, Scores, Spec, Sources, Data_long
+    wb._sheets = [wb[n] for n in order] + rest
+    wb.active = 0
     for ws in wb._sheets:
         ws.sheet_view.tabSelected = ws.title == "Dashboard"
-    for n in ("Dashboard",):
-        wb[n].sheet_properties.tabColor = ACC
-    for n in ("Indicators", "Fiscal outlook", "Macro & debt", "Green investment", "Carbon pricing"):
+    wb["Dashboard"].sheet_properties.tabColor = ACC
+    for n in ("Fiscal outlook", "Macro & debt", "Green investment", "Carbon pricing"):
         wb[n].sheet_properties.tabColor = "1F4E79"
-    wb["Policy settings"].sheet_properties.tabColor = "C9A227"
-    wb["GI_Inputs"].sheet_properties.tabColor = "C9A227"; wb["Macro_assumptions"].sheet_properties.tabColor = "C9A227"
+    for n in ("Policy settings", "GI_Inputs", "Macro_assumptions"):
+        wb[n].sheet_properties.tabColor = "C9A227"
+    for ws in [wb[IND]] + rest:
+        ws.sheet_properties.tabColor = "D9D9D9"
     wb.calculation.fullCalcOnLoad = True
     wb.save(path)
     print(f"macro_live: Macro sheets for {len(wide)} countries")

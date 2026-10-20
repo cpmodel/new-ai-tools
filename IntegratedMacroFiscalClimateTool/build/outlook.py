@@ -460,9 +460,9 @@ def _dashboard(wb, ctx):
     wd.sheet_view.showGridLines = False
     for col, w in zip("ABCDE", [2, 44, 11, 11, 2]):
         wd.column_dimensions[col].width = w
-    wd["B2"] = "Integrated macro-fiscal climate tool"; wd["B2"].font = font(18, True)
-    wd["B3"] = ("Pick a country and a scenario; every tab follows. Detail: Indicators, Fiscal outlook, Macro & debt, Green "
-                "investment, Carbon pricing. More levers: Policy settings. Illustrative calibration.")
+    wd["B2"] = "Macro-Fiscal-Energy-Scenario Tool"; wd["B2"].font = font(18, True)
+    wd["B3"] = ("Pick a country and a scenario; every tab follows. Detail tabs after the Detail ->> divider: Fiscal outlook, "
+                "Macro & debt, Green investment, Carbon pricing; more levers on Policy settings. Illustrative calibration.")
     wd["B3"].font = font(9, italic=True, color=MUT); wd["B3"].alignment = Alignment(wrap_text=True, vertical="top")
     wd.merge_cells("B3:D3"); wd.row_dimensions[3].height = 40
     wd["B5"] = "Country"; wd["B5"].font = font(11, True)
