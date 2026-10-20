@@ -16,16 +16,18 @@ fiscal-climate-ai-tools/
 ├── CPAT_coded/                  CPAT Python reimplementation
 ├── CBAMPolicyTool/              CBAM Policy Tool (global workbook, guide, Egypt case)
 ├── ExciseDiagnostic/            Excise tax diagnostic working paper and data
-├── IntegratedMFC/               Integrated MF-C (macro-fiscal climate) tool: the dashboard plus
-│                                 investment needs on one country page; built in modules
-├── InvestmentNeeds/             Mitigation (net zero) investment needs model, by country,
-│                                 sector and cost-of-capital lens
-├── MacroFiscalModels/           GIMF-lite, DIGNAD/DIGNAR-lite, LIC-DSF-lite and the
-│                                 integrated run (dashboard, NMIM, PriceFeasibility)
-├── PriceFeasibility/            Power-sector carbon tax vs feebate metrics under
-│                                 political-feasibility limits (standalone Python)
-├── TaxMacroFiscalDashboard/     Tax, macro-fiscal, and climate policy dashboards
-│   └── build/                   Raw data, config, and scripts for the Global Fiscal
+├── IntegratedMacroFiscalClimateTool/
+│   │                             Integrated MF-C (macro-fiscal climate) tool: fiscal outlook with
+│   │                             tax, spending and carbon pricing levers, the dashboard, investment
+│   │                             needs and macro models; its source models sit inside it:
+│   ├── IntegratedMacroFiscalClimateTool/InvestmentNeeds/          Mitigation (net zero) investment needs model, by country,
+│   │                             sector and cost-of-capital lens
+│   ├── IntegratedMacroFiscalClimateTool/MacroFiscalModels/        GIMF-lite, DIGNAD/DIGNAR-lite, LIC-DSF-lite and the
+│   │                             integrated run (dashboard, NMIM, PriceFeasibility)
+│   ├── IntegratedMacroFiscalClimateTool/PriceFeasibility/         Power-sector carbon tax vs feebate metrics under
+│   │                             political-feasibility limits (standalone Python)
+│   └── IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/  Tax, macro-fiscal, and climate policy dashboards
+│       └── build/                Raw data, config, and scripts for the Global Fiscal
 │                                 Indicators dashboard (Python + R build pipeline)
 ├── templates/                   Master templates
 └── _research/                   Source literature (IPCC, CBAM regulation, roadmaps)
@@ -80,29 +82,33 @@ Run modes:
 Standalone metrics comparing a carbon tax/ETS, a feebate and hybrids in the power
 sector: abatement subject to limits on visible tariff rises, bottom-40% burden and
 losses to coal and oil generators, with per-country calibration from the dashboard
-panel and Ember. See [`PriceFeasibility/README.md`](PriceFeasibility/README.md).
+panel and Ember. See [`IntegratedMacroFiscalClimateTool/PriceFeasibility/README.md`](IntegratedMacroFiscalClimateTool/PriceFeasibility/README.md).
 Also as a light three-tab Excel screening workbook,
-`PriceFeasibility/PriceFeasibility_Screen.xlsx`, which reads the dashboard's long data format.
+`IntegratedMacroFiscalClimateTool/PriceFeasibility/PriceFeasibility_Screen.xlsx`, which reads the dashboard's long data format.
 
-## IntegratedMFC
+## IntegratedMacroFiscalClimateTool
 
-The Integrated MF-C (macro-fiscal climate) tool, `IntegratedMFC/Integrated_MFC_Tool_v0.4.xlsx`:
-the Global Fiscal Indicators dashboard with the mitigation investment needs from NMIM v0.2 spliced
-in as two blocks (Investment 1: need by sector, incremental cost by cost-of-capital lens, path to
-2050; Investment 2: public investment needs, from the direct budget need to all investment needing
-public money, and who else pays) and the MacroFiscalModels integrated run as two Macro blocks
-(financing gap after carbon pricing; growth, debt and DSF risk) replacing Appendix D, with a Macro
-sheet that puts the run's paths (and the other model family's, as a cross-check) beside a live
-formula version of DIGNAD-lite / DIGNAR-lite, a DSA sheet (LIC-DSF-lite indicators against
-thresholds), fiscal risk from the Climate Fiscal Risk Dashboard v1.5, and a CDPM-method
-cross-check of the investment need. Built in modules by `IntegratedMFC/build/build_mfc_tool.py` with
-the dashboard's own builder; more modules to follow. See
-[`IntegratedMFC/README.md`](IntegratedMFC/README.md).
+The Integrated MF-C (macro-fiscal climate) tool,
+`IntegratedMacroFiscalClimateTool/Integrated_MFC_Tool_v0.5.xlsx`. Its front page is a **Fiscal
+outlook**: pick a country, set the levers (new taxes as pp of GDP a year, new public investment
+and other spending, the fiscal rule, and power-sector carbon pricing - a carbon tax, a feebate or
+both, with the most effective politically feasible mix found live under limits on tariff rises,
+bottom-40% losses and losses to coal and oil generators), and read revenue, expenditure, balance,
+debt, growth and green public investment to 2050, computed live by DIGNAD-R (the recursive
+DIGNAD-lite / DIGNAR-lite). The **Pricing** sheet shows the carbon tax and feebate options. Behind
+them: the Global Fiscal Indicators dashboard with the mitigation investment needs from NMIM v0.2
+(Investment 1 and 2 blocks), the MacroFiscalModels integrated run (Macro 1 and 2 blocks, the
+Macro sheet with the cross-check model family), a DSA sheet (LIC-DSF-lite), fiscal risk from the
+Climate Fiscal Risk Dashboard v1.5, and a CDPM-method cross-check of the investment need. Built in
+modules by `IntegratedMacroFiscalClimateTool/build/build_mfc_tool.py` with the dashboard's own
+builder. The source models (InvestmentNeeds, MacroFiscalModels, PriceFeasibility,
+TaxMacroFiscalDashboard) are subfolders of it. See
+[`IntegratedMacroFiscalClimateTool/README.md`](IntegratedMacroFiscalClimateTool/README.md).
 
 ## InvestmentNeeds
 
 Mitigation (net zero) investment needs model, built on the CDPM-based global
-method (October 2026; CDPM was formerly SiSePuede). See [`InvestmentNeeds/README.md`](InvestmentNeeds/README.md).
+method (October 2026; CDPM was formerly SiSePuede). See [`IntegratedMacroFiscalClimateTool/InvestmentNeeds/README.md`](IntegratedMacroFiscalClimateTool/InvestmentNeeds/README.md).
 
 - **`Mitigation_Investment_Needs_v1.1.xlsx`** — 2030 total and incremental investment
   needs, and incremental cost, for 195 economies × 7 sectors, under three lenses: market
@@ -129,10 +135,10 @@ Simplified Python versions of the IMF GIMF, DIGNAD and DIGNAR models and the Wor
 LIC-DSF. `integrated.py` chains the dashboard, NMIM (investment needs), PriceFeasibility
 (feasible power-sector carbon pricing, whose revenue finances part of the budget need), the
 macro model and the DSF for every country, and its results feed the dashboard's Appendix D.
-The standalone single-country tool is `MacroFiscalModels/MacroFiscal_CountryTool_v0.3.xlsx`. See
-[`MacroFiscalModels/README.md`](MacroFiscalModels/README.md) and the method note
+The standalone single-country tool is `IntegratedMacroFiscalClimateTool/MacroFiscalModels/MacroFiscal_CountryTool_v0.3.xlsx`. See
+[`IntegratedMacroFiscalClimateTool/MacroFiscalModels/README.md`](IntegratedMacroFiscalClimateTool/MacroFiscalModels/README.md) and the method note
 `MacroFiscalModels_Method_v0_1.md` (equations, data needs, validation); pitch deck and user
-guides in `MacroFiscalModels/Docs/`. Calibrations are illustrative.
+guides in `IntegratedMacroFiscalClimateTool/MacroFiscalModels/Docs/`. Calibrations are illustrative.
 
 ## TaxMacroFiscalDashboard
 

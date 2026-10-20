@@ -1,12 +1,57 @@
-# IntegratedMFC — Integrated MF-C tool (macro-fiscal climate)
+# IntegratedMacroFiscalClimateTool — Integrated MF-C tool (macro-fiscal climate)
 
-**The tool:** `Integrated_MFC_Tool_v0.4.xlsx`. Pick a country on the **Dashboard** sheet and it
-shows the Global Fiscal Indicators dashboard (with fiscal risk), the country's mitigation
+**The tool:** `Integrated_MFC_Tool_v0.5.xlsx`. It opens on the **Fiscal outlook**: pick a country,
+set the policy levers, and read the revenue and expenditure outlook, balance, debt, growth and
+green public investment to 2050 (see *Fiscal outlook and carbon pricing* below). The **Pricing**
+sheet finds the most effective politically feasible carbon tax and feebate mix. The **Dashboard**
+follows the same country and shows the Global Fiscal Indicators dashboard (with fiscal risk), the country's mitigation
 investment needs (including its public investment needs, and a CDPM-method cross-check), and
 what the programme does to growth, public debt and debt risk. The **Macro** sheet has the same
 country's paths, with the other model family as a cross-check and a live simple macro model you
 can change; the **DSA** sheet has the debt-sustainability indicators against their thresholds.
 No Python needed to use it.
+
+This folder also holds the tool's source models: `TaxMacroFiscalDashboard/` (the indicator panel
+and dashboard), `InvestmentNeeds/` (NMIM and the v1.1 workbook), `MacroFiscalModels/` (GIMF-lite,
+DIGNAD/DIGNAR-lite, LIC-DSF-lite, the integrated run) and `PriceFeasibility/` (carbon tax vs feebate
+under political-feasibility limits). Paths in this README are relative to this folder.
+
+## Fiscal outlook and carbon pricing
+
+The front page. The policy scenario is the no-new-measures baseline plus:
+
+| Lever | What it does in the model |
+|---|---|
+| New taxes: pp of GDP a year, first year, ceiling | Revenue. The share on capital lowers desired private capital as the base tax does; the rest (VAT-like) only cuts household income |
+| New public investment, pp of GDP | Builds public capital at the country's efficiency (PEFA PI-11), which raises output by the return on public capital |
+| Other new spending, pp of GDP | Spending only; first year and ramp-up shared with public investment |
+| Fiscal rule strength | Scales the speed at which transfers fall as debt rises (1 = as calibrated, 0 = off) |
+| Climate programme (`p_programme`, Macro_assumptions) | NMIM's incremental budget need, with grants and concessional loans, as before |
+| Carbon pricing mode | None, Manual (your tax and feebate rates), or the best feasible carbon tax, feebate or hybrid |
+| Limits F1-F3 | First-year tariff rise, net loss of the bottom 40%, net payment by coal and oil generators (PriceFeasibility's defaults) |
+| Phase-in, first year | The rate rises in equal steps; phasing in also lowers F1 |
+| Revenue use | Shares rebated to the bottom 40% (lowers F2) and spent on green public investment (builds public capital); the rest goes to the budget |
+
+Carbon pricing is PriceFeasibility v0.1 in formulas. For the selected country the Pricing sheet
+computes abatement and F1-F3 for any tax and feebate, shows a tax-by-feebate grid with the
+feasible cells in green, and finds the best feasible mix live: tax only and feebate only exactly
+(each limit is linear in the rate), the hybrid by searching the F3 limit line. At the default
+limits it matches PriceFeasibility's own optimiser to its grid step (Kenya: tax 88.9 vs 88 USD/t).
+Revenue = tax rate x fossil power CO2 / NMIM GDP, on NMIM's net zero path when the climate
+programme is on (its abatement is already in that path), otherwise NMIM's baseline less the
+pricing abatement. A feebate raises nothing and, in this model, costs no growth.
+
+Everything is live (DIGNAD-R, Macro_model), for the 186 countries of the integrated run.
+`build/outlook.py --check ISO3 '{"lever": value}'` computes the same scenario in Python: for Kenya,
+Indonesia, South Africa and Nigeria under several lever settings the workbook (recalculated in
+LibreOffice) and Python agree to 1e-14.
+
+Limits: DIGNAD-R has no trend growth, so the baseline holds the 2024 position (debt, revenue and
+spending ratios) except that fossil rents fall, and growth is shown above or below trend. It is a
+reference point for comparing packages, not a WEO forecast. The integrated run (Macro sheet, Macro
+blocks) is pre-computed with PriceFeasibility's default hybrid and does not respond to the levers.
+
+## Modules
 
 It is built in modules, so more can be added. Now:
 
@@ -84,7 +129,8 @@ The tool does not have its own layout code. `build/build_mfc_tool.py`:
    with the title, file name, version and README text from `build/config/tool.json`. A module can
    replace dashboard blocks (macro-fiscal replaces Appendix D);
 4. adds the sheets the dashboard builder does not make: `build/macro_live.py` writes Macro,
-   Macro_assumptions, Macro_model and Macro_inputs.
+   Macro_assumptions, Macro_model and Macro_inputs, and `build/outlook.py` writes Fiscal outlook
+   (the front page, with the country picker the Dashboard now follows) and Pricing.
 
 So the integrated tool scores, colours and reads exactly like the dashboard, and a change to the
 dashboard (a new indicator, a fix) reaches it on the next build. The build stops if a module's
@@ -92,10 +138,12 @@ config names an indicator its extractor does not emit, or reuses a dashboard cod
 
 ```bash
 pip install pandas numpy openpyxl
-python3 IntegratedMFC/build/build_mfc_tool.py     # -> IntegratedMFC/Integrated_MFC_Tool_v<version>.xlsx
+python3 build/build_mfc_tool.py     # -> Integrated_MFC_Tool_v<version>.xlsx (run from this folder or anywhere)
 ```
 
 It reads repository files only. Rebuild after any of its inputs changes:
+
+- PriceFeasibility: `PriceFeasibility/price_feasibility.py` (parameters and reference optima);
 
 - the dashboard panel: `TaxMacroFiscalDashboard/build/scripts/build_global_indicators.py`;
 - NMIM: `InvestmentNeeds/national_model/nmim_v0_2.py`;
@@ -104,7 +152,7 @@ It reads repository files only. Rebuild after any of its inputs changes:
 - the integrated run: `MacroFiscalModels/integrated.py --all` (about 3 minutes; after NMIM and
   the dashboard panel).
 
-`python3 IntegratedMFC/build/macro_live.py --check KEN AGO` prints DIGNAD-R's results from its
+`python3 build/macro_live.py --check KEN AGO` prints DIGNAD-R's results from its
 Python copy of the equations, to compare with the Macro sheet after recalculation.
 
 ### Adding a module
@@ -144,16 +192,17 @@ Use `block_kind` = `assessment` (Good / Medium / Bad), `context` (High / Medium 
 
 ## Handover: rebuilding everything, and open decisions
 
-Full rebuild after a change to raw data, in order (about 6 minutes in all):
+Full rebuild after a change to raw data, in order, from this folder (about 6 minutes in all):
 
 ```bash
 python3 TaxMacroFiscalDashboard/build/scripts/build_global_indicators.py   # panel
+python3 PriceFeasibility/price_feasibility.py                              # pricing optima
 python3 MacroFiscalModels/integrated.py --all                               # about 3 minutes
 python3 TaxMacroFiscalDashboard/build/scripts/build_global_indicators.py   # panel again (Appendix D)
 python3 TaxMacroFiscalDashboard/build/scripts/build_dashboard.py           # dashboard workbook
 python3 MacroFiscalModels/ExcelDIGNAD/build_dignad_excel.py --check        # DIGNAD-R Excel
 python3 MacroFiscalModels/build_country_tool.py                             # country tool
-python3 IntegratedMFC/build/build_mfc_tool.py                               # this tool
+python3 build/build_mfc_tool.py                                             # this tool
 ```
 
 Requirements beyond the dashboard's: `scipy` (macro models), `pyxlsb` and `xlsxwriter` (panel).

@@ -11,7 +11,7 @@ so the integrated workbook reads, scores and looks exactly like the dashboard.
 Inputs : TaxMacroFiscalDashboard/build/{output/global_data_long.csv, config/}
          per module, see MODULES (now: InvestmentNeeds NMIM v0.2 summary; MacroFiscalModels
          integrated run; the DIGNAD-R equations for the live Macro sheet, see macro_live.py)
-Output : IntegratedMFC/Integrated_MFC_Tool_v<version>.xlsx (version in config/tool.json)
+Output : IntegratedMacroFiscalClimateTool/Integrated_MFC_Tool_v<version>.xlsx (version in config/tool.json)
          build/output/<module>_long.csv (the module's rows, committed)
 
 To add a module: write an extract function (given the dashboard's long panel) returning long rows, add
@@ -21,7 +21,7 @@ import os, sys, shutil, subprocess
 import numpy as np, pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
+ROOT = os.path.abspath(os.path.join(HERE, ".."))           # IntegratedMacroFiscalClimateTool/
 DASH = os.path.join(ROOT, "TaxMacroFiscalDashboard", "build")
 INV = os.path.join(ROOT, "InvestmentNeeds")
 CONFIG = os.path.join(HERE, "config")

@@ -24,10 +24,11 @@ from openpyxl.utils import get_column_letter
 from openpyxl.workbook.defined_name import DefinedName
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
+ROOT = os.path.abspath(os.path.join(HERE, ".."))           # IntegratedMacroFiscalClimateTool/
 MFM = os.path.join(ROOT, "MacroFiscalModels")
 sys.path.insert(0, os.path.join(MFM, "ExcelDIGNAD"))
 import build_dignad_excel as dr                                 # noqa: E402  (the DIGNAD-R model)
+import outlook                                                  # noqa: E402  (levers, carbon pricing)
 
 Y0, Y1, T = dr.Y0, dr.Y1, dr.T
 YEARS = list(range(Y0, Y1 + 1))
@@ -56,6 +57,9 @@ def add(path, panel_long):
     names = panel_long.drop_duplicates("iso3").set_index("iso3").country   # the Dashboard's names
     wide["country"] = wide.iso3.map(names).fillna(wide.country)
     pa = pd.read_csv(os.path.join(MFM, "results", "integrated_paths.csv")).set_index(["iso3", "series"])
+    pfi = outlook.pricing_inputs(wide.iso3, YEARS)
+    pcodes = [c for c, *_ in outlook.PF_PAR] + [c for c, _ in outlook.PF_REF]
+    ppaths = ["co2b", "co2n", "gdpusd"]
 
     wb = openpyxl.load_workbook(path)
 
@@ -80,7 +84,8 @@ def add(path, panel_long):
     cols = (["iso3", "country", "income", "model", "model_reason", "status", "alt_model",
              "dsf_capacity", "dsf_ci", "dsf_rating_base", "dsf_rating_programme"] + dcodes + acodes +
             [f"{p}_{y}" for p, *_ in paths for y in YEARS] +
-            [f"dsf{x}{j}_{y}" for j in range(len(DSFK)) for x in "bpt" for y in DSFY])
+            [f"dsf{x}{j}_{y}" for j in range(len(DSFK)) for x in "bpt" for y in DSFY] +
+            pcodes + [f"{p}_{y}" for p in ppaths for y in YEARS])
     for j, c in enumerate(cols, 1):
         x = wi.cell(1, j, c); x.font = font(8, True, "FFFFFF"); x.fill = HDR
     lv = long.set_index(["iso3", "indicator", "year"]).value
@@ -103,6 +108,8 @@ def add(path, panel_long):
             for x, ser in zip("bpt", ("dsf_base", "dsf_prog", "dsf_thr")):
                 key = (iso, f"{ser}|{k_}")
                 vals += [pa[str(y)].get(key) if key in pa.index else None for y in DSFY]
+        vals += [pfi.at[iso, c] for c in pcodes] + [pfi.at[iso, f"{p}_{y}"] if f"{p}_{y}" in pfi else None
+                                                     for p in ppaths for y in YEARS]
         for j, v in enumerate(vals, 1):
             v = None if (isinstance(v, float) and np.isnan(v)) else v
             wi.cell(i, j, v).font = font(8)
@@ -116,7 +123,9 @@ def add(path, panel_long):
     for j, (h, w) in enumerate([("Name", 18), ("Value", 10), ("Description", 72), ("Source", 60)], 1):
         x = wa.cell(1, j, h); x.font = font(9, True, "FFFFFF"); x.fill = HDR
         wa.column_dimensions[get_column_letter(j)].width = w
-    for i, (n, v, lab, src) in enumerate(dr.PARAMS, 2):
+    # p_pricing is replaced by the carbon pricing levers on the Fiscal outlook sheet
+    prm = [x for x in dr.PARAMS if x[0] != "p_pricing"] + outlook.PF_PRIORS
+    for i, (n, v, lab, src) in enumerate(prm, 2):
         wa.cell(i, 1, n).font = font(9, True)
         c = wa.cell(i, 2, v); c.fill = YEL; c.font = font(10, True, "0000FF"); c.border = BOX
         wa.cell(i, 3, lab).font = font(9); wa.cell(i, 4, src).font = font(9, color=MUT)
@@ -138,7 +147,7 @@ def add(path, panel_long):
     cell("Row of the country in Macro_inputs", "m_row",
          f"=MATCH(Dashboard!$C$4,{rng('country')},0)", "0")
     # INDEX on an empty cell returns 0, not blank: test for blank first (the dashboard's rule)
-    for c in dcodes + acodes:
+    for c in dcodes + acodes + pcodes:
         ix = f"INDEX({rng(c)},m_row)"
         cell(f"input: {c}", f"i_{c}", f'=IF({ix}="","",{ix})')
     I = lambda c: f"i_{c}"
@@ -182,25 +191,32 @@ def add(path, panel_long):
     # ---- Macro_model: the recursion -----------------------------------------------------
     r += 2
     H0 = r
-    BASE = ["year", "t", "dis", "tfp", "rents", "cap", "spend", "rev"]
-    SV = ["KG", "K", "Y", "Kstar", "GDP", "P", "grants", "revenue", "tr", "prim", "interest", "D", "Dk", "ratio", "rc", "chtm"]
+    BASE = ["year", "t", "dis", "tfp", "rents", "cap", "spend", "dtax", "ramp", "cpT", "cpF", "cpE", "co2", "crev"]
+    LEV = ["newtax", "crev", "rebate", "green", "newpi", "newoth"]          # outlook.recursion_extra
+    SV = (["KG", "K", "Y", "Kstar", "GDP", "P", "grants", "revenue", "tr", "prim", "interest", "D", "Dk", "ratio", "rc",
+           "chtm"] + LEV)
     DEV = ["gdp_dev_prog", "gdp_vs_2024_P", "gdp_vs_2024_B", "debt_diff_pp", "chtm_dev_prog", "tr_diff"]
     CH = ["ch_gdp_P", "ch_gdp_B", "ch_gdp_py", "ch_gdp_pyb", "ch_gdp_alt", "ch_debt_P", "ch_debt_B", "ch_debt_py",
           "ch_debt_pyb", "ch_debt_alt",
-          "ch_tr_P", "ch_tr_B", "ch_prog", "ch_rev", "ch_rents"]
-    CHL = {"ch_gdp_P": "Simple model, programme", "ch_gdp_B": "Simple model, baseline",
+          "ch_tr_P", "ch_tr_B", "ch_prog", "ch_rev", "ch_rents",
+          "o_rev_P", "o_exp_P", "o_rev_B", "o_exp_B", "o_bal_P", "o_bal_B", "o_newtax", "o_crev", "o_grn", "o_newsp"]
+    CHL = {"ch_gdp_P": "Simple model, policy", "ch_gdp_B": "Simple model, baseline",
            "ch_gdp_py": "Integrated run, programme", "ch_gdp_pyb": "Integrated run, baseline",
            "ch_gdp_alt": "Other model, programme", "ch_debt_alt": "Other model, programme",
-           "ch_debt_P": "Simple model, programme", "ch_debt_B": "Simple model, baseline",
+           "ch_debt_P": "Simple model, policy", "ch_debt_B": "Simple model, baseline",
            "ch_debt_py": "Integrated run, programme", "ch_debt_pyb": "Integrated run, baseline",
-           "ch_tr_P": "Transfers, programme", "ch_tr_B": "Transfers, baseline",
-           "ch_prog": "Programme spending", "ch_rev": "Pricing revenue", "ch_rents": "Fossil rents"}
+           "ch_tr_P": "Transfers, policy", "ch_tr_B": "Transfers, baseline",
+           "ch_prog": "Programme spending", "ch_rev": "Carbon tax revenue", "ch_rents": "Fossil rents",
+           "o_rev_P": "Revenue, policy", "o_exp_P": "Expenditure, policy", "o_rev_B": "Revenue, baseline",
+           "o_exp_B": "Expenditure, baseline", "o_bal_P": "Balance, policy", "o_bal_B": "Balance, baseline",
+           "o_newtax": "New taxes", "o_crev": "Carbon tax revenue", "o_grn": "Green public investment",
+           "o_newsp": "New public investment + other spending"}
     MC = BASE + [f"B_{v}" for v in SV] + [f"P_{v}" for v in SV] + DEV + CH
     M = {c: get_column_letter(j + 2) for j, c in enumerate(MC)}         # model starts in column B
     for c in MC:
         x = wm[f"{M[c]}{H0}"]; x.value = CHL.get(c, c); x.font = font(8, True, "FFFFFF"); x.fill = HDR
         x.alignment = Alignment(wrap_text=True)
-    wm.cell(H0, 1, "Model, 2024-2050 (B = baseline, P = programme)").font = font(9, True)
+    wm.cell(H0, 1, "Model, 2024-2050 (B = baseline, P = policy: programme + levers)").font = font(9, True)
     R0 = H0 + 1
     py = lambda p, rr: f'INDEX(Macro_inputs!${IC[p + "_" + str(Y0)]}$2:${IC[p + "_" + str(Y1)]}${NI},m_row,$C{rr}+1)'
     for t in range(T):
@@ -209,8 +225,9 @@ def add(path, panel_long):
              "dis": f"=IF(AND(p_dis_year>0,$B{rr}=p_dis_year),1,0)",
              "tfp": f"=IF(AND(p_dis_year>0,$B{rr}>=p_dis_year),1-p_eps_a*p_rho_a^($B{rr}-p_dis_year),1)",
              "rents": f"=c_rents0*(1-p_rent_decline*MIN(1,$C{rr}/{Y1 - Y0}))",
-             "cap": f"={py('cap', rr)}/100", "spend": f"={py('spend', rr)}/100", "rev": f"={py('rev', rr)}/100"}
-        for X, on in (("B", "0"), ("P", "p_programme")):
+             "cap": f"={py('cap', rr)}/100", "spend": f"={py('spend', rr)}/100"}
+        v.update(outlook.shared_columns(py, M, rr, t))
+        for X, on, L in (("B", "0", "0"), ("P", "p_programme", "1")):
             c = lambda var: f"{M[X + '_' + var]}{rr}"
             pr = lambda var: f"{M[X + '_' + var]}{p}"
             if t == 0:
@@ -220,25 +237,29 @@ def add(path, panel_long):
                           f"{X}_interest": "=c_int0", f"{X}_D": "=c_D0", f"{X}_Dk": "=c_Dk0",
                           f"{X}_ratio": f"={c('D')}/{c('GDP')}", f"{X}_rc": "=c_rstar",
                           f"{X}_chtm": f"=(1-c_tax)*(1-p_alpha)*{c('Y')}+{c('tr')}"})
+                v.update({f"{X}_{k}": "=0" for k in LEV})
                 continue
             KGd = f"{pr('KG')}*(1-p_eps_g*${M['dis']}{rr})"; Kd = f"{pr('K')}*(1-p_eps_k*${M['dis']}{rr})"
             v.update({
                 f"{X}_Y": f"=c_A*${M['tfp']}{rr}*({KGd})^c_psi*({Kd})^p_alpha",
-                f"{X}_Kstar": f"=p_alpha*(1-c_tax)*{c('Y')}/(c_rstar+p_delta)",
+                f"{X}_Kstar": f"=p_alpha*((1-c_tax)*{c('Y')}-f_tax_cap*({c('newtax')}+{c('crev')}))/(c_rstar+p_delta)",
                 f"{X}_K": f"={Kd}+p_lambda_k*({c('Kstar')}-{Kd})",
                 f"{X}_P": f"={on}*(${M['cap']}{rr}+${M['spend']}{rr})",
-                f"{X}_KG": f"=(1-p_delta_g)*{KGd}+c_s*(c_ig+{on}*${M['cap']}{rr})",
+                f"{X}_KG": f"=(1-p_delta_g)*{KGd}+c_s*(c_ig+{on}*${M['cap']}{rr}+{c('newpi')}+{c('green')})",
                 f"{X}_GDP": f"={c('Y')}+${M['rents']}{rr}",
                 f"{X}_grants": f"=c_grants0+p_sh_grant*{c('P')}",
-                f"{X}_revenue": f"=c_tax*{c('Y')}+p_gov_take*${M['rents']}{rr}+{c('grants')}+{on}*p_pricing*${M['rev']}{rr}",
-                f"{X}_tr": f"=c_trbar-c_lam_f*({pr('D')}/{pr('GDP')}-c_ratio0)",
-                f"{X}_prim": f"=c_g+c_ig+{c('P')}+{c('tr')}-{c('revenue')}",
+                f"{X}_revenue": f"=c_tax*{c('Y')}+{c('newtax')}+{c('crev')}+p_gov_take*${M['rents']}{rr}+{c('grants')}",
+                f"{X}_tr": f"=c_trbar-f_rule*c_lam_f*({pr('D')}/{pr('GDP')}-c_ratio0)",
+                f"{X}_prim": (f"=c_g+c_ig+{c('P')}+{c('newpi')}+{c('newoth')}+{c('green')}+{c('rebate')}"
+                              f"+{c('tr')}-{c('revenue')}"),
                 f"{X}_interest": f"=p_rk*{pr('Dk')}+{pr('rc')}*({pr('D')}-{pr('Dk')})",
                 f"{X}_D": f"={pr('D')}+{c('interest')}+{c('prim')}",
                 f"{X}_Dk": f"=c_Dk0+({pr('Dk')}-c_Dk0)*(1-p_amort)+p_sh_conc*{c('P')}",
                 f"{X}_ratio": f"={c('D')}/{c('GDP')}",
                 f"{X}_rc": f"=c_rstar+p_eta*MAX(0,{c('ratio')}-c_ratio0)",
-                f"{X}_chtm": f"=(1-c_tax)*(1-p_alpha)*{c('Y')}+{c('tr')}"})
+                f"{X}_chtm": (f"=(1-c_tax)*(1-p_alpha)*{c('Y')}+{c('tr')}+{c('rebate')}"
+                              f"-(1-p_alpha)*({c('newtax')}+{c('crev')})")})
+            v.update({f"{X}_{k}": f for k, f in outlook.recursion_extra(c, pr, L, M, rr).items()})
         m = lambda col, row=rr: f"{M[col]}{row}"
         v.update({
             "gdp_dev_prog": f"=({m('P_GDP')}/{m('B_GDP')}-1)*100",
@@ -257,8 +278,17 @@ def add(path, panel_long):
             "ch_debt_py": f'=IFERROR(IF({py("pyd", rr)}="",NA(),{py("pyd", rr)}),NA())',
             "ch_debt_pyb": f'=IFERROR(IF({py("pydb", rr)}="",NA(),{py("pydb", rr)}),NA())',
             "ch_tr_P": f"={m('P_tr')}*100", "ch_tr_B": f"={m('B_tr')}*100",
-            "ch_prog": f"={m('P_P')}*100", "ch_rev": f"=p_programme*p_pricing*{m('rev')}*100",
+            "ch_prog": f"={m('P_P')}*100", "ch_rev": f"={m('P_crev')}/{m('P_GDP')}*100",
             "ch_rents": f"={m('rents')}*100"})
+        for X in "PB":
+            exp = (f"c_g+c_ig+{m(X + '_P')}+{m(X + '_newpi')}+{m(X + '_newoth')}+{m(X + '_green')}+{m(X + '_rebate')}"
+                   f"+{m(X + '_tr')}+{m(X + '_interest')}")
+            v.update({f"o_rev_{X}": f"={m(X + '_revenue')}/{m(X + '_GDP')}*100",
+                      f"o_exp_{X}": f"=({exp})/{m(X + '_GDP')}*100",
+                      f"o_bal_{X}": f"=-({m(X + '_prim')}+{m(X + '_interest')})/{m(X + '_GDP')}*100"})
+        v.update({"o_newtax": f"={m('P_newtax')}/{m('P_GDP')}*100", "o_crev": f"={m('P_crev')}/{m('P_GDP')}*100",
+                  "o_grn": f"=(p_programme*{m('cap')}+{m('P_green')})/{m('P_GDP')}*100",
+                  "o_newsp": f"=({m('P_newpi')}+{m('P_newoth')})/{m('P_GDP')}*100"})
         for col in MC:
             x = wm[f"{M[col]}{rr}"]; x.value = v[col]; x.font = font(8)
             if col not in ("year", "t", "dis"):
@@ -341,9 +371,10 @@ def add(path, panel_long):
         "How the two differ. The integrated run solves the whole path at once with forward-looking savers and lets the consumption tax and transfers respond; "
         "GIMF-lite (most upper-middle and high-income countries) also has energy savings, private investment and the exchange rate. The simple model is DIGNAD-type "
         "for every country: each year follows from the last, private capital closes p_lambda_k of the gap to its desired level, one fiscal instrument (transfers).",
-        "Scenarios. Baseline: no programme; fossil rents still fall (a global transition). Programme: NMIM's incremental budget need (capital builds public capital; "
-        "land-use and non-CO2 spending does not), financed by grants (p_sh_grant), concessional loans (p_sh_conc) and commercial debt, less earmarked pricing revenue (p_pricing).",
-        "Try: p_dis_year = 2030 for a disaster; p_pricing = 0 to drop the pricing revenue; p_sh_grant = 0.5 for more grants; p_programme = 0 to switch the programme off.",
+        "Scenarios. Baseline: no new measures; fossil rents still fall (a global transition). Policy: NMIM's incremental budget need (capital builds public capital; "
+        "land-use and non-CO2 spending does not), financed by grants (p_sh_grant), concessional loans (p_sh_conc) and commercial debt, plus the levers on the "
+        "Fiscal outlook sheet: new taxes and spending, and carbon pricing (by default PriceFeasibility's feasible hybrid, as in the integrated run).",
+        "Try: p_dis_year = 2030 for a disaster; carbon pricing mode None to drop the pricing revenue; p_sh_grant = 0.5 for more grants; p_programme = 0 to switch the programme off.",
         "Four inputs are income-group defaults until they are in the dashboard: public investment, return on public capital, hand-to-mouth share, grants (Macro_inputs).",
     ]
     for t_ in notes:
@@ -428,10 +459,21 @@ def add(path, panel_long):
         ch.x_axis.delete = False; ch.y_axis.delete = False
         wd.add_chart(ch, anchor)
 
-    extra = [wb[n] for n in ("DSA", "Macro_assumptions", "Macro_model", "Macro_inputs")]
+    # front page: Fiscal outlook, with the country picker; the Dashboard follows it
+    wo = outlook.add_sheets(wb, dict(M=M, R0=R0, RL=RL, H0=H0, MC=MC, wm=wm, rng=rng,
+                                     last_dash=wb["Data_wide"].max_row))
+    db = wb["Dashboard"]
+    db.data_validations.dataValidation = [d for d in db.data_validations.dataValidation if "C4" not in str(d.sqref)]
+    db["C4"] = "='Fiscal outlook'!$C$5"
+    db["B7"] = "Pick the country on the Fiscal outlook sheet. \u25cf marks the headline indicator for each block."
+
+    extra = [wb[n] for n in ("DSA", "Pricing", "Macro_assumptions", "Macro_model", "Macro_inputs")]
     rest = [ws for ws in wb._sheets if ws not in extra]
     k = rest.index(wv) + 1
     wb._sheets = rest[:k] + extra + rest[k:]
+    wb.active = wb._sheets.index(wo)
+    for ws in wb._sheets:
+        ws.sheet_view.tabSelected = ws is wo
     wb.calculation.fullCalcOnLoad = True
     wb.save(path)
     print(f"macro_live: Macro sheets for {len(wide)} countries")
