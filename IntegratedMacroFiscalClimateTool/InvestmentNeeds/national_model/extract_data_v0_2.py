@@ -34,7 +34,8 @@ import numpy as np, pandas as pd, openpyxl
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
 DASH = os.path.join(ROOT, "TaxMacroFiscalDashboard", "build")
-MVP = os.path.join(ROOT, "CPAT_excel_not_master", "mitigation_copypaste", "data")
+REPO = os.path.abspath(os.path.join(ROOT, ".."))               # repository root: CPAT, CBAM
+MVP = os.path.join(REPO, "CPAT_excel_not_master", "mitigation_copypaste", "data")
 OUT = os.path.join(HERE, "data")
 os.makedirs(OUT, exist_ok=True)
 YEARS = [2021, 2022, 2023, 2024]
@@ -184,7 +185,7 @@ def _n(s): return re.sub(r"[^a-z]", "", unicodedata.normalize("NFKD", str(s)).en
 name2iso = {_n(r["name"]): r["iso"] for _, r in ct.iterrows()}
 name2iso.update({_n(k): v for k, v in {"Iran": "IRN", "Russia": "RUS", "South Korea": "KOR", "Taiwan": "TWN",
                  "Viet Nam": "VNM", "Venezuela": "VEN", "Egypt": "EGY", "Türkiye": "TUR", "Libya": "LBY"}.items()})
-ws = openpyxl.load_workbook(os.path.join(ROOT, "CBAMPolicyTool", "CBAM_Policy_Tool_global_v1.0.xlsx"),
+ws = openpyxl.load_workbook(os.path.join(REPO, "CBAMPolicyTool", "CBAM_Policy_Tool_global_v1.0.xlsx"),
                             read_only=True, data_only=True)["Country data"]
 cr = list(ws.iter_rows(values_only=True))
 hdr = cr[3]

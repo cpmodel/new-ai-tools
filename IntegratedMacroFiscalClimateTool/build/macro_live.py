@@ -24,7 +24,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl.workbook.defined_name import DefinedName
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
+ROOT = os.path.abspath(os.path.join(HERE, ".."))           # IntegratedMacroFiscalClimateTool/
 MFM = os.path.join(ROOT, "MacroFiscalModels")
 sys.path.insert(0, os.path.join(MFM, "ExcelDIGNAD"))
 import build_dignad_excel as dr                                 # noqa: E402  (the DIGNAD-R model)
