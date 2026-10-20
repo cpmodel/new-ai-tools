@@ -1,2 +1,5 @@
 __pycache__/
 *.pyc
+
+# generated dashboard workbook (built by 2_build_tool.bat / build_dashboard.py; not committed)
+TaxMacroFiscalDashboard/build/output/Global_fiscal_indicators.xlsx
