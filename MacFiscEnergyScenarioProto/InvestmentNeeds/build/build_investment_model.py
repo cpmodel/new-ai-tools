@@ -46,7 +46,7 @@ from openpyxl.worksheet.datavalidation import DataValidation
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
-DASH = os.path.join(ROOT, "TaxMacroFiscalDashboard", "build")
+DASH = os.path.join(ROOT, "..", "TaxMacroFiscalDashboard", "build")       # at the repository root
 OUT_XLSX = os.path.join(ROOT, "InvestmentNeeds", "Mitigation_Investment_Needs_v1.1.xlsx")
 DAM_F = os.path.join(ROOT, "InvestmentNeeds", "raw_data", "ctryprem.xlsx")
 WEO_F = os.path.join(DASH, "raw_data",

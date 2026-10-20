@@ -19,7 +19,7 @@ import numpy as np
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-PANEL = os.path.join(HERE, "..", "TaxMacroFiscalDashboard", "build", "output", "global_data_wide.csv")
+PANEL = os.path.join(HERE, "..", "..", "TaxMacroFiscalDashboard", "build", "output", "global_data_wide.csv")
 
 INCOME = ["Low income", "Lower middle income", "Upper middle income", "High income"]
 # income-group defaults (author's assumptions unless a source is named), LIC / LMIC / UMIC / HIC

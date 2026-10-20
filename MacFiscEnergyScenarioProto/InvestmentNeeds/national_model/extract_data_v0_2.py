@@ -33,8 +33,8 @@ import numpy as np, pandas as pd, openpyxl
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
-DASH = os.path.join(ROOT, "TaxMacroFiscalDashboard", "build")
-REPO = os.path.abspath(os.path.join(ROOT, ".."))               # repository root: CPAT, CBAM
+REPO = os.path.abspath(os.path.join(ROOT, ".."))               # repository root: dashboard, CPAT, CBAM
+DASH = os.path.join(REPO, "TaxMacroFiscalDashboard", "build")
 MVP = os.path.join(REPO, "CPAT_excel_not_master", "mitigation_copypaste", "data")
 OUT = os.path.join(HERE, "data")
 os.makedirs(OUT, exist_ok=True)

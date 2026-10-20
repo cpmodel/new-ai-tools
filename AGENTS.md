@@ -10,9 +10,10 @@ fiscal and climate-policy analysis, organized by project.
 - `README.md` — repository structure and project summaries.
 - `SETUP.md` — environment requirements, build steps, and run-process specs.
 - `CPAT_excel/`, `CPAT_coded/`, `CBAMPolicyTool/`, `ExciseDiagnostic/`,
-  `IntegratedMacroFiscalClimateTool/` — project folders. The integrated tool holds its
-  source models as subfolders: `TaxMacroFiscalDashboard/`, `InvestmentNeeds/`,
-  `MacroFiscalModels/`, `PriceFeasibility/`.
+  `TaxMacroFiscalDashboard/`, `MacFiscEnergyScenarioProto/` — project folders. The Macro-Fiscal-Energy-Scenario
+  Tool (`MacFiscEnergyScenarioProto/`) holds its source models as subfolders: `InvestmentNeeds/`,
+  `MacroFiscalModels/`, `PriceFeasibility/`; it reads the dashboard panel from
+  `TaxMacroFiscalDashboard/build/`, which is the master for the indicators.
 - For CPAT-Excel tasks, follow `CPAT_excel/AGENTS.md` and the documents it
   points to (`README.md`, `NORMS.md`, `CAVEATS.md`, `TODO.md` in that folder).
 

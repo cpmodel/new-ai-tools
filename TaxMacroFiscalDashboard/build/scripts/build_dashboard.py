@@ -27,7 +27,7 @@ OUT = os.path.join(os.path.abspath(_args.out), "")
 CONFIG = os.path.join(os.path.abspath(_args.config), "")
 # Optional per-tool overrides in <config>/tool.json: version, file_stem, title, subtitle,
 # readme_replace {heading: text} and readme_add [[heading, text], ...]. This dashboard has
-# none and keeps the defaults; IntegratedMacroFiscalClimateTool/ uses it to build its own tool from this script.
+# none and keeps the defaults; MacFiscEnergyScenarioProto/ uses it to build its own tool from this script.
 TOOL = json.load(open(CONFIG + "tool.json")) if os.path.exists(CONFIG + "tool.json") else {}
 VERSION = TOOL.get("version", VERSION)
 F = "Arial"; INK = "0E1B2A"; ACC = "C05621"; MUT = "5A6B7B"

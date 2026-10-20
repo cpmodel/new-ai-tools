@@ -2,18 +2,18 @@
 
 This file consolidates the environment requirements, build instructions, and run
 processes that were previously spread across subfolder `README` files
-(`IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/README.md`, `ExciseDiagnostic/README.txt`) and their
+(`TaxMacroFiscalDashboard/build/README.md`, `ExciseDiagnostic/README.txt`) and their
 associated `requirements.txt` / `r_dependencies.R` files.
 
 ---
 
-## 1. IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build — Global Fiscal Indicators pipeline
+## 1. TaxMacroFiscalDashboard/build — Global Fiscal Indicators pipeline
 
 Self-contained. No network access required to build (beyond the optional source
 refresh), no API keys, no hardcoded paths.
 
 ```
-IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/
+TaxMacroFiscalDashboard/build/
   config/
     indicators.csv        THE definition: 80 indicators, 12 blocks, one row each
     sources.csv            source metadata (coverage is derived, not stored)
@@ -36,7 +36,7 @@ IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/
 
 ### Requirements
 
-**Python** (`IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/requirements.txt`):
+**Python** (`TaxMacroFiscalDashboard/build/requirements.txt`):
 
 ```
 pandas>=2.0
@@ -49,10 +49,10 @@ xlsxwriter>=3.1
 Install with:
 
 ```bash
-pip install -r IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/requirements.txt
+pip install -r TaxMacroFiscalDashboard/build/requirements.txt
 ```
 
-**R** (optional, `IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/r_dependencies.R`) — an identical
+**R** (optional, `TaxMacroFiscalDashboard/build/r_dependencies.R`) — an identical
 preprocessing pipeline for cross-checking the Python output:
 
 ```
@@ -62,12 +62,12 @@ data.table, readxl, writexl, haven
 Install with:
 
 ```bash
-Rscript IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/r_dependencies.R
+Rscript TaxMacroFiscalDashboard/build/r_dependencies.R
 ```
 
 ### Running it on Windows
 
-From `IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/`, double-click in order. Each pauses at the end
+From `TaxMacroFiscalDashboard/build/`, double-click in order. Each pauses at the end
 so you can read the output.
 
 | File | What it does |
@@ -87,7 +87,7 @@ Step 2 reads no raw data, so re-run it on its own after editing `config\indicato
 ### Running it anywhere else
 
 Paths default to the folders above, resolved relative to the script. From
-`IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/scripts/`:
+`TaxMacroFiscalDashboard/build/scripts/`:
 
 ```bash
 python build_global_indicators.py        # -> output/global_data_{long_all_years,long,wide}.csv
@@ -178,10 +178,10 @@ its share of public debt from IDS; concessional share, CPIA, remittances, reserv
 account ownership from the Climate Fiscal Risk Dashboard v1.5, copied into `raw_data/`).
 Appendix E is fiscal risk from the same dashboard (rating, rollover, external and short-term
 debt, climate-institution flags).
-Appendix D is model output read from `IntegratedMacroFiscalClimateTool/MacroFiscalModels/results/integrated_results.csv`
-(see `IntegratedMacroFiscalClimateTool/MacroFiscalModels/Docs/UserGuide_4_Integrated.md`); it is not data and is not
+Appendix D is model output read from `MacFiscEnergyScenarioProto/MacroFiscalModels/results/integrated_results.csv`
+(see `MacFiscEnergyScenarioProto/MacroFiscalModels/Docs/UserGuide_4_Integrated.md`); it is not data and is not
 scored. Build order after a raw-data change: build the panel, run
-`python3 IntegratedMacroFiscalClimateTool/MacroFiscalModels/integrated.py --all`, build the panel again, build the workbook.
+`python3 MacFiscEnergyScenarioProto/MacroFiscalModels/integrated.py --all`, build the panel again, build the workbook.
 
 ### Ground rules baked in
 
@@ -268,20 +268,20 @@ override the master file.
 Requirements: Python with `pandas`, `numpy` and `openpyxl`.
 
 ```bash
-python IntegratedMacroFiscalClimateTool/InvestmentNeeds/build/build_investment_model.py
+python MacFiscEnergyScenarioProto/InvestmentNeeds/build/build_investment_model.py
 ```
 
 Inputs, all in the repository:
-- `IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/output/global_data_wide.csv` and
+- `TaxMacroFiscalDashboard/build/output/global_data_wide.csv` and
   `imffossilfuelsubsidiesdata_sheets.xlsx` (written by the dashboard pipeline, step 1)
-- the WEO and Steffen et al. files in `IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/raw_data/`
-- optional: `IntegratedMacroFiscalClimateTool/InvestmentNeeds/raw_data/ctryprem.xlsx` (Damodaran)
+- the WEO and Steffen et al. files in `TaxMacroFiscalDashboard/build/raw_data/`
+- optional: `MacFiscEnergyScenarioProto/InvestmentNeeds/raw_data/ctryprem.xlsx` (Damodaran)
 
-Then, optionally, `python IntegratedMacroFiscalClimateTool/InvestmentNeeds/build/run_sensitivity.py` (needs LibreOffice;
-about a minute per case) and `python IntegratedMacroFiscalClimateTool/InvestmentNeeds/build/make_summary_image.py`
+Then, optionally, `python MacFiscEnergyScenarioProto/InvestmentNeeds/build/run_sensitivity.py` (needs LibreOffice;
+about a minute per case) and `python MacFiscEnergyScenarioProto/InvestmentNeeds/build/make_summary_image.py`
 (needs `matplotlib`).
 
-The output is `IntegratedMacroFiscalClimateTool/InvestmentNeeds/Mitigation_Investment_Needs_v1.1.xlsx`. It is
+The output is `MacFiscEnergyScenarioProto/InvestmentNeeds/Mitigation_Investment_Needs_v1.1.xlsx`. It is
 formula-driven and Excel recalculates it on open. If the dashboard panel is rebuilt,
 re-run this script to pick up the new data.
 
@@ -290,10 +290,10 @@ re-run this script to pick up the new data.
 Requirements: Python with `pandas`, `numpy`, `openpyxl`; LibreOffice for `check_v0_2.py`.
 
 ```bash
-python IntegratedMacroFiscalClimateTool/InvestmentNeeds/national_model/extract_data_v0_2.py
-python IntegratedMacroFiscalClimateTool/InvestmentNeeds/national_model/nmim_v0_2.py
-python IntegratedMacroFiscalClimateTool/InvestmentNeeds/national_model/build_workbook_v0_2.py
-python IntegratedMacroFiscalClimateTool/InvestmentNeeds/national_model/check_v0_2.py
+python MacFiscEnergyScenarioProto/InvestmentNeeds/national_model/extract_data_v0_2.py
+python MacFiscEnergyScenarioProto/InvestmentNeeds/national_model/nmim_v0_2.py
+python MacFiscEnergyScenarioProto/InvestmentNeeds/national_model/build_workbook_v0_2.py
+python MacFiscEnergyScenarioProto/InvestmentNeeds/national_model/check_v0_2.py
 ```
 
 The long results file (`results/nmim_results_v0_2.csv`, ~8 MB) is regenerated by the
@@ -301,28 +301,28 @@ engine and not committed.
 
 ---
 
-## 3b. IntegratedMacroFiscalClimateTool — Integrated MF-C tool
+## 3b. MacFiscEnergyScenarioProto — Macro-Fiscal-Energy-Scenario Tool
 
 Requirements: Python with `pandas`, `numpy`, `openpyxl`.
 
 ```bash
-python3 IntegratedMacroFiscalClimateTool/build/build_mfc_tool.py   # -> IntegratedMacroFiscalClimateTool/Integrated_MFC_Tool_v0.6.xlsx
+python3 MacFiscEnergyScenarioProto/build/build_mfc_tool.py   # -> MacFiscEnergyScenarioProto/Macro_Fiscal_Energy_Scenario_Tool_v0.7.xlsx
 ```
 
-It reads the dashboard panel and config (`IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/output/`, `config/`),
-`IntegratedMacroFiscalClimateTool/InvestmentNeeds/national_model/results/nmim_summary_v0_2.csv` and
-`IntegratedMacroFiscalClimateTool/MacroFiscalModels/results/integrated_{results,paths}.csv`, the cached values of
-`IntegratedMacroFiscalClimateTool/InvestmentNeeds/Mitigation_Investment_Needs_v1.1.xlsx` (Appendix F cross-check; recalculate it
+It reads the dashboard panel and config (`TaxMacroFiscalDashboard/build/output/`, `config/`),
+`MacFiscEnergyScenarioProto/InvestmentNeeds/national_model/results/nmim_summary_v0_2.csv` and
+`MacFiscEnergyScenarioProto/MacroFiscalModels/results/integrated_{results,paths}.csv`, the cached values of
+`MacFiscEnergyScenarioProto/InvestmentNeeds/Mitigation_Investment_Needs_v1.1.xlsx` (Appendix F cross-check; recalculate it
 after a rebuild) (and imports the DIGNAD-R equations from
-`IntegratedMacroFiscalClimateTool/MacroFiscalModels/ExcelDIGNAD/build_dignad_excel.py`), the
-PriceFeasibility parameters and optima (`IntegratedMacroFiscalClimateTool/PriceFeasibility/output/`)
-NMIM's workbook (`IntegratedMacroFiscalClimateTool/InvestmentNeeds/national_model/NMIM_v0.2.xlsx`, whose
+`MacFiscEnergyScenarioProto/MacroFiscalModels/ExcelDIGNAD/build_dignad_excel.py`), the
+PriceFeasibility parameters and optima (`MacFiscEnergyScenarioProto/PriceFeasibility/output/`)
+NMIM's workbook (`MacFiscEnergyScenarioProto/InvestmentNeeds/national_model/NMIM_v0.2.xlsx`, whose
 engine sheets `build/nmim_live.py` copies in), and runs
-`IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/scripts/build_dashboard.py` on the merged panel. Rebuild it after
+`TaxMacroFiscalDashboard/build/scripts/build_dashboard.py` on the merged panel. Rebuild it after
 rebuilding any of those (after the integrated run, section 4). Modules and how to add one:
-`IntegratedMacroFiscalClimateTool/README.md`.
+`MacFiscEnergyScenarioProto/README.md`.
 
-To check the scenario formulas (Dashboard, Fiscal outlook), `python3 IntegratedMacroFiscalClimateTool/build/outlook.py
+To check the scenario formulas (Dashboard, Fiscal outlook), `python3 MacFiscEnergyScenarioProto/build/outlook.py
 --check KEN '{"f_tax_step": 0.5, "f_cp_mode": "Feasible feebate"}'` prints the policy scenario from a
 Python copy of the equations, to compare with the workbook after setting the same levers and
 recalculating (LibreOffice: `soffice --headless --convert-to xlsx`).
@@ -334,26 +334,26 @@ recalculating (LibreOffice: `soffice --headless --convert-to xlsx`).
 Requirements: Python with `numpy`, `scipy`, `pandas`, `openpyxl`, `matplotlib`.
 
 ```bash
-cd IntegratedMacroFiscalClimateTool/MacroFiscalModels
+cd MacFiscEnergyScenarioProto/MacroFiscalModels
 python3 run_demo.py KEN
 ```
 
-It runs the NMIM engine (`IntegratedMacroFiscalClimateTool/InvestmentNeeds/national_model/nmim_v0_2.py`, which reads
-`IntegratedMacroFiscalClimateTool/InvestmentNeeds/national_model/data/*.csv`) for the chosen country and writes charts and
-paths to `IntegratedMacroFiscalClimateTool/MacroFiscalModels/results/`.
+It runs the NMIM engine (`MacFiscEnergyScenarioProto/InvestmentNeeds/national_model/nmim_v0_2.py`, which reads
+`MacFiscEnergyScenarioProto/InvestmentNeeds/national_model/data/*.csv`) for the chosen country and writes charts and
+paths to `MacFiscEnergyScenarioProto/MacroFiscalModels/results/`.
 
 Integrated run (all countries, about 3 minutes), then refresh the dashboard:
 
 ```bash
-python3 IntegratedMacroFiscalClimateTool/MacroFiscalModels/integrated.py --all
-python3 IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/scripts/build_global_indicators.py
-python3 IntegratedMacroFiscalClimateTool/TaxMacroFiscalDashboard/build/scripts/build_dashboard.py
+python3 MacFiscEnergyScenarioProto/MacroFiscalModels/integrated.py --all
+python3 TaxMacroFiscalDashboard/build/scripts/build_global_indicators.py
+python3 TaxMacroFiscalDashboard/build/scripts/build_dashboard.py
 ```
 
-It reads the dashboard panel, NMIM and `IntegratedMacroFiscalClimateTool/PriceFeasibility/output/country_metrics.csv`.
+It reads the dashboard panel, NMIM and `MacFiscEnergyScenarioProto/PriceFeasibility/output/country_metrics.csv`.
 
 Standalone country tool (Excel, no Python needed to use it), rebuilt after the integrated run:
 
 ```bash
-python3 IntegratedMacroFiscalClimateTool/MacroFiscalModels/build_country_tool.py   # -> IntegratedMacroFiscalClimateTool/MacroFiscalModels/MacroFiscal_CountryTool_v0.3.xlsx
+python3 MacFiscEnergyScenarioProto/MacroFiscalModels/build_country_tool.py   # -> MacFiscEnergyScenarioProto/MacroFiscalModels/MacroFiscal_CountryTool_v0.3.xlsx
 ```

@@ -28,7 +28,7 @@ import numpy as np
 import pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-REPO = os.path.dirname(HERE)
+REPO = os.path.dirname(os.path.dirname(HERE))                  # repository root (the dashboard panel)
 PANEL = os.path.join(REPO, "TaxMacroFiscalDashboard", "build", "output", "global_data_wide.csv")
 EMBER = os.path.join(REPO, "TaxMacroFiscalDashboard", "build", "raw_data",
                      "release_generation_yearly_global.csv")

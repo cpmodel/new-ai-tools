@@ -25,7 +25,7 @@ from openpyxl.worksheet.datavalidation import DataValidation
 VERSION = "0.3"
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..", "..")
-PANEL = os.path.join(ROOT, "TaxMacroFiscalDashboard", "build", "output", "global_data_wide.csv")
+PANEL = os.path.join(ROOT, "..", "TaxMacroFiscalDashboard", "build", "output", "global_data_wide.csv")
 PATHS = os.path.join(HERE, "..", "results", "integrated_paths.csv")
 COUNTRIES = ["KEN", "SLE", "UGA", "LBR", "ETH", "RWA", "MOZ", "GHA", "SEN", "AGO", "COG", "TCD"]
 Y0, Y1 = 2024, 2050

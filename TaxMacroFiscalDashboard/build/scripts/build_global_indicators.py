@@ -627,7 +627,7 @@ for iso in ISO:
 # --- integrated scenario (Appendix D): MacroFiscalModels output, not source data ---
 # Written by MacroFiscalModels/integrated.py, which itself reads this panel's source
 # indicators only (never Appendix D), so: build the panel, run integrated.py, build again.
-INT_F = os.environ.get("INT_RESULTS", os.path.join(_here, "..", "..", "..", "MacroFiscalModels",
+INT_F = os.environ.get("INT_RESULTS", os.path.join(_here, "..", "..", "..", "MacFiscEnergyScenarioProto", "MacroFiscalModels",
                                                    "results", "integrated_results.csv"))
 if os.path.exists(INT_F):
     intr = pd.read_csv(INT_F)

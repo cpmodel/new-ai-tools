@@ -1,4 +1,4 @@
-"""Charts for the Integrated MF-C tool, styled one way: fixed colours by role, a numeric year axis
+"""Charts for the Macro-Fiscal-Energy-Scenario Tool, styled one way: fixed colours by role, a numeric year axis
 labelled every five years, legend below the plot, no axis titles (the chart title carries the unit),
 and hidden cells plotted (chart data often sits in hidden columns)."""
 from openpyxl.chart import ScatterChart, AreaChart, Reference, Series

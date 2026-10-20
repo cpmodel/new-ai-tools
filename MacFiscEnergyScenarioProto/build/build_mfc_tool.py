@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the Integrated MF-C (macro-fiscal climate) tool.
+"""Build the Macro-Fiscal-Energy-Scenario Tool (formerly the Integrated MF-C tool).
 
 The tool is the Global Fiscal Indicators dashboard with extra modules spliced in as blocks.
 Each module turns a repository model's results into rows of the dashboard's long format
@@ -11,7 +11,7 @@ so the integrated workbook reads, scores and looks exactly like the dashboard.
 Inputs : TaxMacroFiscalDashboard/build/{output/global_data_long.csv, config/}
          per module, see MODULES (now: InvestmentNeeds NMIM v0.2 summary; MacroFiscalModels
          integrated run; the DIGNAD-R equations for the live Macro sheet, see macro_live.py)
-Output : IntegratedMacroFiscalClimateTool/Integrated_MFC_Tool_v<version>.xlsx (version in config/tool.json)
+Output : MacFiscEnergyScenarioProto/Integrated_MFC_Tool_v<version>.xlsx (version in config/tool.json)
          build/output/<module>_long.csv (the module's rows, committed)
 
 To add a module: write an extract function (given the dashboard's long panel) returning long rows, add
@@ -21,8 +21,8 @@ import os, sys, shutil, subprocess
 import numpy as np, pandas as pd
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-ROOT = os.path.abspath(os.path.join(HERE, ".."))           # IntegratedMacroFiscalClimateTool/
-DASH = os.path.join(ROOT, "TaxMacroFiscalDashboard", "build")
+ROOT = os.path.abspath(os.path.join(HERE, ".."))           # MacFiscEnergyScenarioProto/
+DASH = os.path.join(ROOT, "..", "TaxMacroFiscalDashboard", "build")   # at the repository root
 INV = os.path.join(ROOT, "InvestmentNeeds")
 CONFIG = os.path.join(HERE, "config")
 OUT = os.path.join(HERE, "output")

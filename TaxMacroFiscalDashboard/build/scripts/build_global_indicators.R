@@ -535,7 +535,7 @@ emit(ISO, "climate_pfm_diagnostic_on_record", 2022, as.integer(ISO %in% UNDP_YES
 ## --- integrated scenario (Appendix D): MacroFiscalModels output, not source data --
 # Written by MacroFiscalModels/integrated.py, which reads this panel's source indicators
 # only (never Appendix D), so: build the panel, run integrated.py, build again.
-INT_F <- normalizePath(Sys.getenv("INT_RESULTS", file.path(.here, "..", "..", "..", "MacroFiscalModels",
+INT_F <- normalizePath(Sys.getenv("INT_RESULTS", file.path(.here, "..", "..", "..", "MacFiscEnergyScenarioProto", "MacroFiscalModels",
                                                         "results", "integrated_results.csv")), mustWork = FALSE)
 if (file.exists(INT_F)) {
   intr <- as.data.table(read.csv(INT_F, check.names = FALSE))

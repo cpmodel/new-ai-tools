@@ -1,4 +1,4 @@
-"""Green investment needs in the Integrated MF-C tool: the National Mitigation Investment Model
+"""Green investment needs in the Macro-Fiscal-Energy-Scenario Tool: the National Mitigation Investment Model
 (NMIM v0.2) live, for the country picked on the Dashboard.
 
 NMIM's own workbook (InvestmentNeeds/national_model/NMIM_v0.2.xlsx, built by build_workbook_v0_2.py)
