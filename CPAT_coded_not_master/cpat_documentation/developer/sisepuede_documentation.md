@@ -1,4 +1,6 @@
-# Documentation for the Sisepuede team
+# Documentation for the CDPM (formerly SiSePuede) team
+
+> **Name.** CDPM was formerly called SiSePuede (and CPM). Studies published before the change use the old name; file, repository and code names keep it too.
 
 ## Environment setup
 This project uses Conda for environment management. The instructions below show an example of how to set up the environment using Conda and the provided `environment.yml` file.

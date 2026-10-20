@@ -1,5 +1,7 @@
 # InvestmentNeeds — Mitigation (Net Zero) Investment Needs Model
 
+> **Name.** CDPM was formerly called SiSePuede (and CPM). Studies published before the change use the old name; file, repository and code names keep it too.
+
 Two models live here:
 
 - **`Mitigation_Investment_Needs_v1.1.xlsx`** — 2030 snapshot for 195 economies: group totals
@@ -28,7 +30,7 @@ lenses:
 | (c) World Bank + local co-benefits | 6% | Savings + local air-pollution co-benefits (memo: + carbon at the WB shadow price) |
 
 The method is the one set out in *Global Investment Needs for Climate Action: A Method
-Based on SISEPUEDE* (October 2026), equations 1–7. The workbook implements its Tier 3
+Based on CDPM (formerly SiSePuede)* (October 2026), equations 1–7. The workbook implements its Tier 3
 (group totals allocated to countries by drivers), with the cost of capital, savings and
 co-benefits differentiated by country.
 
@@ -57,7 +59,7 @@ fuels and fuel supply · AFOLU and nature.
      fossil generation mix (Ember) at CPAT 2024 fuel and air-pollution costs, with heat
      rates and IPCC 2006 CO2 factors; EVs replace gasoline cars per vehicle.
    - *Enabling* (grids): no benefits of their own (switch `p_grid_credit`).
-   - *Calibrated* (buildings, industry): b = 0.133, c = 0.129 (SISEPUEDE LAC) scaled by
+   - *Calibrated* (buildings, industry): b = 0.133, c = 0.129 (CDPM LAC) scaled by
      CPAT country indices.
    - *Cost per tonne* (low-emission fuels USD 100/t, AFOLU USD 50/t).
 7. **Incremental cost** = capital charge on incremental investment − savings

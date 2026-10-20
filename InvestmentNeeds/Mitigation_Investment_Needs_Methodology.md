@@ -1,5 +1,7 @@
 # Mitigation Investment Needs Model: Methodology
 
+> **Name.** CDPM was formerly called SiSePuede (and CPM). Studies published before the change use the old name; file, repository and code names keep it too.
+
 20 October 2026 · Stephen
 
 Mitigation on a net zero path needs USD 5.2 tn of investment in 2030, of which USD 1.7 tn is incremental. At the World Bank's 6% that increment costs the world a net USD 38 bn a year, about USD 41 per tonne abated; counting local co-benefits it saves USD 43 bn.
@@ -35,7 +37,7 @@ The model covers mitigation only: the investment a country needs in 2030 to be o
 | Term | Definition |
 | --- | --- |
 | Total investment (I) | All new capital in the seven mitigation sectors in 2030, including what would be built anyway. Comparable with IHLEG, IEA and Beyond the Gap. |
-| Incremental investment (dI) | I less the investment a current-policies baseline would make in the same sectors. Comparable with the CCDRs and SISEPUEDE. |
+| Incremental investment (dI) | I less the investment a current-policies baseline would make in the same sectors. Comparable with the CCDRs and CDPM (formerly SiSePuede). |
 | Capital charge | dI converted to an annual cost with the capital recovery factor at the lens rate over the asset life. |
 | Savings | Fuel and operating costs avoided each year by the incremental assets, net of their own extra operating costs. |
 | Local co-benefits | Avoided local damages each year, mainly air-pollution health costs. Public: no investor collects them. |
@@ -53,7 +55,7 @@ Countries are grouped as in IHLEG (2024): the 41 IMF advanced economies, China, 
 
 ## Core method
 
-The model is the Tier 3 version of the SISEPUEDE-based method: published group totals are shared out to countries by physical drivers, then each country's incremental capital is costed at three rates against country-specific savings and co-benefits. Equation numbers follow the method note.
+The model is the Tier 3 version of the CDPM-based method: published group totals are shared out to countries by physical drivers, then each country's incremental capital is costed at three rates against country-specific savings and co-benefits. Equation numbers follow the method note.
 
 **1. Group pools.** For each group g (advanced economies, China, other EMDCs) and sector s, the 2030 total is a published clean-energy or nature total times a sector share:
 
@@ -109,7 +111,7 @@ Two cautions. Market WACC is nominal and 6% is real; the switch p_basis = 1 defl
 
 ## Savings, co-benefits and abatement
 
-Version 1.1 replaces the single savings ratio for half the investment with physics: power and transport now derive b, c and a from each country's fuel mix, prices and pollution costs, and grids, fuels and AFOLU no longer get savings they do not produce. This was the weakest part of v1.0, where one ratio (b = 0.133, calibrated on SISEPUEDE's Latin American results) set the sign of every result.
+Version 1.1 replaces the single savings ratio for half the investment with physics: power and transport now derive b, c and a from each country's fuel mix, prices and pollution costs, and grids, fuels and AFOLU no longer get savings they do not produce. This was the weakest part of v1.0, where one ratio (b = 0.133, calibrated on CDPM's Latin American results) set the sign of every result.
 
 Each sector uses one of four methods:
 
@@ -174,13 +176,13 @@ USD bn a year for one year's 2030 investment, world, v1.1 defaults.
 - **Driver:** road fuel energy (gasoline and diesel, CPAT).
 - **Savings:** per vehicle, 15,000 km a year at 7.5 l/100 km of gasoline replaced by 0.18 kWh/km of power, plus USD 0.012/km maintenance; divided by a USD 5,000 purchase premium in 2030. Abatement nets off the grid's CO2.
 - **Example:** India saves USD 639 a vehicle a year (b = 0.128) and abates 0.17 t per USD 1,000, low because its grid is coal-heavy.
-- **Weak points:** the premium (an assumption; SISEPUEDE used USD 13,000 for 2019, IEA reports near parity in China); transit and rail are costed as if they were EVs; no congestion or crash benefits are counted.
+- **Weak points:** the premium (an assumption; CDPM used USD 13,000 for 2019, IEA reports near parity in China); transit and rail are costed as if they were EVs; no congestion or crash benefits are counted.
 
 ### Buildings and industry
 
 - **What they cover:** efficiency, heat pumps, electrification of heat; CCS in industry. 35% and 20% of end use (assumptions).
 - **Drivers:** building and industrial energy use, EJ (CPAT).
-- **Benefits:** still calibrated: b = 0.133 and c = 0.129 (SISEPUEDE LAC), moved by the country fuel-cost and air-pollution indices; a = 0.35.
+- **Benefits:** still calibrated: b = 0.133 and c = 0.129 (CDPM LAC), moved by the country fuel-cost and air-pollution indices; a = 0.35.
 - **Weak point:** these two are now the only sectors where savings rest on one region's calibration, and they produce most of the net saving. They are the first to move to engineering parameters (heat-pump and efficiency cost curves).
 
 ### Low-emission fuels and fuel supply
@@ -395,18 +397,18 @@ The workbook reproduces the method note's own Table 7 exactly, and its increment
 | Same, EMDCs | 275 / 441 | 275 / 441 | As above |
 | World total investment | USD 5,199 bn | 5,199 (pools) | Must tie exactly |
 | EMDC incremental investment | 1.4% of GDP | 1.4% of GDP | CCDR synthesis (World Bank 2023), includes adaptation |
-| Brazil incremental | 1.4% of GDP | 1.9% | SISEPUEDE LAC (Kalra et al. 2023) |
-| Mexico incremental | 1.1% of GDP | ~1% | SISEPUEDE LAC |
-| Dominican Republic incremental | 1.1% of GDP | 1.6% | SISEPUEDE LAC |
+| Brazil incremental | 1.4% of GDP | 1.9% | CDPM LAC (Kalra et al. 2023) |
+| Mexico incremental | 1.1% of GDP | ~1% | CDPM LAC |
+| Dominican Republic incremental | 1.1% of GDP | 1.6% | CDPM LAC |
 | World cost per tonne at 6% | USD 41/t | Most potential below USD 100/t, half below USD 20/t | IPCC AR6 WGIII SPM C.12.1 |
 
-The model is low against SISEPUEDE for Brazil and the Dominican Republic. SISEPUEDE covers non-capital technical costs and all of AFOLU, which this model counts only as a share of a regional pool.
+The model is low against CDPM for Brazil and the Dominican Republic. CDPM covers non-capital technical costs and all of AFOLU, which this model counts only as a share of a regional pool.
 
 The IPCC comparison is the main cross-check on the benefit side. IPCC finds that "for a smaller part of the potential, deployment leads to net cost savings" (SPM C.12.1). v1.1 now agrees in direction: a net cost of USD 38 bn a year at 6% overall, with savings in buildings, industry and transport. v1.0's large net saving did not.
 
 ## Toward a national-level global model
 
-A national model for every country is feasible, and the current workbook is its skeleton: what is missing is a physical pathway per country (module 2), which today is borrowed from group totals. Replacing the allocation with country stock-turnover modelling turns a Tier 3 estimate into a Tier 2 one for all ~190 countries, with Tier 1 (SISEPUEDE or CCDR runs) wherever those exist.
+A national model for every country is feasible, and the current workbook is its skeleton: what is missing is a physical pathway per country (module 2), which today is borrowed from group totals. Replacing the allocation with country stock-turnover modelling turns a Tier 3 estimate into a Tier 2 one for all ~190 countries, with Tier 1 (CDPM or CCDR runs) wherever those exist.
 
 ![A national model runs six modules for every country, sector and year](methodology_figures/national_model_architecture.png)
 
@@ -418,7 +420,7 @@ Module 4 should also feed back into module 2: a higher cost of capital shifts th
 
 | Tier | Where | Physical pathway from | Countries |
 | --- | --- | --- | --- |
-| 1 | Country model run exists | SISEPUEDE (18 LAC; Uganda, Morocco, Libya in progress), CCDR models | ~60 |
+| 1 | Country model run exists | CDPM (18 LAC; Uganda, Morocco, Libya in progress), CCDR models | ~60 |
 | 2 | Open data only | OSeMOSYS Global for power; stock-turnover for vehicles, buildings, industry; NGFS downscaled energy; FAO for land | ~130 |
 | 3 | Fallback | Current allocation of IHLEG/IEA group totals | Any gap |
 
@@ -432,7 +434,7 @@ Yes, in stages, with two conditions. I can write and run the whole pipeline (Pyt
 | 2. Power | Capacity build-out per country from OSeMOSYS Global or a simple least-cost merit model, with country WACC inside | OSeMOSYS Global data |
 | 3. End use | Vehicle, building and industry stock-turnover with technology costs and learning | IEA/ICCT stock data, NREL ATB, IRENA |
 | 4. AFOLU | Abatement potential and cost by country (IPCC AR6 database, FAO, Roe et al.) | Open databases |
-| 5. Integration | Annual 2025-2050 results, three lenses, Monte Carlo, Tier 1 overrides from SISEPUEDE and CCDRs | Phases 1-4 |
+| 5. Integration | Annual 2025-2050 results, three lenses, Monte Carlo, Tier 1 overrides from CDPM and CCDRs | Phases 1-4 |
 
 Phases 2 and 3 are where most of the gain is: they replace the two parameters the results are most sensitive to (power fuel displacement and end-use savings) with country stock and cost data.
 
@@ -493,7 +495,7 @@ Other limits: one year (2030) rather than a path; average rather than marginal d
 
 ## Sources
 
-- Method note: *Global Investment Needs for Climate Action: A Method Based on SISEPUEDE* (October 2026)
+- Method note: *Global Investment Needs for Climate Action: A Method Based on CDPM* (October 2026)
 - [IHLEG 3 (Bhattacharya et al. 2024)](https://www.lse.ac.uk/granthaminstitute/wp-content/uploads/2024/11/Raising-ambition-and-accelerating-delivery-of-climate-finance_Third-IHLEG-report.pdf), clean energy and nature totals
 - [IEA-IFC (2023), Scaling Up Private Finance for Clean Energy in EMDEs](https://www.iea.org/reports/scaling-up-private-finance-for-clean-energy-in-emerging-and-developing-economies/key-findings), sector shares and private share
 - [IEA World Energy Investment 2024](https://www.iea.org/reports/world-energy-investment-2024/overview-and-key-findings), 2024 clean-energy investment by group (national model calibration)

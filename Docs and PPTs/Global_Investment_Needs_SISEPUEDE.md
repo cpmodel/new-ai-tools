@@ -1,10 +1,12 @@
 ---
-title: "Global Investment Needs for Climate Action: A Method Based on SISEPUEDE"
-subtitle: "A global method for climate investment needs, built on SISEPUEDE's equations and parameterised with the most complete global estimates, evaluated at commercial rates, at World Bank rates, and at World Bank rates with co-benefits. Appendices cover SISEPUEDE, the other models and estimates, the parameters, and an annotated bibliography on financing."
+title: "Global Investment Needs for Climate Action: A Method Based on CDPM (formerly SiSePuede)"
+subtitle: "A global method for climate investment needs, built on CDPM's equations and parameterised with the most complete global estimates, evaluated at commercial rates, at World Bank rates, and at World Bank rates with co-benefits. Appendices cover CDPM, the other models and estimates, the parameters, and an annotated bibliography on financing."
 date: "October 20, 2026"
 ---
 
 # Executive summary
+
+> **Name.** CDPM was formerly called SiSePuede (and CPM). Studies published before the change use the old name; file, repository and code names keep it too.
 
 Every climate finance discussion starts with a number for investment needs. That number depends on three choices that are rarely stated:
 
@@ -12,7 +14,7 @@ Every climate finance discussion starts with a number for investment needs. That
 * which discount rate, or cost of capital, turns future flows into today's money;
 * whether benefits other than fuel savings are counted.
 
-This note sets out one global method that makes all three explicit. It uses SISEPUEDE's equations and parameters wherever SISEPUEDE has them. It then applies the method to the world.
+This note sets out one global method that makes all three explicit. It uses CDPM's equations and parameters wherever CDPM has them. It then applies the method to the world.
 
 **Which model is complete.** No single model covers every country, every sector and the cost of capital. Nine models and estimates were reviewed (Table 2 and Appendix B).
 
@@ -22,7 +24,7 @@ This note sets out one global method that makes all three explicit. It uses SISE
   * the cost of capital and co-benefits, which it reports.
 
   It is a synthesis, not a model. Energy comes from the IEA's Global Energy and Climate (GEC) model, which is proprietary. Adaptation comes from UNEP's Adaptation Gap Report.
-* **The most complete open model is SISEPUEDE (RAND and IDB).** It:
+* **The most complete open model is CDPM (RAND and IDB).** It:
   * covers every IPCC sector at country level;
   * prices costs, savings and co-benefits in one module;
   * runs about a thousand futures.
@@ -32,7 +34,7 @@ This note sets out one global method that makes all three explicit. It uses SISE
 
 The method therefore combines the strengths of each:
 
-* **Structure:** SISEPUEDE's equation (physical change times unit cost, compared with a baseline).
+* **Structure:** CDPM's equation (physical change times unit cost, compared with a baseline).
 * **Default quantities and totals:** the IHLEG and IEA.
 * **Gaps:** Beyond the Gap for infrastructure, UNEP for adaptation.
 * **Financing:** a country-and-technology cost of capital, which no open model yet has.
@@ -52,7 +54,7 @@ The method therefore combines the strengths of each:
 | China | 1.3–1.4 | Not reported |
 | EMDCs other than China | 2.3–2.5 | 6.5% |
 
-Clean energy is USD 4.8 trillion of the global total. For EMDCs other than China, the totals rise to USD 3.1–3.5 trillion by 2035. Both are total needs. The increment over what would happen anyway is smaller: 1.4–2.8% of GDP in the CCDRs and about 2% in SISEPUEDE's LAC study.
+Clean energy is USD 4.8 trillion of the global total. For EMDCs other than China, the totals rise to USD 3.1–3.5 trillion by 2035. Both are total needs. The increment over what would happen anyway is smaller: 1.4–2.8% of GDP in the CCDRs and about 2% in CDPM's LAC study.
 
 **The three lenses (Table 6).** Each figure below is for one year's investment of USD 6.5 trillion, with each item expressed as an annual flow over a 25-year asset life.
 
@@ -72,9 +74,9 @@ The gap between (a) and (c) in EMDCs is the case for de-risking and concessional
 * the co-benefits per dollar (0.129 a year);
 * the abatement per dollar (0.35 tCO2e a year per USD 1,000).
 
-All three come from SISEPUEDE's LAC results and the IEA's net zero pathway. They should be replaced, country by country, by SISEPUEDE runs. The EMDC cost of capital is the most influential input. It should come from the IEA Cost of Capital Observatory or CPI, by country and technology.
+All three come from CDPM's LAC results and the IEA's net zero pathway. They should be replaced, country by country, by CDPM runs. The EMDC cost of capital is the most influential input. It should come from the IEA Cost of Capital Observatory or CPI, by country and technology.
 
-SISEPUEDE itself needs five fixes before it can produce the method's outputs globally (Appendix A):
+CDPM itself needs five fixes before it can produce the method's outputs globally (Appendix A):
 
 1. a dual discount rate;
 2. consistent discounting of power-sector capital;
@@ -82,20 +84,20 @@ SISEPUEDE itself needs five fixes before it can produce the method's outputs glo
 4. capital recovery factors in place of straight-line charges;
 5. a separate gross capital output.
 
-Appendix A covers SISEPUEDE. Appendix B covers the other models and estimates, Appendix C the full parameter set, and Appendix D the verification notes. Appendix E is the annotated bibliography on financing.
+Appendix A covers CDPM. Appendix B covers the other models and estimates, Appendix C the full parameter set, and Appendix D the verification notes. Appendix E is the annotated bibliography on financing.
 
 
 # Why the investment-needs number differs between studies
 
 Four definitional choices explain most of the spread in published numbers. They matter more than model differences.
 
-**Total or incremental.** Beyond the Gap and the IEA report *total* investment: all new capital needed to reach a goal. The CCDRs, Bhattacharya et al. and SISEPUEDE report *incremental* investment: the extra spending above a baseline that would happen anyway. Incremental numbers are typically a quarter to a half of totals. The CCDR synthesis makes the point itself: its USD 574 billion a year is lower than the IHLEG's USD 1.2–1.7 trillion because it counts only the climate increment.
+**Total or incremental.** Beyond the Gap and the IEA report *total* investment: all new capital needed to reach a goal. The CCDRs, Bhattacharya et al. and CDPM report *incremental* investment: the extra spending above a baseline that would happen anyway. Incremental numbers are typically a quarter to a half of totals. The CCDR synthesis makes the point itself: its USD 574 billion a year is lower than the IHLEG's USD 1.2–1.7 trillion because it counts only the climate increment.
 
-**Capital only or net of savings.** Beyond the Gap counts capital and reports operations and maintenance separately. The IEA and McKinsey count capital only. SISEPUEDE counts technical costs that mix capital, operations and avoided costs, then sets them against fuel savings. Its "investment" line is therefore closer to a net incremental cost.
+**Capital only or net of savings.** Beyond the Gap counts capital and reports operations and maintenance separately. The IEA and McKinsey count capital only. CDPM counts technical costs that mix capital, operations and avoided costs, then sets them against fuel savings. Its "investment" line is therefore closer to a net incremental cost.
 
-**The discount rate.** A sum of future costs depends heavily on the rate. Beyond the Gap uses 6% (World Bank). The LAC SISEPUEDE study uses 7%. The Costa Rica study used 5%. The IEA embeds technology- and country-specific WACCs. Most others state no rate.
+**The discount rate.** A sum of future costs depends heavily on the rate. Beyond the Gap uses 6% (World Bank). The LAC CDPM study uses 7%. The Costa Rica study used 5%. The IEA embeds technology- and country-specific WACCs. Most others state no rate.
 
-**What counts as a benefit.** SISEPUEDE counts fuel savings, avoided air pollution, congestion, crashes, ecosystem services and diet-related health. The IHLEG (2024) puts co-benefits and avoided costs at 15–18% of global GDP in 2030. Most other studies count none.
+**What counts as a benefit.** CDPM counts fuel savings, avoided air pollution, congestion, crashes, ecosystem services and diet-related health. The IHLEG (2024) puts co-benefits and avoided costs at 15–18% of global GDP in 2030. Most other studies count none.
 
 Table 1 sets out how each of the major estimates makes these choices.
 
@@ -103,7 +105,7 @@ Table 1 sets out how each of the major estimates makes these choices.
 
 | Study | What is counted | Scope | Discount rate / cost of capital | Co-benefits |
 |---|---|---|---|---|
-| SISEPUEDE LAC (Kalra et al. 2023) | Incremental technical cost vs baseline; set against savings | 18 LAC countries, 2025–2050 | 7% flat, applied after the model run | Yes: pollution, crashes, congestion, ecosystems, diet health |
+| CDPM LAC (Kalra et al. 2023) | Incremental technical cost vs baseline; set against savings | 18 LAC countries, 2025–2050 | 7% flat, applied after the model run | Yes: pollution, crashes, congestion, ecosystems, diet health |
 | Beyond the Gap (Rozenberg & Fay 2019) | Total new capital; O&M separate | LMICs, infrastructure, 2015–2030 | 6% real, flat | No |
 | CCDR synthesis (World Bank 2023) | Incremental climate investment | 42 economies, to 2030 | Not stated; varies by country model | No (country-level in places) |
 | Bhattacharya et al. (2022) | Incremental spending above 2019 | EMDEs other than China, 4 areas | Not stated | No |
@@ -135,7 +137,7 @@ G means the test is met, M partly met, P not met.
 | Model or estimate | Countries | Sectors | Total vs incremental | Capital from physical change | Cost of capital by country | Open |
 |---|---|---|---|---|---|---|
 | IHLEG (2024) synthesis | G: world, three groups | G: energy, adaptation, loss and damage, nature, just transition | M: total | M: inherits IEA | M: reported, not applied | M: report |
-| SISEPUEDE (RAND/IDB) | M: 18 LAC; Uganda, Morocco, Libya in progress | G: all IPCC sectors, with co-benefits | G: incremental | G: activity × unit cost | P: one rate | G: code and data |
+| CDPM (RAND/IDB) | M: 18 LAC; Uganda, Morocco, Libya in progress | G: all IPCC sectors, with co-benefits | G: incremental | G: activity × unit cost | P: one rate | G: code and data |
 | IEA GEC model | G: 29 regions | M: energy only | G: both | G: stock and capacity | G: in model | P: proprietary |
 | OSeMOSYS Global | G: 163 countries | P: power only | M: gross | G: linear programme | G: by region and technology | G |
 | MESSAGEix-GLOBIOM and IAMs (NGFS, McCollum et al. 2018) | M: 10–33 regions | M: energy and land | M: gross | G | P: model-specific | M |
@@ -144,7 +146,7 @@ G means the test is met, M partly met, P not met.
 | CCDRs (World Bank) | M: 42 economies | G: country-specific | G: incremental | M: varies | M: varies | P |
 | CPAT (World Bank/IMF) | G: about 200 countries | M: energy | n.a. | P: no capital module | P | M |
 
-**The conclusion.** The IHLEG estimate is the only one that is complete in coverage, so the method uses it for the global totals. SISEPUEDE is the only open model that is complete in sectors and in accounting (costs, savings and co-benefits against a baseline), so the method uses its equations and structure. Neither has a cost of capital that differs by country. The method adds one, from the IEA Cost of Capital Observatory and CPI.
+**The conclusion.** The IHLEG estimate is the only one that is complete in coverage, so the method uses it for the global totals. CDPM is the only open model that is complete in sectors and in accounting (costs, savings and co-benefits against a baseline), so the method uses its equations and structure. Neither has a cost of capital that differs by country. The method adds one, from the IEA Cost of Capital Observatory and CPI.
 
 Two candidates were set aside:
 
@@ -153,7 +155,7 @@ Two candidates were set aside:
 
 # The method
 
-The method generalises SISEPUEDE's cost equation (Appendix A, equation A1) from cost items to capital, and adds the financing and economic layers that SISEPUEDE lacks.
+The method generalises CDPM's cost equation (Appendix A, equation A1) from cost items to capital, and adds the financing and economic layers that CDPM lacks.
 
 ## Capital required
 
@@ -166,16 +168,16 @@ $$
 where:
 
 * $\Delta Q$ is new physical capacity: additions plus replacements, such as GW of solar, km of transmission, EVs sold, buildings retrofitted or hectares restored;
-* $k_{j,t} = k_{j,0}\, g_j^{\,t-t_0}$ is the unit capital cost, with a learning or trend factor $g_j$ as in SISEPUEDE;
+* $k_{j,t} = k_{j,0}\, g_j^{\,t-t_0}$ is the unit capital cost, with a learning or trend factor $g_j$ as in CDPM;
 * $p_{c,s}$ is the country's price level for investment goods relative to the source of $k$, taken from the ICP purchasing-power parities for gross fixed capital formation.
 
-Incremental investment is the difference from the baseline $B$, as in SISEPUEDE:
+Incremental investment is the difference from the baseline $B$, as in CDPM:
 
 $$
 \Delta I_{c,s,t} = I^{S}_{c,s,t} - I^{B}_{c,s,t} \qquad (2)
 $$
 
-Total investment is $I^S$ itself. Both are reported. Total is the number that compares with Beyond the Gap, the IEA and the IHLEG. Incremental compares with the CCDRs and SISEPUEDE.
+Total investment is $I^S$ itself. Both are reported. Total is the number that compares with Beyond the Gap, the IEA and the IHLEG. Incremental compares with the CCDRs and CDPM.
 
 **Where no physical model exists**, the method uses a share-of-GDP rule by income group and sector, calibrated on the models that do exist:
 
@@ -216,7 +218,7 @@ $$
 N^{F}_{c,t} = \sum_j \Big( \Delta F_{c,j,t} - \Delta OM_{c,j,t} - A_{c,j,t}(WACC) \Big) \qquad (6)
 $$
 
-The economic case discounts at the social rate. It adds the co-benefits $CB$ (air pollution, crashes, congestion, ecosystems, health), as SISEPUEDE does. It also adds avoided emissions $\Delta E$ valued at the World Bank shadow price of carbon $P^{C}_t$:
+The economic case discounts at the social rate. It adds the co-benefits $CB$ (air pollution, crashes, congestion, ecosystems, health), as CDPM does. It also adds avoided emissions $\Delta E$ valued at the World Bank shadow price of carbon $P^{C}_t$:
 
 $$
 N^{E}_{c,t} = \sum_j \Big( \Delta F_{c,j,t} - \Delta OM_{c,j,t} - A_{c,j,t}(r_s) \Big) + CB_{c,t} + P^{C}_t\, \Delta E_{c,t} \qquad (7)
@@ -229,11 +231,11 @@ Equations 6 and 7 are the two numbers a finance ministry needs:
 
 The difference between them is what public finance, guarantees and carbon pricing have to bridge.
 
-## What each step takes from SISEPUEDE
+## What each step takes from CDPM
 
-| Step | SISEPUEDE has it | What the method adds |
+| Step | CDPM has it | What the method adds |
 |---|---|---|
-| Physical change by sector, compared with a baseline | Yes, all IPCC sectors, about 1,000 futures | Defaults from the IEA and IHLEG where SISEPUEDE has not been run |
+| Physical change by sector, compared with a baseline | Yes, all IPCC sectors, about 1,000 futures | Defaults from the IEA and IHLEG where CDPM has not been run |
 | Unit costs with trends (equation 1) | Yes, several dozen cost factors, LAC 2019 dollars | Global and regional unit capital costs; local price factors |
 | Power capital | Yes, NemoMod least cost | Rate set to the country WACC; technology interest rates implemented |
 | Gross capital output | No, technical costs mix capital and operations | Reported separately |
@@ -254,25 +256,25 @@ The last column rates the parameter against international evidence: G good, M me
 | Global needs, 2030 | USD 6.3–6.7 trillion a year: advanced 2.7–2.8, China 1.3–1.4, EMDCs 2.3–2.5 | IHLEG (2024) | CPI 7.4–9 trillion; McKinsey 9.2 trillion gross; ETC 3.5 trillion | G: most complete |
 | Clean energy, 2030 | USD 4.8 trillion a year (EMDCs 1.6) | IHLEG (2024), from IEA | IEA NZE 4.5 trillion; IEA–IFC EMDEs 2.2–2.8 trillion | G |
 | Adaptation, EMDCs | USD 0.2–0.3 trillion a year | UNEP AGR (2023) | UNFCCC NDR 0.46–0.58 trillion (all needs) | M: wide range |
-| Nature and agriculture, EMDCs | USD 0.3–0.4 trillion a year | IHLEG (2024) | SISEPUEDE reforestation USD 45/ha a year | M |
-| Share of GDP, fallback (θ) | Total infrastructure 4.5% (2–8%) in LMICs; incremental climate 1.4% (under 1 to 10%) | Beyond the Gap; CCDR synthesis | SISEPUEDE 1–2%; IHLEG EMDCs 6.5% (total) | M: scope differs |
+| Nature and agriculture, EMDCs | USD 0.3–0.4 trillion a year | IHLEG (2024) | CDPM reforestation USD 45/ha a year | M |
+| Share of GDP, fallback (θ) | Total infrastructure 4.5% (2–8%) in LMICs; incremental climate 1.4% (under 1 to 10%) | Beyond the Gap; CCDR synthesis | CDPM 1–2%; IHLEG EMDCs 6.5% (total) | M: scope differs |
 | Unit capital cost, utility solar | About USD 760/kW (2023) | IRENA (2024)† | IEA regional values 500–1,200 | G |
 | Unit capital cost, onshore wind | About USD 1,160/kW (2023) | IRENA (2024)† | IEA regional values | G |
-| Grids | About USD 0.6–1 of grid investment per USD 1 of renewables | IEA (2023) grids report† | SISEPUEDE USD 2.70/MWh (levelised) | M |
-| EV premium | USD 12,000 + 1,000 charging, falling | SISEPUEDE (Baik et al. 2019) | Near parity in China by 2024 (IEA) | P: dated |
-| Asset life | 25 years (12 vehicles; 40 grids) | Engineering norms | SISEPUEDE 12 years for EVs | G |
-| Price level of investment goods (p) | ICP PPP for gross fixed capital formation | World Bank ICP | SISEPUEDE: one US-to-LAC scaling | M |
+| Grids | About USD 0.6–1 of grid investment per USD 1 of renewables | IEA (2023) grids report† | CDPM USD 2.70/MWh (levelised) | M |
+| EV premium | USD 12,000 + 1,000 charging, falling | CDPM (Baik et al. 2019) | Near parity in China by 2024 (IEA) | P: dated |
+| Asset life | 25 years (12 vehicles; 40 grids) | Engineering norms | CDPM 12 years for EVs | G |
+| Price level of investment goods (p) | ICP PPP for gross fixed capital formation | World Bank ICP | CDPM: one US-to-LAC scaling | M |
 | WACC, commercial | Advanced 5.5%; China 6%†; EMDCs 10.5% (9–12%), high case 15% | IEA via IHLEG (2024); CPI (2023) | CPI cost of debt 2.8% (Germany) to 45% (Zambia) | M: by group, not country |
-| Social discount rate | 6% (range 2–10%) | Fay et al. (2016) | Beyond the Gap 6%; SISEPUEDE 7% | G |
-| Financial savings per USD of capital (b) | 0.133 a year | Calibrated on SISEPUEDE LAC (benefit-cost ratio 1.70 at 6%) | Implies break-even WACC of 12.6% | M: one region |
-| Co-benefits per USD of capital (c) | 0.129 a year | Calibrated on SISEPUEDE LAC | IHLEG 15–18% of GDP; Markandya 1.4–2.45 times costs | M: one region |
-| Abatement per USD 1,000 of capital (a) | 0.35 tCO2e a year | Author's calculation: about 37 Gt over about USD 110 trillion (IEA NZE)† | SISEPUEDE LAC higher (AFOLU is cheap) | P: needs review |
+| Social discount rate | 6% (range 2–10%) | Fay et al. (2016) | Beyond the Gap 6%; CDPM 7% | G |
+| Financial savings per USD of capital (b) | 0.133 a year | Calibrated on CDPM LAC (benefit-cost ratio 1.70 at 6%) | Implies break-even WACC of 12.6% | M: one region |
+| Co-benefits per USD of capital (c) | 0.129 a year | Calibrated on CDPM LAC | IHLEG 15–18% of GDP; Markandya 1.4–2.45 times costs | M: one region |
+| Abatement per USD 1,000 of capital (a) | 0.35 tCO2e a year | Author's calculation: about 37 Gt over about USD 110 trillion (IEA NZE)† | CDPM LAC higher (AFOLU is cheap) | P: needs review |
 | Shadow price of carbon | USD 50–100/tCO2e (2030) | World Bank (2017, 2024) | US EPA about USD 190 | G |
 
 Three parameters need the most review, and in this order:
 
 1. **The EMDC cost of capital.** It decides whether the financial case holds. The IEA Cost of Capital Observatory and CPI give it by country and technology. The method should use those values, not one rate per group.
-2. **The savings and co-benefits per dollar (b and c).** They are calibrated on one region. A SISEPUEDE run per country, or per region, would replace them.
+2. **The savings and co-benefits per dollar (b and c).** They are calibrated on one region. A CDPM run per country, or per region, would replace them.
 3. **Abatement per dollar (a).** It mixes energy, which is expensive per tonne, with AFOLU, which is cheap per tonne. It should be computed by sector.
 
 # Global investment needs
@@ -294,7 +296,7 @@ How to read the table:
 
 * **Total and current.** These are total needs. Global climate finance was USD 1.3 trillion in 2021–2022 (CPI), and clean energy investment USD 1.9 trillion in 2023 (IEA). Needs are about four times current flows in EMDCs other than China.
 * **Share of GDP.** At an assumed world GDP of about USD 125 trillion in 2030 (author's assumption), USD 6.5 trillion is about 5% of world GDP. The IHLEG gives 6.5% of GDP for EMDCs other than China.
-* **Incremental.** The CCDRs give 1.4% of GDP for incremental climate investment to 2030, and SISEPUEDE about 2% for LAC. The IHLEG totals include investment that would happen anyway.
+* **Incremental.** The CCDRs give 1.4% of GDP for incremental climate investment to 2030, and CDPM about 2% for LAC. The IHLEG totals include investment that would happen anyway.
 
 **Table 5. The global needs compared with the other estimates, once aligned**
 
@@ -307,13 +309,13 @@ How to read the table:
 | ETC (2023) | USD 3.5 trillion a year gross to 2050 | Lower: average over 2025–2050, energy |
 | Beyond the Gap (2019) | 4.5% of GDP (2–8%), LMICs, all infrastructure | Total; includes non-climate infrastructure |
 | CCDR synthesis (2023) | 1.4% of GDP incremental; USD 574 billion a year, LICs and MICs other than China | Incremental share of IHLEG EMDC total (about a quarter) |
-| SISEPUEDE LAC (2023) | USD 1.3 trillion present value, about 2% of GDP a year incremental | Incremental; agrees with the CCDRs |
+| CDPM LAC (2023) | USD 1.3 trillion present value, about 2% of GDP a year incremental | Incremental; agrees with the CCDRs |
 | UNFCCC NDR 2 (2024) | USD 455–584 billion a year, costed NDC needs | Lower: partial, self-reported |
 
 The estimates are consistent once scope is aligned:
 
 * **Totals** (IHLEG, IEA, CPI, McKinsey) are 5–8% of GDP.
-* **Increments** (CCDRs, SISEPUEDE) are 1–3% of GDP for middle-income countries.
+* **Increments** (CCDRs, CDPM) are 1–3% of GDP for middle-income countries.
 * **Low-income and climate-exposed countries** are much higher, at 7–10% (CCDRs: Pakistan, the Sahel).
 
 # Investment needs under three discount-rate lenses
@@ -329,7 +331,7 @@ The three lenses separate these jobs.
   * central case: advanced economies 5.5%, China 6%, EMDCs 10.5% (the IHLEG and IEA range for solar is 9–12%);
   * high case: 7%, 8% and 15%.
 * **(b) World Bank rate.** 6% everywhere, the World Bank default under the Ramsey rule (Fay et al. 2016). Beyond the Gap and the IMF also use 6%.
-* **(c) World Bank rate plus co-benefits.** 6%, with the co-benefits that SISEPUEDE counts (air pollution, crashes, congestion, ecosystems, health), plus avoided emissions valued at the World Bank shadow price of carbon of USD 50–100/tCO2e in 2030.
+* **(c) World Bank rate plus co-benefits.** 6%, with the co-benefits that CDPM counts (air pollution, crashes, congestion, ecosystems, health), plus avoided emissions valued at the World Bank shadow price of carbon of USD 50–100/tCO2e in 2030.
 
 The lenses are applied to one year's investment, the 2030 need of USD 6.5 trillion. Its capital charge (equation 4, 25-year life) is set against savings and co-benefits, using the parameters in Table 3. All items are annual flows over the asset life.
 
@@ -354,7 +356,7 @@ The commercial rates are for advanced economies, China and EMDCs, in that order.
 | EMDCs other than China | 2,400 | 275 (10.5%) | 45 | −52 (15%) | 188 | 131 | 441 |
 | World | 6,500 | 585 | 280 | 131 | 508 | 356 | 1,195 |
 
-The figures are the author's calculations from equations 4, 6 and 7 and Table 3. They are illustrative. The savings and co-benefit ratios are calibrated on SISEPUEDE's LAC results and applied uniformly, so the split by group reflects the cost of capital only.
+The figures are the author's calculations from equations 4, 6 and 7 and Table 3. They are illustrative. The savings and co-benefit ratios are calibrated on CDPM's LAC results and applied uniformly, so the split by group reflects the cost of capital only.
 
 **What the lenses show.**
 
@@ -363,7 +365,7 @@ The figures are the author's calculations from equations 4, 6 and 7 and Table 3.
 * At 10.5%, the USD 2.4 trillion of EMDC investment returns only USD 45 billion a year more than it costs to finance. At 15% it loses money.
 * Financing costs USD 87 billion a year more than at 6% (USD 184 billion more at 15%), for each year's investment. That is the cost-of-capital penalty.
 * The penalty accumulates as investment builds up. Per point of WACC, it is about USD 40 billion a year for each year's clean energy investment of USD 4.8 trillion. After about four years of investment that matches the IEA's estimate of USD 150 billion a year per point.
-* At high rates an optimiser also changes the mix toward less capital-intensive options (Ameli et al. 2021), so the physical needs change too. Only a model with the cost of capital inside it, such as SISEPUEDE's NemoMod once its interest rates are implemented, can show this.
+* At high rates an optimiser also changes the mix toward less capital-intensive options (Ameli et al. 2021), so the physical needs change too. Only a model with the cost of capital inside it, such as CDPM's NemoMod once its interest rates are implemented, can show this.
 
 **(b) At the World Bank's 6%, the financial case holds in every group.**
 
@@ -387,12 +389,12 @@ The figures are the author's calculations from equations 4, 6 and 7 and Table 3.
 
 **For a country.** There are three tiers:
 
-1. **Where SISEPUEDE has been run** (18 LAC countries; Uganda, Morocco and Libya in progress):
-   * take $\Delta Q$ and the baseline from SISEPUEDE;
+1. **Where CDPM has been run** (18 LAC countries; Uganda, Morocco and Libya in progress):
+   * take $\Delta Q$ and the baseline from CDPM;
    * apply equation 1 with global unit costs and the country price factor;
    * report gross capital separately;
    * apply equations 4–7 at the country WACC and at 6%.
-2. **Where an energy model exists but not SISEPUEDE** (OSeMOSYS Global, a CCDR model, the IEA): use its power and energy quantities, and the fallback rule (equation 3) for AFOLU, adaptation and infrastructure.
+2. **Where an energy model exists but not CDPM** (OSeMOSYS Global, a CCDR model, the IEA): use its power and energy quantities, and the fallback rule (equation 3) for AFOLU, adaptation and infrastructure.
 3. **Elsewhere**: use the fallback rule for all sectors, with the IHLEG group totals as a check.
 
 **For the global total.** Sum the country results, and check them against the IHLEG group totals (Table 4) and the IAM regional ranges (NGFS, McCollum et al. 2018).
@@ -400,21 +402,21 @@ The figures are the author's calculations from equations 4, 6 and 7 and Table 3.
 **What to build first.** Five steps, in order of their effect on the result:
 
 1. **Country WACC by technology**, from the IEA Cost of Capital Observatory and CPI, as an open table. This is the method's main original contribution: no open model has it.
-2. **SISEPUEDE fixes** (Appendix A.5): a dual discount rate; consistent power-capital discounting; technology interest rates in NemoMod; capital recovery factors in place of straight-line charges; a gross capital output.
+2. **CDPM fixes** (Appendix A.5): a dual discount rate; consistent power-capital discounting; technology interest rates in NemoMod; capital recovery factors in place of straight-line charges; a gross capital output.
 3. **Global unit costs** (IRENA, IEA, NREL's Annual Technology Baseline), with ICP price factors, replacing the US-to-LAC scaling.
-4. **SISEPUEDE runs for the largest EMDC emitters outside LAC** (India, Indonesia, South Africa, Türkiye, Viet Nam, Egypt), to replace the calibrated b, c and a with country values.
+4. **CDPM runs for the largest EMDC emitters outside LAC** (India, Indonesia, South Africa, Türkiye, Viet Nam, Egypt), to replace the calibrated b, c and a with country values.
 5. **A financing layer**: the split between public and private, and between domestic and external, as in the IHLEG, linked to a debt module such as MFMod or Kharas and Rivard (2022).
 
 
-# Appendix A. SISEPUEDE
+# Appendix A. CDPM
 
-This appendix reviews how SISEPUEDE estimates investment needs, its core parameters, and its published results, and re-bases those results under the three lenses. It is the model whose equations the global method generalises. Equations and tables are numbered A1, A2 and so on.
+This appendix reviews how CDPM estimates investment needs, its core parameters, and its published results, and re-bases those results under the three lenses. It is the model whose equations the global method generalises. Equations and tables are numbered A1, A2 and so on.
 
-## A.1 How SISEPUEDE estimates investment needs
+## A.1 How CDPM estimates investment needs
 
 ### The model in one paragraph
 
-SISEPUEDE represents an economy as a set of sector models: agriculture, forestry and land use; livestock; waste and wastewater; industrial processes; buildings; transport; fugitive emissions; and energy production. Each is driven by population and GDP. Users define *transformations* (more than 50 in the LAC study, such as "electrify light-duty vehicles", "produce electricity with renewables" or "halt deforestation"). These are combined into *strategies*. The model is calibrated to historical emissions (Climate Watch) by minimising mean-squared error with a genetic algorithm and particle swarm optimisation. It then runs each strategy across about a thousand futures drawn by Latin Hypercube sampling of uncertain inputs. This is Robust Decision Making in the sense of Lempert et al. Energy production is optimised by NemoMod, an open-source least-cost energy model in Julia. The cost-benefit module (`costs_benefits_ssp`) then converts physical differences between each strategy and the baseline into money.
+CDPM represents an economy as a set of sector models: agriculture, forestry and land use; livestock; waste and wastewater; industrial processes; buildings; transport; fugitive emissions; and energy production. Each is driven by population and GDP. Users define *transformations* (more than 50 in the LAC study, such as "electrify light-duty vehicles", "produce electricity with renewables" or "halt deforestation"). These are combined into *strategies*. The model is calibrated to historical emissions (Climate Watch) by minimising mean-squared error with a genetic algorithm and particle swarm optimisation. It then runs each strategy across about a thousand futures drawn by Latin Hypercube sampling of uncertain inputs. This is Robust Decision Making in the sense of Lempert et al. Energy production is optimised by NemoMod, an open-source least-cost energy model in Julia. The cost-benefit module (`costs_benefits_ssp`) then converts physical differences between each strategy and the baseline into money.
 
 ### The core equation
 
@@ -446,9 +448,9 @@ In the LAC study $r = 7\%$ for every flow, country and future. The report calls 
 
 ### Power-sector capital: an embedded optimisation
 
-Electricity is different. NemoMod chooses the least-cost capacity mix to meet demand and reports two discounted variables, `vdiscountedcapitalinvestment` and `vdiscountedoperatingcost`. SISEPUEDE stores them as `nemomod_entc_discounted_capital_investment_*` and `nemomod_entc_discounted_operating_costs_*`. The cost-benefit database maps power capex and opex directly onto these discounted series.
+Electricity is different. NemoMod chooses the least-cost capacity mix to meet demand and reports two discounted variables, `vdiscountedcapitalinvestment` and `vdiscountedoperatingcost`. CDPM stores them as `nemomod_entc_discounted_capital_investment_*` and `nemomod_entc_discounted_operating_costs_*`. The cost-benefit database maps power capex and opex directly onto these discounted series.
 
-The NemoMod discount rate comes from SISEPUEDE's analytical parameters:
+The NemoMod discount rate comes from CDPM's analytical parameters:
 
 * `attributes/analytical_parameters.csv` documents a default of 5%, "used for analyzing all costs and benefits … passed to NemoMod (NemoMod_DiscountRate) to find the least cost solution".
 * The shipped configuration (`sisepuede.config`) sets `discount_rate: 0.0`.
@@ -457,7 +459,7 @@ This has three consequences:
 
 1. The *capacity mix* NemoMod chooses depends on the rate. At 0% capital-intensive renewables look cheaper than they would at a commercial cost of capital. Ameli et al. (2021) show the effect can be large: using region-specific WACC instead of a uniform rate cuts green electricity in Africa by 35% in a 2°C pathway.
 2. Power capex arrives in the cost-benefit module *already discounted* to NemoMod's base year at NemoMod's rate. Other cost lines are undiscounted. If equation A2 is then applied to everything, power capex is either discounted twice (at a non-zero NemoMod rate) or once at the reporting rate (at 0%). The documentation does not say which convention the LAC run used.
-3. `InterestRateTechnology` and `InterestRateStorage`, NemoMod's inputs for financing costs that differ from the social discount rate, are stubbed in SISEPUEDE (their formatters return nothing). Depreciation defaults to the sinking-fund method. So there is no way to give a solar farm in Zambia a higher cost of capital than one in Chile.
+3. `InterestRateTechnology` and `InterestRateStorage`, NemoMod's inputs for financing costs that differ from the social discount rate, are stubbed in CDPM (their formatters return nothing). Depreciation defaults to the sinking-fund method. So there is no way to give a solar farm in Zambia a higher cost of capital than one in Chile.
 
 ### Cost factors outside power
 
@@ -471,7 +473,7 @@ $$
 CRF(r,n) = \frac{r}{1-(1+r)^{-n}} \qquad (A3)
 $$
 
-**Table A1. Core SISEPUEDE cost parameters that drive investment needs (2019 USD, LAC average)**
+**Table A1. Core CDPM cost parameters that drive investment needs (2019 USD, LAC average)**
 
 The last column rates the parameter against international evidence (G good, M medium, P poor) with the main reason.
 
@@ -499,19 +501,19 @@ The last column rates the parameter against international evidence (G good, M me
 
 ### Jobs and the wider economy
 
-SISEPUEDE estimates employment effects with a multi-regional input-output table (ECLAC/ADB 2011): the cost and saving streams are mapped onto sectors and multiplied through. It has no macroeconomic feedback. Investment does not raise growth, prices do not adjust, and financing does not crowd anything out. In this it differs from the CCDRs' macro models (MFMod, Envisage, MANAGE) and from Kharas and Rivard (2022), where growth is the channel through which a big push pays for itself.
+CDPM estimates employment effects with a multi-regional input-output table (ECLAC/ADB 2011): the cost and saving streams are mapped onto sectors and multiplied through. It has no macroeconomic feedback. Investment does not raise growth, prices do not adjust, and financing does not crowd anything out. In this it differs from the CCDRs' macro models (MFMod, Envisage, MANAGE) and from Kharas and Rivard (2022), where growth is the channel through which a big push pays for itself.
 
 ### Uncertainty
 
 The LAC study runs each strategy across about a thousand futures, varying technology costs, fuel prices, demand drivers and the effectiveness of transformations. It reports the distribution of net benefits and finds the vulnerabilities with scenario discovery (PRIM). This is a real strength over the point estimates of most global studies. The discount rate and the cost of capital, though, are *not* among the uncertain inputs, and they are among the most influential. Costa Rica's earlier study varied 3,000 futures and found benefits exceeded costs in all but 22.
 
-## A.2 What SISEPUEDE finds
+## A.2 What CDPM finds
 
 ### Latin America and the Caribbean
 
 Table A2 summarises the published results (Kalra et al. 2023). All values are present values over 2025–2050 in 2019 US dollars at 7%.
 
-**Table A2. SISEPUEDE results for 18 LAC countries**
+**Table A2. CDPM results for 18 LAC countries**
 
 | Result | Value |
 |---|---|
@@ -535,7 +537,7 @@ The critical actions are renewable electricity, transport electrification and ha
 
 ### Countries
 
-**Table A3. SISEPUEDE country results**
+**Table A3. CDPM country results**
 
 | Country | Investment needs | Share of GDP a year | Net benefit | Rate, period | Source |
 |---|---|---|---|---|---|
@@ -545,9 +547,9 @@ The critical actions are renewable electricity, transport electrification and ha
 | Costa Rica | Not reported as a single figure | n.a. | USD 41 billion | 5%, 2020–2050 | Groves et al. 2020 |
 | Colombia, Peru, Chile | Earlier RAND/IDB studies | n.a. | USD 330 / 140 / 7 billion | Various | Cited in Kalra et al. 2023 |
 
-The country spread (1–2% of GDP a year) is close to the CCDR average of 1.4%. The research for this note found no CCDR that names SISEPUEDE as its model. The CCDR synthesis lists Envisage, CGEBox, MANAGE, MFMod, the LTGM, CPAT and E3ME. Any World Bank use of SISEPUEDE in a CCDR should be confirmed with the country teams.
+The country spread (1–2% of GDP a year) is close to the CCDR average of 1.4%. The research for this note found no CCDR that names CDPM as its model. The CCDR synthesis lists Envisage, CGEBox, MANAGE, MFMod, the LTGM, CPAT and E3ME. Any World Bank use of CDPM in a CCDR should be confirmed with the country teams.
 
-## A.3 SISEPUEDE's LAC results under the three lenses
+## A.3 CDPM's LAC results under the three lenses
 
 ### The three lenses
 
@@ -587,30 +589,30 @@ where $\rho$ is pure time preference, $\eta$ the elasticity of marginal utility 
 * The UK Green Book uses 3.5%.
 * US OMB Circular A-4 (2023) uses about 2%.
 
-**(c) World Bank rate plus co-benefits.** The same 6%, with all of SISEPUEDE's non-financial benefits (air pollution, crashes, congestion, ecosystems, diet-related health) and, optionally, avoided emissions valued at the World Bank shadow price of carbon. That price is USD 40–80/tCO2e in 2020 and 50–100 in 2030, rising 2.25% a year to about 78–156 in 2050. It has been mandatory in IBRD/IDA project appraisal since July 2017. International evidence supports counting co-benefits:
+**(c) World Bank rate plus co-benefits.** The same 6%, with all of CDPM's non-financial benefits (air pollution, crashes, congestion, ecosystems, diet-related health) and, optionally, avoided emissions valued at the World Bank shadow price of carbon. That price is USD 40–80/tCO2e in 2020 and 50–100 in 2030, rising 2.25% a year to about 78–156 in 2050. It has been mandatory in IBRD/IDA project appraisal since July 2017. International evidence supports counting co-benefits:
 
 * Markandya et al. (2018) find health co-benefits 1.4–2.45 times mitigation costs.
 * Vandyck et al. (2018) cite USD 2–196/tCO2, with a mean of USD 49.
 * Parry and Black (2021) find efficient fuel pricing would avoid 0.9 million air-pollution deaths a year.
 * Karlsson et al. (2020) review 239 studies and find air-quality co-benefits often of the same order as mitigation costs.
 
-### Method for re-basing SISEPUEDE
+### Method for re-basing CDPM
 
-SISEPUEDE's annual flows are not published, so the LAC results are re-based with two stylised profiles:
+CDPM's annual flows are not published, so the LAC results are re-based with two stylised profiles:
 
 * **Costs** are front-loaded and roughly flat from 2025.
 * **Benefits** ramp up linearly as the capital stock turns over.
 
-For each rate $r$, the present value at 7% is multiplied by the ratio of the present-value factors. For lens (a), 70% of the technical cost is treated as capital and re-annuitised at the WACC with equation A3 over 20 years, to reflect the higher financing charge. These are author's calculations and are illustrative. They should be replaced by a direct re-run of SISEPUEDE when the annual flows are available.
+For each rate $r$, the present value at 7% is multiplied by the ratio of the present-value factors. For lens (a), 70% of the technical cost is treated as capital and re-annuitised at the WACC with equation A3 over 20 years, to reflect the higher financing charge. These are author's calculations and are illustrative. They should be replaced by a direct re-run of CDPM when the annual flows are available.
 
-**Table A4. Present-value factors relative to SISEPUEDE's 7%**
+**Table A4. Present-value factors relative to CDPM's 7%**
 
 | Rate | Flat cost stream | Ramping benefit stream | CRF, 20 years | Annual charge per USD 1 trillion of capital |
 |---|---|---|---|---|
 | 0% | 2.06 | 2.81 | 0.050 | USD 50 billion |
 | 3% | 1.46 | 1.75 | 0.067 | USD 67 billion |
 | 6% (World Bank) | 1.09 | 1.14 | 0.087 | USD 87 billion |
-| 7% (SISEPUEDE LAC) | 1.00 | 1.00 | 0.094 | USD 94 billion |
+| 7% (CDPM LAC) | 1.00 | 1.00 | 0.094 | USD 94 billion |
 | 10% | 0.80 | 0.70 | 0.118 | USD 118 billion |
 | 12% | 0.70 | 0.56 | 0.134 | USD 134 billion |
 | 15% | 0.59 | 0.42 | 0.160 | USD 160 billion |
@@ -619,13 +621,13 @@ Benefits fall faster than costs as the rate rises, because they come later. That
 
 ### Results
 
-**Table A5. SISEPUEDE LAC All Actions re-based under the three lenses (USD trillion, present value 2025–2050, 2019 prices)**
+**Table A5. CDPM LAC All Actions re-based under the three lenses (USD trillion, present value 2025–2050, 2019 prices)**
 
 | Rate | Lens | Cost, adjusted | Financial benefit | Net financial benefit | Total net benefit (with co-benefits) | Financial benefit-cost ratio |
 |---|---|---|---|---|---|---|
 | 3% | Low social | 1.51 | 3.49 | 1.98 | 5.09 | 2.31 |
 | 6% | (b) World Bank | 1.34 | 2.28 | 0.94 | 3.15 | 1.70 |
-| 7% | SISEPUEDE published | 1.30 | 2.00 | 0.70 | 2.70 | 1.54 |
+| 7% | CDPM published | 1.30 | 2.00 | 0.70 | 2.70 | 1.54 |
 | 10% | (a) Commercial, low | 1.21 | 1.39 | 0.18 | 1.74 | 1.15 |
 | 12% | (a) Commercial, central | 1.17 | 1.12 | −0.06 | 1.33 | 0.95 |
 | 15% | (a) Commercial, high | 1.14 | 0.83 | −0.31 | 0.90 | 0.73 |
@@ -646,9 +648,9 @@ The carbon value assumes illustrative abatement of about 93 GtCO2e over 2025–2
 
 **(a) At commercial rates the private financial case for the All Actions strategy breaks down at about 12%.** That is the WACC many EMDE clean energy projects face today. The investment need itself rises: the same assets cost more to finance. Each USD 1 trillion of capital costs USD 134–160 billion a year at 12–15%, against USD 87 billion at 6%, so financing adds USD 47–73 billion a year per trillion. The IEA's estimate that a 1 percentage point fall in the cost of capital saves about USD 150 billion a year in clean energy financing globally is consistent with this.
 
-Commercial rates would also change the mix. At high WACC an optimiser such as NemoMod builds less capital-intensive renewable capacity (Ameli et al. 2021), so physical needs, emissions and fuel bills all change. SISEPUEDE cannot show this today, because its NemoMod rate is a single social rate.
+Commercial rates would also change the mix. At high WACC an optimiser such as NemoMod builds less capital-intensive renewable capacity (Ameli et al. 2021), so physical needs, emissions and fuel bills all change. CDPM cannot show this today, because its NemoMod rate is a single social rate.
 
-**(b) At the World Bank's 6% the financial case is robust.** The net financial benefit is about USD 0.9 trillion and the benefit-cost ratio 1.7. The investment need is about USD 1.3 trillion in present value, or about 2% of GDP a year. This is the lens closest to Beyond the Gap and the CCDRs, and the one to use when comparing SISEPUEDE with them.
+**(b) At the World Bank's 6% the financial case is robust.** The net financial benefit is about USD 0.9 trillion and the benefit-cost ratio 1.7. The investment need is about USD 1.3 trillion in present value, or about 2% of GDP a year. This is the lens closest to Beyond the Gap and the CCDRs, and the one to use when comparing CDPM with them.
 
 **(c) With co-benefits at 6%, the economic case is overwhelming.** The total net benefit is about USD 3.2 trillion, and USD 5.5–7.9 trillion with carbon valued at the World Bank shadow price. Even at 15%, co-benefits keep the total net benefit positive (about USD 0.9 trillion). Co-benefits are public: avoided deaths, cleaner air and fewer crashes do not appear on an investor's balance sheet.
 
@@ -663,19 +665,19 @@ Two caveats apply:
 * The stylised profiles overstate precision. The direction is robust; the break-even rate (11–13%) is approximate.
 * The "financial benefit" here includes fuel savings to all sectors, households included, not just to the investor. A strict project-finance view would show an even weaker private case at commercial rates.
 
-## A.4 Recommendations for SISEPUEDE
+## A.4 Recommendations for CDPM
 
 1. **Make the discount rate explicit and dual.** Report economic results at the World Bank social rate (6% by default, or 2× country growth per Fay et al. 2016) and financial results at a country-specific WACC by technology class (CPI, IEA Cost of Capital Observatory). Sensitivity at 3% and 12% should be standard output, and the discount rate should be added to the uncertain inputs in the futures.
 2. **Fix the NemoMod inconsistency.** Either pass undiscounted capital investment from NemoMod and discount everything once in the cost-benefit step, or document that power capex is pre-discounted and exclude it from the second discounting. Align `sisepuede.config` (0%) with the documented default (5%).
-3. **Implement `InterestRateTechnology` and `InterestRateStorage`** so that NemoMod's least-cost mix reflects the country's cost of capital, and run the "de-risked" case (WACC cut by 2–6 points) as a transformation. This would let SISEPUEDE estimate the value of guarantees directly.
+3. **Implement `InterestRateTechnology` and `InterestRateStorage`** so that NemoMod's least-cost mix reflects the country's cost of capital, and run the "de-risked" case (WACC cut by 2–6 points) as a transformation. This would let CDPM estimate the value of guarantees directly.
 4. **Annualise capital consistently.** Replace straight-line per-km charges (EVs, trucks) with capital recovery factors at the chosen rate (equation A3), and document the rate behind every levelised cost factor.
-5. **Report gross capital expenditure separately** from operating costs and savings, by sector and year, so that SISEPUEDE's results can be compared directly with Beyond the Gap, the IEA and the IHLEG, and fed into financing models.
+5. **Report gross capital expenditure separately** from operating costs and savings, by sector and year, so that CDPM's results can be compared directly with Beyond the Gap, the IEA and the IHLEG, and fed into financing models.
 6. **Add the missing infrastructure**: mode-shift infrastructure (rail, bus rapid transit), distribution grids and storage beyond NemoMod's scope, and adaptation.
 7. **Localise unit costs** with country price levels and, where possible, local capex data (IRENA cost databases, MDB project data), not a single US-to-LAC scaling.
 8. **Add a financing layer**: split investment into public and private, domestic and external, and link it to a debt module (as in Kharas and Rivard 2022, or the CCDRs' MFMod), so that the model can say who pays and what it does to debt.
 9. **Resolve the social-cost-of-carbon inconsistency** between the headline (excluded) and the waste appendix (included), and report the carbon value as a separate line.
 
-## A.5 Issues found in SISEPUEDE's treatment of investment needs
+## A.5 Issues found in CDPM's treatment of investment needs
 
 | # | Issue | Where | Effect | Fix |
 |---|---|---|---|---|
@@ -690,13 +692,13 @@ Two caveats apply:
 | 9 | Social cost of carbon excluded in headline, used in waste | LAC report vs appendix | Inconsistent benefits | Separate carbon line |
 | 10 | Discount rate not in the uncertainty ensemble | Futures design | Most influential input left fixed | Add to the Latin Hypercube sample |
 
-## A.6 Core SISEPUEDE parameters for investment needs
+## A.6 Core CDPM parameters for investment needs
 
 **Model structure and settings**
 
 | Parameter | Value | Source in code or documentation |
 |---|---|---|
-| Base period | 2015 = period 0 | SISEPUEDE time periods |
+| Base period | 2015 = period 0 | CDPM time periods |
 | Transformation start | 2025 | LAC study |
 | Horizon | 2050 (36 periods) | Model attributes |
 | Currency | 2019 USD, LAC average | costs_benefits_ssp docs |
@@ -759,14 +761,14 @@ Technical cost factors are listed in Table A1. The full set is in the `docs/cost
 **GCAM (PNNL/JGCRI).**
 
 * **What it is.** Fully open, with 32 regions covering energy, land and water.
-* **Limits.** Its native outputs are physical (EJ, Mt, km³). Investment has to be derived outside the model from capacity change times unit cost, which is SISEPUEDE's pattern.
-* **Use in the method:** none directly. It is an alternative source of physical change for regions without a SISEPUEDE run.
+* **Limits.** Its native outputs are physical (EJ, Mt, km³). Investment has to be derived outside the model from capacity change times unit cost, which is CDPM's pattern.
+* **Use in the method:** none directly. It is an alternative source of physical change for regions without a CDPM run.
 
 **CPAT (World Bank and IMF).**
 
 * **What it is.** A spreadsheet and Python tool covering about 200 countries, for carbon pricing, fuel subsidy reform, revenue, distribution and air pollution.
 * **Limits.** It has no capital-investment module.
-* **Use in the method:** none for investment, though its air-pollution values could replace the IMF 2014 factors in SISEPUEDE's co-benefits. †The public CPAT pages could not be reached in this review.
+* **Use in the method:** none for investment, though its air-pollution values could replace the IMF 2014 factors in CDPM's co-benefits. †The public CPAT pages could not be reached in this review.
 
 **E3ME and FTT (Cambridge Econometrics).**
 
@@ -778,17 +780,17 @@ Technical cost factors are listed in Table A1. The full set is in the `docs/cost
 * **What it is.** Country estimates of infrastructure needs against current trends for 56 countries, covering transport, energy, water and telecoms.
 * **Use in the method:** a complement to Beyond the Gap for non-energy infrastructure. †The online tool could not be reached in this review.
 
-**SISEPUEDE** is covered in Appendix A.
+**CDPM** is covered in Appendix A.
 
 ## B.2 The estimates
 
 **Table B1. Leading estimates of investment needs**
 
-The last column rates comparability with SISEPUEDE (G good, M medium, P poor).
+The last column rates comparability with CDPM (G good, M medium, P poor).
 
 | Study | Headline | Base | Method | Comparability |
 |---|---|---|---|---|
-| SISEPUEDE LAC (2023) | USD 1.3 trillion PV incremental, about 2% of GDP a year; net benefit USD 2.7 trillion | 18 LAC countries, 2025–2050, 7% | Economy-wide sector models; NemoMod; about 1,000 futures | n.a. |
+| CDPM LAC (2023) | USD 1.3 trillion PV incremental, about 2% of GDP a year; net benefit USD 2.7 trillion | 18 LAC countries, 2025–2050, 7% | Economy-wide sector models; NemoMod; about 1,000 futures | n.a. |
 | Beyond the Gap (2019) | 2–8% of GDP, 4.5% central (USD 1.5 trillion a year) | LMICs, 2015–2030, 6% | Bottom-up sector models; six IAMs for power | M: total, infrastructure only |
 | CCDR synthesis (2023) | +1.4% of GDP a year (under 1 to 10%); USD 574 billion a year (2.8% of GDP) for LICs and MICs other than China | 42 economies, to 2030 | Country models (MFMod, CGE, CPAT, E3ME) | G: incremental, country-level |
 | Bhattacharya et al. (2022) | 11.3% → 18.2% of GDP, 2019–2030; +USD 1.3 trillion by 2025, +3.5 trillion by 2030 | EMDEs other than China | Synthesis of sector studies | M: includes human capital |
@@ -814,8 +816,8 @@ To compare like with like, Figure B1 restates each estimate as an annual share o
 Share of GDP per year, by study (T = total, I = incremental)
 
 CCDR synthesis (avg)            I  |####                          1.4%
-SISEPUEDE LAC                   I  |######                        ~2%
-SISEPUEDE Brazil / DR / Mexico  I  |#####                         1-1.9%
+CDPM LAC                   I  |######                        ~2%
+CDPM Brazil / DR / Mexico  I  |#####                         1-1.9%
 CCDR synthesis (LIC+MIC ex-CN)  I  |########                      2.8%
 Bhattacharya et al. 2025 incr.  I  |###########                   +3.8pp
 Beyond the Gap (central)        T  |#############                 4.5%
@@ -826,12 +828,12 @@ Beyond the Gap (range)          T  |######  to  ########################  2-8%
 
 Four points stand out.
 
-1. **On incremental investment, SISEPUEDE and the CCDRs agree.** Both find 1–2% of GDP a year for middle-income countries, with low-income and climate-exposed countries much higher (Pakistan 9–10%, Sahel 7–8%). The agreement is not by construction, since the models are completely different. It suggests that 1–3% of GDP is a robust range for the incremental climate investment of a middle-income country.
-2. **Total estimates are two to four times larger** because they include investment that development requires anyway: the baseline power plants, roads and water systems. Beyond the Gap's main finding, that decarbonised paths "need not cost more" than polluting ones, is consistent with SISEPUEDE's: the incremental cost is modest, and fuel savings largely repay it.
-3. **SISEPUEDE is alone in netting costs against benefits.** Its headline is a net benefit, not a cost. That is the right question for a finance ministry. It also makes the number hard to compare: a figure of 2% of GDP in investment with a net benefit of twice that is a different message from "USD 2.4 trillion a year".
-4. **Only the IEA embeds a cost of capital that differs by country**, and only the IHLEG (2024) reports one. All the others, including SISEPUEDE, value a solar farm in Zambia with the same discount rate as one in Germany. Section A.3 and the main text show why that matters.
+1. **On incremental investment, CDPM and the CCDRs agree.** Both find 1–2% of GDP a year for middle-income countries, with low-income and climate-exposed countries much higher (Pakistan 9–10%, Sahel 7–8%). The agreement is not by construction, since the models are completely different. It suggests that 1–3% of GDP is a robust range for the incremental climate investment of a middle-income country.
+2. **Total estimates are two to four times larger** because they include investment that development requires anyway: the baseline power plants, roads and water systems. Beyond the Gap's main finding, that decarbonised paths "need not cost more" than polluting ones, is consistent with CDPM's: the incremental cost is modest, and fuel savings largely repay it.
+3. **CDPM is alone in netting costs against benefits.** Its headline is a net benefit, not a cost. That is the right question for a finance ministry. It also makes the number hard to compare: a figure of 2% of GDP in investment with a net benefit of twice that is a different message from "USD 2.4 trillion a year".
+4. **Only the IEA embeds a cost of capital that differs by country**, and only the IHLEG (2024) reports one. All the others, including CDPM, value a solar farm in Zambia with the same discount rate as one in Germany. Section A.3 and the main text show why that matters.
 
-### Strengths and gaps of SISEPUEDE relative to the others
+### Strengths and gaps of CDPM relative to the others
 
 **Strengths.**
 
@@ -866,15 +868,15 @@ Values marked † need confirmation against the primary source. The ratings foll
 | Onshore wind | About USD 1,160/kW | 25 | IRENA (2024)† | G |
 | Offshore wind | About USD 2,800/kW | 25 | IRENA (2024)† | G |
 | Battery storage, utility | About USD 250–300/kWh installed | 15 | IRENA; BNEF† | M |
-| Transmission and distribution | USD 0.6–1 per USD 1 of renewables; SISEPUEDE USD 2.70/MWh | 40 | IEA (2023)†; NREL via SISEPUEDE | M |
-| Power, all technologies, by country | Endogenous least cost | By technology | NemoMod in SISEPUEDE; OSeMOSYS Global | G |
-| Electric light-duty vehicle | Premium USD 12,000 + 1,000 charging, falling | 12 | SISEPUEDE (Baik et al. 2019) | P: near parity in China |
-| Electric trucks and buses | USD 0.042/vkm + 0.011/kWh (levelised) | 12 | SISEPUEDE (Burke et al. 2022) | M |
-| Rail and bus rapid transit | Not in SISEPUEDE; fallback 1.3% of GDP for all transport | 40 | Beyond the Gap | P: missing in SISEPUEDE |
-| Buildings: efficiency and heat pumps | SISEPUEDE levelised factors (rate undocumented) | 20–30 | SISEPUEDE (Rissman et al.) | P |
-| Industry: CCS for cement / steel / chemicals | USD 40 / 50 / 100 per tCO2 | 25 | SISEPUEDE | M: low |
-| Fugitive emissions: leaks; flaring | USD 20 / 2 per tCO2e | 15 | SISEPUEDE (ICF 2014) | G |
-| Reforestation | USD 45/ha a year | n.a. | SISEPUEDE | M |
+| Transmission and distribution | USD 0.6–1 per USD 1 of renewables; CDPM USD 2.70/MWh | 40 | IEA (2023)†; NREL via CDPM | M |
+| Power, all technologies, by country | Endogenous least cost | By technology | NemoMod in CDPM; OSeMOSYS Global | G |
+| Electric light-duty vehicle | Premium USD 12,000 + 1,000 charging, falling | 12 | CDPM (Baik et al. 2019) | P: near parity in China |
+| Electric trucks and buses | USD 0.042/vkm + 0.011/kWh (levelised) | 12 | CDPM (Burke et al. 2022) | M |
+| Rail and bus rapid transit | Not in CDPM; fallback 1.3% of GDP for all transport | 40 | Beyond the Gap | P: missing in CDPM |
+| Buildings: efficiency and heat pumps | CDPM levelised factors (rate undocumented) | 20–30 | CDPM (Rissman et al.) | P |
+| Industry: CCS for cement / steel / chemicals | USD 40 / 50 / 100 per tCO2 | 25 | CDPM | M: low |
+| Fugitive emissions: leaks; flaring | USD 20 / 2 per tCO2e | 15 | CDPM (ICF 2014) | G |
+| Reforestation | USD 45/ha a year | n.a. | CDPM | M |
 | Adaptation, all | USD 215–387 billion a year (developing countries, 2030) | n.a. | UNEP AGR (2023) | M |
 | Flood protection | 0.32% of GDP (LMICs) | 40+ | Beyond the Gap | M |
 | Water and sanitation | 0.55% of GDP (LMICs) | 40 | Beyond the Gap | M |
@@ -901,7 +903,7 @@ Values marked † need confirmation against the primary source. The ratings foll
 | Cost of equity, average | 12% advanced; 27% EMDCs | CPI via IHLEG | G |
 | Climate investment risk premium | 1% (Germany) to 29% (Zambia); average 4.6% advanced, 15% EMDCs | CPI (2023) | G |
 | Social discount rate | 6% default; 2–10% interquartile range by country | Fay et al. (2016) | G |
-| SISEPUEDE reporting rate | 7% (LAC); 5% (Costa Rica); 0% config; 5% documented | Appendix A | P: inconsistent |
+| CDPM reporting rate | 7% (LAC); 5% (Costa Rica); 0% config; 5% documented | Appendix A | P: inconsistent |
 
 **Capital recovery factors, 25-year life (equation 4)**
 
@@ -915,12 +917,12 @@ At 10.5% the annual charge per dollar is 46% higher than at 6%. At 15% it is 98%
 
 | Parameter | Value | Source | Fit |
 |---|---|---|---|
-| Financial savings per USD of capital (b) | 0.133 a year | Calibrated: SISEPUEDE LAC benefit-cost ratio 1.70 at 6% × CRF 0.078 | M |
-| Co-benefits per USD of capital (c) | 0.129 a year | Calibrated: SISEPUEDE LAC co-benefits 1.65 × cost at 6% | M |
+| Financial savings per USD of capital (b) | 0.133 a year | Calibrated: CDPM LAC benefit-cost ratio 1.70 at 6% × CRF 0.078 | M |
+| Co-benefits per USD of capital (c) | 0.129 a year | Calibrated: CDPM LAC co-benefits 1.65 × cost at 6% | M |
 | Abatement per USD 1,000 of capital (a) | 0.35 tCO2e a year | Author's calculation from IEA NZE† | P |
-| Air pollution: coal / gas | USD 2.77 / 0.99 per GJ | IMF (Parry et al. 2014), via SISEPUEDE | G: dated; CPAT has newer values |
+| Air pollution: coal / gas | USD 2.77 / 0.99 per GJ | IMF (Parry et al. 2014), via CDPM | G: dated; CPAT has newer values |
 | Transport pollution: diesel / gasoline | USD 0.31 / 0.039 per litre | IMF (Parry et al. 2014) | G: dated |
-| Diet-related health | USD 1,750 per person (350–3,500) | Springmann et al., via SISEPUEDE | M |
+| Diet-related health | USD 1,750 per person (350–3,500) | Springmann et al., via CDPM | M |
 | Shadow price of carbon | USD 40–80 (2020), 50–100 (2030), rising 2.25% a year | World Bank (2017, 2024) | G |
 
 
@@ -929,7 +931,7 @@ At 10.5% the annual charge per dollar is 46% higher than at 6%. At 15% it is 98%
 All figures in Tables 5 and B1 come from primary documents (reports, PDFs or official summaries). The following points were checked and should be noted when citing.
 
 * **Beyond the Gap** (Rozenberg and Fay 2019). The 6% rate is confirmed in the technical appendix: "discounted with a 6 percent discount rate, and … annualized between 2015 and 2030". The text refers to "thousands of scenarios"; a specific total of about 3,000 could not be confirmed. The 4.5% central case breaks down as: electricity 2.2%, transport 1.3%, water and sanitation 0.55%, flood protection 0.32%, irrigation 0.13%.
-* **CCDR synthesis** (World Bank 2023, *The Development, Climate, and Nature Crisis*). It is dated December 2023 and covers 38 CCDRs and 42 economies. The range is "less than 1 to 10 percent of GDP". It names Envisage, CGEBox, MANAGE, MFMod, the LTGM, CPAT and E3ME. RAND and SISEPUEDE are not mentioned. No discount rate is stated.
+* **CCDR synthesis** (World Bank 2023, *The Development, Climate, and Nature Crisis*). It is dated December 2023 and covers 38 CCDRs and 42 economies. The range is "less than 1 to 10 percent of GDP". It names Envisage, CGEBox, MANAGE, MFMod, the LTGM, CPAT and E3ME. RAND and CDPM are not mentioned. No discount rate is stated.
 * **Bhattacharya et al. (2022).** The +4 points of GDP is the 2025 increment (+3.8 points). The 2030 increment is about +7 points. Stern is credited for guidance, not as an author, on the LSE version.
 * **IHLEG 3 (2024).** The cost-of-capital figures (solar WACC 9–12% vs 5–6%; cost of debt 21% vs 6%) and the co-benefits figure (15–18% of global GDP in 2030) are verbatim.
 * **IEA (2021).** The "200 basis points saves USD 15 trillion" figure is widely cited but was not found in the IEA's published text. Verify against the full PDF before citing. "Up to seven times higher" financing costs is verbatim.
@@ -944,7 +946,7 @@ All figures in Tables 5 and B1 come from primary documents (reports, PDFs or off
   * the 6% WACC for China, which is an assumption;
   * the abatement per dollar (a), which is the author's derivation from the IEA's Net Zero pathway.
 
-  Several sources could not be reached in this review: McCollum et al. (2018), the NGFS investment-variable list, the public CPAT pages and the GI Hub Outlook tool. SISEPUEDE's country repositories outside LAC were seen on GitHub (sisepuede-framework), but no consolidated global input database was found. Confirm with the SISEPUEDE team.
+  Several sources could not be reached in this review: McCollum et al. (2018), the NGFS investment-variable list, the public CPAT pages and the GI Hub Outlook tool. CDPM's country repositories outside LAC were seen on GitHub (sisepuede-framework), but no consolidated global input database was found. Confirm with the CDPM team.
 
 
 # Appendix E. Annotated bibliography on financing
@@ -971,7 +973,7 @@ It proposes a Global Credit Guarantee Facility of USD 6.6 billion, 10% paid in a
 Proposes a partial foreign-exchange guarantee, funded by a modest fee and donor backing, to absorb the currency risk that makes local-currency clean energy finance expensive. It compares the cost of capital for a solar farm in developed and developing countries. It complements the GCGF (credit risk) by unbundling FX risk, as Wolf (2023) argues. Title wording varies between citing sources; the CPI page could not be loaded.
 
 **Ameli, N., Dessens, O., Winning, M., Cronin, J., Chenet, H., Drummond, P., Calzadilla, A., Anandarajah, G. and Grubb, M. (2021). "Higher cost of finance exacerbates a climate investment trap in developing economies." *Nature Communications* 12: 4046.** <https://doi.org/10.1038/s41467-021-24305-3>
-Shows that using region-specific WACC in a global energy model (TIAM-UCL), rather than the uniform rate used in most integrated assessment models, cuts green electricity in Africa by 35% in a cost-optimal 2°C pathway. Policies that lower WACC would let Africa reach net zero about ten years earlier. Coins the "climate investment trap": high risk raises the cost of capital, which deters investment and worsens climate risk. This is the key methodological critique of models, SISEPUEDE included, that use one discount rate everywhere.
+Shows that using region-specific WACC in a global energy model (TIAM-UCL), rather than the uniform rate used in most integrated assessment models, cuts green electricity in Africa by 35% in a cost-optimal 2°C pathway. Policies that lower WACC would let Africa reach net zero about ten years earlier. Coins the "climate investment trap": high risk raises the cost of capital, which deters investment and worsens climate risk. This is the key methodological critique of models, CDPM included, that use one discount rate everywhere.
 
 **Steffen, B. (2020). "Estimating the cost of capital for renewable energy projects." *Energy Economics* 88: 104783.** <https://doi.org/10.1016/j.eneco.2020.104783> †
 Compares survey, CAPM and auction-based methods for estimating technology- and country-specific costs of capital for renewables, and provides one of the most used empirical datasets. It is the methodological basis for replacing a uniform discount rate with differentiated WACC.
@@ -983,7 +985,7 @@ Builds country- and technology-specific costs of capital into integrated assessm
 Early empirical evidence that climate vulnerability raises sovereign borrowing costs in developing countries, independent of macro fundamentals. Supports treating climate vulnerability as a distinct premium in the cost of capital. Cited by Kharas and Rivard (2022).
 
 **IEA, World Economic Forum, ETH Zurich and Imperial College London. *Cost of Capital Observatory.*** <https://www.iea.org/reports/cost-of-capital-observatory>
-Free dashboard of actual financing costs for clean energy in EMDEs, updated with 2023–2024 data in 2025. The IEA's methodology article gives real pre-tax WACC of 3–6% for utility-scale solar and onshore wind in advanced economies, and finds the cost of capital accounts for 20–50% of the levelised cost of solar. The recommended data source for country WACC in SISEPUEDE.
+Free dashboard of actual financing costs for clean energy in EMDEs, updated with 2023–2024 data in 2025. The IEA's methodology article gives real pre-tax WACC of 3–6% for utility-scale solar and onshore wind in advanced economies, and finds the cost of capital accounts for 20–50% of the levelised cost of solar. The recommended data source for country WACC in CDPM.
 
 ## E.2 Debt, creditworthiness and fiscal space
 
@@ -1068,7 +1070,7 @@ It is the political origin of much of the MDB reform agenda. The exact content a
 Low- and middle-income countries need 2–8% of GDP a year for infrastructure to 2030, with 4.5% (USD 1.5 trillion) as the central case, at a 6% discount rate. Decarbonised paths "need not cost more". Spending better (maintenance, lower construction costs) matters as much as spending more. The World Bank benchmark for total infrastructure needs.
 
 **World Bank (2023). *The Development, Climate, and Nature Crisis: Solutions to End Poverty on a Livable Planet.* CCDR synthesis.** <https://openknowledge.worldbank.org/handle/10986/40652>
-Across 42 economies, building resilience and cutting emissions 73% by 2050 needs an extra 1.4% of GDP a year to 2030, ranging from under 1% to 10%. Extrapolated to all LICs and MICs other than China, that is USD 574 billion a year (2.8% of GDP). It names the macro models used in CCDRs. The closest World Bank counterpart to SISEPUEDE's incremental estimates.
+Across 42 economies, building resilience and cutting emissions 73% by 2050 needs an extra 1.4% of GDP a year to 2030, ranging from under 1% to 10%. Extrapolated to all LICs and MICs other than China, that is USD 574 billion a year (2.8% of GDP). It names the macro models used in CCDRs. The closest World Bank counterpart to CDPM's incremental estimates.
 
 ## E.4 Commentary (Financial Times)
 
@@ -1213,4 +1215,4 @@ World Bank (2024). *International Comparison Program: Purchasing Power Parities 
 
 World Bank (2024). *Shadow Price of Carbon in Economic Analysis.* Guidance Note. World Bank.
 
-SISEPUEDE documentation: <https://sisepuede.readthedocs.io/en/latest/>. Code: github.com/jcsyme/sisepuede; github.com/sisepuede-framework/costs_benefits_ssp.
+CDPM documentation: <https://sisepuede.readthedocs.io/en/latest/>. Code: github.com/jcsyme/sisepuede; github.com/sisepuede-framework/costs_benefits_ssp.

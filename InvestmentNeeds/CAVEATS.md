@@ -40,3 +40,9 @@ Append-only log of completed work in `InvestmentNeeds/`, following the CPAT norm
 - **Outputs:** `national_model/` v0.2 - `extract_data_v0_2.py` (adds `data/power_market.csv`), `nmim_v0_2.py` (section 12), `build_workbook_v0_2.py`, `check_v0_2.py`, `NMIM_v0.2.xlsx` (Typology, PowerMarket sheets), `NMIM_Method_v0_2.md`, `check_report_v0_2.md`; v0.1 workbook, plan, check report and summary moved to `national_model/Old/`. Methodology (`.md`, `.docx`, shared Claude doc) gains a *Who pays* chapter; figures `typology_spectrum.png`, `typology_by_group.png`. Typology doc (Claude doc) kept as the stand-alone version.
 - **Caveats:** (1) Type shares and pressure-index spans are judgements (†), applied to country data, not observed splits. (2) PSRT ends in 2013; 48 countries curated and 12 updated by judgement (notes on PowerMarket sheet) and need review by power sector staff. (3) PPI misses domestic private investment and advanced economies; used only to raise structure 1 to 2. (4) Cost recovery is average retail price over CPAT supply cost; ignores collection losses and arrears. (5) The typology splits investment, not incremental cost; the budget need counts P1 plus 30% of P4.
 
+
+## 2026-10-20 - Model name: SiSePuede is now CDPM
+- **Task:** Rename SiSePuede to CDPM in prose (first mention "CDPM (formerly SiSePuede)"; a name note under each title).
+- **Inputs:** Stephen, 20 Oct: SiSePuede (also CPM) is now called CDPM.
+- **Outputs:** `README.md`, `Mitigation_Investment_Needs_Methodology.md` and `.docx`; `../Docs and PPTs/Global_Investment_Needs_SISEPUEDE.md` and `.docx` (Word files rebuilt with pandoc, the old file as reference doc); `../README.md`; `../CPAT_coded_not_master/cpat_documentation/developer/sisepuede_documentation.md`.
+- **Caveats:** File names, repository names, code and config (`cpat_sisepuede`, `sisepuede.config`) keep the old name; so do earlier entries in this log. Studies cited (e.g. Kalra et al. 2023) were published as SISEPUEDE.

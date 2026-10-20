@@ -71,8 +71,8 @@ Run modes:
 
 ## InvestmentNeeds
 
-Mitigation (net zero) investment needs model, built on the SISEPUEDE-based global
-method (October 2026). See [`InvestmentNeeds/README.md`](InvestmentNeeds/README.md).
+Mitigation (net zero) investment needs model, built on the CDPM-based global
+method (October 2026; CDPM was formerly SiSePuede). See [`InvestmentNeeds/README.md`](InvestmentNeeds/README.md).
 
 - **`Mitigation_Investment_Needs_v1.1.xlsx`** — 2030 total and incremental investment
   needs, and incremental cost, for 195 economies × 7 sectors, under three lenses: market
