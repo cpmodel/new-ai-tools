@@ -171,6 +171,6 @@ Decisions waiting for the owner (details in `MacroFiscalModels/TODO.md` and `CAV
 - **Trade data:** a manual WDI download (exports and imports of goods and services) would replace
   the DSF's two biggest assumptions (TODO 11); for Kenya it can move capacity from medium to strong.
 
-A worked country example: [`briefings/Kenya_briefing.md`](briefings/Kenya_briefing.md).
+A worked country example: [`briefings/Kenya_briefing.md`](briefings/Kenya_briefing.md) (Word: `briefings/Kenya_briefing.docx`, built with `pandoc Kenya_briefing.md -o Kenya_briefing.docx --reference-doc=../../Presentations/Global_Investment_Needs_SISEPUEDE.docx`).
 
 Versions: `VersionNotes.md`. Task log: `CAVEATS.md`.
