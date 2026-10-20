@@ -142,4 +142,35 @@ Use `block_kind` = `assessment` (Good / Medium / Bad), `context` (High / Medium 
 - **Scores rank, they do not judge.** A High investment need is a magnitude, not a verdict; do
   not average the investment blocks with the assessment blocks (see the dashboard's README sheet).
 
+## Handover: rebuilding everything, and open decisions
+
+Full rebuild after a change to raw data, in order (about 6 minutes in all):
+
+```bash
+python3 TaxMacroFiscalDashboard/build/scripts/build_global_indicators.py   # panel
+python3 MacroFiscalModels/integrated.py --all                               # about 3 minutes
+python3 TaxMacroFiscalDashboard/build/scripts/build_global_indicators.py   # panel again (Appendix D)
+python3 TaxMacroFiscalDashboard/build/scripts/build_dashboard.py           # dashboard workbook
+python3 MacroFiscalModels/ExcelDIGNAD/build_dignad_excel.py --check        # DIGNAD-R Excel
+python3 MacroFiscalModels/build_country_tool.py                             # country tool
+python3 IntegratedMFC/build/build_mfc_tool.py                               # this tool
+```
+
+Requirements beyond the dashboard's: `scipy` (macro models), `pyxlsb` and `xlsxwriter` (panel).
+R is needed only to check the R pipeline. Rebuild NMIM or the v1.1 workbook first if their inputs
+changed (and recalculate v1.1). Bump versions and archive per each folder's `VersionNotes.md`.
+
+Decisions waiting for the owner (details in `MacroFiscalModels/TODO.md` and `CAVEATS.md`):
+
+- **Model choice for concessional borrowers:** keep the IDS multilateral share as the
+  concessional proxy, or switch to the concessional share of external debt now in Appendix C
+  (moves countries between DIGNAD-lite and GIMF-lite).
+- **Which channels to credit:** DIGNAD-lite and GIMF-lite differ most on energy savings and
+  private investment (Kenya 2050: +0.3% vs +4.6% of GDP); see TODO 1, 10 and 36.
+- **Hand-to-mouth proxy:** use Findex account ownership or keep the income-group default.
+- **Trade data:** a manual WDI download (exports and imports of goods and services) would replace
+  the DSF's two biggest assumptions (TODO 11); for Kenya it can move capacity from medium to strong.
+
+A worked country example: [`briefings/Kenya_briefing.md`](briefings/Kenya_briefing.md).
+
 Versions: `VersionNotes.md`. Task log: `CAVEATS.md`.
