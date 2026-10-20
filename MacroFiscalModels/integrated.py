@@ -90,6 +90,7 @@ def _run_macro(model, prog, sh, rev):
                                                 ("pub", "pub_cap", "pub_spend", "prv", "sav")}}, p)[0]
                     y = out["y"] / ss0["y"]
                     return dict(y=y, debt=out["debt_gdp"], pdef=out["prim_def"], pdef0=base["prim_def"][0],
+                                y_base=base["y"] / ss0["y"], debt_base=base["debt_gdp"],
                                 rule=p.lam_b, tightened=bool(t))
                 over = {"lam_tau": t["k"], "lam_tr": t["k"]} if t else {}
                 p = (cb.to_dignar(sh, **over) if model == "DIGNAR-lite" else cb.to_dignad(sh, **over))
@@ -97,8 +98,11 @@ def _run_macro(model, prog, sh, rev):
                 gdp0 = 1 + p.rents0
                 base = run_dignad({**prog, **{k: np.zeros_like(prog["pub"]) for k in ("pub", "pub_cap", "pub_spend")}},
                                   replace(p, rents_path=()))[0]            # no programme, no rent decline
+                # baseline for the charts: no programme, but rents fall as in the programme run (global transition)
+                bl = run_dignad({**prog, **{k: np.zeros_like(prog["pub"]) for k in ("pub", "pub_cap", "pub_spend")}}, p)[0]
                 return dict(y=out["gdp"] / gdp0, debt=out["debt_gdp"], pdef=-out["prim_bal"],
-                            pdef0=-base["prim_bal"][0], rule=p.lam_tr, tightened=bool(t))
+                            pdef0=-base["prim_bal"][0], y_base=bl["gdp"] / gdp0, debt_base=bl["debt_gdp"],
+                            rule=p.lam_tr, tightened=bool(t))
         except (RuntimeError, ValueError, np.linalg.LinAlgError) as e:
             last = e
     raise RuntimeError(f"not financeable under the fiscal rule ({last})")
@@ -136,6 +140,8 @@ def run(iso, mode="hybrid", paths=None):
             n = len(prog["years"])
             paths["gdp_dev_pct"] = 100 * (m["y"][:n] - 1)
             paths["debt_pct_gdp"] = 100 * m["debt"][:n]
+            paths["gdp_dev_base_pct"] = 100 * (m["y_base"][:n] - 1)              # baseline: no programme
+            paths["debt_base_pct_gdp"] = 100 * m["debt_base"][:n]
     except RuntimeError as e:
         r.update(status=str(e).split(" (")[0])
         m = None

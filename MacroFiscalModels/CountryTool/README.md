@@ -1,6 +1,6 @@
 # Macro-fiscal country tool
 
-`MacroFiscal_CountryTool_v<version>.xlsx` is a standalone Excel workbook: pick a country on the
+The current tool, `../MacroFiscal_CountryTool_v<version>.xlsx` (in `MacroFiscalModels/`), is a standalone Excel workbook: pick a country on the
 **Country** sheet and it shows the whole integrated chain for it, with charts. No Python is needed
 to use it.
 
@@ -12,15 +12,15 @@ to use it.
 | 3. What it does: GDP vs today's path, public debt 2024 / 2030 / 2050, fossil rents | GIMF-lite / DIGNAD-lite / DIGNAR-lite |
 | 4. Is debt sustainable: risk rating before and with the programme | LIC-DSF-lite (low and lower-middle income) |
 | Settings: each calibration value and whether it is dashboard data or a default | `calibration.py` |
-| Charts: programme and financing; GDP; debt; PV of public debt against the DSF threshold | annual paths |
+| Charts, two columns: the result (programme and financing; GDP and debt, programme and baseline; PV of public debt against the DSF threshold) and the difference from the baseline (financing gap; GDP, pp; debt, pp; PV of debt, scenario less DSF baseline) | annual paths, incl. a no-programme baseline from the same macro model |
 
 Results are pre-computed; changing an assumption needs a re-run:
 
 ```bash
 cd MacroFiscalModels
 python3 integrated.py --all          # results/integrated_{results,paths,settings}.csv (about 10 minutes)
-python3 build_country_tool.py        # -> CountryTool/MacroFiscal_CountryTool_v<VERSION>.xlsx
+python3 build_country_tool.py        # -> MacroFiscal_CountryTool_v<VERSION>.xlsx (in MacroFiscalModels/)
 ```
 
-Versions: `VersionNotes.md`; superseded workbooks go to `Archive/`. Calibrations are illustrative;
+Versions: `VersionNotes.md`; the current workbook sits in `MacroFiscalModels/`, superseded ones in `Archive/` here. Calibrations are illustrative;
 see `../Docs/UserGuide_4_Integrated` for the chain and its caveats.

@@ -112,7 +112,7 @@ Simplified Python versions of the IMF GIMF, DIGNAD and DIGNAR models and the Wor
 LIC-DSF. `integrated.py` chains the dashboard, NMIM (investment needs), PriceFeasibility
 (feasible power-sector carbon pricing, whose revenue finances part of the budget need), the
 macro model and the DSF for every country, and its results feed the dashboard's Appendix D.
-The standalone single-country tool is `MacroFiscalModels/CountryTool/MacroFiscal_CountryTool_v0.1.xlsx`. See
+The standalone single-country tool is `MacroFiscalModels/MacroFiscal_CountryTool_v0.2.xlsx`. See
 [`MacroFiscalModels/README.md`](MacroFiscalModels/README.md) and the method note
 `MacroFiscalModels_Method_v0_1.md` (equations, data needs, validation); pitch deck and user
 guides in `MacroFiscalModels/Docs/`. Calibrations are illustrative.

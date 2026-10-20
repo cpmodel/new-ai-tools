@@ -7,10 +7,10 @@ and which are defaults. Everything is pre-computed by `integrated.py --all`; the
 results up, so changing an assumption needs a re-run in Python.
 
     python3 integrated.py --all          # refresh results/integrated_*.csv (about 10 minutes)
-    python3 build_country_tool.py        # -> CountryTool/MacroFiscal_CountryTool_v<VERSION>.xlsx
+    python3 build_country_tool.py        # -> MacroFiscal_CountryTool_v<VERSION>.xlsx (this folder)
 
-Versioning: bump VERSION when a changed workbook is shipped, move the previous file to
-CountryTool/Archive/ and add a line to CountryTool/VersionNotes.md.
+Versioning: the current workbook sits in MacroFiscalModels/; bump VERSION when a changed workbook is
+shipped, move the previous file to CountryTool/Archive/ and add a line to CountryTool/VersionNotes.md.
 """
 import os
 import pandas as pd
@@ -20,10 +20,10 @@ from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 from openpyxl.worksheet.datavalidation import DataValidation
 
-VERSION = "0.1"
+VERSION = "0.2"
 HERE = os.path.dirname(os.path.abspath(__file__))
 RES = os.path.join(HERE, "results")
-OUTDIR = os.path.join(HERE, "CountryTool")
+OUTDIR = HERE                                   # the current version sits in MacroFiscalModels/
 DEFAULT_ISO = "KEN"
 
 F = "Arial"; INK = "0E1B2A"; ACC = "C05621"; MUT = "5A6B7B"
@@ -92,9 +92,10 @@ def main():
         wk.cell(1, j, y).font = font(9, True)
     calc_rows = [("pub_cap", "Budget need: capital"), ("pub_spend", "Budget need: spending (no capital)"),
                  ("prv", "Private investment"), ("rev", "Carbon-pricing revenue"), ("sav", "Energy savings"),
-                 ("gdp_dev_pct", "GDP vs today's path, %"), ("debt_pct_gdp", "Public debt, % GDP")]
+                 ("gdp_dev_pct", "GDP vs today's path, %: programme"), ("debt_pct_gdp", "Public debt, % GDP: programme"),
+                 ("gdp_dev_base_pct", "GDP vs today's path, %: baseline"), ("debt_base_pct_gdp", "Public debt, % GDP: baseline")]
     for k in DSF_KEYS:
-        calc_rows += [(f"dsf_base|{k}", f"{k}: baseline"), (f"dsf_prog|{k}", f"{k}: with programme"),
+        calc_rows += [(f"dsf_base|{k}", f"{k}: DSF baseline"), (f"dsf_prog|{k}", f"{k}: integrated scenario"),
                       (f"dsf_thr|{k}", f"{k}: threshold")]
     ROW = {}
     for i, (key, label) in enumerate(calc_rows, 2):
@@ -109,6 +110,23 @@ def main():
             else:
                 src = "Paths!%s$2:%s$%d" % ((get_column_letter(j + 2),) * 2 + (NP,))
             wk.cell(i, j, f'=IFERROR(INDEX({src},MATCH(Country!$F$5&"|"&$AD{i},Paths!$A$2:$A${NP},0)),NA())').number_format = "0.00"
+    # differences from the baseline (programme less baseline), computed from the rows above
+    diffs = [("d_gap", "Financing gap: budget need less pricing revenue", [("pub_cap", 1), ("pub_spend", 1), ("rev", -1)], 2050),
+             ("d_gdp", "GDP: programme less baseline, pp", [("gdp_dev_pct", 1), ("gdp_dev_base_pct", -1)], 2050),
+             ("d_debt", "Public debt: programme less baseline, pp of GDP", [("debt_pct_gdp", 1), ("debt_base_pct_gdp", -1)], 2050),
+             ("d_dsf", "PV of public debt / GDP: integrated scenario less DSF baseline, pp", [("dsf_prog|PV public debt / GDP", 1),
+                                                                                ("dsf_base|PV public debt / GDP", -1)], 2034)]
+    i = len(calc_rows) + 2
+    for key, label, terms, yend in diffs:
+        ROW[key] = i
+        wk.cell(i, 1, label).font = font(9)
+        for j, y in enumerate(YEARS, 2):
+            if y > yend:
+                continue
+            L = get_column_letter(j)
+            expr = "".join(("+" if sgn > 0 else "-") + f"{L}{ROW[k]}" for k, sgn in terms)
+            wk.cell(i, j, f"=IFERROR({expr.lstrip('+')},NA())").number_format = "0.00"
+        i += 1
     wk.sheet_properties.tabColor = "BFBFBF"
 
     # ---------------------------------------------------------------- Country (the tool)
@@ -207,7 +225,8 @@ def main():
     # charts
     def chart(title, keys, anchor, ytitle, x_end=2050):
         ch = LineChart()
-        ch.title = title; ch.height = 7.5; ch.width = 17
+        ch.title = title; ch.height = 7.5; ch.width = 16
+        ch.varyColors = False                      # one colour per series (Excel otherwise colours each year)
         ch.y_axis.title = ytitle; ch.legend.position = "b"
         ncol = 1 + (x_end - 2024)
         for k in keys:
@@ -218,12 +237,23 @@ def main():
         ch.x_axis.delete = False; ch.y_axis.delete = False
         ws.add_chart(ch, anchor)
 
+    # left column: the result; right column: the difference from the baseline (no programme)
+    ws["H4"] = "Result"; ws["R4"] = "Difference from baseline (programme less no programme)"
+    ws["H4"].font = font(11, True); ws["R4"].font = font(11, True)
     chart("Programme and financing, % of GDP", ["pub_cap", "pub_spend", "prv", "rev"], "H5", "% GDP")
-    chart("GDP vs today's path, %", ["gdp_dev_pct"], "H21", "%")
-    chart("Public debt, % of GDP", ["debt_pct_gdp"], "H37", "% GDP")
+    chart("Financing gap: budget need less pricing revenue, % of GDP", ["d_gap"], "R5", "% GDP")
+    chart("GDP vs today's path, %", ["gdp_dev_pct", "gdp_dev_base_pct"], "H21", "%")
+    chart("GDP: programme less baseline, percentage points", ["d_gdp"], "R21", "pp")
+    chart("Public debt, % of GDP", ["debt_pct_gdp", "debt_base_pct_gdp"], "H37", "% GDP")
+    chart("Public debt: programme less baseline, pp of GDP", ["d_debt"], "R37", "pp")
     chart("LIC-DSF-lite: PV of public debt / GDP (2025-2034)",
           ["dsf_base|PV public debt / GDP", "dsf_prog|PV public debt / GDP", "dsf_thr|PV public debt / GDP"],
           "H53", "%", 2034)
+    chart("LIC-DSF-lite: PV of public debt, scenario less DSF baseline, pp", ["d_dsf"], "R53", "pp", 2034)
+    ws["R69"] = ("DSF difference: the integrated scenario (programme, pricing revenue and, for DIGNAR-lite countries, "
+                 "the fall in fossil rents) against the DSF baseline built from the dashboard; the other three "
+                 "differences are programme against no programme in the same macro model.")
+    ws["R69"].font = font(8, italic=True, color=MUT)
 
     ws.freeze_panes = "A7"
     ws.page_setup.orientation = "landscape"; ws.page_setup.fitToWidth = 1; ws.page_setup.fitToHeight = 0

@@ -36,7 +36,7 @@ The order is stable: `integrated.py` reads only the panel's source indicators, n
 
 # The country tool
 
-`MacroFiscalModels/CountryTool/MacroFiscal_CountryTool_v0.1.xlsx` shows these results one country at a time, with charts, and needs no Python: open it, go to the **Country** sheet and pick a country in the yellow cell. After a new `integrated.py --all`, rebuild it with `python3 build_country_tool.py`. See `CountryTool/README.md`.
+`MacroFiscalModels/MacroFiscal_CountryTool_v0.2.xlsx` shows these results one country at a time, with charts, and needs no Python: open it, go to the **Country** sheet and pick a country in the yellow cell. After a new `integrated.py --all`, rebuild it with `python3 build_country_tool.py`. See `CountryTool/README.md`.
 
 # Which model a country gets
 

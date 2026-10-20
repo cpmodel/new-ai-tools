@@ -22,7 +22,7 @@ from openpyxl.utils import get_column_letter
 from openpyxl.workbook.defined_name import DefinedName
 from openpyxl.worksheet.datavalidation import DataValidation
 
-VERSION = "0.1"
+VERSION = "0.2"
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.join(HERE, "..", "..")
 PANEL = os.path.join(ROOT, "TaxMacroFiscalDashboard", "build", "output", "global_data_wide.csv")
@@ -515,6 +515,7 @@ def build(wide, years, long):
 
     def chart(title, rows_, anchor, ytitle):
         ch = LineChart(); ch.title = title; ch.height = 7; ch.width = 16; ch.y_axis.title = ytitle; ch.legend.position = "b"
+        ch.varyColors = False                      # one colour per series (Excel otherwise colours each year)
         for i in rows_:
             ch.add_data(Reference(wk, min_col=1, max_col=T + 1, min_row=i, max_row=i), titles_from_data=True, from_rows=True)
         ch.set_categories(Reference(wk, min_col=2, max_col=T + 1, min_row=1, max_row=1))

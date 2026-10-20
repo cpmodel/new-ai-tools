@@ -1,6 +1,6 @@
-# DIGNAD-R Excel (proof of concept, v0.1)
+# DIGNAD-R Excel (proof of concept, v0.2)
 
-`DIGNAD_R_Excel_v0.1.xlsx` is DIGNAD-lite with the DIGNAR resource block written entirely in Excel
+`DIGNAD_R_Excel_v0.2.xlsx` is DIGNAD-lite with the DIGNAR resource block written entirely in Excel
 formulas, for 12 countries (Kenya, Sierra Leone, Uganda, Liberia, Ethiopia, Rwanda, Mozambique,
 Ghana, Senegal, Angola, Congo Rep., Chad), 2024-2050. No macros, no Python to use it.
 
