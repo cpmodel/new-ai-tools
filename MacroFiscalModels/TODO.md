@@ -30,6 +30,13 @@ Open work, in priority order. Move items to `CAVEATS.md` when done.
 17. **Data issues found by the integrated run.** Solomon Islands: NMIM budget need 91% of GDP in 2030 (check NMIM land-use / non-CO2 inputs). Cabo Verde: WDI coal rents 17% of GDP with no fuel exports (ignored by `calibration.shared`; flag to the dashboard owner). Libya: rents of 61% of GDP falling 80% cannot be stabilised by the fiscal rule.
 18. **Pitch deck** covers the models, not yet the integrated run; add a slide when the pilots are calibrated.
 
+## DIGNAD-R Excel (proof of concept, 2026-10-20)
+
+19. Move the four augmented inputs (public investment, return on public capital, hand-to-mouth share, grants) into the dashboard's Appendix C with real sources; then DIGNAD-R Excel reads the dashboard columns only.
+20. A second fiscal instrument (consumption tax) to close the gap to Python DIGNAD-lite where the rule has to tighten.
+21. Energy savings and per-country overrides on the Assumptions sheet.
+22. Wire `Outputs` into the country tool or the dashboard (Appendix D) as a live module.
+
 ## Other open items
 
 - Country calibrations: `calibration.py` now sets shared settings from the dashboard; macro-model input block in the dashboard still to add (CPIA, reserves, remittances, projected debt service, net foreign assets, labour share, Findex, public capital stock, disaster damages, import share).

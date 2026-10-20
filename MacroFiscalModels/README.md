@@ -15,6 +15,7 @@ programme can be run through a macro model and a debt sustainability test.
 | `calibration.py` | One calibration of the shared settings from the dashboard panel; model choice rule; cross-check of the two models |
 | `integrated.py` | Integrated country run: dashboard -> NMIM -> PriceFeasibility -> GIMF / DIGNAD / DIGNAR-lite -> LIC-DSF-lite -> `results/integrated_results.csv` (dashboard Appendix D) |
 | `build_country_tool.py` | Builds the standalone single-country Excel tool, `CountryTool/MacroFiscal_CountryTool_v<version>.xlsx` (see `CountryTool/README.md`) |
+| `ExcelDIGNAD/` | DIGNAD-R Excel: a recursive, formula-only DIGNAD-lite / DIGNAR-lite for 12 countries, dashboard-form inputs, long-form outputs for a master tool (proof of concept; see `ExcelDIGNAD/README.md`) |
 | `pricing_bridge.py` | PriceFeasibility's feasible power-sector mix -> carbon-pricing revenue earmarked for the budget need |
 | `pf_solver.py` | Perfect-foresight Newton solver (sparse Jacobian) shared by the two macro models |
 | `run_demo.py` | Disaster scenarios, the NMIM programme for one country in GIMF-lite and DIGNAD-lite, and the DSF |
