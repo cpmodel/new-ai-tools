@@ -1,13 +1,15 @@
-import openpyxl, matplotlib
+import os, openpyxl, matplotlib
+HERE = os.path.dirname(os.path.abspath(__file__))
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch
-wb = openpyxl.load_workbook('/home/user/new-ai-tools/InvestmentNeeds/Mitigation_Investment_Needs_v1.0.xlsx', data_only=True)
+wb = openpyxl.load_workbook(os.path.join(HERE, '..', 'Mitigation_Investment_Needs_v1.1.xlsx'), data_only=True)
 ws = wb['Results_Summary']
 rows = {r[0]: r[1:5] for r in ws.iter_rows(min_row=5, max_row=60, max_col=5, values_only=True) if r[0]}
 sect = []
 for r in ws.iter_rows(min_row=40, max_row=70, max_col=6, values_only=True):
     if r[0] and isinstance(r[4], (int, float)) and r[0] != 'Total' and not r[0].startswith('Net'): sect.append((r[0], r[4]))
+sect_ic = []
 I = rows['Total investment need, I']; dI = rows['Incremental investment need, dI']; gdp = rows['GDP 2030 (USD bn, 2024 prices)']
 lens = [('(a) Market cost of capital', 'INCREMENTAL COST (a) market cost of capital'),
         ('(a) Market, high case', 'INCREMENTAL COST (a) market, high case'),
@@ -19,11 +21,11 @@ plt.rcParams['font.family'] = 'DejaVu Sans'
 fig = plt.figure(figsize=(10.8, 19.2), dpi=100, facecolor=SURF)
 def txt(x, y, s, size, color=T1, weight='normal', **kw): fig.text(x, y, s, fontsize=size, color=color, weight=weight, **kw)
 txt(0.06, 0.955, 'Mitigation investment needs, 2030', 30, weight='bold')
-txt(0.06, 0.933, 'Net zero pathway · 195 economies · 7 sectors · USD a year, 2023 prices', 15, T2)
+txt(0.06, 0.933, 'Net zero pathway · 195 economies · 7 sectors · USD a year, 2023 prices · model v1.1', 15, T2)
 # hero tiles
 tiles = [('Total investment', f'${I[3]/1000:.1f} tn', f'{I[3]/gdp[3]:.1%} of world GDP'),
          ('Incremental investment', f'${dI[3]/1000:.1f} tn', f'{dI[3]/gdp[3]:.1%} of world GDP'),
-         ('Incremental cost, lens (c)', f'−${-rows[lens[3][1]][3]:.0f} bn', 'net saving with co-benefits')]
+         ('Net cost at World Bank 6%', f'+${rows[lens[2][1]][3]:.0f} bn', f'≈ ${rows[lens[2][1]][3]/rows["Abatement from dI (MtCO2e/yr)"][3]*1000:.0f} per tonne abated')]
 for k, (lab, big, sub) in enumerate(tiles):
     x0 = 0.06 + k * 0.30
     fig.patches.append(FancyBboxPatch((x0, 0.825), 0.28, 0.085, boxstyle='round,pad=0,rounding_size=0.012',
@@ -42,7 +44,7 @@ for li, (lab, key) in enumerate(lens):
         ax.text(v + (3 if v >= 0 else -3), y, (f'{v:+.0f}' if round(v) != 0 else '0'), va='center', ha='left' if v >= 0 else 'right', fontsize=11, color=T1)
 ax.set_yticks(range(4)); ax.set_yticklabels([l for l, _ in lens], fontsize=13, color=T1)
 ax.invert_yaxis(); ax.axvline(0, color=T2, lw=1.2)
-ax.set_xlim(-175, 45); ax.tick_params(axis='x', colors=T3, labelsize=11); ax.tick_params(axis='y', length=0)
+ax.set_xlim(-45, 70); ax.tick_params(axis='x', colors=T3, labelsize=11); ax.tick_params(axis='y', length=0)
 ax.grid(axis='x', color=GRID, lw=0.8); ax.set_axisbelow(True)
 for s in ax.spines.values(): s.set_visible(False)
 for k, (gname, _) in enumerate(groups):
@@ -62,12 +64,13 @@ ax2.grid(axis='x', color=GRID, lw=0.8); ax2.set_axisbelow(True)
 for s in ax2.spines.values(): s.set_visible(False)
 # key messages
 txt(0.06, 0.175, 'What it shows', 19, weight='bold')
+sec = dict(sect_ic)
 msgs = [f'Other EMDCs need {I[2]/gdp[2]:.1%} of GDP in total, against {I[0]/gdp[0]:.1%} in advanced economies.',
-        'At market rates the EMDC case is thin: −\\$5 bn, turning to a +\\$14 bn net cost in the high case.',
-        'At 6% EMDCs save more; China shows a small cost (its observed WACC is 3.9%).',
-        'Local co-benefits turn every group to a large net saving: the case for public finance.']
+        f'EMDC net cost doubles at market rates: +\\${rows[lens[2][1]][2]:.0f} bn at 6%, +\\${rows[lens[0][1]][2]:.0f} bn at market, +\\${rows[lens[1][1]][2]:.0f} bn high case.',
+        'Grids and low-emission fuels carry the net cost; buildings, industry and transport save.',
+        f'Local co-benefits turn every group to a net saving: −\\${-rows[lens[3][1]][3]:.0f} bn a year worldwide.']
 for k, m in enumerate(msgs): txt(0.06, 0.148 - k * 0.024, '•  ' + m, 13.5, T1)
 txt(0.06, 0.035, 'Sources: IHLEG (2024), IEA-IFC (2023), IMF CPAT and WEO, IRENA, Steffen et al. (2025), SISEPUEDE LAC calibration.\n'
-    'Tier 3 allocation; savings and co-benefit ratios calibrated on one region. Model: Mitigation_Investment_Needs_v1.0.xlsx', 10.5, T3)
-out = '/home/user/new-ai-tools/InvestmentNeeds/Mitigation_Investment_Needs_v1.0_summary.png'
+    'Tier 3 allocation; engineering benefits for power and transport, calibrated for buildings and industry. Model: Mitigation_Investment_Needs_v1.1.xlsx', 10.5, T3)
+out = os.path.join(HERE, '..', 'Mitigation_Investment_Needs_v1.1_summary.png')
 fig.savefig(out, facecolor=SURF); print(out, sect)

@@ -74,12 +74,15 @@ Run modes:
 Mitigation (net zero) investment needs model, built on the SISEPUEDE-based global
 method (October 2026). See [`InvestmentNeeds/README.md`](InvestmentNeeds/README.md).
 
-- **`Mitigation_Investment_Needs_v1.0.xlsx`** — 2030 total and incremental investment
+- **`Mitigation_Investment_Needs_v1.1.xlsx`** — 2030 total and incremental investment
   needs, and incremental cost, for 195 economies × 7 sectors, under three lenses: market
   cost of capital, World Bank rate (6%), and World Bank rate with local co-benefits.
-  Uses the dashboard's cost-of-capital and PIMA indicators. Has a Damodaran input sheet
-  for wider WACC coverage.
-- **`build/build_investment_model.py`** — builds the workbook from repository data
+  Engineering-based savings for power and transport; Sensitivity sheet. Uses the
+  dashboard's cost-of-capital and PIMA indicators; has a Damodaran input sheet for wider
+  WACC coverage. v1.0 is kept for reference.
+- **`Mitigation_Investment_Needs_v1.1_summary.png`** — one-page summary of the results
+- **`build/`** — `build_investment_model.py` (workbook), `run_sensitivity.py`
+  (Sensitivity sheet), `make_summary_image.py` (summary PNG)
 - **`raw_data/`** — optional inputs (Damodaran `ctryprem.xlsx`)
 
 ## TaxMacroFiscalDashboard

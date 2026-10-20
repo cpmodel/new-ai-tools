@@ -1,6 +1,6 @@
 # InvestmentNeeds — Mitigation (Net Zero) Investment Needs Model
 
-`Mitigation_Investment_Needs_v1.0.xlsx` estimates 2030 **total** and **incremental**
+`Mitigation_Investment_Needs_v1.1.xlsx` (current; v1.0 kept for reference) estimates 2030 **total** and **incremental**
 mitigation investment needs, and their **incremental cost**, for 195 economies
 (every economy with IMF WEO GDP) and seven sectors, under three cost-of-capital
 lenses:
@@ -36,9 +36,14 @@ fuels and fuel supply · AFOLU and nature.
 5. **Country WACC** (lens a): observed RE WACC from the dashboard (IRENA 2021, Steffen et
    al. 2025) → Damodaran-based WACC (eq. 5, calibrated to the observed level) → IHLEG
    group rate.
-6. **Savings and co-benefits** per dollar (b = 0.133, c = 0.129, SISEPUEDE LAC
-   calibration) scaled by country indices from CPAT: fossil fuel bill per tCO2 and local
-   air-pollution cost per tCO2.
+6. **Savings, co-benefits and abatement** (v1.1) by sector method:
+   - *Engineering* (power generation, transport): renewable output displaces the country's
+     fossil generation mix (Ember) at CPAT 2024 fuel and air-pollution costs, with heat
+     rates and IPCC 2006 CO2 factors; EVs replace gasoline cars per vehicle.
+   - *Enabling* (grids): no benefits of their own (switch `p_grid_credit`).
+   - *Calibrated* (buildings, industry): b = 0.133, c = 0.129 (SISEPUEDE LAC) scaled by
+     CPAT country indices.
+   - *Cost per tonne* (low-emission fuels USD 100/t, AFOLU USD 50/t).
 7. **Incremental cost** = capital charge on incremental investment − savings
    (− co-benefits in lens c). Positive = net cost.
 8. **PIMA**: PIMA-adjusted investment uses the public-investment efficiency gap (PEFA
@@ -60,16 +65,22 @@ observed WACC. Either:
   and re-run the build script; or
 - paste it into the `Damodaran` sheet (instructions on the sheet).
 
-**v1.0 ships without Damodaran values**: the source host could not be reached when the
+**v1.0 and v1.1 ship without Damodaran values**: the source host could not be reached when the
 workbook was built, so the 111 economies without an observed WACC use the IHLEG group
 rate.
 
 ## Build
 
 ```bash
-pip install pandas numpy openpyxl
-python InvestmentNeeds/build/build_investment_model.py
+pip install pandas numpy openpyxl matplotlib
+python InvestmentNeeds/build/build_investment_model.py     # the workbook
+python InvestmentNeeds/build/run_sensitivity.py            # Sensitivity sheet (needs LibreOffice)
+python InvestmentNeeds/build/make_summary_image.py         # one-page PNG summary
 ```
+
+The methodology document (sector by sector, sensitivity, and what a national-level
+model would need) is a shared doc linked from the session; its content mirrors this
+README and the workbook's README sheet.
 
 It reads only repository files: `TaxMacroFiscalDashboard/build/output/global_data_wide.csv`,
 `.../output/imffossilfuelsubsidiesdata_sheets.xlsx`, and the WEO and Steffen files in
@@ -81,8 +92,9 @@ See the README sheet in the workbook. The key ones:
 
 - This is a Tier 3 allocation. Group totals are matched exactly. Country values depend
   on the drivers and on β and φ.
-- b, c and a are calibrated on one region. The country indices adjust them but are no
-  substitute for a country model run.
+- Buildings and industry still use the one-region calibration for savings and
+  co-benefits; power is conservative (no credit for fossil plants not built; 2024 fuel
+  prices).
 - Yellow cells are author's assumptions to review: AE/China AFOLU pools, the end-use
   split, the China WACC, public shares, and the PEFA-to-gap mapping.
 - Market rates (nominal) are compared with the 6% WB rate (real), as in the method note.

@@ -266,6 +266,10 @@ Inputs, all in the repository:
 - the WEO and Steffen et al. files in `TaxMacroFiscalDashboard/build/raw_data/`
 - optional: `InvestmentNeeds/raw_data/ctryprem.xlsx` (Damodaran)
 
-The output is `InvestmentNeeds/Mitigation_Investment_Needs_v1.0.xlsx`. It is
+Then, optionally, `python InvestmentNeeds/build/run_sensitivity.py` (needs LibreOffice;
+about a minute per case) and `python InvestmentNeeds/build/make_summary_image.py`
+(needs `matplotlib`).
+
+The output is `InvestmentNeeds/Mitigation_Investment_Needs_v1.1.xlsx`. It is
 formula-driven and Excel recalculates it on open. If the dashboard panel is rebuilt,
 re-run this script to pick up the new data.

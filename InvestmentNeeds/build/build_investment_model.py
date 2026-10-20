@@ -47,11 +47,11 @@ from openpyxl.worksheet.datavalidation import DataValidation
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.abspath(os.path.join(HERE, "..", ".."))
 DASH = os.path.join(ROOT, "TaxMacroFiscalDashboard", "build")
-OUT_XLSX = os.path.join(ROOT, "InvestmentNeeds", "Mitigation_Investment_Needs_v1.0.xlsx")
+OUT_XLSX = os.path.join(ROOT, "InvestmentNeeds", "Mitigation_Investment_Needs_v1.1.xlsx")
 DAM_F = os.path.join(ROOT, "InvestmentNeeds", "raw_data", "ctryprem.xlsx")
 WEO_F = os.path.join(DASH, "raw_data",
                      "dataset_2026-08-26T13_41_09_874550254Z_DEFAULT_INTEGRATION_IMF_RES_WEO_9_0_0.csv")
-VERSION = "v1.0"
+VERSION = "v1.1"
 
 # -----------------------------------------------------------------------------
 # 1. DATA
@@ -121,7 +121,24 @@ CPAT_COLS = [  # (column header, CPAT code, unit)
     ("Road accident cost (US$ bn)", "mit.roda.con.all.all.1", "$bn"),
     ("Road damage cost (US$ bn)", "mit.rodd.con.all.all.1", "$bn"),
     ("Renewable share of electricity (CPAT)", "mit.ecy.renshare.1", "share"),
+    ("Supply cost electricity, residential ($/kWh)", "mit.sup.cost.ecy.res.1", "$/kWh"),
+    ("Air pollution cost coal, power ($/GJ)", "mit.airpol.cost.coa.pow.1", "$/GJ"),
+    ("Air pollution cost gas, power ($/GJ)", "mit.airpol.cost.nga.pow.1", "$/GJ"),
+    ("Air pollution cost other oil ($/l)", "mit.airpol.cost.oop.1", "$/l"),
+    ("Air pollution cost gasoline ($/l)", "mit.airpol.cost.gso.all.1", "$/l"),
 ]
+
+# --- Ember: generation by fossil source, latest year -------------------------
+em = pd.read_csv(os.path.join(DASH, "raw_data", "release_generation_yearly_global.csv"), low_memory=False)
+em = em[(em["Area type"] == "Country or economy") & em["ISO 3 code"].notna()]
+em_last = em.groupby("ISO 3 code").Year.max()
+em = em[em.Year == em["ISO 3 code"].map(em_last)]
+EMB = em.pivot_table(index="ISO 3 code", columns="Electricity source", values="Generation (TWh)", aggfunc="sum")
+EMB["year"] = em_last
+EMBER_COLS = [("Ember year", "year"), ("Generation, total (TWh), Ember", "Total generation"),
+              ("Coal (TWh), Ember", "Coal"), ("Gas (TWh), Ember", "Gas"), ("Other fossil (TWh), Ember", "Other fossil")]
+for _, c_ in EMBER_COLS:
+    assert c_ in EMB.columns, c_
 
 # --- Dashboard indicators carried into the model ------------------------------
 DASH_COLS = [  # (header, panel code, block)
@@ -379,6 +396,37 @@ INPUTS = [
   "Author's calculation, ~37 Gt over ~USD 110 tn (IEA NZE). Method note Table 3. †", "P", True),
  ("p_spc_lo", "Shadow price of carbon 2030, low", 50, "USD/tCO2e", "World Bank (2017, 2024)", "G", False),
  ("p_spc_hi", "Shadow price of carbon 2030, high", 100, "USD/tCO2e", "World Bank (2017, 2024)", "G", False),
+ ("H", "Sector benefit methods (v1.1): engineering for power and transport, cost per tonne for fuels and AFOLU"),
+ ("p_eng", "Use engineering savings for power and transport? 1=yes", 1, "switch",
+  "1 = derive b, c, a from country fuel mix, prices and externalities (CPAT, Ember). 0 = v1.0 calibrated ratios", "", False),
+ ("p_grid_credit", "Share of power-generation benefits credited to grids", 0, "weight",
+  "0 = grids are enabling capital with no savings of their own (conservative). 1 = same per-$ benefits as generation", "", True),
+ ("p_capex_pv", "Utility solar PV capital cost", 760, "USD/kW",
+  "IRENA (2024) Renewable Power Generation Costs in 2023, global weighted average (method note Table C). †", "G", False),
+ ("p_capex_wind", "Onshore wind capital cost", 1160, "USD/kW", "IRENA (2024), as above. †", "G", False),
+ ("p_sh_pv", "Solar share of new generation investment", 0.5, "share", "Author's assumption. †", "M", True),
+ ("p_cf_pv", "Solar PV capacity factor", 0.17, "share", "Engineering norm, global average (IRENA range 0.15-0.18). †", "M", False),
+ ("p_cf_wind", "Onshore wind capacity factor", 0.35, "share", "Engineering norm, global average (IRENA range 0.3-0.4). †", "M", False),
+ ("p_om_re", "Renewable O&M, share of capital a year", 0.015, "share", "Engineering norm (~USD 10-20/kW-yr). †", "M", False),
+ ("p_hr_coal", "Heat rate, coal power", 10.0, "GJ/MWh", "Engineering norm, ~36% efficiency. †", "M", False),
+ ("p_hr_gas", "Heat rate, gas power", 7.5, "GJ/MWh", "Engineering norm, fleet ~48% efficiency. †", "M", False),
+ ("p_hr_oil", "Heat rate, oil power", 10.5, "GJ/MWh", "Engineering norm, ~34% efficiency. †", "M", False),
+ ("p_ef_coal", "CO2 factor, coal", 0.0946, "tCO2/GJ", "IPCC 2006 Guidelines Vol. 2 Table 2.2, other bituminous coal", "G", False),
+ ("p_ef_gas", "CO2 factor, natural gas", 0.0561, "tCO2/GJ", "IPCC 2006, Table 2.2", "G", False),
+ ("p_ef_oil", "CO2 factor, residual fuel oil", 0.0774, "tCO2/GJ", "IPCC 2006, Table 2.2", "G", False),
+ ("p_ef_gso", "CO2 factor, motor gasoline", 0.0693, "tCO2/GJ", "IPCC 2006, Table 2.2", "G", False),
+ ("p_gj_l_oil", "Energy content, fuel oil", 0.0386, "GJ/litre", "Physical constant (approx.)", "G", False),
+ ("p_gj_l_gso", "Energy content, gasoline", 0.0342, "GJ/litre", "Physical constant (approx.)", "G", False),
+ ("p_ev_prem", "EV purchase premium incl. charging, 2030", 5000, "USD/vehicle",
+  "Author's assumption: SISEPUEDE 2019 value USD 13,000 falling; IEA reports near parity in China by 2024. †", "P", True),
+ ("p_ev_km", "Vehicle-km a year", 15000, "km", "SISEPUEDE (Baik et al. 2019)", "M", False),
+ ("p_ice_l", "Gasoline car fuel use", 7.5, "l/100 km", "Engineering norm, on-road fleet average. †", "M", False),
+ ("p_ev_kwh", "EV electricity use", 0.18, "kWh/km", "Engineering norm incl. charging losses. †", "M", False),
+ ("p_ev_maint", "EV maintenance saving", 0.012, "USD/km", "SISEPUEDE (AAA 2019)", "M", False),
+ ("p_cpt_fuel", "Abatement cost, low-emission fuels and CCS", 100, "USD/tCO2e",
+  "IPCC AR6 WGIII SPM C.12: options at USD 100/t or less could halve 2019 emissions by 2030. Used as levelised cost. †", "M", True),
+ ("p_cpt_afolu", "Abatement cost, AFOLU", 50, "USD/tCO2e",
+  "IPCC AR6 WGIII SPM C.9.1: AFOLU potential 8-14 Gt/yr below USD 100/t, 30-50% of it below USD 20/t. 50 is an assumed average. †", "P", True),
  ("H", "Allocation of group totals to countries (equation 1 / 3)"),
  ("p_beta_alloc", "Weight on physical driver vs GDP (PPP)", 0.5, "weight",
   "Author's assumption: half current physical activity (replacement), half economic size (growth). †", "P", True),
@@ -428,6 +476,15 @@ SECT = [  # code, name, pool share formula, life, driver description, life sourc
  ("FUEL", "Low-emission fuels and fuel supply", "p_sh_fuel", 20, "Fossil energy supply (EJ)", "Assumption †"),
  ("AFOLU", "AFOLU and nature", None, 30, "Non-CO2 GHG + net LULUCF source (MtCO2e)", "Assumption †"),
 ]
+METHOD = {
+ "GEN": "Engineering: displaced fossil power (Ember mix x heat rates x CPAT fuel cost, air pollution; IPCC CO2 factors)",
+ "GRID": "Enabling: no own benefits; p_grid_credit x generation benefits",
+ "TRN": "Engineering: EV vs gasoline car per vehicle (CPAT fuel and power prices, gasoline air pollution)",
+ "BLD": "Calibrated: SISEPUEDE b and c x CPAT country index; a = p_a",
+ "IND": "Calibrated: SISEPUEDE b and c x CPAT country index; a = p_a",
+ "FUEL": "Cost per tonne: no savings or co-benefits; a = 1000 x CRF(6%) / p_cpt_fuel",
+ "AFOLU": "Cost per tonne: no savings; c = p_c (ecosystem co-benefits); a = 1000 x CRF(6%) / p_cpt_afolu",
+}
 wsS = wb.create_sheet("Sector_Params")
 put(wsS, "A1", "Sector parameters and 2030 investment pools by group (USD bn/yr)", f_t)
 put(wsS, "A2", "Blue cells are editable. Incremental shares default to the group values on Inputs; "
@@ -435,8 +492,8 @@ put(wsS, "A2", "Blue cells are editable. Incremental shares default to the group
     "market WACC in lens (a) only.", f_note)
 hdr = ["Code", "Sector", "Share of clean energy", "Asset life (yrs)", "Tech premium (lens a)",
        "Incr. share AE", "Incr. share China", "Incr. share EMDC", "Savings multiplier (b)",
-       "Co-benefit multiplier (c)", "Abatement a (t/yr per $1,000)", "Allocation driver", "Life source"]
-header_row(wsS, 4, 1, hdr, [8, 36, 11, 9, 10, 9, 9, 9, 10, 10, 11, 34, 34])
+       "Co-benefit multiplier (c)", "Benefit method (v1.1)", "Allocation driver", "Life source"]
+header_row(wsS, 4, 1, hdr, [8, 36, 11, 9, 10, 9, 9, 9, 10, 10, 44, 34, 34])
 SROW = {}
 for k, (code, nm, sh, life, drv, lsrc) in enumerate(SECT):
     rr = 5 + k; SROW[code] = rr
@@ -447,7 +504,7 @@ for k, (code, nm, sh, life, drv, lsrc) in enumerate(SECT):
     put(wsS, f"F{rr}", "=p_inc_ae", fmt=PCT); put(wsS, f"G{rr}", "=p_inc_chn", fmt=PCT)
     put(wsS, f"H{rr}", "=p_inc_emdc", fmt=PCT)
     put(wsS, f"I{rr}", 1, f_in, DEC2); put(wsS, f"J{rr}", 1, f_in, DEC2)
-    put(wsS, f"K{rr}", "=p_a", fmt=DEC3)
+    put(wsS, f"K{rr}", METHOD[code], al=wrap)
     put(wsS, f"L{rr}", drv); put(wsS, f"M{rr}", lsrc)
 rr = 5 + len(SECT)
 put(wsS, f"B{rr}", "Total (energy sectors)", f_b)
@@ -549,6 +606,9 @@ for h, code, blk in DASH_COLS:
     add(code, f"{h} [dashboard: {blk}]", "v", (lambda code: (lambda r: wide.at[r.iso, code]
         if r.iso in wide.index and pd.notna(wide.at[r.iso, code]) else None))(code),
         "0" if "year" in code else DEC2)
+for h, c_ in EMBER_COLS:
+    add("em_" + c_, h, "v", (lambda c_: (lambda r: float(EMB.at[r.iso, c_])
+        if r.iso in EMB.index and pd.notna(EMB.at[r.iso, c_]) else None))(c_), "0" if c_ == "year" else BN1)
 KEYS = [c[0] for c in cols]
 def col_of(key): return CL([c[0] for c in cols].index(key) + 1)
 # derived columns (formulas, {r} = row)
@@ -601,6 +661,43 @@ add("idx_c", "Co-benefit index (world = 1)", "f",
     f'=IF({X("cb_t")}="",1,MIN(p_idx_max,MAX(p_idx_min,{X("cb_t")}/p_cb_world)))', DEC2)
 add("b_c", "Savings ratio b (per yr)", "f", f'=p_b*(1-p_wb_idx+p_wb_idx*{X("idx_b")})', DEC3)
 add("c_c", "Co-benefit ratio c (per yr)", "f", f'=p_c*(1-p_wc_idx+p_wc_idx*{X("idx_c")})', DEC3)
+# --- v1.1 engineering benefits: power generation (per USD 1,000 of capital) ---
+add("fos_sh", "Fossil share of generation, Ember", "f",
+    f'=IF(N({X("em_Total generation")})>0,(N({X("em_Coal")})+N({X("em_Gas")})+N({X("em_Other fossil")}))/{X("em_Total generation")},"")', PCT)
+add("fos_tot", "helper: fossil generation (TWh)", "f",
+    f'=N({X("em_Coal")})+N({X("em_Gas")})+N({X("em_Other fossil")})', BN1)
+add("sh_coal", "Coal share of fossil generation", "f", f'=IF({X("fos_tot")}>0,N({X("em_Coal")})/{X("fos_tot")},"")', PCT)
+add("sh_gas", "Gas share of fossil generation", "f", f'=IF({X("fos_tot")}>0,N({X("em_Gas")})/{X("fos_tot")},"")', PCT)
+add("sh_oil", "Oil/other share of fossil generation", "f", f'=IF({X("fos_tot")}>0,N({X("em_Other fossil")})/{X("fos_tot")},"")', PCT)
+add("re_kwh", "RE output per USD 1,000 (kWh/yr)", "f",
+    "=1000*(p_sh_pv*p_cf_pv/p_capex_pv+(1-p_sh_pv)*p_cf_wind/p_capex_wind)*8760", BN)
+add("gen_ok", "Engineering power data complete? (1/0)", "f",
+    f'=IF(AND(ISNUMBER({X("fos_sh")}),ISNUMBER({X("sh_coal")}),{X("has_cpat")}=1),1,0)', "0")
+add("fuel_mwh", "Fuel cost of displaced fossil power (USD/MWh)", "f",
+    f'=IF({X("gen_ok")}=0,"",{X("sh_coal")}*p_hr_coal*N({X("mit.sup.cost.coa.pow.1")})+{X("sh_gas")}*p_hr_gas*N({X("mit.sup.cost.nga.pow.1")})'
+    f'+{X("sh_oil")}*p_hr_oil*N({X("mit.sup.cost.oop.all.1")})/p_gj_l_oil)', BN1)
+add("co2_mwh", "CO2 of displaced fossil power (t/MWh)", "f",
+    f'=IF({X("gen_ok")}=0,"",{X("sh_coal")}*p_hr_coal*p_ef_coal+{X("sh_gas")}*p_hr_gas*p_ef_gas+{X("sh_oil")}*p_hr_oil*p_ef_oil)', DEC3)
+add("ap_mwh", "Air pollution of displaced fossil power (USD/MWh)", "f",
+    f'=IF({X("gen_ok")}=0,"",{X("sh_coal")}*p_hr_coal*N({X("mit.airpol.cost.coa.pow.1")})+{X("sh_gas")}*p_hr_gas*N({X("mit.airpol.cost.nga.pow.1")})'
+    f'+{X("sh_oil")}*p_hr_oil*N({X("mit.airpol.cost.oop.1")})/p_gj_l_oil)', BN1)
+add("grid_ef", "Average grid CO2 (t/MWh)", "f", f'=IF({X("gen_ok")}=0,"",{X("fos_sh")}*{X("co2_mwh")})', DEC3)
+add("b_gen", "b power: fuel saved per $ less RE O&M", "f",
+    f'=IF({X("gen_ok")}=0,"",{X("re_kwh")}*{X("fos_sh")}*{X("fuel_mwh")}/1000/1000-p_om_re)', DEC3)
+add("c_gen", "c power: air pollution avoided per $", "f",
+    f'=IF({X("gen_ok")}=0,"",{X("re_kwh")}*{X("fos_sh")}*{X("ap_mwh")}/1000/1000)', DEC3)
+add("a_gen", "a power: tCO2/yr per $1,000", "f",
+    f'=IF({X("gen_ok")}=0,"",{X("re_kwh")}*{X("fos_sh")}*{X("co2_mwh")}/1000)', DEC3)
+# --- v1.1 engineering benefits: transport (EV premium) -----------------------
+add("trn_ok", "Engineering transport data complete? (1/0)", "f",
+    f'=IF(AND({X("gen_ok")}=1,ISNUMBER({X("mit.sup.cost.gso.all.1")}),ISNUMBER({X("mit.sup.cost.ecy.res.1")})),1,0)', "0")
+add("ev_sav", "EV saving per vehicle (USD/yr)", "f",
+    f'=IF({X("trn_ok")}=0,"",p_ev_km*p_ice_l/100*{X("mit.sup.cost.gso.all.1")}-p_ev_km*p_ev_kwh*{X("mit.sup.cost.ecy.res.1")}+p_ev_km*p_ev_maint)', BN)
+add("b_trn", "b transport: saving per $ of premium", "f", f'=IF({X("trn_ok")}=0,"",{X("ev_sav")}/p_ev_prem)', DEC3)
+add("c_trn", "c transport: air pollution avoided per $", "f",
+    f'=IF({X("trn_ok")}=0,"",p_ev_km*p_ice_l/100*N({X("mit.airpol.cost.gso.all.1")})/p_ev_prem)', DEC3)
+add("a_trn", "a transport: tCO2/yr per $1,000", "f",
+    f'=IF({X("trn_ok")}=0,"",1000/p_ev_prem*(p_ev_km*p_ice_l/100*p_gj_l_gso*p_ef_gso-p_ev_km*p_ev_kwh/1000*{X("grid_ef")}))', DEC3)
 # cost of capital
 add("dam_ds", "Damodaran default spread", "f",
     f'=IFERROR(IF(INDEX(Damodaran!$D:$D,MATCH({X("iso")},Damodaran!$A:$A,0))="","",INDEX(Damodaran!$D:$D,MATCH({X("iso")},Damodaran!$A:$A,0))),"")', PCT2)
@@ -699,6 +796,18 @@ for row in wsI.iter_rows(min_row=5, max_row=wsI.max_row):
 # -----------------------------------------------------------------------------
 # 7. CALC (country x sector)
 # -----------------------------------------------------------------------------
+CDK = dict(bc="b_c", cc="c_c", bg="b_gen", cg="c_gen", ag="a_gen", bt="b_trn", ct="c_trn", at="a_trn")
+_eng = lambda e, cal: f'IF(AND(p_eng=1,ISNUMBER(Country_Data!${e}${{cd}})),Country_Data!${e}${{cd}},{cal})'
+BCA = {  # sector -> (b, c, a) formula bodies; {bg} etc. are Country_Data columns
+ "GEN": (_eng("{bg}", "Country_Data!${bc}${cd}"), _eng("{cg}", "Country_Data!${cc}${cd}"), _eng("{ag}", "p_a")),
+ "GRID": ("p_grid_credit*" + _eng("{bg}", "Country_Data!${bc}${cd}"), "p_grid_credit*" + _eng("{cg}", "Country_Data!${cc}${cd}"),
+          "p_grid_credit*" + _eng("{ag}", "p_a")),
+ "TRN": (_eng("{bt}", "Country_Data!${bc}${cd}"), _eng("{ct}", "Country_Data!${cc}${cd}"), _eng("{at}", "p_a")),
+ "BLD": ("Country_Data!${bc}${cd}", "Country_Data!${cc}${cd}", "p_a"),
+ "IND": ("Country_Data!${bc}${cd}", "Country_Data!${cc}${cd}", "p_a"),
+ "FUEL": ("0", "0", "1000*p_r_wb/(1-(1+p_r_wb)^-Sector_Params!$D${sr})/p_cpt_fuel"),
+ "AFOLU": ("0", "p_c", "1000*p_r_wb/(1-(1+p_r_wb)^-Sector_Params!$D${sr})/p_cpt_afolu"),
+}
 DRV = {"GEN": "elec", "GRID": "elec", "TRN": "d_trn", "BLD": "d_bld", "IND": "d_ind",
        "FUEL": "d_fuel", "AFOLU": "d_afolu"}
 wsK = wb.create_sheet("Calc")
@@ -725,9 +834,9 @@ KC = [  # key, header, formula template ({r} row, {cd} country row), fmt
  ("crfa", "CRF (a)", "=M{r}/(1-(1+M{r})^-P{r})", '0.0000'),
  ("crfah", "CRF (a) high", "=N{r}/(1-(1+N{r})^-P{r})", '0.0000'),
  ("crfb", "CRF (b)", "=O{r}/(1-(1+O{r})^-P{r})", '0.0000'),
- ("b", "Savings ratio b", "=Country_Data!${bc}${cd}*Sector_Params!$I${sr}", DEC3),
- ("c", "Co-benefit ratio c", "=Country_Data!${cc}${cd}*Sector_Params!$J${sr}", DEC3),
- ("a", "Abatement a (t/yr per $1,000)", "=Sector_Params!$K${sr}", DEC3),
+ ("b", "Savings ratio b", "={bf}*Sector_Params!$I${sr}", DEC3),
+ ("c", "Co-benefit ratio c", "={cf}*Sector_Params!$J${sr}", DEC3),
+ ("a", "Abatement a (t/yr per $1,000)", "={af}", DEC3),
  ("sav", "Savings on dI", "=T{r}*L{r}", BN1),
  ("cb", "Local co-benefits on dI", "=U{r}*L{r}", BN1),
  ("abt", "Abatement from dI (MtCO2e/yr)", "=V{r}*L{r}", BN1),
@@ -763,7 +872,9 @@ for n_ in range(N):
             if key == "sec":
                 cell.value = code; cell.font = f_in
             else:
-                cell.value = tpl.format(r=rr, cd=cd, d=col_of(DRV[code]), pr=PROW[code], sr=SROW[code], **sub)
+                bf, cf, af = BCA[code]
+                bf, cf, af = (x.format(cd=cd, sr=SROW[code], **{k_: col_of(v_) for k_, v_ in CDK.items()}) for x in (bf, cf, af))
+                cell.value = tpl.format(r=rr, cd=cd, d=col_of(DRV[code]), pr=PROW[code], sr=SROW[code], bf=bf, cf=cf, af=af, **sub)
                 cell.font = f_link if tpl.startswith("=Country_Data") or tpl.startswith("=Sector_Params") else f_base
             cell.number_format = fmt
         rr += 1
@@ -1056,9 +1167,12 @@ TXT = [
        "nominal; Steffen et al. 2025) where available; else a Damodaran-based WACC, D/V(rf + default spread)(1 - tax) + "
        "E/V(rf + beta x ERP + lambda x CRP), shifted to the observed level; else the IHLEG group rate (AE 5.5%, China 6%, "
        "EMDC 10.5%). The high case adds the group gap to 7% / 8% / 15%. Lens (b)/(c) use 6% (or IBRD ~5.2% by switch)."),
- ("p", "6. Savings and co-benefits (eq. 6-7). Savings = b x dI and co-benefits = c x dI, with b = 0.133 and c = 0.129 "
-       "(SISEPUEDE LAC calibration) scaled by country indices from CPAT: fossil fuel bill per tCO2 (b) and local air-pollution "
-       "cost per tCO2 (c), each relative to the investment-weighted world average (so the world b and c stay at the calibrated values), capped at 0.25-4."),
+ ("p", "6. Savings, co-benefits and abatement (eq. 6-7), v1.1. Power generation and transport use engineering "
+       "parameters: renewable output per dollar displaces the country's fossil generation mix (Ember) at CPAT 2024 fuel supply "
+       "costs and air-pollution costs, with heat rates and IPCC 2006 CO2 factors; EVs replace gasoline cars (fuel, power and "
+       "maintenance per vehicle over the purchase premium). Grids carry no benefits of their own (switch p_grid_credit). "
+       "Low-emission fuels and AFOLU are costed per tonne (USD 100/t and 50/t). Buildings and industry keep the calibrated "
+       "b = 0.133 and c = 0.129 (SISEPUEDE LAC) scaled by CPAT country indices relative to the investment-weighted world average."),
  ("p", "7. Incremental cost: (a) = CRF(WACC) x dI - savings; (b) = CRF(6%) x dI - savings; (c) = (b) - local co-benefits. "
        "Memo lines add avoided emissions (a x dI) at the World Bank shadow price of carbon. Positive = net cost."),
  ("p", "8. PIMA. PIMA-adjusted investment = I x [(1 - public share) + public share / (1 - efficiency gap)]. The gap is "
@@ -1081,8 +1195,9 @@ TXT = [
        "Set p_basis = 1 to deflate market rates to real terms."),
  ("p", "- The allocation is a Tier 3 estimate. It reproduces the group totals exactly, but country values depend on the "
        "drivers and on beta and phi. Replace with SISEPUEDE or CCDR country runs where they exist."),
- ("p", "- b, c and a are calibrated on one region (SISEPUEDE LAC) and IEA NZE. The country indices move them with fuel "
-       "costs and air-pollution damages but do not replace a country model run."),
+ ("p", "- In buildings and industry, b, c and a are still calibrated on one region (SISEPUEDE LAC) and IEA NZE. "
+       "Power is conservative: fossil plants avoided in growing systems are not credited, and 2024 fuel prices are used."),
+ ("p", "- The Sensitivity sheet holds static results from build/run_sensitivity.py; re-run it after changing inputs."),
  ("p", "- The AE/China AFOLU pools, the end-use split, the China WACC, the public shares and the PEFA mapping are "
        "author's assumptions (yellow)."),
  ("p", "- CPAT local air pollution cost is the uncharged (implicit-subsidy) air-pollution cost of fossil fuel use, 2024."),
