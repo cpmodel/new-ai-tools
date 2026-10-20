@@ -86,11 +86,13 @@ Also as a light three-tab Excel screening workbook,
 
 ## IntegratedMFC
 
-The Integrated MF-C (macro-fiscal climate) tool, `IntegratedMFC/Integrated_MFC_Tool_v0.2.xlsx`:
+The Integrated MF-C (macro-fiscal climate) tool, `IntegratedMFC/Integrated_MFC_Tool_v0.3.xlsx`:
 the Global Fiscal Indicators dashboard with the mitigation investment needs from NMIM v0.2 spliced
 in as two blocks (Investment 1: need by sector, incremental cost by cost-of-capital lens, path to
 2050; Investment 2: public investment needs, from the direct budget need to all investment needing
-public money, and who else pays). Built in modules by `IntegratedMFC/build/build_mfc_tool.py` with
+public money, and who else pays) and the MacroFiscalModels integrated run as two Macro blocks
+(financing gap after carbon pricing; growth, debt and DSF risk) replacing Appendix D, with a Macro
+sheet that puts the run's paths beside a live formula version of DIGNAD-lite / DIGNAR-lite. Built in modules by `IntegratedMFC/build/build_mfc_tool.py` with
 the dashboard's own builder; more modules to follow. See
 [`IntegratedMFC/README.md`](IntegratedMFC/README.md).
 

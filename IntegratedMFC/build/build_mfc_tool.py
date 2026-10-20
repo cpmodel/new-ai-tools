@@ -9,7 +9,8 @@ merged panel and config to build/output/merged/ and runs the dashboard's own bui
 so the integrated workbook reads, scores and looks exactly like the dashboard.
 
 Inputs : TaxMacroFiscalDashboard/build/{output/global_data_long.csv, config/}
-         per module, see MODULES (now: InvestmentNeeds NMIM v0.2 summary)
+         per module, see MODULES (now: InvestmentNeeds NMIM v0.2 summary; MacroFiscalModels
+         integrated run; the DIGNAD-R equations for the live Macro sheet, see macro_live.py)
 Output : IntegratedMFC/Integrated_MFC_Tool_v<version>.xlsx (version in config/tool.json)
          build/output/<module>_long.csv (the module's rows, committed)
 
@@ -93,8 +94,45 @@ def extract_investment_needs(long):
     return pd.DataFrame(out, columns=["iso3", "indicator", "value", "year", "source"])
 
 
-# name, extract function, block its blocks follow in reading order
-MODULES = [("investment_needs", extract_investment_needs, "Context 3")]
+# ---------------------------------------------------------------- module: macro-fiscal
+MFM = os.path.join(ROOT, "MacroFiscalModels", "results")
+SRC_MF = "integrated_results.csv (MacroFiscalModels integrated run, model output)"
+RISK = {"Low": 1, "Moderate": 2, "High": 3}
+
+
+def extract_macro_fiscal(long):
+    """The integrated run (dashboard -> NMIM -> PriceFeasibility -> GIMF / DIGNAD / DIGNAR-lite ->
+    LIC-DSF-lite), pre-computed for every NMIM country by MacroFiscalModels/integrated.py."""
+    ir = pd.read_csv(os.path.join(MFM, "integrated_results.csv")).set_index("iso3")
+    pa = pd.read_csv(os.path.join(MFM, "integrated_paths.csv")).set_index(["iso3", "series"])
+    out = []
+
+    def emit(series, code, year=2030):
+        for iso, v in series.items():
+            if pd.notna(v) and np.isfinite(float(v)):
+                out.append((iso, code, float(v), str(year), SRC_MF))
+
+    emit(ir.financing_gap_2030_pct_gdp, "mf_financing_gap_2030_pct_gdp")
+    emit(ir.budget_need_2030_pct_gdp, "mf_budget_need_2030_pct_gdp")
+    emit(ir.pricing_revenue_2030_pct_gdp, "mf_pricing_revenue_2030_pct_gdp")
+    emit(ir.pricing_share_of_need_pct, "mf_pricing_share_of_need_pct", "2025-2050")
+    emit(ir.pricing_tau_t, "mf_carbon_tax_usd_t")
+    emit(ir.pricing_abatement_pct, "mf_pricing_abatement_pct")
+    emit(ir.gdp_dev_2030_pct, "mf_gdp_dev_2030_pct")
+    emit(ir.gdp_dev_2050_pct, "mf_gdp_dev_2050_pct", 2050)
+    p50 = lambda s: pa.xs(s, level="series")["2050"]
+    emit(((1 + p50("gdp_dev_pct") / 100) / (1 + p50("gdp_dev_base_pct") / 100) - 1) * 100, "mf_gdp_vs_base_2050_pct", 2050)
+    emit(ir.debt_2030_pct_gdp, "mf_debt_2030_pct_gdp")
+    emit(ir.debt_2050_pct_gdp, "mf_debt_2050_pct_gdp", 2050)
+    emit(p50("debt_pct_gdp") - p50("debt_base_pct_gdp"), "mf_debt_vs_base_2050_pp", 2050)
+    emit(ir.dsf_rating_base.map(RISK), "mf_dsf_risk_base_code", "2024-2050")
+    emit(ir.dsf_rating_programme.map(RISK), "mf_dsf_risk_code", "2024-2050")
+    return pd.DataFrame(out, columns=["iso3", "indicator", "value", "year", "source"])
+
+
+# name, extract function, block its blocks follow in reading order, dashboard blocks it replaces
+MODULES = [("investment_needs", extract_investment_needs, "Context 3", []),
+           ("macro_fiscal", extract_macro_fiscal, "Investment 2", ["Appendix D"])]
 
 
 # ---------------------------------------------------------------- merge and build
@@ -105,7 +143,11 @@ def main():
     src = pd.read_csv(os.path.join(DASH, "config", "sources.csv"))
     meta = long.drop_duplicates("iso3").set_index("iso3")[["country", "region", "income", "is_ccdr"]]
 
-    for name, extract, after in MODULES:
+    for name, extract, after, replaces in MODULES:
+        if replaces:
+            gone = set(cfg.code[cfg.block.isin(replaces)])
+            cfg = cfg[~cfg.block.isin(replaces)]
+            long = long[~long.indicator.isin(gone)]
         rows = extract(long)
         dropped = sorted(set(rows.iso3) - set(meta.index))
         if dropped:
@@ -135,6 +177,11 @@ def main():
 
     subprocess.run([sys.executable, os.path.join(DASH, "scripts", "build_dashboard.py"),
                     "--out", MERGED, "--config", MERGED, "--ship", SHIP], check=True)
+
+    # sheets the dashboard builder does not make: the live simple macro model
+    import json, macro_live
+    tool = json.load(open(os.path.join(CONFIG, "tool.json")))
+    macro_live.add(os.path.join(SHIP, f"{tool['file_stem']}_v{tool['version']}.xlsx"), long)
 
 
 if __name__ == "__main__":

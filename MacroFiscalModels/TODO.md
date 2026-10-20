@@ -35,7 +35,7 @@ Open work, in priority order. Move items to `CAVEATS.md` when done.
 19. Move the four augmented inputs (public investment, return on public capital, hand-to-mouth share, grants) into the dashboard's Appendix C with real sources; then DIGNAD-R Excel reads the dashboard columns only.
 20. A second fiscal instrument (consumption tax) to close the gap to Python DIGNAD-lite where the rule has to tighten.
 21. Energy savings and per-country overrides on the Assumptions sheet.
-22. Wire `Outputs` into the country tool or the dashboard (Appendix D) as a live module.
+22. **Done 2026-10-20 (see `IntegratedMFC/CAVEATS.md`).** ~~Wire `Outputs` into the country tool or the dashboard (Appendix D) as a live module.~~ DIGNAD-R runs live for the selected country on the Integrated MF-C tool's Macro sheet (all 186 countries), with the integrated run's paths beside it.
 
 ## Other open items
 

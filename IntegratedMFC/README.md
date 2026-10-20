@@ -1,18 +1,23 @@
 # IntegratedMFC — Integrated MF-C tool (macro-fiscal climate)
 
-**The tool:** `Integrated_MFC_Tool_v0.2.xlsx`. Pick a country on the **Dashboard** sheet and it
-shows the Global Fiscal Indicators dashboard and the country's mitigation investment needs,
-including its public investment needs, on one page. No Python needed to use it.
+**The tool:** `Integrated_MFC_Tool_v0.3.xlsx`. Pick a country on the **Dashboard** sheet and it
+shows the Global Fiscal Indicators dashboard, the country's mitigation investment needs
+(including its public investment needs), and what the programme does to growth and public debt.
+The **Macro** sheet next to it has the same country's paths, with a live simple macro model you
+can change. No Python needed to use it.
 
 It is built in modules, so more can be added. Now:
 
 | Module | Blocks | Source | Coverage |
 |---|---|---|---|
-| Macro-fiscal dashboard | Fiscal, PIMA, Finance 1-2, Context 1-3, Appendix A-D (65 indicators) | `TaxMacroFiscalDashboard/` panel, v1.2 | 217 |
+| Macro-fiscal dashboard | Fiscal, PIMA, Finance 1-2, Context 1-3, Appendix A-C (59 indicators; Appendix D replaced by the macro-fiscal module) | `TaxMacroFiscalDashboard/` panel, v1.2 | 217 |
 | Investment needs | **Investment 1**, need and cost: net zero and incremental investment 2030, incremental by sector, incremental 2050, incremental cost under three cost-of-capital lenses, cost-of-capital penalty, cost per tonne, abatement, PV of cost 2025-2050 (18) | NMIM v0.2, `InvestmentNeeds/national_model/results/nmim_summary_v0_2.csv` | 186 |
 | | **Investment 2**, public investment needs: direct budget need (P1 + public gap of P4) and its parts, incremental budget need, PIMA-adjusted budget need, plus regulated utilities, all investment needing public money, private capital and its parts, private share (11) | NMIM v0.2; PIMA adjustment also uses the dashboard's PEFA PI-11 | 186 |
+| Macro-fiscal | **Macro 1**, financing: financing gap = incremental budget need less feasible power carbon-pricing revenue, 2030; pricing share of the need 2025-2050; feasible carbon tax; abatement (6) | MacroFiscalModels integrated run (`results/integrated_results.csv`, PriceFeasibility inside) | 186 |
+| | **Macro 2**, growth and debt: GDP vs today's path 2030 and 2050, GDP vs no-programme baseline 2050, public debt 2030 and 2050, debt added by the programme, LIC-DSF-lite risk before and with the programme (8) | integrated run (`integrated_results.csv`, `integrated_paths.csv`) | 184 (DSF: 66 LIC/LMIC) |
+| | **Macro sheet**: the integrated run's GDP and debt paths beside **DIGNAD-R**, the simple recursive DIGNAD-lite / DIGNAR-lite in formulas, for the Dashboard's country, with charts and yellow assumptions | `MacroFiscalModels/ExcelDIGNAD/build_dignad_excel.py` (equations, assumptions, inputs) | 186 |
 
-The investment blocks sit after Context 3, before the appendices, and read High / Medium / Low
+The investment blocks sit after Context 3, the macro blocks after them, then the appendices. The investment blocks and read High / Medium / Low
 (magnitudes, like the Context blocks), with 1-10 scores on the same 5th-95th percentile rescale as
 every other indicator. Values are in % of NMIM's GDP for the year, except the cost per tonne
 (USD/tCO2e), abatement (% of baseline emissions) and the private share (%). The year column is the
@@ -23,6 +28,22 @@ scenario year (2030, 2050 or 2025-2050).
 no country estimate of public needs. NMIM builds the need country by country to 2050, splits it by
 who pays, and is the model MacroFiscalModels runs (Appendix D). The tool uses NMIM only; v1.1 stays
 in `InvestmentNeeds/` as the global reference.
+
+**Macro-fiscal: two models, on purpose.**
+
+- *Integrated run* (pre-computed, Python, `MacroFiscalModels/integrated.py`): one model per
+  country by `calibration.py`'s rule - GIMF-lite (135 countries, mostly upper-middle and high
+  income, market finance), DIGNAD-lite (35, low income and concessional borrowers), DIGNAR-lite
+  (16, fossil rents of 10% of GDP or more) - solved with perfect foresight; then LIC-DSF-lite for
+  low and lower-middle income. Two countries are not financeable under the fiscal rule and have no
+  macro results. This is what the Macro blocks show.
+- *DIGNAD-R* (live, formulas, Macro sheet): the same DIGNAD-lite / DIGNAR-lite equations made
+  recursive, so they run in Excel and respond to the yellow assumptions (disaster, grant and
+  concessional shares, pricing earmark, fiscal rule). It is DIGNAD-type for every country, has
+  one fiscal instrument and no energy savings or private investment push, so it sits below the
+  integrated run for GIMF-lite countries and where the fiscal rule had to tighten. Its equations,
+  assumptions and input rules are imported from `ExcelDIGNAD/build_dignad_excel.py`, so the two
+  workbooks are one model; this one computes the selected country only, for all 186.
 
 **Public investment needs, narrow to wide** (Investment 2):
 
@@ -51,7 +72,10 @@ The tool does not have its own layout code. `build/build_mfc_tool.py`:
    `MODULES`, and adds its sources (`build/config/<module>_sources.csv`);
 3. writes the merged panel and config to `build/output/merged/` (not committed) and runs the
    dashboard's own builder, `TaxMacroFiscalDashboard/build/scripts/build_dashboard.py`, on them,
-   with the title, file name, version and README text from `build/config/tool.json`.
+   with the title, file name, version and README text from `build/config/tool.json`. A module can
+   replace dashboard blocks (macro-fiscal replaces Appendix D);
+4. adds the sheets the dashboard builder does not make: `build/macro_live.py` writes Macro,
+   Macro_assumptions, Macro_model and Macro_inputs.
 
 So the integrated tool scores, colours and reads exactly like the dashboard, and a change to the
 dashboard (a new indicator, a fix) reaches it on the next build. The build stops if a module's
@@ -65,7 +89,12 @@ python3 IntegratedMFC/build/build_mfc_tool.py     # -> IntegratedMFC/Integrated_
 It reads repository files only. Rebuild after any of its inputs changes:
 
 - the dashboard panel: `TaxMacroFiscalDashboard/build/scripts/build_global_indicators.py`;
-- NMIM: `InvestmentNeeds/national_model/nmim_v0_2.py`.
+- NMIM: `InvestmentNeeds/national_model/nmim_v0_2.py`;
+- the integrated run: `MacroFiscalModels/integrated.py --all` (about 10 minutes; after NMIM and
+  the dashboard panel).
+
+`python3 IntegratedMFC/build/macro_live.py --check KEN AGO` prints DIGNAD-R's results from its
+Python copy of the equations, to compare with the Macro sheet after recalculation.
 
 ### Adding a module
 
@@ -86,6 +115,12 @@ Use `block_kind` = `assessment` (Good / Medium / Bad), `context` (High / Medium 
   rests on the Power Sector Reform Tracker (ends 2013), with 60 countries set or updated by
   judgement; power sector staff should review them.
 - **The typology splits investment, not incremental cost.**
+- **Macro calibrations are illustrative** (MacroFiscalModels method note, section 6): four
+  DIGNAD-R inputs (public investment, return on public capital, hand-to-mouth share, grants) are
+  income-group defaults; DSF coefficients and thresholds still need checking against the Guidance
+  Note; the DSF baseline ratios are placeholders.
+- **The Macro sheet's two columns differ by construction** (see above). Read the integrated run
+  for the number, the simple model for what moves it.
 - **PIMA adjustment** treats the whole budget need as public investment subject to the
   efficiency gap; PEFA PI-11 covers 82 countries, the rest use income-group gaps.
 - **Scores rank, they do not judge.** A High investment need is a magnitude, not a verdict; do
