@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # =============================================================================
-# NMIM v0.1 - workbook builder (CPAT norms)
+# NMIM v0.2 - workbook builder (CPAT norms)
 # =============================================================================
-# Writes national_model/NMIM_v0.1.xlsx:
+# Writes national_model/NMIM_v0.2.xlsx:
 #   ReadMe        purpose, use, colour legend, version log
 #   Dashboard     selected country: investment, incremental cost, emissions (+ chart)
 #   Settings      country selector (C4)
@@ -11,12 +11,16 @@
 #   Mitigation    CPAT Mitigation layout, live formulas for the selected country,
 #                 rendered from the same templates the Python engine evaluates
 #   Results_All   all countries, from the Python engine (values)
+#   Typology      selected country: who pays - type shares by sector and investment
+#                 by type (live formulas reading Mitigation), power market facts
 #   Check         selected country: workbook vs Python on key rows
 #   DATA->        divider
 #   Data          one row per country: every @field the formulas read
+#   PowerMarket   one row per country: power market structure, private participation,
+#                 cost recovery, RISE (data/power_market.csv)
 #   PyKey         Python results for the key rows (values; read by Check)
 #
-# Run after nmim_v0_1.py:  python InvestmentNeeds/national_model/build_workbook_v0_1.py
+# Run after nmim_v0_2.py:  python InvestmentNeeds/national_model/build_workbook_v0_2.py
 # =============================================================================
 import os, re
 import pandas as pd
@@ -26,8 +30,9 @@ from openpyxl.utils import get_column_letter as CL
 from openpyxl.workbook.defined_name import DefinedName
 from openpyxl.worksheet.datavalidation import DataValidation
 from openpyxl.chart import LineChart, Reference
+from openpyxl.chart.series import SeriesLabel
 
-import nmim_v0_1 as M
+import nmim_v0_2 as M
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 OUT = os.path.join(HERE, f"NMIM_v{M.VERSION}.xlsx")
@@ -52,9 +57,11 @@ wsI = wb.create_sheet("Inputs")
 wb.create_sheet("MODULES->")
 wsM = wb.create_sheet("Mitigation")
 wsA = wb.create_sheet("Results_All")
+wsY = wb.create_sheet("Typology")
 wsC = wb.create_sheet("Check")
 wb.create_sheet("DATA->")
 wsT = wb.create_sheet("Data")
+wsP = wb.create_sheet("PowerMarket")
 wsK = wb.create_sheet("PyKey")
 
 def band(ws, row, text, color, last_col, font=f9b):
@@ -72,7 +79,7 @@ for r in M.ROWS:
     for t in [r["base"], r["proj"]] + (r["hist"] or []):
         fields |= set(re.findall(r"@(\w+)", t))
 fields = ["name"] + sorted(fields - {"name"})
-wsT["A1"] = "Data: one row per country (CPAT 2024 panel, Ember, WEO, CBAM tool, v1.1 WACC). Built by extract_data_v0_1.py."
+wsT["A1"] = "Data: one row per country (CPAT 2024 panel, Ember, WEO, CBAM tool, v1.1 WACC). Built by extract_data_v0_2.py."
 wsT["A1"].font = f9b
 wsT.cell(row=3, column=1, value="countrycode").font = f9b
 for j, fl in enumerate(fields):
@@ -133,7 +140,7 @@ H1 = ["", "Fuel", "Sector", "Description", "Unit", "Source", "Input Code", "Outp
 for j, h in enumerate(H1): wsM.cell(row=1, column=1 + j, value=h).font = f9b
 for y, col in YCOL.items():
     c = wsM[f"{col}1"]; c.value = y; c.font = f9b
-band(wsM, 2, "NMIM v0.1 - National Mitigation Investment Model (selected country: see Settings)", TITLE, LASTC, fwb)
+band(wsM, 2, "NMIM v0.2 - National Mitigation Investment Model (selected country: see Settings)", TITLE, LASTC, fwb)
 
 row = 3
 SROW, RROW = {}, {}
@@ -222,8 +229,8 @@ M_LAST = rr
 # -----------------------------------------------------------------------------
 # RESULTS_ALL (Python, values) and PyKey
 # -----------------------------------------------------------------------------
-sm = pd.read_csv(os.path.join(M.RES, "nmim_summary_v0_1.csv"))
-res = pd.read_csv(os.path.join(M.RES, "nmim_results_v0_1.csv"))
+sm = pd.read_csv(os.path.join(M.RES, "nmim_summary_v0_2.csv"))
+res = pd.read_csv(os.path.join(M.RES, "nmim_results_v0_2.csv"))
 band(wsA, 1, "Results for all countries (Python engine, values), USD bn and MtCO2e", TITLE, 22, fw)
 wsA["A2"] = ("Incremental cost is the annual cost in that year of all incremental capital in service (capital charge) "
              "plus the change in O&M, less fuel savings (less air pollution avoided in lens c). Positive = net cost. "
@@ -237,7 +244,12 @@ cols = [("iso", "ISO3"), ("name", "Country"), ("grp", "Group"), ("wacc", "Market
         ("cum_inv2", "Cumulative investment 2025-50, net zero"), ("cum_dinv", "Cumulative incremental 2025-50"),
         ("pv_ic_a", "PV incr. cost (a)"), ("pv_ic_b", "PV incr. cost (b)"), ("pv_ic_c", "PV incr. cost (c)"),
         ("cum_abt", "Cumulative abatement 2025-50"), ("co2_model_2024", "Energy CO2 2024, model"),
-        ("co2_cpat_2024", "Energy CO2 2024, CPAT")]
+        ("co2_cpat_2024", "Energy CO2 2024, CPAT"),
+        ("pms", "Power market (1 VIU, 2 single buyer, 3 wholesale)"), ("cr_ecy", "Electricity cost recovery"),
+        ("typ1_2030", "2030 net zero: P1 pure public"), ("typ2_2030", "P2 regulated utility"),
+        ("typ3_2030", "P3 contracted revenue"), ("typ4_2030", "P4 viability gap"), ("typ5_2030", "P5 pure private"),
+        ("bud_2030", "Direct budget need 2030 (P1 + gap of P4)"), ("dbud_2030", "Incremental budget need 2030"),
+        ("prv_2030", "Private capital 2030")]
 for j, (k, h) in enumerate(cols):
     c = wsA.cell(row=4, column=1 + j, value=h); c.font = fwb; c.fill = fill(TITLE)
     c.alignment = Alignment(wrap_text=True, vertical="center")
@@ -248,13 +260,15 @@ for n, (_, s) in enumerate(sm.iterrows()):
         v = s[k]
         c = wsA.cell(row=5 + n, column=1 + j, value=(round(float(v), 4) if isinstance(v, float) else v))
         c.font = f9
-        if j >= 3: c.number_format = "0.0%" if k == "wacc" else "#,##0;(#,##0);-"
+        if j >= 3: c.number_format = ("0.0%" if k == "wacc" else "0.00" if k == "cr_ecy" else "0" if k == "pms"
+                                      else "#,##0;(#,##0);-")
 wsA.freeze_panes = "C5"; wsA.auto_filter.ref = f"A4:{CL(len(cols))}{4 + len(sm)}"
 for j in range(len(cols)): wsA.column_dimensions[CL(1 + j)].width = 22 if j == 1 else 11
 
 KEYCODES = ["mit.gdp.lvl", "mit.act.ecy.res", "mit.gen.tot.2", "mit.gen.fos.1", "mit.inv.gen.2", "mit.inv.grid.2",
             "mit.inv.trn.2", "mit.inv.bld.2", "mit.inv.ind.2", "mit.inv.tot.1", "mit.inv.tot.2", "mit.ghg.tot.1",
-            "mit.ghg.tot.2", "mit.ic.a", "mit.ic.b", "mit.ic.c"]
+            "mit.ghg.tot.2", "mit.ic.a", "mit.ic.b", "mit.ic.c", "mit.typ.p1.2", "mit.typ.p2.2", "mit.typ.p3.2",
+            "mit.typ.p4.2", "mit.typ.p5.2", "mit.typ.bud.2"]
 wsK["A1"] = "Python results for the key rows (values; Check sheet reads these)"
 wsK.cell(row=2, column=1, value="key"); wsK.cell(row=2, column=2, value="iso"); wsK.cell(row=2, column=3, value="code")
 KY = [2024, 2025, 2030, 2040, 2050]
@@ -307,7 +321,10 @@ DROWS = [("GDP (2024 USD bn)", "mit.gdp.lvl"),
          ("  non-CO2 and land use", "mit.dinv.nco"),
          ("Incremental cost (a) market WACC", "mit.ic.a"), ("Incremental cost (b) World Bank 6%", "mit.ic.b"),
          ("Incremental cost (c) 6% + local co-benefits", "mit.ic.c"),
-         ("GHG, baseline (MtCO2e)", "mit.ghg.tot.1"), ("GHG, net zero (MtCO2e)", "mit.ghg.tot.2")]
+         ("GHG, baseline (MtCO2e)", "mit.ghg.tot.1"), ("GHG, net zero (MtCO2e)", "mit.ghg.tot.2"),
+         ("Net zero investment by type (see Typology)", "mit.inv.tot.2")] + [
+         (f"  {nm}", f"mit.typ.p{k}.2") for k, nm in M.TYPES] + [
+         ("Direct budget need (P1 + gap of P4)", "mit.typ.bud.2")]
 DY = [2025, 2030, 2035, 2040, 2045, 2050]
 wsD["B5"] = "USD bn a year unless stated"; wsD["B5"].font = fnote
 for j, y in enumerate(DY):
@@ -325,10 +342,121 @@ ch = LineChart(); ch.title = "GHG emissions, baseline and net zero (MtCO2e)"; ch
 for code, nm in (("mit.ghg.tot.1", "Baseline"), ("mit.ghg.tot.2", "Net zero")):
     ref = Reference(wsM, min_col=14, max_col=40, min_row=RROW[code], max_row=RROW[code])
     ch.add_data(ref, from_rows=True, titles_from_data=False)
-from openpyxl.chart.series import SeriesLabel
 ch.series[0].tx = SeriesLabel(v="Baseline"); ch.series[1].tx = SeriesLabel(v="Net zero")
 ch.set_categories(Reference(wsM, min_col=14, max_col=40, min_row=1, max_row=1))
-wsD.add_chart(ch, "B24")
+wsD.add_chart(ch, "B31")
+
+# -----------------------------------------------------------------------------
+# POWERMARKET (data, values)
+# -----------------------------------------------------------------------------
+pm = pd.read_csv(os.path.join(M.DATA, "power_market.csv"))
+PMH = [("iso", "ISO3"), ("pms", "Market structure (1 VIU, 2 single buyer, 3 wholesale)"), ("pms_src", "Source"),
+       ("pms_note", "Note"), ("reg_indep", "Independent regulator"), ("unbundled", "Generation unbundled"),
+       ("privatised", "Privatisation"), ("cost_reflective_psrt", "Cost-reflective tariffs (PSRT)"),
+       ("cr_ecy", "Cost recovery: retail price / supply cost (CPAT)"), ("ecy_sub_pct_gdp", "Explicit electricity subsidy, % GDP"),
+       ("ffs_exp_pct_gdp", "Explicit fossil subsidies, % GDP"), ("ppi_elec_bn_yr", "PPI private electricity, USD bn a year 2015-24"),
+       ("ppi_elec_pct_gdp", "PPI private electricity, % GDP"), ("ppi_gen_n_1524", "PPI generation projects 2015-24"),
+       ("ppi_vre_share", "Solar and wind share of PPI generation"), ("ppi_merchant_share", "Merchant share of PPI generation"),
+       ("ppi_private_dist", "Private distribution (PPI)"), ("ppi_private_trans", "Private transmission (PPI)"),
+       ("rise_re", "RISE renewable energy score"), ("rise_lpf", "RISE levelling the playing field")]
+band(wsP, 1, "PowerMarket: power sector structure and finance by country (data/power_market.csv)", TITLE, len(PMH), fw)
+wsP["A2"] = ("Structure: Power Sector Reform Tracker 2013 (Urpelainen and Yang; 3 if wholesale market, 2 if IPPs, else 1), "
+             "curated for countries PSRT does not cover and where it is out of date, raised to 2 where World Bank PPI shows "
+             "two or more private generation projects 2014-2024. Cost recovery from the IMF CPAT 2024 panel. RISE 2023.")
+wsP["A2"].font = fnote
+for j, (k, h) in enumerate(PMH):
+    c = wsP.cell(row=3, column=1 + j, value=h); c.font = fwb; c.fill = fill(TITLE)
+    c.alignment = Alignment(wrap_text=True, vertical="center")
+wsP.row_dimensions[3].height = 52
+for n, x in enumerate(pm.itertuples()):
+    for j, (k, h) in enumerate(PMH):
+        v = getattr(x, k)
+        c = wsP.cell(row=4 + n, column=1 + j, value=None if (isinstance(v, float) and pd.isna(v)) else
+                     (round(float(v), 4) if isinstance(v, float) else v))
+        c.font = f9
+PM_LAST = 3 + len(pm)
+PMC = {k: CL(1 + j) for j, (k, h) in enumerate(PMH)}
+wsP.freeze_panes = "B4"; wsP.auto_filter.ref = f"A3:{CL(len(PMH))}{PM_LAST}"
+for j in range(len(PMH)): wsP.column_dimensions[CL(1 + j)].width = 40 if PMH[j][0] == "pms_note" else 12
+
+# -----------------------------------------------------------------------------
+# TYPOLOGY (selected country, live formulas)
+# -----------------------------------------------------------------------------
+band(wsY, 1, "Typology - who pays for net zero investment (selected country)", TITLE, 10, fw)
+wsY["B2"] = "=Settings!C5"; wsY["B2"].font = Font(name=F, size=12, bold=True)
+wsY["B3"] = ("P1 pure public (taxes repay it) | P2 regulated utility (tariffs on a regulated asset base) | P3 contracted "
+             "revenue (PPA, CfD, concession) | P4 viability gap (market revenue + public top-up) | P5 pure private (own "
+             "savings or sales)"); wsY["B3"].font = fnote
+pmlook = lambda k: f'=INDEX(PowerMarket!${PMC[k]}$4:${PMC[k]}${PM_LAST},MATCH(Settings!$C$4,PowerMarket!$A$4:$A${PM_LAST},0))'
+FACTS = [("Power market structure (1 VIU, 2 single buyer, 3 wholesale)", pmlook("pms"), "0"),
+         ("Source", pmlook("pms_src") + '&""', "@"), ("Note", pmlook("pms_note") + '&""', "@"),
+         ("Independent regulator / unbundled / privatised (0/1, PSRT)",
+          "=" + "&\" / \"&".join(pmlook(k)[1:] for k in ("reg_indep", "unbundled", "privatised")), "@"),
+         ("Electricity cost recovery (retail price / supply cost)", pmlook("cr_ecy"), "0.00"),
+         ("Private electricity investment, PPI, USD bn a year 2015-24", pmlook("ppi_elec_bn_yr"), "#,##0.00"),
+         ("RISE renewable energy score (0-100)", pmlook("rise_re"), "0"),
+         ("Utility pressure index (tariff under-recovery)", f"=Mitigation!$J${SROW['ty_u']}", "0.00"),
+         ("Capital-cost pressure index (WACC above 6%)", f"=Mitigation!$J${SROW['ty_h']}", "0.00"),
+         ("Subsidy pressure index (explicit fossil subsidies)", f"=Mitigation!$J${SROW['ty_v']}", "0.00"),
+         ("Top-up share of market end-use investment", f"=Mitigation!$J${SROW['ty_m']}", "0.00")]
+band(wsY, 5, "Country context", SECTION, 10)
+for n, (lab, fml, fmt) in enumerate(FACTS):
+    r = 6 + n
+    wsY.cell(row=r, column=2, value=lab).font = f9
+    c = wsY.cell(row=r, column=3, value=fml); c.font = f9; c.number_format = fmt
+r = 6 + len(FACTS) + 1
+band(wsY, r, "Type shares by sector (Mitigation section 1)", SECTION, 10); r += 1
+for j, h in enumerate(["Sector", "P1", "P2", "P3", "P4", "P5", "Sum"]):
+    c = wsY.cell(row=r, column=2 + j, value=h); c.font = fwb; c.fill = fill(TITLE)
+r += 1
+J = lambda k: f"Mitigation!$J${SROW[k]}"
+SHR = [("Power generation", [f"={J(f'ty_gen_p{k}')}" for k in range(1, 6)]),
+       ("Grids and storage", [f"={J(f'ty_grid_p{k}')}" for k in range(1, 6)]),
+       ("Transport (EV premium, chargers)", [f"={J(f'ty_trn_p{k}')}" for k in range(1, 6)]),
+       ("Buildings", [f"={J(f'ty_bld_p{k}')}" for k in range(1, 6)]),
+       ("Industry: fuel switch", ["0", "0", "0", f"={J('ty_ih_p4')}", f"=1-{J('ty_ih_p4')}"]),
+       ("Industry: CCS on CBAM goods", ["0", "0", "0", "1", "0"]),
+       ("Non-CO2", [f"={J('ty_nc_p1')}", "0", "0", f"=1-{J('ty_nc_p1')}-{J('ty_nc_p5')}", f"={J('ty_nc_p5')}"]),
+       ("Land use", [f"={J('ty_lu_p1')}", "0", "0", f"=1-{J('ty_lu_p1')}", "0"]),
+       ("Other energy CO2 (aviation, shipping)", ["0", "0", "0", "1", "0"]),
+       ("Unmodelled clean investment", [f"={J(f'ty_cal_p{k}')}" for k in range(1, 6)])]
+for lab, cells in SHR:
+    wsY.cell(row=r, column=2, value=lab).font = f9
+    for j, v in enumerate(cells):
+        c = wsY.cell(row=r, column=3 + j, value=v if v.startswith("=") else float(v)); c.number_format = "0%"; c.font = f9
+    c = wsY.cell(row=r, column=8, value=f"=SUM(C{r}:G{r})"); c.number_format = "0%"; c.font = f9
+    r += 1
+r += 1
+band(wsY, r, "Investment by type, USD bn a year (Mitigation section 12)", SECTION, 10); r += 1
+TY = [2025, 2030, 2035, 2040, 2045, 2050]
+for j, h in enumerate(["Item"] + TY):
+    c = wsY.cell(row=r, column=2 + j, value=h); c.font = fwb; c.fill = fill(TITLE)
+r += 1
+TROWS = ([(f"Net zero: {nm}", f"mit.typ.p{k}.2") for k, nm in M.TYPES] +
+         [("Net zero: total", "mit.inv.tot.2")] +
+         [(f"Incremental: {nm}", f"mit.dtyp.p{k}") for k, nm in M.TYPES] +
+         [("Direct budget need, net zero (P1 + gap of P4)", "mit.typ.bud.2"),
+          ("Direct budget need, incremental", "mit.dtyp.bud"),
+          ("Revenue resting on a public tariff or buyer (P2 + P3)", "mit.typ.cnt.2"),
+          ("Private capital (P3 + P5 + private part of P4)", "mit.typ.prv.2")])
+TY0 = r
+for lab, code in TROWS:
+    wsY.cell(row=r, column=2, value=lab).font = f9b if "total" in lab or "budget" in lab else f9
+    for j, y in enumerate(TY):
+        c = wsY.cell(row=r, column=3 + j, value=f"=Mitigation!{YCOL[y]}{RROW[code]}")
+        c.number_format = "#,##0.0;(#,##0.0);-"; c.font = f9
+        if "budget" in lab: c.fill = fill(REVIEW)
+    r += 1
+wsY.column_dimensions["B"].width = 56; wsY.column_dimensions["C"].width = 26
+for col in "DEFGH": wsY.column_dimensions[col].width = 10
+from openpyxl.chart import BarChart
+bc = BarChart(); bc.type = "col"; bc.grouping = "stacked"; bc.overlap = 100
+bc.title = "Net zero investment by type (USD bn)"; bc.height, bc.width = 7.5, 16
+for k in range(5):
+    bc.add_data(Reference(wsY, min_col=3, max_col=8, min_row=TY0 + k, max_row=TY0 + k), from_rows=True, titles_from_data=False)
+    bc.series[k].tx = SeriesLabel(v=M.TYPES[k][1])
+bc.set_categories(Reference(wsY, min_col=3, max_col=8, min_row=TY0 - 1, max_row=TY0 - 1))
+wsY.add_chart(bc, f"J5")
 
 # -----------------------------------------------------------------------------
 # README
@@ -343,7 +471,7 @@ TXT = [
  ("How to use", "Choose a country on Settings!C4. Mitigation recalculates in live formulas (CPAT layout: K = 2021 ... "
   "N = 2024 base year ... AN = 2050). Dashboard summarises it. Inputs holds every parameter (MTInputs column "
   "structure; edit column G). Results_All holds every country from the Python engine; Check compares the two."),
- ("Method", "See NMIM_Method_v0_1.md. Baseline end use follows CPAT's activity equation with CPAT income-group "
+ ("Method", "See NMIM_Method_v0_2.md. Baseline end use follows CPAT's activity equation with CPAT income-group "
   "elasticities and prices fixed in real terms; net zero applies sector transformations (EV sales, heat "
   "electrification, industrial abatement, fossil-free power by group target year); power capacity is a stock model "
   "with lives and learning; clean investment not modelled bottom-up is calibrated to IEA 2024 by group and added to "
@@ -353,10 +481,17 @@ TXT = [
   "workbook's (observed, Damodaran or IHLEG default)."),
  ("Colours", "Title 00B050; section 92D050; inputs EBF1DE (blue text); codes DCE6F1; base year DDD9C4; "
   "results to review FFF2CC."),
+ ("Typology", "v0.2 splits every investment line into five types by who pays (P1 pure public, P2 regulated "
+  "utility, P3 contracted revenue, P4 viability gap, P5 pure private). Shares depend on the country's power market "
+  "structure (PowerMarket sheet: PSRT, PPI, curated), electricity cost recovery (CPAT), market WACC, explicit fossil "
+  "subsidies and income group (Mitigation section 1 and 12; Typology sheet). Direct budget need = P1 + the public "
+  "gap share of P4."),
  ("Caveats", "Simplified: no price response, no power optimisation, car-equivalent vehicles, assumed transformation "
   "dates; several formulas exceed the 100-character norm (to be split). Parameters marked † are assumptions."),
- ("Version log", f"v{M.VERSION} | 2026-10-20 | First build: 186 countries, 11 end-use rows, power stock model, "
-  "IEA 2024 calibration of investment levels; three lenses; workbook = Python on key rows (Check)."),
+ ("Version log", f"v0.2 | 2026-10-20 | Investment typology (who pays) by country and sector; power market data "
+  "(PowerMarket); industry and non-CO2 spending split into their parts; results otherwise unchanged from v0.1.\n"
+  "v0.1 | 2026-10-20 | First build: 186 countries, 11 end-use rows, power stock model, IEA 2024 calibration of "
+  "investment levels; three lenses; workbook = Python on key rows (Check)."),
 ]
 r = 3
 for h, t in TXT:
@@ -365,7 +500,7 @@ for h, t in TXT:
     wsR.row_dimensions[r].height = max(14, 13 * (len(t) // 150 + 1)); r += 1
 wsR.column_dimensions["A"].width = 14
 
-for ws in (wsR, wsD, wsS, wsI, wsM, wsA, wsC):
+for ws in (wsR, wsD, wsS, wsI, wsM, wsA, wsY, wsC, wsP):
     ws.sheet_view.zoomScale = 90
 wb.save(OUT)
 print("wrote", OUT, "Mitigation rows", M_LAST, "data fields", len(fields))
