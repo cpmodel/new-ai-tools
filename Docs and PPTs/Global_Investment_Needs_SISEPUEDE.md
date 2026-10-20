@@ -6,7 +6,7 @@ date: "October 20, 2026"
 
 # Executive summary
 
-> **Name.** CDPM was formerly called SiSePuede (and CPM). Studies published before the change use the old name; file, repository and code names keep it too.
+> **Name.** CDPM was formerly called SiSePuede. Studies published before the change use the old name; file, repository and code names keep it too.
 
 Every climate finance discussion starts with a number for investment needs. That number depends on three choices that are rarely stated:
 

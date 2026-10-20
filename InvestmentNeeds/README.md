@@ -1,6 +1,6 @@
 # InvestmentNeeds — Mitigation (Net Zero) Investment Needs Model
 
-> **Name.** CDPM was formerly called SiSePuede (and CPM). Studies published before the change use the old name; file, repository and code names keep it too.
+> **Name.** CDPM was formerly called SiSePuede. Studies published before the change use the old name; file, repository and code names keep it too.
 
 Two models live here:
 
