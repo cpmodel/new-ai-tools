@@ -1,4 +1,5 @@
 # Fiscal Climate AI Tools
+# WELCOME!! :)
 
 A collection of working papers, data workbooks, and process files for fiscal and
 climate-policy analysis, organized by project.
