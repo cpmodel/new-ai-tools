@@ -35,7 +35,7 @@ fiscal-climate-ai-tools/
 
 ## User guide - start here
 
-New to the AI tools? [`user_guide/`](user_guide/) has a short quick start for GitHub Copilot
+New to the AI tools? [`user_guide/`](user_guide/) has a short quick start for the GitHub Copilot app
 (`AI_Tools_Quick_Start.pptx` / `.docx`): an excise diagnostic for Indonesia and tax indicators
 in the dashboard. `excise_diagnostic_process.md` there is the file to attach in Copilot (a copy;
 the master is in `ExciseDiagnostic/process_files/`). All three are in `AI_Tools_Quick_Start.zip`.
