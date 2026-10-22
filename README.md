@@ -28,17 +28,17 @@ fiscal-climate-ai-tools/
 ├── TaxMacroFiscalDashboard/     Global Fiscal Indicators dashboard (the master) and other
 │   └── build/                   dashboards; raw data, config and scripts for the indicator
 │                                 panel (Python + R build pipeline), which the tool reads
-├── user_guide/                  AI Tools Quick Start (one .md) + excise process file
+├── user_guide/                  AI Tools Quick Start (PowerPoint + Word) + excise .md to attach
 ├── templates/                   Master templates
 └── _research/                   Source literature (IPCC, CBAM regulation, roadmaps)
 ```
 
 ## User guide - start here
 
-New to the AI tools? Read [`user_guide/AI_Tools_Quick_Start.md`](user_guide/AI_Tools_Quick_Start.md):
-two short examples with GitHub Copilot (an excise diagnostic for Indonesia; tax indicators in
-the dashboard). The excise process file sits next to it (a copy; the master is in
-`ExciseDiagnostic/process_files/`).
+New to the AI tools? [`user_guide/`](user_guide/) has a short quick start for GitHub Copilot
+(`AI_Tools_Quick_Start.pptx` / `.docx`): an excise diagnostic for Indonesia and tax indicators
+in the dashboard. `excise_diagnostic_process.md` there is the file to attach in Copilot (a copy;
+the master is in `ExciseDiagnostic/process_files/`). All three are in `AI_Tools_Quick_Start.zip`.
 
 ## CPAT (Excel)
 
