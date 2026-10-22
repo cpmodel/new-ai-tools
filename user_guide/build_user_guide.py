@@ -1,4 +1,5 @@
-"""Build the two AI quick-start guides (Word, PowerPoint, Markdown, prompts) and the zip.
+"""Build the AI Tools Quick Start: one Word doc and one PowerPoint holding both guides,
+the Markdown README, a PROMPTS.md per guide, and the zip.
 
 One source (GUIDES below) -> every output, so they never drift apart.
 Run from anywhere:  python user_guide/build_user_guide.py
@@ -21,13 +22,15 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HERE)
 DATE = "October 2026"
 ZIP_NAME = "AI_Tools_Quick_Start.zip"
+NAME = "AI_Tools_Quick_Start"
+TITLE = "AI Tools Quick Start"
+INTRO = "Two short guides. Pick the one you need."
 NAVY, BLUE, GOLD, GREY, LIGHT, WARN, CODE = "1F3864", "2E75B6", "C9A227", "404040", "EEF3F9", "FDECEA", "F2F2F2"
 
 # --------------------------------------------------------------------------- content
 GUIDES = [
     dict(
         folder="1_Excise_Diagnostic_Claude",
-        name="Excise_Diagnostic_Quick_Start",
         title="Excise diagnostic for Indonesia",
         tool="Claude (deep research)",
         goal="Claude researches Indonesia's excise laws and writes the diagnostic: a Word report and an Excel workbook.",
@@ -42,7 +45,7 @@ GUIDES = [
         steps=[
             ("Make a Project", "In Claude: Projects > New project. Call it \"Excise - Indonesia\"."),
             ("Add two files", "excise_diagnostic_process.md (in the repo: ExciseDiagnostic/process_files/) "
-                              "and INDONESIA_INPUTS.md (in this folder)."),
+                              "and INDONESIA_INPUTS.md (user_guide/1_Excise_Diagnostic_Claude/)."),
             ("Start a chat", "New chat inside the Project. Switch on Research."),
             ("Paste Prompt 1", "Read the answer. Is every rate quoted, with its date and a link? "
                                "Then paste Prompt 2, and so on to Prompt 6."),
@@ -79,7 +82,6 @@ GUIDES = [
     ),
     dict(
         folder="2_Tax_Indicators_Copilot",
-        name="Tax_Indicators_Quick_Start",
         title="Add tax indicators to the dashboard",
         tool="GitHub Copilot",
         goal="Copilot adds four rows under Tax revenue in the Global Fiscal Indicators dashboard: "
@@ -123,22 +125,22 @@ GUIDES = [
 
 
 # --------------------------------------------------------------------------- markdown
-def build_md(g, d):
-    L = [f"# {g['title']} - with {g['tool']}", "", g["goal"], "", "## What you need (we assume you have this)", ""]
+def build_md(n, g, d):
+    L = [f"## Part {n}: {g['title']} - with {g['tool']}", "", g["goal"], "", "### What you need (we assume you have this)", ""]
     L += [f"- {x}" for x in g["assumed"]]
     if g["warn"]: L += ["", f"> **{g['warn'][0]}** {g['warn'][1]}"]
-    L += ["", "## Steps", ""] + [f"{i}. **{a}.** {b}" for i, (a, b) in enumerate(g["steps"], 1)]
-    L += ["", "## Prompts (copy and paste, one at a time)", ""]
+    L += ["", "### Steps", ""] + [f"{i}. **{a}.** {b}" for i, (a, b) in enumerate(g["steps"], 1)]
+    L += ["", f"### Prompts (copy and paste, one at a time; also in [`{g['folder']}/PROMPTS.md`]({g['folder']}/PROMPTS.md))", ""]
     for a, b in g["prompts"]: L += [f"**{a}**", "", "```text", b, "```", ""]
-    L += [f"## {g['check_title']}", "", "| | |", "|---|---|"] + [f"| {a} | {b} |" for a, b in g["check"]]
+    L += [f"### {g['check_title']}", "", "| | |", "|---|---|"] + [f"| {a} | {b} |" for a, b in g["check"]]
     if g["extra"]:
-        L += ["", f"## {g['extra'][0]}", "", g["extra"][1], "", f"**{g['extra_prompt'][0]}**", "",
+        L += ["", f"### {g['extra'][0]}", "", g["extra"][1], "", f"**{g['extra_prompt'][0]}**", "",
               "```text", g["extra_prompt"][1], "```"]
-    with open(os.path.join(d, "README.md"), "w", encoding="utf-8") as fh: fh.write("\n".join(L) + "\n")
     P = [f"# Prompts - {g['title']}", "", "Copy and paste one at a time. Read each answer first.", ""]
     for a, b in g["prompts"] + ([g["extra_prompt"]] if g["extra_prompt"] else []):
         P += [f"## {a}", "", "```text", b, "```", ""]
     with open(os.path.join(d, "PROMPTS.md"), "w", encoding="utf-8") as fh: fh.write("\n".join(P))
+    return L
 
 
 # --------------------------------------------------------------------------- word
@@ -148,24 +150,36 @@ def _shade(p, fill):
 
 
 def _num(doc, i, a, b, color=None):
+    w = 1.6 if len(i) > 3 else 0.7
     p = doc.add_paragraph(); f = p.paragraph_format
-    f.left_indent = Cm(0.7); f.first_line_indent = Cm(-0.7); f.space_after = Pt(4)
+    f.left_indent = Cm(w); f.first_line_indent = Cm(-w); f.tab_stops.add_tab_stop(Cm(w)); f.space_after = Pt(4)
     r = p.add_run(f"{i}\t{a}" + (". " if b else "")); r.bold = True
     if color: r.font.color.rgb = RGBColor.from_string(color)
     if b: p.add_run(b)
 
 
-def build_docx(g, path):
+def build_docx(guides, path):
     doc = Document()
     st = doc.styles["Normal"]; st.font.name = "Arial"; st.font.size = Pt(10.5)
     st.element.rPr.rFonts.set(qn("w:eastAsia"), "Arial")
+    st.paragraph_format.space_after = Pt(4)
     for s in ["Title", "Heading 1"]:
         doc.styles[s].font.name = "Arial"; doc.styles[s].font.color.rgb = RGBColor.from_string(NAVY)
     for sec in doc.sections:
-        sec.left_margin = sec.right_margin = Cm(2.2); sec.top_margin = sec.bottom_margin = Cm(1.8)
-    t = doc.add_paragraph(g["title"], style="Title"); t.runs[0].font.size = Pt(24)
-    p = doc.add_paragraph(); r = p.add_run(f"Quick start with {g['tool']}  ·  {DATE}"); r.italic = True
-    r.font.color.rgb = RGBColor.from_string(GREY)
+        sec.left_margin = sec.right_margin = Cm(2.2); sec.top_margin = sec.bottom_margin = Cm(1.4)
+    t = doc.add_paragraph(TITLE, style="Title"); t.runs[0].font.size = Pt(26)
+    p = doc.add_paragraph(); r = p.add_run(DATE); r.italic = True; r.font.color.rgb = RGBColor.from_string(GREY)
+    doc.add_paragraph(INTRO)
+    for n, g in enumerate(guides, 1): _num(doc, f"Part {n}", f"{g['title']} - with {g['tool']}", g["goal"])
+    for n, g in enumerate(guides, 1):
+        doc.add_page_break(); _docx_part(doc, n, g)
+    doc.save(path)
+
+
+def _docx_part(doc, n, g):
+    p = doc.add_paragraph(); r = p.add_run(f"PART {n}  ·  {g['tool'].upper()}"); r.bold = True
+    r.font.color.rgb = RGBColor.from_string(GOLD)
+    t = doc.add_paragraph(g["title"], style="Title"); t.runs[0].font.size = Pt(22)
     doc.add_paragraph(g["goal"])
 
     doc.add_heading("What you need (we assume you have this)", 1)
@@ -192,7 +206,6 @@ def build_docx(g, path):
         doc.add_heading(g["extra"][0], 1); doc.add_paragraph(g["extra"][1])
         p = doc.add_paragraph(); _shade(p, CODE)
         r = p.add_run(g["extra_prompt"][1]); r.font.name = "Consolas"; r.font.size = Pt(10)
-    doc.save(path)
 
 
 # --------------------------------------------------------------------------- powerpoint
@@ -221,20 +234,38 @@ def _badge(s, x, y, label, fill=BLUE, d=0.5):
     r.font.size = PPt(15); r.font.bold = True; r.font.color.rgb = _rgb("FFFFFF"); r.font.name = "Arial"
 
 
-def _slide(prs, g, kicker, title):
+def _slide(prs, n, g, kicker, title):
     s = prs.slides.add_slide(prs.slide_layouts[6]); _rect(s, 0, 0, 13.333, 0.12, NAVY)
-    _text(s, 0.7, 0.4, 12, 0.35, kicker.upper(), 12, True, GOLD)
+    _text(s, 0.7, 0.4, 12, 0.35, f"PART {n}  ·  {g['title']}  ·  {kicker}".upper(), 12, True, GOLD)
     _text(s, 0.7, 0.75, 12, 0.8, title, 30, True, NAVY)
-    _text(s, 0.7, 7.0, 12, 0.3, f"{g['title']}  ·  quick start with {g['tool']}  ·  {DATE}", 9, False, "808080")
+    _text(s, 0.7, 7.0, 12, 0.3, f"{TITLE}  ·  Part {n}: {g['title']} with {g['tool']}  ·  {DATE}", 9, False, "808080")
     return s
 
 
-def build_pptx(g, path):
+def build_pptx(guides, path):
     prs = Presentation(); prs.slide_width = Inches(13.333); prs.slide_height = Inches(7.5)
+    s = prs.slides.add_slide(prs.slide_layouts[6]); _rect(s, 0, 0, 13.333, 7.5, NAVY)
+    _text(s, 0.8, 0.8, 11, 0.4, "USER GUIDE", 13, True, GOLD)
+    _text(s, 0.8, 1.3, 11, 1.0, TITLE, 44, True, "FFFFFF")
+    _text(s, 0.8, 2.35, 11.5, 0.6, INTRO, 16, False, "D9E2F3")
+    first = 2
+    for n, g in enumerate(guides, 1):
+        x = 0.8 + (n - 1) * 6.0
+        _rect(s, x, 3.4, 5.6, 3.0, "2B4A7E"); _rect(s, x, 3.4, 5.6, 0.08, GOLD)
+        _text(s, x + 0.3, 3.65, 5, 0.4, f"PART {n}  ·  slides {first}-{first + 3}", 12, True, GOLD)
+        _text(s, x + 0.3, 4.05, 5, 0.9, g["title"], 22, True, "FFFFFF")
+        _text(s, x + 0.3, 4.95, 5, 0.4, f"with {g['tool']}", 14, True, "D9E2F3")
+        _text(s, x + 0.3, 5.4, 5, 1.0, g["goal"], 11, False, "D9E2F3")
+        first += 4
+    _text(s, 0.8, 6.8, 11, 0.4, DATE, 11, False, "D9E2F3")
+    for n, g in enumerate(guides, 1): _pptx_part(prs, n, g)
+    prs.save(path)
 
-    # 1 cover: goal + what you need (+ credits warning)
+
+def _pptx_part(prs, n, g):
+    # 1 part cover: goal + what you need (+ credits warning)
     s = prs.slides.add_slide(prs.slide_layouts[6]); _rect(s, 0, 0, 5.2, 7.5, NAVY)
-    _text(s, 0.6, 0.8, 4.2, 0.4, "QUICK START", 13, True, GOLD)
+    _text(s, 0.6, 0.8, 4.2, 0.4, f"PART {n}  ·  QUICK START", 13, True, GOLD)
     _text(s, 0.6, 1.5, 4.2, 2.2, g["title"], 34, True, "FFFFFF")
     _text(s, 0.6, 3.9, 4.2, 0.5, f"with {g['tool']}", 18, False, "D9E2F3")
     _text(s, 0.6, 4.7, 4.2, 2.0, g["goal"], 13, False, "D9E2F3")
@@ -248,14 +279,14 @@ def build_pptx(g, path):
         _text(s, 6.1, y + 0.9, 6.5, 1.3, g["warn"][1], 13, False, GREY)
 
     # 2 steps
-    s = _slide(prs, g, "Steps", f"{len(g['steps'])} steps")
+    s = _slide(prs, n, g, "Steps", f"{len(g['steps'])} steps")
     for i, (a, b) in enumerate(g["steps"]):
         y = 1.8 + i * 0.98
         _badge(s, 0.7, y, str(i + 1)); _text(s, 1.4, y - 0.02, 11, 0.4, a, 18, True, NAVY)
         _text(s, 1.4, y + 0.38, 11.2, 0.6, b, 13, False, GREY)
 
     # 3 prompts
-    s = _slide(prs, g, "Prompts", "Copy and paste, one at a time")
+    s = _slide(prs, n, g, "Prompts", "Copy and paste, one at a time")
     long_ = len(g["prompts"]) <= 3
     y = 1.75
     for a, b in g["prompts"]:
@@ -266,7 +297,7 @@ def build_pptx(g, path):
         y += h + 0.2
 
     # 4 check
-    s = _slide(prs, g, "Check", g["check_title"])
+    s = _slide(prs, n, g, "Check", g["check_title"])
     for i, (a, b) in enumerate(g["check"]):
         y = 1.8 + i * 0.75
         _rect(s, 0.7, y, 7.4, 0.62, LIGHT)
@@ -275,30 +306,31 @@ def build_pptx(g, path):
         _rect(s, 8.6, 1.8, 4.1, 3.0, "FFF6DB")
         _text(s, 8.8, 1.95, 3.8, 0.5, g["extra"][0], 16, True, NAVY)
         _text(s, 8.8, 2.55, 3.8, 2.2, g["extra"][1], 13, False, GREY)
-    prs.save(path)
 
 
 # --------------------------------------------------------------------------- top README + zip
-def build_index():
-    L = ["# AI Tools Quick Start", "", "Two separate guides. Pick the one you need.", "",
-         "| Guide | Tool | Folder |", "|---|---|---|"]
-    for g in GUIDES:
-        L.append(f"| {g['title']} | {g['tool']} | [`{g['folder']}/`]({g['folder']}/) |")
-    L += ["", f"Each folder has the guide as Word, PowerPoint and Markdown, plus `PROMPTS.md` to copy from. "
-          f"Everything is also in [`{ZIP_NAME}`]({ZIP_NAME}).", "",
-          "To change the guides, edit `build_user_guide.py` and run `python user_guide/build_user_guide.py`.", ""]
+def build_index(parts):
+    L = [f"# {TITLE}", "", INTRO, "", f"Word: [`{NAME}.docx`]({NAME}.docx)  ·  PowerPoint: [`{NAME}.pptx`]({NAME}.pptx)"
+         f"  ·  everything zipped: [`{ZIP_NAME}`]({ZIP_NAME})", ""]
+    for n, g in enumerate(GUIDES, 1): L.append(f"- **Part {n}:** {g['title']} - with {g['tool']}")
+    for part in parts: L += ["", "---", ""] + part
+    L += ["", "---", "", "To change the guide, edit `build_user_guide.py` and run `python user_guide/build_user_guide.py`.", ""]
     open(os.path.join(HERE, "README.md"), "w", encoding="utf-8").write("\n".join(L))
 
 
 if __name__ == "__main__":
-    build_index()
+    parts = []
+    for n, g in enumerate(GUIDES, 1):
+        d = os.path.join(HERE, g["folder"]); os.makedirs(d, exist_ok=True)
+        parts.append(build_md(n, g, d))
+    build_index(parts)
+    build_docx(GUIDES, os.path.join(HERE, NAME + ".docx"))
+    build_pptx(GUIDES, os.path.join(HERE, NAME + ".pptx"))
     with zipfile.ZipFile(os.path.join(HERE, ZIP_NAME), "w", zipfile.ZIP_DEFLATED) as z:
-        z.write(os.path.join(HERE, "README.md"), "AI_Tools_Quick_Start/README.md")
+        for f in ["README.md", NAME + ".docx", NAME + ".pptx"]:
+            z.write(os.path.join(HERE, f), f"AI_Tools_Quick_Start/{f}")
         for g in GUIDES:
-            d = os.path.join(HERE, g["folder"]); os.makedirs(d, exist_ok=True)
-            build_md(g, d)
-            build_docx(g, os.path.join(d, g["name"] + ".docx"))
-            build_pptx(g, os.path.join(d, g["name"] + ".pptx"))
+            d = os.path.join(HERE, g["folder"])
             for f in sorted(os.listdir(d)):
                 z.write(os.path.join(d, f), f"AI_Tools_Quick_Start/{g['folder']}/{f}")
             for src, dst in g["zip_extra"].items():

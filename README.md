@@ -29,7 +29,7 @@ fiscal-climate-ai-tools/
 │   └── build/                   dashboards; raw data, config and scripts for the indicator
 │                                 panel (Python + R build pipeline), which the tool reads
 ├── user_guide/                  Two quick starts (Claude: excise diagnostic; Copilot: tax
-│                                 indicators), Word + PowerPoint, and a zip
+│                                 indicators) in one Word doc + one PowerPoint, and a zip
 ├── templates/                   Master templates
 └── _research/                   Source literature (IPCC, CBAM regulation, roadmaps)
 ```
@@ -38,8 +38,9 @@ fiscal-climate-ai-tools/
 
 New to the AI tools? [`user_guide/`](user_guide/) has two short, separate quick starts:
 an excise diagnostic for Indonesia with Claude, and new tax indicators in the dashboard
-with GitHub Copilot. Each comes as Word, PowerPoint and Markdown with copy-paste prompts;
-everything is also in `user_guide/AI_Tools_Quick_Start.zip`.
+with GitHub Copilot. Both are in one Word document and one PowerPoint
+(`user_guide/AI_Tools_Quick_Start.docx` / `.pptx`), with copy-paste prompts; everything is
+also in `user_guide/AI_Tools_Quick_Start.zip`.
 
 ## CPAT (Excel)
 
